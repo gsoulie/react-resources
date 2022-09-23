@@ -5,5 +5,6 @@
 * [Généralités et présentation](https://github.com/gsoulie/react-resources/blob/master/react-concept.md)       
 * [Directives structurelles](https://github.com/gsoulie/react-resources/blob/master/react-directives.md)     
 * Composants
+  * [Pressable](https://github.com/gsoulie/react-resources/blob/master/react-pressable.md)     
   * [Listes - ScrollView et FlatList](https://github.com/gsoulie/react-resources/blob/master/react-list.md)      
   * [StatusBar (expo)](https://github.com/gsoulie/react-resources/blob/master/react-statusbar.md)    
