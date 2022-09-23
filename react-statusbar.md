@@ -18,4 +18,4 @@ export default function App() {
 	</>
 ````
 
-Le composant *<StatusBar>* permet de définir la couleur des éléments qu'elle contient via la propriété *style=''* qui peut prendre les valeurs *light, dark, auto*
+Le composant *<StatusBar>* permet de définir la couleur des éléments qu'elle contient via la propriété ````style=''```` qui peut prendre les valeurs *light, dark, auto*
