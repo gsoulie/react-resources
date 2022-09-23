@@ -2,4 +2,4 @@
 
 # React Native
 
-* [Généralités et présentation](https://github.com/gsoulie/react-resources/blob/master/react-presentation.md)       
+* [Généralités et présentation](https://github.com/gsoulie/react-resources/blob/master/react-concept.md)       
