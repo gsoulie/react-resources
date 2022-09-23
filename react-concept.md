@@ -24,7 +24,7 @@ qui n'est pas compilée.
 |````<input>````|````EditText````|````UITextField````|````<TextInput>````|
 
 
-<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> React Native n'est **PAS du web** ! En conséquence il ne faut pas résonner comme sous Ionic, Angular, Vue... Ce n'est **PAS** une web app contrairement à *React* !
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> React Native n'est **PAS du web** ! En conséquence il ne faut pas raisonner comme sous Ionic, Angular, Vue... Ce n'est **PAS** une web app contrairement à *React* !
 
 Il faut donc avoir en tête les points suivants :
 
