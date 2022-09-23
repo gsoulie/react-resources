@@ -3,6 +3,11 @@
 
 # React Native
 
+* [Structure des éléments selon les plateformes](#structure-des-éléments-selon-les-plateformes)      
+* [Installation](#installation)     
+* [Différences entre les plateformes](#différences-entre-les-plateformes)     
+* [Styles](#styles)     
+
 **React JS** est une lib JS pour le développement web
 
 **React native** est une collection de builtin components qui sont compilés en élément natif UI. les API natives sont exposés au JS.
@@ -33,7 +38,8 @@ Il faut donc avoir en tête les points suivants :
 * il n'y as pas d'héritage de style, celà veut dire qu'un style appliqué sur un parent (ex une div) ne sera pas appliqué aux éléments enfants. (ex si on ajoute une propriété ````color: 'white'```` sur une *View*, cette couleur ne sera pas appliquée aux élément *<Text>* enfants qui pourraient exister 
 * On utilise les composants natif, par exemple du texte ne peut pas être ajouté en dehors d'un composant <Text>
 * Les balises html utilisées dans les autres framework n'existent pas pour React Native (contrairement à React) !
-
+[Back to top](#react-native)     
+  
 ## Installation
 
 Deux CLI sont disponibles pour créer un projet React Native, le CLI *Expo* et le CLI *React Native*. Il est possible de passer de l'un à l'autre à postériori.
@@ -59,7 +65,8 @@ npm run web
 npm run android
 npm run ios
 ````
-
+[Back to top](#react-native)     
+  
 ## Différences entre les plateformes
 
 Certains styles ne s'appliquent pas directement sur les éléments selon la plateforme.
@@ -69,4 +76,14 @@ Par exemple une propriété ````borderRadius: 8px```` ne fonctionnera pas direct
 Pour prendre en charge ces petites différences, il faut contourner le fonctionnement. Par exemple dans le cas cité, 
 il faudrait pour iOS, encapsuler le l'élément *<Text>* dans une *<View>* et appliquer le borderRadius sur la *<View>* plutôt que sur l'élément *<Text>*
   
+[Back to top](#react-native)     
+  
+## Styles
+
+### Button
+  
+Les composant de type *Button* ne sont pas surchargeables comme en web classique. Il contienent un certain nombre de propriétés permettant de leur appliquer du style. Si l'on souhaite surcharger ces styles ou créer un style personnalisé, il faut alors créer son propre bouton à partir d'un composant ````<Pressable>````
+  
+Autre exemple, si on souhaite ajouter un margin sur un *Button* il faut au préalable l'inclure dans une *<View>* et appliquer le margin sur cette *<View>*
+
 [Back to top](#react-native)     
