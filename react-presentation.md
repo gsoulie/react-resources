@@ -3,5 +3,7 @@
 # React Native
 
 * [Généralités et présentation](https://github.com/gsoulie/react-resources/blob/master/react-concept.md)       
+* [Directives structurelles](https://github.com/gsoulie/react-resources/blob/master/react-directives.md)     
 * Composants
   * [Listes - ScrollView et FlatList](https://github.com/gsoulie/react-resources/blob/master/react-list.md)      
+  * [StatusBar (expo)](https://github.com/gsoulie/react-resources/blob/master/react-statusbar.md)    
