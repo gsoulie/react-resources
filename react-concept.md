@@ -3,10 +3,18 @@
 
 # React Native
 
+* [Ressources](#ressources)     
+* [Présentation](#présentation)     
 * [Structure des éléments selon les plateformes](#structure-des-éléments-selon-les-plateformes)      
 * [Installation](#installation)     
 * [Différences entre les plateformes](#différences-entre-les-plateformes)     
 * [Styles](#styles)     
+
+## Ressources
+
+https://www.youtube.com/watch?v=VozPNrt-LfE&ab_channel=Academind
+
+## Présentation 
 
 **React JS** est une lib JS pour le développement web
 
