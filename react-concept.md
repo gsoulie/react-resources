@@ -61,7 +61,12 @@ Installation ````npm i -g expo-cli````
 
 Création du projet ````npx create-expo-app AwesomeProject````
 
-Exécution ````npx expo start````
+Exécution 
+````
+npx expo install @expo/webpack-config@^0.17.0 
+npx expo start --web
+npx expo start
+````
 
 ### CLI React Native
   
