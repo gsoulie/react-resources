@@ -61,7 +61,7 @@ Installation ````npm i -g expo-cli````
 
 Création du projet ````npx create-expo-app AwesomeProject````
 
-Exécution ````expo start --web````
+Exécution ````npx expo start````
 
 ### CLI React Native
   
