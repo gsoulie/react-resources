@@ -3,11 +3,11 @@
 # React
 
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/react-generalites.md)    
- * ViteJS    
- * Hooks    
- * StrictMode    
- * Sass    
- * Généricité    
+  * ViteJS    
+  * Hooks    
+  * StrictMode    
+  * Sass    
+  * Généricité    
 * [Forms](https://github.com/gsoulie/react-resources/blob/master/react-forms.md)    
 * [Http](https://github.com/gsoulie/react-resources/blob/master/react-http.md)     
 
