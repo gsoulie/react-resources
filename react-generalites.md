@@ -9,6 +9,7 @@
   * [useEffect](#useeffect)      
   * [useRef](#useref)     
   * [useContext](#usecontext)     
+  * [useReducer](#usereducer)     
 * [props](#props)     
 * [StrictMode](#strictmode)    
 * [Sass](#sass)    
@@ -132,6 +133,45 @@ Le Contexte est une fonctionnalité de React permettant de partager le state ent
 ````useContext````  est un hook permettant de se "brancher" très simplement au Contexte, et donc d'accéder au State partagé.
 
 L'utilisation du Contexte est une des méthodes de State Management, qui peut se cumuler avec d'autres méthodes, telles que l'utilisation de Redux.
+
+[Back to top](#généralités)      
+
+### useReducer
+
+*useReducer* est une alternative à *useState*, de type ````(state, action) => newState```` qui retourne le state courant associé à une fonction *dispatch* (i.e Redux)
+
+Il faut préférer l'utilisation de *useReducer*  à *useState* lorsqu'on doit gérer une logique de state complexe qui implique plusieurs sous-valeurs ou lorsque le state suivant dépends du state précédent.
+
+*useReducer* permet également d'optimiser les performances des composants qui déclenchent des mises à jour approfondies, car vous pouvez transmettre la répartition au lieu des rappels.
+
+Voici un exemple de compteur géré avec *useReducer*
+
+````tsx
+const initialState = {count: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    default:
+      throw new Error();
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+    </>
+  );
+}
+````
+[Back to top](#généralités)      
 
 ### useRef
 
