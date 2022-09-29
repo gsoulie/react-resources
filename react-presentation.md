@@ -5,6 +5,7 @@
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/react-generalites.md)    
   * ViteJS    
   * Hooks    
+  * props    
   * StrictMode    
   * Sass    
   * Généricité    
