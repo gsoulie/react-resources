@@ -5,6 +5,10 @@
 * [Ressources](#ressources)     
 * [ViteJS](#vitejs)    
 * [Hooks](#hooks)    
+  * [useState](#usestate)     
+  * [useEffect](#useeffect)      
+  * [useRef](#useref)     
+  * [useContext](#usecontext)     
 * [props](#props)     
 * [StrictMode](#strictmode)    
 * [Sass](#sass)    
@@ -32,7 +36,6 @@ npm run dev
 [Back to top](#généralités)      
 
 ## Hooks
-
 
 ### useState
 
@@ -110,6 +113,14 @@ Cette fonction de rappelle va s'exécuter lors du démontage du composant. Vous 
 ````
 
 [Back to top](#généralités)      
+
+### useContext
+
+Le Contexte est une fonctionnalité de React permettant de partager le state entre plusieurs composants parents et enfants, à l'aide d'un Provider.
+
+````useContext````  est un hook permettant de se "brancher" très simplement au Contexte, et donc d'accéder au State partagé.
+
+L'utilisation du Contexte est une des méthodes de State Management, qui peut se cumuler avec d'autres méthodes, telles que l'utilisation de Redux.
 
 ### useRef
 
