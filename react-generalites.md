@@ -116,6 +116,17 @@ Cette fonction de rappelle va s'exécuter lors du démontage du composant. Vous 
 
 ### useContext
 
+Le Contexte nous permet de récupérer simplement nos datas sans avoir à tout passer manuellement. Pour cela, on englobe le composant parent le plus haut dans l’arborescence de composants avec ce qu’on appelle un *Provider*. Tous les composants enfants pourront alors se connecter au Provider et ainsi accéder aux props, sans avoir à passer par tous les composants intermédiaires. On dit que les composants enfants sont les Consumers 
+
+le Contexte est conçu pour **partager des données qui peuvent être considérées comme globales** :
+* des données sur l’utilisateur actuellement authentifié, 
+* le thème, 
+* la langue utilisée, etc.
+
+Exemple d'utilisation : https://openclassrooms.com/fr/courses/7150606-creez-une-application-react-complete/7256029-partagez-vos-donnees-avec-le-contexte-et-usecontext#:~:text=Le%20Contexte%20est%20une%20fonctionnalit%C3%A9,d'acc%C3%A9der%20au%20State%20partag%C3%A9.  
+
+#### En résumé
+
 Le Contexte est une fonctionnalité de React permettant de partager le state entre plusieurs composants parents et enfants, à l'aide d'un Provider.
 
 ````useContext````  est un hook permettant de se "brancher" très simplement au Contexte, et donc d'accéder au State partagé.
