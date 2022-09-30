@@ -9,8 +9,10 @@
   * StrictMode    
   * Sass    
   * Généricité    
+  * Tips     
 * [Forms](https://github.com/gsoulie/react-resources/blob/master/react-forms.md)    
 * [Http](https://github.com/gsoulie/react-resources/blob/master/react-http.md)     
+* [Routing](https://github.com/gsoulie/react-resources/blob/master/react-routing.md)     
 
 # React Native
 
