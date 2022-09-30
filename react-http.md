@@ -4,6 +4,27 @@
 
 # Http
 
+* [fetch](#fetch)     
+* [axios](#axios)    
+
+## Fetch
+
+La méthode basique pour faire des appels http consiste à utiliser la méthode *fetch*
+
+````tsx
+getPost = async () => {
+	const response = await  fetch('https://jsonplaceholder.typicode.com/posts', {
+	    method: 'GET'
+	  });
+	if(!response.ok) {
+		throw { message: 'Failed to fetch posts', status: 500 };
+	}
+	return response.json();
+}
+````
+
+## Axios
+
 Comme avec Vue, il est pratique d'utiliser **Axios** pour gérer les appels http
 
 ````npm i axios````
