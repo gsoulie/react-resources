@@ -4,12 +4,12 @@
 
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/react-generalites.md)    
   * ViteJS    
-  * Hooks    
   * props    
   * StrictMode    
   * Sass    
   * Généricité    
   * Tips     
+* [Hooks](https://github.com/gsoulie/react-resources/blob/master/react-hooks.md)    
 * [Forms](https://github.com/gsoulie/react-resources/blob/master/react-forms.md)    
 * [Http](https://github.com/gsoulie/react-resources/blob/master/react-http.md)     
 * [Routing](https://github.com/gsoulie/react-resources/blob/master/react-routing.md)     
