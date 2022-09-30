@@ -8,6 +8,9 @@
 * [Route par défaut](#route-par-défaut)     
 * [Routes imbriquées](#routes-imbriquées)     
 * [Infomrations sur la route](#informations-sur-la-route)      
+* [Route index](#route-index)     
+* [Loader](#useLoaderData)    
+* [Gestion des erreurs](#gestion-des-erreurs)     
 
 
 Par défaut il n'y a pas de gestion de des routes dans React comme sous Angular / Vue (Vue Router est maintenant intégré). 
@@ -231,4 +234,109 @@ search: ""		// paramètres de requête ex avec '?param=valeur'
 state: null		// state passé en paramètre de navigation
 ````
   
+[Back to top](#routing)     	
+
+## Route index
+
+La route de type **index** est la route par défaut qui sera appelée lorsque la route parent sera activée. Dans l'exemple ci-dessous, la route */profile/<id>* chargera le composant <Profile>
+à l'intérieur duquel sera chargé l'élément ````<h1>Route index</h1>```` dans le *Outlet*
+
+````tsx
+<Route path="/profile/:id" element={<Profile />}>
+  <Route index element={<h1>Route index</h1>}/>		<!-- Route index -->
+  <Route path="/profile/:id/coords" element={<Coords />}/>
+  <Route path="/profile/:id/cart" element={<Cart/>}/>
+</Route>
+````
+
+[Back to top](#routing)     
+	
+## useLoaderData
+
+https://www.youtube.com/watch?v=L2kzUg6IzxM&ab_channel=Academind
+
+useLoaderData est un hook de React Router. Il permet de déclencher un chargement de data lors de l'activation d'une route. 
+
+
+*Composant Enfant*
+````tsx
+import { useLoaderData } from 'react-router-dom';
+import { fetchPostDetailFromApi } from '../shared/services/post';
+
+export const PostDetail = () => {
+	const postData = useLoaderData();
+	
+	return (
+		<>
+			<h2>Détail du post</h2>
+			<h4>{ postData.title }</h4>
+			<p>{ postData.message }</p>
+		</>
+	)
+}
+
+export function loader({ params }) {	// params de la route
+	const postId = params.id;
+	return fetchPostDetailFromApi(postId);
+}
+````
+
+Le loader est ensuite déclenché via la propriété ````loader```` de l'élément ````<Route>````
+
+*Composant Parent*
+````tsx
+import { loader as postDetailLoader } from '../components/PostDetail';
+
+<Route path="/blog">
+	<Route path=":id" element={<PostDetail />} loader="{postDetailLoader}"/>
+</Route>
+````
+[Back to top](#routing)     
+
+### defer
+
+A voir utilisation de ````defer```` pour retarder le chargement de certaines données lors du routage
+
+[Back to top](#routing)     
+
+## Gestion des erreurs
+
+Depuis React Router 6.4, un nouveau paramètre ````errorElement```` permet de gérer un affichage en cas d'erreur levée par le ````loader````
+
+````tsx
+<Route 
+	path=":id" 
+	element={<PostDetail />} 
+	loader="{postDetailLoader}"
+	errorElement={<h1>Une erreur est survenue lors du chargement des données</h1>}
+/>
+````
+
+Ce paramètre peut être positionné sur n'importe quel route à n'importe quel niveau (note : en plaçant le paramètre au niveau parent, si une erreur est levée par un enfant, cela déclenchera l'affichage défini dans le niveau parent). Cela permet de pouvoir gérer une page d'erreur pour chaque route si besoin
+
+### useRouteError
+
+Le hook useRouteError permet d'accéder à l'erreur levée par le routage
+
+Soit la requête : 
+
+````tsx
+const response = await fetch('<URL>');
+if (!response.ok) {
+	throw { message: 'Failed to load posts', status: 500 };
+}
+````
+
+Sera lue avec le hook de la manière suivante
+
+````tsx
+import { useRouteError } from 'react-router-dom';
+
+const error = useRouteError();
+
+return (
+	<p>{ error.code } - { error.message }</p>
+)
+````
+
 [Back to top](#routing)     
