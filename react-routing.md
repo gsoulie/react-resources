@@ -166,6 +166,17 @@ return (
 );
 ````
 
+Une autre syntaxe moins verbeuse est possible 
+
+````tsx
+<Route path="/profile">
+  <Route path=":id" element={<Profile/>}/>
+  <Route path=":id/edit" element={<Edit />} />
+  <Route path=":id/coords" element={<Coords />}/>
+  <Route path=":id/cart" element={<Cart/>}/>
+</Route>
+````
+
 Dans la sous-page contenant le routage imbriqué, il faut alors importer un élément ````<Outlet>```` équivalent au *<router-outlet>* Angular.
 
 *Profile.tsx*
