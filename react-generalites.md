@@ -16,6 +16,7 @@
 * [StrictMode](#strictmode)    
 * [Sass](#sass)    
 * [Généricité](#généricité)    
+* [Tips](#tips)     
 
 ## Ressources
 
@@ -333,4 +334,11 @@ export const Fruit = ({fruitInfo, actionClick) => {
 De cette manière, depuis le parent on peut définir n'importe quelle action sur le click sans avoir à modifier le traitement dans le composant enfant.
 
 On pourrait faire de même avec la valeur *fruitInfo* pour gérer autre chose que des fruits
+
 [Back to top](#généralités)      
+
+## Tips
+
+Dans VSCode, utiliser le préfixe ````rfc```` pour déclencher un snippet de création de composant fonctionnel
+	
+[Back to top](#généralités)    
