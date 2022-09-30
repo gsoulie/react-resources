@@ -10,6 +10,8 @@
   * [useRef](#useref)     
   * [useContext](#usecontext)     
   * [useReducer](#usereducer)     
+  * [useParams](#useparams)     
+  * [useLocation](#uselocation)      
 * [props](#props)     
 * [StrictMode](#strictmode)    
 * [Sass](#sass)    
@@ -196,6 +198,17 @@ return (
 
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Pour gérer les données dans un formulaire, il n'est **pas recommandé** d'utiliser *useRef()* car ce dernier ne provoque pas de re-render automatique de l'affichage.
 
+[Back to top](#généralités)      
+
+### useParams
+
+*useParams* est un hook de **React Router** (voir chapitre navigation), permettant de récupérer les paramètres d'une route
+
+[Back to top](#généralités)      
+
+### useLocation
+
+*useLocation* est un hook de **React Router** (voir chapitre navigation), permettant de récupérer certaines informations sur la route en cours
 
 [Back to top](#généralités)      
 
