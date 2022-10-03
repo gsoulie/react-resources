@@ -14,6 +14,7 @@
 * [Forms](https://github.com/gsoulie/react-resources/blob/master/react-forms.md)    
 * [Http](https://github.com/gsoulie/react-resources/blob/master/react-http.md)     
 * [Routing](https://github.com/gsoulie/react-resources/blob/master/react-routing.md)     
+* [Local Storage](https://github.com/gsoulie/react-resources/blob/master/react-localstorage.md)     
 
 # React Native
 
