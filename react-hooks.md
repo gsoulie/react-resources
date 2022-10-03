@@ -17,7 +17,7 @@
 
 ## useEffect
 
-Le hook useEffect est un hook qui remplace **dans un composant fonctionnel** les évènements ````componentDidMount```` et ````componentWillmount```` que l'on utilise avec les composant de classe. Il va permettre de déclencher une fonction de manière asynchrone lorsque l'état du composant change. 
+Le hook useEffect est un hook qui remplace **dans un composant fonctionnel** les évènements ````componentDidMount```` et ````componentWillmount```` que l'on utilise avec les composant de classe. Il va permettre de **déclencher une fonction de manière asynchrone lorsque l'état du composant change**. 
 Cela peut permettre d'appliquer des effets de bords ou peut permettre de reproduire la logique que l'on mettait auparavant dans les méthodes 
 ````componentDidMount```` et ````componentWillUnmount````
 
