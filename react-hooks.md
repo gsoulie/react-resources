@@ -107,6 +107,80 @@ Le Contexte est une fonctionnalité de React permettant de partager le state ent
 
 L'utilisation du Contexte est une des méthodes de State Management, qui peut se cumuler avec d'autres méthodes, telles que l'utilisation de Redux.
 
+> Il est conseillé de créer un fichier séparé pour gérer chaque contexte. Ce fichier doit décrire la forme que va avoir le context (pas les valeurs).
+
+1 - Créer le fichier contexte
+
+````tsx
+import React from 'react';
+
+export default React.createContext({
+  theme: '',
+  updateTheme: (themeName: string) => {} 
+});
+````
+
+2 - Importer le contexte dans le composant parent par exemple
+
+````tsx
+import ThemeContext from './contexts/themeContext';
+````
+
+3 - Positionner le contexte
+
+Le contexte se comporte comme un composant qui englobe les autres. On va donc encadrer les balises de la vue avec le contexte
+
+Il faut ensuite donner une *value* au theme. Cette *value* doit correspondre à la structure que l'on a donné au contexte
+
+````tsx
+import ThemeContext from './contexts/themeContext';
+
+function App() {
+
+  const [theme, setTheme] = useState('light-theme');
+
+  const contextValue = {
+    theme: theme,
+    updateTheme: setTheme
+  }
+    
+  return (
+    <ThemeContext.Provider value={contextValue}>
+      <div className={theme}>
+        <Toolbar />
+        <ProductList />
+      </div>
+    </ThemeContext.Provider>
+  )
+}
+````
+
+Ici nous avons utilisé les valeurs du *useState* mais ça pourrait être d'autres variables / fonctions.
+
+4 - Consommer le contexte avec le hook ````useContext```` dans le composant enfant
+
+````tsx
+import ThemeContext from '../../contexts/themeContext';
+
+export default function Toolbar() {
+
+  const ctx = useContext(ThemeContext);
+
+  const handleChangeTheme = (e: any) => {
+    ctx.updateTheme(e.currentTarget.value);
+  }
+  return (
+    <div className="toolbar">
+	  <label>Select theme : </label>
+	  <select className="select" defaultValue={ctx.theme} onChange={handleChangeTheme}>
+		<option value="light-theme">Light</option>
+		<option value="dark-theme">Dark</option>
+	  </select>
+	</div>
+  )
+}
+````
+
 [Back to top](#hooks)      
 
 ## useReducer
