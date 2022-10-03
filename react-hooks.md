@@ -52,7 +52,7 @@ Le second paramètre permet de définir l'état (state ou props) que l'on souhai
 function ExampleComponent() {
     useEffect(() => {
         console.log("Je n'ai qu'un paramètre");
-    });
+    }, []);
 
     return <>Hello world</>;
 }
