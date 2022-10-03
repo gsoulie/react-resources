@@ -26,7 +26,7 @@ useEffect prend en premier paramètre une fonction qui sera exécutée lorsqu'un
 
 Le second paramètre permet de définir l'état (state ou props) que l'on souhaite observer. C'est un tableau qui permet de définir les dépendances de ce hook (cela permet de ne pas exécuter la fonction que si un élément
  a changé pour ce composant). 
- Si vous ne mettez aucune dépendance (un tableau vide) dans ce cas là la fonction passée en premier paramètre ne sera exécuté que lors du montage du composant.
+ **Si vous ne mettez aucune dépendance (un tableau vide) dans ce cas là la fonction passée en premier paramètre ne sera exécuté que lors du montage du composant.** Comme un ngOnInit sous Angular
 
 <img src="https://img.shields.io/badge/ATTENTION-DD0031.svg?logo=LOGO"> il est **très** important de noter que l'exécution du *useEffect* intervient aussi à l'initialisation de la valeur du state !!  
  
