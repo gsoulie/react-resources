@@ -11,6 +11,7 @@
 * [Route index](#route-index)     
 * [Loader](#useLoaderData)    
 * [Gestion des erreurs](#gestion-des-erreurs)     
+* [Naviguer par code](#naviguer-par-code)     
 
 
 Par défaut il n'y a pas de gestion de des routes dans React comme sous Angular / Vue (Vue Router est maintenant intégré). 
@@ -337,6 +338,25 @@ const error = useRouteError();
 return (
 	<p>{ error.code } - { error.message }</p>
 )
+````
+
+[Back to top](#routing)     
+
+## Naviguer par code
+
+La navigation via le code se fait par l'intermédiaire du hook *useNavigate()*
+
+````tsx
+export default function Cart() {
+  const navigate = useNavigate();
+  
+  return (
+    <div>
+      <h3>Votre panier</h3>
+      <button onClick={() => navigate('/')}>Retour accueil</button>
+    </div>
+  )
+}
 ````
 
 [Back to top](#routing)     
