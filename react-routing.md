@@ -12,6 +12,7 @@
 * [Loader](#useLoaderData)    
 * [Gestion des erreurs](#gestion-des-erreurs)     
 * [Naviguer par code](#naviguer-par-code)     
+* [Route guard](#route-guard)     
 
 
 Par défaut il n'y a pas de gestion de des routes dans React comme sous Angular / Vue (Vue Router est maintenant intégré). 
@@ -359,4 +360,52 @@ export default function Cart() {
 }
 ````
 
+[Back to top](#routing)     
+
+## Route guard
+
+Il existe plusieurs solution pour protéger un ensemble de route. Une des plus simple est la suivante 
+
+1 - Créer un fichier permettant d'activer un ensemble de route si le critère choisi est validé (ex : authentification)
+
+*ProtectedRoutes.tsx*
+````tsx
+import { useContext } from 'react'
+import { Navigate, Outlet } from 'react-router-dom'
+import AuthContext from './shared/contexts/authContext'
+
+export const PrivateRoutes = () => {
+  //const authCtx = useContext(AuthContext);  	// possibilité de se baser sur une valeur de contexte
+  let auth = {'token':true}
+return (
+    auth.token ? <Outlet/> : <Navigate to='/login'/>
+  )
+}
+````
+
+La fonction regarde si la condition est validée, si c'est le cas elle affichera le contenu des routes dans un objet ````<Outlet>````. Dans le cas contraire elle redirigera vers la route */login*
+
+Ensuite dans le composant principal il suffit d'encadrer les routes à protéger dans une autre *Route* qui recevra comme élément le *ProtectedRoutes* défini précédemment.
+
+Sans y inclure la route par défaut type "**" et les routes qui doivent rester accessibles tout le temps
+
+*App.tsx*
+```tsx
+return (
+  <AuthContext.Provider value={authCtx}>
+	<div>
+		<Toolbar />
+		<Routes>
+		
+		  <Route element={<PrivateRoutes />}>
+			<Route path="/" element={<ProductList />} />
+			<Route path="/cart" element={<Cart/>} />
+		  </Route>
+		  
+		  <Route path='/login' element={<Login/>}/>
+		</Routes>
+	</div>
+  </AuthContext.Provider>
+  )
+````
 [Back to top](#routing)     
