@@ -10,6 +10,7 @@
 * [Généricité](#généricité)    
 * [Tips](#tips)     
 * [Frameworks UI](#frameworks-ui)     
+* [Variables d'environnement](#variables-d--environnement)     
 
 ## Ressources
 
@@ -96,8 +97,88 @@ comme s'il s'agissait d'un vrai élément html ````<button>````
 <CustomButton type="submit">Submit button</CustomButton>
 ````
 
-[Back to top](#généralités)      
+[Back to top](#généralités)    
+	
+### Props typées
 
+Il existe plusieurs façon de typer les *props* d'un composant, voici les plus courantes :
+
+#### Méthode interface
+
+Utilisable avec et sans destructuration
+
+````tsx
+export interface IProps {
+  product: Product,
+  user: User
+}
+
+export const ProductTile = ({product, user}: IProps) => { return ( <h1>{ product.title }</h1> }
+
+````
+
+#### Méthode PropsWithChildren
+
+````typescript
+import React, {PropsWithChildren} from 'react';
+
+export interface Props {
+  product: Product;
+}
+
+const ProductDetail = (props: PropsWithChildren<Props>) => {...}
+````
+
+#### Méthode React.FC
+
+La méthode avec ````React.FC```` utilise ````PropsWithChildren```` de manière transparente
+
+````tsx
+export interface Props {
+  product: Product
+}
+
+export const ProductTile: React.FC<Props> = (props) => {
+	return (
+		<>
+			<h1>{ props.product.title }</h1>
+		</>
+	)
+}
+````
+[Back to top](#généralités)    
+	
+### Astuce spread props
+	
+Astuce pour faciliter le passage d'un grand nombre de props il est possible d'utiliser la notation *spread* props
+
+Afin d'éviter ceci : 
+
+````tsx
+const data = {
+	id: 23,
+	age: 35,
+	name: 'Jen',
+	bio: 'My name is Jen'
+}
+
+<User id={data.id} name={data.name} age={data.age} bio={data.bio}/>
+````
+
+préférer l'écriture suivante :
+
+````tsx
+const data = {
+	id: 23,
+	age: 35,
+	name: 'Jen',
+	bio: 'My name is Jen'
+}
+
+<User {...data} />
+````
+[Back to top](#généralités)    
+	
 ## StrictMode
 
 Par défaut, le mode stric de react est activé dans le fichier *main.tsx*
@@ -169,5 +250,18 @@ Dans VSCode, utiliser le préfixe ````rfc```` pour déclencher un snippet de cr�
 * Ant design : https://ant.design/docs/react/introduce     
 * React bootstrap : https://react-bootstrap.github.io/getting-started/introduction     
 
+
+[Back to top](#généralités)    
+	
+## Variables environnement
+
+créer un fichier .env à la racine du projet
+
+Pour une utilisation avec *Vite*, déclarer les variables à exposer en les préfixants par *VITE_*. Les variables non préfixées de la sorte ne seront pas accessibles
+
+utiliser les variables n'importe où dans le projet avec la syntaxe :
+````
+import.meta.env.VITE_MA_VARIABLE
+````
 
 [Back to top](#généralités)    
