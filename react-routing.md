@@ -13,6 +13,7 @@
 * [Gestion des erreurs](#gestion-des-erreurs)     
 * [Naviguer par code](#naviguer-par-code)     
 * [Route guard](#route-guard)     
+* [Lazy loading](#lazy-loading)      
 
 
 Par défaut il n'y a pas de gestion de des routes dans React comme sous Angular / Vue (Vue Router est maintenant intégré). 
@@ -407,5 +408,27 @@ return (
 	</div>
   </AuthContext.Provider>
   )
+````
+[Back to top](#routing)     
+
+## Lazy loading
+
+## Lazy loading des routes
+
+````tsx
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { Suspense, lazy } from 'react';
+ 
+const Home = lazy(() => import('./routes/Home'));
+const About = lazy(() => import('./routes/About'));
+ 
+const App = () => (
+<Suspense fallback={<div>Loading...</div>}>
+  <Routes>
+	<Route exact path="/" component={Home}/>
+	<Route path="/about" component={About}/>
+  </Routes>
+</Suspense>  
+);
 ````
 [Back to top](#routing)     
