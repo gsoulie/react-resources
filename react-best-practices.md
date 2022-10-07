@@ -5,8 +5,7 @@
 
 ## Performance
 
-Un point important à avoir en tête est que la modification s'un state entraine un rafraichissement de tout le composant dans lequel il est déclaré / modifié. Ce qui veut dire que si 
-le composant en question contient d'autres composants enfants qui n'ont aucune relation avec le state modifié, alors ces composants enfants seront eux-aussi rafraichi lors de la modification du state.
+Un point important à avoir en tête est que la modification d'un state **entraine un rafraichissement de tout le composant** dans lequel il est déclaré / modifié. Ce qui veut dire que si le composant en question contient d'autres composants enfants qui n'ont aucune relation avec le state modifié, alors ces composants enfants seront eux-aussi rafraichi lors de la modification du state.
 
 Ceci peut causer d'important problème de performance.
 
