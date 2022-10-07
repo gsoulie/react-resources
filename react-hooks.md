@@ -10,6 +10,7 @@
 * [useParams](#useparams)     
 * [useLocation](#uselocation)    
 * [useNavigate](#useNavigate)     
+* [useMemo et useCallback](#usememo-et-usecallback)     
 
 ## useState
 
@@ -271,6 +272,28 @@ function MyCompo() {
       navigate('/home');
     }
 }
+````
+
+[Back to top](#hooks)   
+
+## useMemo et useCallback
+
+https://www.w3schools.com/react/react_usememo.asp
+
+Ce hook permet de retourner une valeur mémorisé (assimilable à une valeur mise en cache), généralement très utile pour mémoriser des traitements lourds qu'on souhaite éviter de recalculer lors du changement d'un state dans le composant par exemple.
+
+le useMemo ne sera alors rejoué **uniquement** si l'une de ses dépendances est mise à jour 
+
+````useCallback```` est similaire à la différence qu'il retourne une **fonction** mémorisée au lieu d'une **valeur** mémorisée
+
+````typescript
+const [count, setCount] = useState(0);
+const [other, setOther] = useState(0);
+
+//const total = expensiveCalculation(count);	// sera rejoué à chaque modification d'un state du composant même s'il s'agit du state *other*
+
+const total = useMemo(() => expensiveCalculation(count), [count]);	// ne sera rejoué uniquement si le state *count* est modifié
+
 ````
 
 [Back to top](#hooks)   
