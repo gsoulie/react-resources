@@ -47,7 +47,7 @@ C'est donc dans ce cas précis qu'il est préférable d'utiliser les *fragments*
 </div>
 ````
 
-L'utilisation d'un fragment **ne créé pas de noeud supplémentaire dans le DOM** contrairement à une <div>. Il s'agit juste de sucre syntaxique.
+L'utilisation d'un fragment **ne créé pas de noeud supplémentaire dans le DOM** contrairement à une ````<div>````. Il s'agit juste de sucre syntaxique.
 
 
 ### Imports dynamiques
