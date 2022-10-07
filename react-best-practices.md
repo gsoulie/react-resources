@@ -28,9 +28,6 @@ Dans l'exemple ci-dessous, nous sommes obligé d'encadrer le contenu du code con
 		</div>
 	)}
 </div>
-
-<>
-</>
 ````
 
 Dans ce cas précis, nous avons ajouté une div **uniquement** pour pallier l'erreur de compilation, à moins que nous souhaitions ajouter du css à cette div, elle est **inutile** pour nous.
