@@ -22,7 +22,7 @@ Dans l'exemple ci-dessous, nous sommes obligé d'encadrer le contenu du code con
 	{ isVisible ? (
 		<MyCompo />
 	) : (
-		<div>	<--- encadrement avec div obligatoire 
+		<div>	<!-- encadrement avec div obligatoire -->
 			<h1>My label</h1>
 			<button>Click me</button>
 		</div>
@@ -42,7 +42,7 @@ C'est donc dans ce cas précis qu'il est préférable d'utiliser les *fragments*
 	{ isVisible ? (
 		<MyCompo />
 	) : (
-		<>	<--- encadrement avec fragment 
+		<>	<!-- encadrement avec fragment -->
 			<h1>My label</h1>
 			<button>Click me</button>
 		</>
