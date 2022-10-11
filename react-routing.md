@@ -14,6 +14,7 @@
 * [Naviguer par code](#naviguer-par-code)     
 * [Route guard](#route-guard)     
 * [Lazy loading](#lazy-loading)      
+* [Déclaration des routes dans fichier externe](#déclaration-des-routes-dans-fichier-externe)     
 
 
 Par défaut il n'y a pas de gestion de des routes dans React comme sous Angular / Vue (Vue Router est maintenant intégré). 
@@ -430,5 +431,89 @@ const App = () => (
   </Routes>
 </Suspense>  
 );
+````
+[Back to top](#routing)     
+
+## Déclaration des routes dans fichier externe
+
+*app-routing.tsx*
+
+````typescript
+import { RestrictedMembers } from './components/RestrictedMembers';
+import { Admin } from './components/Admin';
+import { Login } from './components/Login';
+import { Public } from './components/Public';
+import { ErrorPage } from './components/ErrorPage';
+import { createBrowserRouter, redirect } from 'react-router-dom'
+import authService from "./shared/services/auth.service";
+import App from './App'
+
+const authLoader = () => {
+  if (!authService.isLogged()) {
+    return redirect('/login');
+  } else {
+    return true;
+  }
+};
+
+export const routes = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            element: <Public />,
+            index: true
+          },
+          {
+            element: <Login />,
+            path: '/login'
+          },
+          {
+            element: <Admin />,
+            path: '/admin',
+            loader: authLoader
+          },
+          {
+            element: <RestrictedMembers />,
+            path: '/members',
+            loader: authLoader
+          },
+        ]
+      }
+    ]
+  }
+])
+````
+
+*main.tsx*
+
+````tsx
+import { routes } from './app-routing'
+
+const router = routes;
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  // <BrowserRouter>
+  //   <App />
+  // </BrowserRouter>
+  <RouterProvider router={router} />
+)
+````
+
+*App.tsx*
+
+````tsx
+ return (
+    <>      
+	<Header />
+	<Menu />
+	<Outlet />
+    </>
+  )
 ````
 [Back to top](#routing)     
