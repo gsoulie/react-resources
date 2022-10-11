@@ -25,9 +25,18 @@ Cela peut permettre d'appliquer des effets de bords ou peut permettre de reprodu
 useEffect prend en premier paramètre une fonction qui sera exécutée lorsqu'une de ses dépendance change 
 (cette fonction est exécutée de manière asynchrone et ne bloquera pas le rendu du composant). 
 
-Le second paramètre permet de définir l'état (state ou props) que l'on souhaite observer. C'est un tableau qui permet de définir les dépendances de ce hook (cela permet de ne pas exécuter la fonction que si un élément
- a changé pour ce composant). 
- **Si vous ne mettez aucune dépendance (un tableau vide) dans ce cas là la fonction passée en premier paramètre ne sera exécuté que lors du montage du composant.** Comme un ngOnInit sous Angular
+Le second paramètre permet de définir l'état (state ou props) dont on souhaite observer les mises à jour. C'est un tableau qui permet de définir les dépendances de ce hook (cela permet de n'exécuter la fonction que si un élément a changé pour l'élément observé).
+
+*exemple*
+
+ici, le traitement du useEffect sera déclenché une première fois à l'initialisation puis à chaque modification de la valeur *products* du contexte *ctx*
+````tsx
+ useEffect(() => {
+    // traitement ...
+  }, [ctx.products])
+````
+
+ **Si vous ne mettez aucune dépendance (un tableau vide) en second paramètre, alors la fonction passée en premier paramètre ne sera exécuté que lors du montage du composant.** Comme un ngOnInit sous Angular
 
 <img src="https://img.shields.io/badge/ATTENTION-DD0031.svg?logo=LOGO"> il est **très** important de noter que l'exécution du *useEffect* intervient aussi à l'initialisation de la valeur du state !!  
  
