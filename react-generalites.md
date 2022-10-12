@@ -11,6 +11,7 @@
 * [Tips](#tips)     
 * [Frameworks UI](#frameworks-ui)     
 * [Variables d'environnement](#variables-d--environnement)     
+* [Déploiement](#déploiement)    
 
 ## Ressources
 
@@ -264,4 +265,13 @@ utiliser les variables n'importe où dans le projet avec la syntaxe :
 import.meta.env.VITE_MA_VARIABLE
 ````
 
+[Back to top](#généralités)    
+	
+## Déploiement
+	
+````
+npm run build
+````
+	
+déployer ensuite sur le serveur web (firebase, netlify, heroku, github pages, etc...)
 [Back to top](#généralités)    
