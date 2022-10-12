@@ -11,6 +11,8 @@
 * [useLocation](#uselocation)    
 * [useNavigate](#useNavigate)     
 * [useMemo et useCallback](#usememo-et-usecallback)     
+* [useLoaderData](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#useloaderdata)    
+* [useRouteError](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#userouteerror)     
 
 ## useState
 
