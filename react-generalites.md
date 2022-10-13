@@ -201,6 +201,28 @@ Pour désactiver le mode strict, il suffit de retirer la balise ````<React.Stric
 ## Sass
 
 ````npm i sass````
+	
+### Utiliser un fichier variables.scss
+
+**Créer un fichier variables.scss**
+
+````css
+:root {
+  --color-primary: #0070f3;
+  --color-primary-hover: #097cff;
+  --box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%)
+}
+````
+
+**Importer le fichier dans le global.scss**
+	
+````css
+@import './variables.scss';
+	
+.btn {
+	background-color: var(--color-primary);	
+}
+````
 
 [Back to top](#généralités)      
 
