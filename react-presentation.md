@@ -18,6 +18,10 @@
 * [Routing](https://github.com/gsoulie/react-resources/blob/master/react-routing.md)     
 * [Local Storage](https://github.com/gsoulie/react-resources/blob/master/react-localstorage.md)     
 
+# Next
+
+* [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)      
+
 # React Native
 
 * [Généralités et présentation](https://github.com/gsoulie/react-resources/blob/master/react-concept.md)       
