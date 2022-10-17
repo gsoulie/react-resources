@@ -7,7 +7,7 @@
 * [Routes dynamiques](#routes-dynamiques)     
 * [Route par défaut](#route-par-défaut)     
 * [Routes imbriquées](#routes-imbriquées)     
-* [Infomrations sur la route](#informations-sur-la-route)      
+* [Informations sur la route](#informations-sur-la-route)      
 * [Route index](#route-index)     
 * [Loader](#useLoaderData)    
 * [Gestion des erreurs](#gestion-des-erreurs)     
