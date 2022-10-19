@@ -83,7 +83,7 @@ useEffect(() => {
 });
 ````
 
-Cette fonction de rappelle va s'exécuter lors du démontage du composant. Vous aurez besoin de l'utiliser régulièrement si vous gérez des évènements spécifiques dans le contexte du JavaScript en général. Typiquement, si vous utilisez un setInterval dans un composant de fonction, il faudra bien penser à le couper!
+Cette fonction de rappelle va s'exécuter lors du démontage du composant. Vous aurez besoin de l'utiliser régulièrement si vous gérez des évènements spécifiques dans le contexte du JavaScript en général. Typiquement, si vous utilisez un setInterval ou des observables dans un composant de fonction, il faudra bien penser à le couper et à vous désabonner!
 
 ````tsx
  useEffect(() => {
