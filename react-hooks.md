@@ -199,7 +199,7 @@ export default function Toolbar() {
 
 ## useReducer
 
-*useReducer* est une alternative à *useState*, de type ````(state, action) => newState```` qui retourne le state courant associé à une fonction *dispatch* (i.e Redux)
+*useReducer* est une alternative à *useState*, de type ````(state, action) => newState```` qui retourne le state courant associé à une fonction *dispatch* (utilise le pattern Redux)
 
 Il faut préférer l'utilisation de *useReducer*  à *useState* lorsqu'on doit gérer une logique de state complexe qui implique plusieurs sous-valeurs ou lorsque le state suivant dépends du state précédent.
 
@@ -226,7 +226,7 @@ function Counter() {
   return (
     <>
       Count: {state.count}
-      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button> // dispatch l'action 'decrement'
       <button onClick={() => dispatch({type: 'increment'})}>+</button>
     </>
   );
