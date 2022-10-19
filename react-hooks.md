@@ -4,6 +4,8 @@
 
 * [useState](#usestate)     
 * [useEffect](#useeffect)      
+* [useLayoutEffect](#uselayouteffect)      
+* [custom hook](#custom-hook)     
 * [useRef](#useref)     
 * [useContext](#usecontext)     
 * [useReducer](#usereducer)     
@@ -98,6 +100,50 @@ Cette fonction de rappelle va s'exécuter lors du démontage du composant. Vous 
             clearInterval(countInterval);
         };
     }, []);
+````
+
+[Back to top](#hooks)      
+
+## useLayoutEffect
+
+Fonctionne comme *useEffect* à la différence qu'il s'exécute **après** le calcul du rendu d'un composant mais **avant** l'affichage du dom à l'écran. Ce qui signifie que React attend la fin du traitement avant de rendre le dom visible pour l'utilisateur
+
+[Back to top](#hooks)      
+
+## custom hook
+
+Lorsqu'un traitement utilisant un ou plusieurs hook est utilisé dans plusieurs composants, il est possible de créer un hook personnalisé qui n'est ni plus ni moins qu'une fonction JS
+
+par exemple :
+
+````tsx
+const App = () => {
+	const [title, setTitle] = useState('')
+	
+	useEffect(() => {
+		const data = fetchFromDataBase(article.id);
+		setTitle(data.displayTitle);
+	}, [])
+}
+````
+
+Peut être réécrit de la manière suivante 
+
+````tsx
+const useDisplayTitle = () => {
+	const [title, setTitle] = useState('')
+	
+	useEffect(() => {
+		const data = fetchFromDataBase(article.id);
+		setTitle(data.displayTitle);
+	}, [])
+	
+	return title ?? 'default value';	// <-- return value
+}
+
+const App = () => {
+	const title = useDisplayTitle();
+}
 ````
 
 [Back to top](#hooks)      
