@@ -38,7 +38,7 @@ ici, le traitement du useEffect sera déclenché une première fois à l'initial
   }, [ctx.products])
 ````
 
- **Si vous ne mettez aucune dépendance (un tableau vide) en second paramètre, alors la fonction passée en premier paramètre ne sera exécuté que lors du montage du composant.** Comme un ngOnInit sous Angular
+ **Si vous ne mettez aucune dépendance (un tableau vide) en second paramètre, alors la fonction passée en premier paramètre ne sera exécuté que lors du montage et démontage du composant.** Comme un ngOnInit sous Angular
 
 <img src="https://img.shields.io/badge/ATTENTION-DD0031.svg?logo=LOGO"> il est **très** important de noter que l'exécution du *useEffect* intervient aussi à l'initialisation de la valeur du state !!  
  
