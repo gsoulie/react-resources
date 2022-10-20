@@ -28,7 +28,7 @@ export const Form = ({ addTodoEvent }) => {
 	return (
 		<form action="submit" onSubmit={handleSubmit}>
 			<input value={inputRef} onChange={handleChange} />
-			<button>envoyer</submit>
+			<button type="submit">envoyer</submit>
 		</form>
 		<ul>
 			{fruits.map(f => (
