@@ -74,6 +74,8 @@ function ExampleComponent() {
 }
 ````
 
+<img src="https://img.shields.io/badge/Bonne%20Pratique-68ADFE.svg?logo=LOGO"> Il est conseillé d'éviter de modifier des state à l'intérieur des *useEffect*. Ils ne sont pas fait pour ça initialement. Il faut leur préférer l'utilisation de fonctions callback
+
 ### unmount 
 
 Chaque useEffect que vous déclarez vous donne accès à un callback permettant d'intervenir sur le démontage du composant. Il s'agit du retour de votre fonction dans le useEffect dans laquelle vous fournissez une fonction de rappel.
