@@ -76,7 +76,9 @@ function ExampleComponent() {
 
 ### unmount 
 
-Chaque useEffect que vous déclarez vous donne accès à un callback permettant d'intervenir sur le démontage du composant. Il s'agit du retour de votre fonction dans le useEffect dans laquelle vous fournissez une fonction de rappelle.
+Chaque useEffect que vous déclarez vous donne accès à un callback permettant d'intervenir sur le démontage du composant. Il s'agit du retour de votre fonction dans le useEffect dans laquelle vous fournissez une fonction de rappel.
+
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> cette fonction de "nettoyage" va être jouée lors de **chaque** update du useEffect !!!
 
 ````tsx
 useEffect(() => {
