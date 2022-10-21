@@ -74,7 +74,7 @@ function ExampleComponent() {
 }
 ````
 
-<img src="https://img.shields.io/badge/Bonne%20Pratique-68ADFE.svg?logo=LOGO"> Il est conseillé d'éviter de modifier des state à l'intérieur des *useEffect*. Ils ne sont pas fait pour ça initialement. Il faut leur préférer l'utilisation de fonctions callback
+<img src="https://img.shields.io/badge/Bonne%20Pratique-68ADFE.svg?logo=LOGO"> Il est conseillé d'éviter de modifier des state à l'intérieur des *useEffect*. Ils ne sont pas fait pour ça initialement. Il faut leur préférer l'utilisation de fonctions callback. De manière générale, les *useEffect* sont surtout utilisés pour souscrire / se désabonner à des évènements / observables
 
 ### unmount 
 
