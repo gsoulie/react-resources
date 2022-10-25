@@ -18,6 +18,7 @@
 * [Http](https://github.com/gsoulie/react-resources/blob/master/react-http.md)     
 * [Routing](https://github.com/gsoulie/react-resources/blob/master/react-routing.md)     
 * [Local Storage](https://github.com/gsoulie/react-resources/blob/master/react-localstorage.md)     
+* [Rendering en dehors de la div root avec React Portal](https://www.youtube.com/watch?v=LyLa7dU5tp8&ab_channel=WebDevSimplified)      
 
 # Next
 
