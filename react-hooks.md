@@ -20,6 +20,8 @@
 
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> bien positionner ses states. Trop souvent on a tendance à positionner les states dans le composant parent alors que ce dernier n'utilise pas forcément le contenu => https://www.youtube.com/watch?v=NZqMVUEiDIw&ab_channel=WebDevSimplified
 
+Il faut garder à l'esprit que toute modification d'un state entraine un repaint du composant, de fait, modifier un state lors d'une saisie n'a pas forcément d'intérêt si visuellement nous n'avons pas de nécessité de rafraichir l'affichage.
+
 [Back to top](#hooks)      
 
 ## useEffect
