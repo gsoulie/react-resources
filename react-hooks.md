@@ -26,6 +26,8 @@ Il faut garder à l'esprit que toute modification d'un state entraine un repaint
 
 ## useEffect
 
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Avant de se lancer, il faut bien se questionner sur la nécessité ou non d'utiliser un effect : https://beta.reactjs.org/learn/you-might-not-need-an-effect
+
 Le hook useEffect est un hook qui remplace **dans un composant fonctionnel** les évènements ````componentDidMount```` et ````componentWillmount```` que l'on utilise avec les composant de classe. Il va permettre de **déclencher une fonction de manière asynchrone lorsque l'état du composant change**. 
 Cela peut permettre d'appliquer des effets de bords ou peut permettre de reproduire la logique que l'on mettait auparavant dans les méthodes 
 ````componentDidMount```` et ````componentWillUnmount````
@@ -350,6 +352,29 @@ https://www.w3schools.com/react/react_usememo.asp
 Ce hook permet de retourner une valeur mémorisé (assimilable à une valeur mise en cache), généralement très utile pour mémoriser des traitements lourds qu'on souhaite éviter de recalculer lors du changement d'un state dans le composant par exemple.
 
 le useMemo ne sera alors rejoué **uniquement** si l'une de ses dépendances est mise à jour 
+
+*Exemple d'utilisation*
+
+````typescript
+function TodoList({ todos, filter }) {
+  const [newTodo, setNewTodo] = useState('');
+  // ✅ This is fine if getFilteredTodos() is not slow.
+  const visibleTodos = getFilteredTodos(todos, filter);
+  // ...
+}
+````
+
+Peut être converti avec *useMemo* de la manière suivante si le traitement ````getFilteredTodos()```` est lent
+
+````typescript
+import { useMemo, useState } from 'react';
+
+function TodoList({ todos, filter }) {
+  const [newTodo, setNewTodo] = useState('');
+  const visibleTodos = useMemo(() => getFilteredTodos(todos, filter), [todos, filter]);
+  // ...
+}
+````
 
 ````useCallback```` est similaire à la différence qu'il retourne une **fonction** mémorisée au lieu d'une **valeur** mémorisée
 
