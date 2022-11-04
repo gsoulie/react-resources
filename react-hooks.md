@@ -2,6 +2,7 @@
 
 # Hooks
 
+* [key](#key)     
 * [useState](#usestate)     
 * [useEffect](#useeffect)      
 * [useLayoutEffect](#uselayouteffect)      
@@ -15,6 +16,24 @@
 * [useMemo et useCallback](#usememo-et-usecallback)     
 * [useLoaderData](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#useloaderdata)    
 * [useRouteError](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#userouteerror)     
+
+## key
+
+source : https://beta.reactjs.org/learn/you-might-not-need-an-effect#resetting-all-state-when-a-prop-changes
+
+La propriété ````key```` de React est principalement utilisée dans les boucles afin d'optimiser le repaint des éléments (comme le *trackBy* Angular). Mais la propriété ````key```` permet aussi de pouvoir contrôler les instances des composants.
+Chaque fois que React rend vos composants, il appelle vos fonctions pour récupérer les nouveaux éléments React qu'il utilise pour mettre à jour le DOM. Si vous renvoyez les mêmes types d'éléments, il conserve ces composants/noeuds DOM, même si toutes les props ont changés.
+
+La seule exception à cette règle est la clé prop. Cela vous permet de renvoyer exactement le même type d'élément, mais force React à démonter l'instance précédente et à en monter une nouvelle. Cela signifie que tout état qui existait dans le composant à ce moment-là est complètement supprimé et que le composant est "réinitialisé" à toutes fins utiles. Pour les composants fonction, cela signifie que React exécutera le nettoyage des effets, puis il exécutera les initialiseurs d'état et les rappels d'effet.
+
+Pour utiliser la propriété ````key```` il suffit donc de l'ajouter 
+
+````html
+<Profile
+      userId={userId}
+      key={userId}
+    />
+````
 
 ## useState
 
