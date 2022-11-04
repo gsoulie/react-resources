@@ -45,7 +45,7 @@ Il faut garder à l'esprit que toute modification d'un state entraine un repaint
 
 ## useEffect
 
-<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Avant de se lancer, il faut bien se questionner sur la nécessité ou non d'utiliser un effect : https://beta.reactjs.org/learn/you-might-not-need-an-effect
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Avant de se lancer, il faut bien se questionner sur la nécessité ou non d'utiliser un effect : https://beta.reactjs.org/learn/you-might-not-need-an-effect, on abuse trop souvent du useEffect pour de mauvaises raisons
 
 Le hook useEffect est un hook qui remplace **dans un composant fonctionnel** les évènements ````componentDidMount```` et ````componentWillmount```` que l'on utilise avec les composant de classe. Il va permettre de **déclencher une fonction de manière asynchrone lorsque l'état du composant change**. 
 Cela peut permettre d'appliquer des effets de bords ou peut permettre de reproduire la logique que l'on mettait auparavant dans les méthodes 
