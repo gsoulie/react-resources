@@ -2,6 +2,7 @@
 
 # Hooks
 
+* [Librairie complète](#librairie-complète)      
 * [key](#key)     
 * [useState](#usestate)     
 * [useEffect](#useeffect)      
@@ -16,6 +17,11 @@
 * [useMemo et useCallback](#usememo-et-usecallback)     
 * [useLoaderData](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#useloaderdata)    
 * [useRouteError](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#userouteerror)     
+
+## Librairie complète
+
+Librairie de snippet de hook (ex : copy to clipboard) https://www.youtube.com/watch?v=xDJZ99CPRMw&ab_channel=Melvynx     
+
 
 ## key
 
