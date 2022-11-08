@@ -12,6 +12,7 @@
 * [Frameworks UI](#frameworks-ui)     
 * [Variables d'environnement](#variables-d--environnement)     
 * [Déploiement](#déploiement)    
+* [Icons](#icons)     
 
 ## Ressources
 
@@ -297,3 +298,17 @@ npm run build
 	
 déployer ensuite sur le serveur web (firebase, netlify, heroku, github pages, etc...)
 [Back to top](#généralités)    
+	
+## icons
+
+https://react-icons.github.io/react-icons/
+	
+````
+import { MdArrowForwardIos } from 'react-icons/md';
+
+return (
+	<span>A vos abris<MdArrowForwardIos /></span>
+)
+
+	
+
