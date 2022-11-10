@@ -213,6 +213,17 @@ export default React.createContext({
   theme: '',
   updateTheme: (themeName: string) => {} 
 });
+
+// Autre exemple de déclaration
+interface userContext {
+  players: number,
+  updatePlayers: (count: number) => void,
+  extensionEnabled: boolean,
+  updateExtensionEnabled: (enabled: boolean) => void,
+  tiles: string,
+  updateTiles: (tiles: string[]) => void
+}
+export default React.createContext<userContext | null>(null);
 ````
 
 2 - Importer le contexte dans le composant parent par exemple
