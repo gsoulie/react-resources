@@ -3,6 +3,37 @@
 
 # Forms
 
+## Méthode avec champ uncontrolled
+
+Cettte méthode est à privilégier dans la majorité des cas car elle ne procède pas à un repaint du composant à chaque saisie et c'est le dom qui gère tout seul les données
+
+````tsx
+const Form = () => {
+  const handleSubmit = (e) => {
+	e.preventDefault();
+	const form = e.target
+	
+	// Version Typescript à privilégier pour le typage
+	const formData = new FormData(form);
+	const username = formData.get('username');	// Ne pas oublier la propriété "name" dans la vue car formData se base dessus
+	
+	// Version JS pur
+	const el = form.elements;
+	const username = el.username.value;
+
+	form.reset();
+ }
+
+  return (
+    <form onSubmit="{handleSubmit}">
+	<label htmlFor="username">Username</label>
+	<input type="text" id="username" name="username"/>
+	<button type="submit">Submit</button>
+    </form>
+  );
+};
+````
+
 ## Méthode useState
 
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> la manipulation de formulaires via la méthode *useState* a pour conséquence de re-rendre la vue à chaque modification de la valeur d'un champ de saisie. C'est pourquoi cette méthode n'est à privilégier que pour les champs de type searchbar (avec recherche sans validation via un bouton) ou lorsqu'on a besoin de faire un traitement dès que l'on observe une modification d'un champ ou si l'on souhaite gérer l'affichage d'erreurs de saisie en direct.
@@ -37,33 +68,6 @@ export const Form = ({ addTodoEvent }) => {
 		</ul>
 	)
 }
-````
-
-[Back to top](#forms)     
-
-## Méthode avec champ uncontrolled
-
-Cettte méthode est à privilégier dans la majorité des cas car elle ne procède pas à un repaint du composant à chaque saisie
-
-````tsx
-const Form = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-
-    const name = form.elements.name.value;
-
-    alert(`Submitted ${name}`);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" id="name" />
-      <button type="submit">Submit</button>
-    </form>
-  );
-};
 ````
 
 [Back to top](#forms)     
