@@ -46,7 +46,8 @@ Il faut donc avoir en tête les points suivants :
 * il n'y as pas d'héritage de style, celà veut dire qu'un style appliqué sur un parent (ex une div) ne sera pas appliqué aux éléments enfants. (ex si on ajoute une propriété ````color: 'white'```` sur une *View*, cette couleur ne sera pas appliquée aux élément *<Text>* enfants qui pourraient exister 
 * On utilise les composants natif, par exemple du texte ne peut pas être ajouté en dehors d'un composant <Text>
 * Les balises html classiques utilisées dans les autres framework n'existent pas pour React Native (contrairement à React) ! On utilise les composants React Native
-[Back to top](#react-native)     
+  
+[Back to top](#react-native)       
   
 ## Installation
 
