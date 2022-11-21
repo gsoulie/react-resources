@@ -47,6 +47,8 @@ Il faut donc avoir en tête les points suivants :
 * On utilise les composants natif, par exemple du texte ne peut pas être ajouté en dehors d'un composant <Text>
 * Les balises html classiques utilisées dans les autres framework n'existent pas pour React Native (contrairement à React) ! On utilise les composants React Native
   
+> A noter qu'il est possible d'utiliser React Native pour développer une application web. Cependant, compte-tenu que React est spécialement développé pour le web, il est à préférer pour la version web plutôt que React Native.
+  
 [Back to top](#react-native)       
   
 ## Installation
