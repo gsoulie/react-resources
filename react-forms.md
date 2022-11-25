@@ -17,6 +17,9 @@ const Form = () => {
 	const formData = new FormData(form);
 	const username = formData.get('username');	// Ne pas oublier la propriété "name" dans la vue car formData se base dessus
 	
+	// Récupérer tous les champs du formulaires d'un coup
+	const values = Object.fromEntries(formData); // => { username: 'toto', tel: '06060606' }
+	
 	// Version JS pur
 	const el = form.elements;
 	const username = el.username.value;
@@ -28,6 +31,9 @@ const Form = () => {
     <form onSubmit="{handleSubmit}">
 	<label htmlFor="username">Username</label>
 	<input type="text" id="username" name="username"/>
+	
+	<label htmlFor="tel">Telephone</label>
+	<input type="text" id="tel" name="tel"/>
 	<button type="submit">Submit</button>
     </form>
   );
