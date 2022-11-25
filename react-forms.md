@@ -20,6 +20,9 @@ const Form = () => {
 	// Récupérer tous les champs du formulaires d'un coup
 	const values = Object.fromEntries(formData); // => { username: 'toto', tel: '06060606' }
 	
+	// variante avec destructuration
+	const { username, tel} = Object.fromEntries(formData);
+	
 	// Version JS pur
 	const el = form.elements;
 	const username = el.username.value;
