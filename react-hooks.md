@@ -376,6 +376,10 @@ function MyCompo() {
     rootToHome() {
       navigate('/home');
     }
+    
+    navigateToPrevious() {
+    	navigate(-1)
+    }
 }
 ````
 
