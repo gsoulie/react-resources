@@ -23,6 +23,73 @@
 Librairie de snippet de hook (ex : copy to clipboard) https://www.youtube.com/watch?v=xDJZ99CPRMw&ab_channel=Melvynx     
 
 
+## Bonnes pratique hook
+
+### Side effects
+
+mettre à jour un localStorage en fonction d'un state :
+
+*NON FONCTIONNEL*
+
+````typescript
+const [count, setCount] = useState(0);
+
+const addToCount = (amount) => {
+	setCount((curr) => curr + amount);
+	
+	localStorage.setItem('count', count);	// => Le localStorage ne sera pas à jour
+}
+````
+
+*A REMPLACER PAR*
+
+````typescript
+const [count, setCount] = useState(0);
+
+const addToCount = (amount) => {
+	setCount((curr) => curr + amount);
+}
+
+// Synchronisation
+useEffect(() => {
+	localStorage.setItem('count', count);
+}, [count])
+````
+
+Utiliser un stockage en local storage en réaction d'un state est un **side effect**, ce qui est précisément le but d'un *useEffect*
+
+### useEffect
+
+Généralement on ne doit pas setter des states dans un useEffect. Si on le fait, c'est qu'il y a un problème !
+
+*MAUVAISE PRATIQUE*
+
+````typescript
+const [search, setSearch] = useState('');
+const [username, setUsername] = useState('');
+
+useEffect(() => {
+	if (!search && !username) {
+		setTitle('Nothing...');
+		return;
+	}
+	
+	setTitle(`${search} for ${username}`);
+}, [search, username])
+````
+
+*A REMPLACER PAR*
+
+````typescript
+const [search, setSearch] = useState('');
+const [username, setUsername] = useState('');
+const title = !search && !username ? 'Nothing...' : `${search} for ${username}`;
+
+return(<h2>{title}</h2>);
+````
+
+<img src="https://img.shields.io/badge/Resources-Angular%20(Fr)-DD0031.svg?logo=LOGO"> ne pas oublier qu'une variable dépendant d'un state sera mise à jour si le state change car ce dernier déclenche un re-render du composant !
+
 ## key
 
 source : https://beta.reactjs.org/learn/you-might-not-need-an-effect#resetting-all-state-when-a-prop-changes
