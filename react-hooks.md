@@ -89,7 +89,7 @@ const title = !search && !username ? 'Nothing...' : `${search} for ${username}`;
 return(<h2>{title}</h2>);
 ````
 
-<img src="https://img.shields.io/badge/Resources-Angular%20(Fr)-DD0031.svg?logo=LOGO"> ne pas oublier qu'une variable dépendant d'un state sera mise à jour si le state change car ce dernier déclenche un re-render du composant !
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> ne pas oublier qu'une variable dépendant d'un state sera mise à jour si le state change car ce dernier déclenche un re-render du composant !
 
 ## key
 
