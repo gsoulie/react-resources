@@ -3,6 +3,7 @@
 # Hooks
 
 * [Librairie complète](#librairie-complète)      
+* [Bonnes pratiques](#bonnes-pratiques-hook)     
 * [key](#key)     
 * [useState](#usestate)     
 * [useEffect](#useeffect)      
@@ -23,7 +24,7 @@
 Librairie de snippet de hook (ex : copy to clipboard) https://www.youtube.com/watch?v=xDJZ99CPRMw&ab_channel=Melvynx     
 
 
-## Bonnes pratique hook
+## Bonnes pratiques hook
 
 ### Side effects
 
