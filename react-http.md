@@ -13,14 +13,22 @@
 La méthode basique pour faire des appels http consiste à utiliser la méthode *fetch*
 
 ````tsx
-getPost = async () => {
-	const response = await  fetch('https://jsonplaceholder.typicode.com/posts', {
-	    method: 'GET'
-	  });
-	if(!response.ok) {
-		throw { message: 'Failed to fetch posts', status: 500 };
-	}
-	return response.json();
+async getPost(url: string) => {
+    const response = await  fetch(url, { method: 'GET' });
+    if(!response.ok) {
+	throw { message: 'Failed to fetch posts', status: 500 };
+	return null;
+    }
+    return response.json();
+}
+
+const Component = () => {
+    useEffect(() => {
+        getPost('/api/posts')
+	.then((json) => {
+	    ...
+	})
+    }, [])
 }
 ````
 
