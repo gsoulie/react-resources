@@ -13,18 +13,23 @@
 La méthode basique pour faire des appels http consiste à utiliser la méthode *fetch*
 
 ````tsx
-async getPost(url: string) => {
+type Post = {
+    title: string;
+    message: string;
+}
+async fetchData<T>(url: string) => {
     const response = await  fetch(url, { method: 'GET' });
     if(!response.ok) {
 	throw { message: 'Failed to fetch posts', status: 500 };
 	return null;
     }
-    return response.json();
+    return response.json() as T;
 }
 
 const Component = () => {
+    
     useEffect(() => {
-        getPost('/api/posts')
+        fetchData<Post>('/api/posts')
 	.then((json) => {
 	    ...
 	})
