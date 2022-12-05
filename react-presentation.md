@@ -20,6 +20,7 @@
 * [Routing](https://github.com/gsoulie/react-resources/blob/master/react-routing.md)     
 * [Local Storage](https://github.com/gsoulie/react-resources/blob/master/react-localstorage.md)     
 * [Rendering en dehors de la div root avec React Portal](https://www.youtube.com/watch?v=LyLa7dU5tp8&ab_channel=WebDevSimplified)      
+* [i18n](https://github.com/gsoulie/react-resources/blob/master/react-i18n.md)     
 
 # Next
 
