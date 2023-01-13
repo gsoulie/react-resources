@@ -270,6 +270,11 @@ Dans VSCode, utiliser le préfixe ````rfc```` pour déclencher un snippet de cr�
 ## Frameworks UI
 
 * Material UI : https://mui.com/material-ui/getting-started/installation/
+	
+````
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+````
+	
 * Chakra : https://chakra-ui.com/getting-started     
 * Ant design : https://ant.design/docs/react/introduce     
 * React bootstrap : https://react-bootstrap.github.io/getting-started/introduction     
