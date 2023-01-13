@@ -2,6 +2,14 @@
 
 # React
 
+*Création d'un projet*
+````
+npm create vite@latest
+npm i
+npm i sass
+npm i react-router-dom
+````
+
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/react-generalites.md)    
   * ViteJS    
   * props    
