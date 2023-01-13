@@ -272,6 +272,142 @@ L'utilisation du Contexte est une des méthodes de State Management, qui peut se
 
 > Il est conseillé de créer un fichier séparé pour gérer chaque contexte. Ce fichier doit décrire la forme que va avoir le context (pas les valeurs).
 
+
+1 - Créer le fichier contexte
+
+````typescript
+import { createContext, useMemo, useState } from "react";
+
+export type PlayerType = {
+  guid: string,
+  name: string,
+  color: string,
+  score: number
+}
+
+const PlayerCtx = createContext<{
+  players: PlayerType[];
+  updatePlayers: (p: PlayerType[]) => void;
+  deletePlayers: () => void;
+} | null>(null);
+
+// Avec initialisation
+// const PlayerCtx = createContext<{
+//   players: PlayerType[];
+//   setPlayers: (p: PlayerType[]) => void;
+// } | null>({
+//   players: [
+//     {
+//       name: "Guillaume",
+//       color: "#ffcc00",
+//       score: 150,
+//     },
+//     {
+//       name: "Maël",
+//       color: "#aa3355",
+//       score: 270,
+//     },
+//   ],
+//   setPlayers: () => {},
+// });
+
+// custom provider
+const PlayerContextProvider = ({ children }) => {
+  const [players, setPlayers] = useState<PlayerType[]>([]);
+
+  const deletePlayers = () => {
+    setPlayers([]);
+  };
+
+  const ctxValue = useMemo(
+    () => ({
+      players,
+      updatePlayers: (newPlayers: PlayerType[]) => setPlayers(newPlayers),
+      deletePlayers,
+      resetPlayersScore,
+    }),
+    [players, setPlayers]
+  );
+  // const ctxValue = {
+  //   players,
+  //   updatePlayers: (newPlayers: PlayerType[]) => setPlayers(newPlayers),
+  //   deletePlayers,
+  // };
+
+  return <PlayerCtx.Provider value={ctxValue}>{children}</PlayerCtx.Provider>;
+};
+
+export { PlayerCtx, PlayerContextProvider };
+````
+2 - Créer un custom hook 
+
+Permet de vérifier la valeur du contexte avant utilisation
+
+````typescript
+import { useContext } from "react";
+import { PlayerCtx } from "../context/player-provider";
+
+export const usePlayers = () => {
+  const ctx = useContext(PlayerCtx);
+
+  if (!ctx) {
+    throw new Error(
+      "Le contexte usePlayer doit être utilisé à l'intérieur du provider PlayerContextProvider"
+    );
+  }
+  return ctx;
+};
+
+````
+
+3 - Ajout du contexte dans l'application ou sur un composant
+
+````typescript
+import { PlayerContextProvider } from "./shared/context/player-provider";
+
+function App() {
+  return (
+    <PlayerContextProvider>
+      <Outlet />
+    </PlayerContextProvider>
+  );
+}
+````
+
+4 - Consommation du contexte
+
+````typescript
+import { usePlayers } from "../../shared/hooks/player-hook";
+import List from "@mui/material/List";
+
+export const ScoreSheet = () => {
+  const playersCtx = usePlayers();
+  
+  const addPlayer = () => {
+    let currents = [...playersCtx.players];
+    const newPlayer = {guid: '0001d21d', name: 'test', score: 0, color: '#ffcc00'};
+    currents.push(newPlayer);
+    
+    playersCtx.updatePlayers(currents);
+  };
+
+  return (
+    <>
+      <Header />
+      <div className="form">
+        <List className="ion-list">
+          {playersCtx.players.map((player, i: number) => (
+            <div key={player.guid}>...</div>
+          ))}
+        </List>
+      </div>
+    </>
+  );
+};
+````
+
+### Autre méthode (moins propre)
+
 1 - Créer le fichier contexte
 
 ````tsx
