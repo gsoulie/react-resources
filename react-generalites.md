@@ -13,6 +13,7 @@
 * [Variables d'environnement](#variables-d--environnement)     
 * [Déploiement](#déploiement)    
 * [Icons](#icons)     
+* [Services](#services)     
 
 ## Ressources
 
@@ -314,6 +315,37 @@ import { MdArrowForwardIos } from 'react-icons/md';
 return (
 	<span>A vos abris<MdArrowForwardIos /></span>
 )
+````
 
+[Back to top](#généralités)    
 	
+## Services
+	
+````typescript
+import { SelectedColor, COLORS } from './../enum/colors.enum';
+class ColorHelper {
+  constructor() { }
 
+  fetchColors = (): SelectedColor[] => {
+
+    const colorSet: SelectedColor[] = COLORS.map((c) => ({
+      color: c,
+      selected: false,
+    }));
+
+    return colorSet;
+  }
+}
+export default new ColorHelper();
+	
+// Appel
+import colorHelper from "../../shared/hooks/color-helper.service";
+
+export const Player = () => {
+  const [colors, setColor] = useState<SelectedColor[]>(
+    colorHelper.fetchColors()
+  );
+}
+````
+
+[Back to top](#généralités)    
