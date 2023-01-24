@@ -38,3 +38,35 @@ npx next export
 ````
 
 -> Génère un répertoire *.out* qu'on va poser sur le serveur
+
+## Fonctionnement
+
+Avec NextJS, il est possible de déclarer des composants **serveur** et des composants **clients**. Il est important de se rappeler que toutes les fonctions qui s'exécutentt habituellement côté client ne sont pas accessibles côté serveur. Par exemple l'appel à ````window.xxxx```` ne pourra pas s'effectuer dans un composant déclaré comme composant serveur.
+De la même manière, il n'y a pas d'état ou de reducer (useState, useReducer) dans les composants côté serveur.
+
+Si on a besoin d'un state ou d'un reducer, alors il faut définir son composant comme étant un composant **client**.
+
+````typescript
+'use client'; // <-- déclarer le composant comme étant "client"
+
+export default MyCompo = () => {
+
+}
+````
+
+### Récupérer des données asynchrone côté client
+
+Pour pouvoir récupérer des données asynchrone côté client, il existe un hook **use** qui agit comme un **await**
+
+````typescript
+'use client';
+
+async function getData() {
+  const res = await fetch('https://xxxxxx');
+  return res.json();
+}
+
+export default MyCompo = () => {
+  const name = use(getData());
+}
+````
