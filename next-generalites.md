@@ -77,7 +77,7 @@ export default MyCompo = () => {
 
 ## Navigation
 
-Les pages sont associées à une route en fonction de leur nom de fichier. Par exemple, en développement :
+Next est un meta-framework orienté **file-based routing**. Les pages sont associées à une route en fonction de leur nom de fichier. Par exemple, en développement :
 
 ````pages/index.js```` est associé à la route ````/````.     
 ````pages/posts/first-post.js```` est associé à la route ````/posts/first-post````.     
