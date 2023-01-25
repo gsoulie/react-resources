@@ -11,6 +11,7 @@ npm i react-router-dom
 ````
 
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/react-generalites.md)    
+  * Principes     
   * ViteJS    
   * props    
   * StrictMode    
