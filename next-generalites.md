@@ -41,6 +41,8 @@ npx next export
 
 ## Fonctionnement
 
+React 18 et Next 12 introduisent une version alpha des composants serveur React. Les composants serveur sont entièrement rendus sur le serveur et ne nécessitent pas de JavaScript côté client pour être rendus. De plus, les composants serveur permettent aux développeurs de conserver une certaine logique sur le serveur et d'envoyer uniquement le résultat de cette logique au client. Cela réduit la taille du bundle envoyé au client et améliore les performances de rendu côté client.
+
 Avec NextJS, il est possible de déclarer des composants **serveur** et des composants **clients**. Il est important de se rappeler que toutes les fonctions qui s'exécutentt habituellement côté client ne sont pas accessibles côté serveur. Par exemple l'appel à ````window.xxxx```` ne pourra pas s'effectuer dans un composant déclaré comme composant serveur.
 De la même manière, il n'y a pas d'état ou de reducer (useState, useReducer) dans les composants côté serveur.
 
