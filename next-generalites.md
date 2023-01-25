@@ -2,6 +2,8 @@
 
 # Généralités
 
+* [Navigation](#navigation)     
+
 ## Description
 
 La création d'un projet *Next* va générer les répertoires suivants :
@@ -72,3 +74,11 @@ export default MyCompo = () => {
   const name = use(getData());
 }
 ````
+
+## Navigation
+
+Les pages sont associées à une route en fonction de leur nom de fichier. Par exemple, en développement :
+
+````pages/index.js```` est associé à la route ````/````.     
+````pages/posts/first-post.js```` est associé à la route ````/posts/first-post````.     
+Nous avons déjà le fichier ````pages/index.js````, alors créons ````pages/posts/first-post.js```` pour voir comment cela fonctionne.
