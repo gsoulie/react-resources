@@ -2,6 +2,7 @@
 
 # Généralités
 
+* [Principes](#principes)     
 * [Ressources](#ressources)     
 * [ViteJS](#vitejs)    
 * [props](#props)     
@@ -14,6 +15,10 @@
 * [Déploiement](#déploiement)    
 * [Icons](#icons)     
 * [Services](#services)     
+
+## Principes
+
+**Hydratation** : Le principe d'hydratation dans le contexte du server-side rendering (SSR) fait référence à la technique permettant de prendre un composant React ou Vue qui a été initialement rendu côté serveur, puis de le "réhydrater" côté client en lui donnant accès à toutes les fonctionnalités de React ou Vue, comme les interactions utilisateur, les événements, etc. Cela permet d'optimiser les performances en affichant le contenu plus rapidement pour l'utilisateur tout en conservant les avantages de l'interactivité offerte par les frameworks JavaScript côté client.
 
 ## Ressources
 
