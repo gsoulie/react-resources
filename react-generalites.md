@@ -290,11 +290,15 @@ npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
 	
 ## Variables d'environnement
 
-créer un fichier .env à la racine du projet
+* Créer un fichier **.env** à la racine du projet
 
 Pour une utilisation avec *Vite*, déclarer les variables à exposer en les préfixants par *VITE_*. Les variables non préfixées de la sorte ne seront pas accessibles
+	
+````
+VITE_API_ENDPOINT = "https://www.myendpoint.com"
+````
 
-utiliser les variables n'importe où dans le projet avec la syntaxe :
+* Utiliser les variables n'importe où dans le projet avec la syntaxe :
 ````
 import.meta.env.VITE_MA_VARIABLE
 ````
