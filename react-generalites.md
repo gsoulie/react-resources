@@ -11,7 +11,7 @@
 * [Généricité](#généricité)    
 * [Tips](#tips)     
 * [Frameworks UI](#frameworks-ui)     
-* [Variables d'environnement](#variables-d--environnement)     
+* [Variables d'environnement](#variables-d-environnement)     
 * [Déploiement](#déploiement)    
 * [Icons](#icons)     
 * [Services](#services)     
@@ -288,7 +288,7 @@ npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
 
 [Back to top](#généralités)    
 	
-## Variables environnement
+## Variables d'environnement
 
 créer un fichier .env à la racine du projet
 
