@@ -37,6 +37,17 @@ const Component = () => {
 }
 ````
 
+````typescript
+const res = await fetch('/user', {
+  headers: {
+    // ✅ If we are sending serialized JSON, we should set the Content-Type:
+    'Content-Type': 'application/json'
+  },
+  method: 'POST',
+  body: JSON.stringify({ name: 'Steve Sewell', company: 'Builder.io' })
+})
+````
+
 ## Axios
 
 Comme avec Vue, il est pratique d'utiliser **Axios** pour gérer les appels http
