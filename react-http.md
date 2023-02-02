@@ -72,6 +72,82 @@ export const UserList = () => {
 }
 ````
 
+### Exemple de Helper basé sur axios
+
+````typescript
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'https://api.example.com/',
+});
+
+// Function to handle API errors
+const handleError = (error) => {
+  if (error.response) {
+    // The request was made and the server responded with a status code outside the 2xx range
+    console.error(error.response.data);
+    console.error(error.response.status);
+    console.error(error.response.headers);
+  } else if (error.request) {
+    // The request was made but no response was received
+    console.error(error.request);
+  } else {
+    // Something happened in setting up the request that triggered an Error
+    console.error('Error', error.message);
+  }
+  console.error(error.config);
+};
+
+export default class ApiService {
+  static async get(path) {
+    try {
+      const response = await api.get(path);
+      return response.data;
+    } catch (error) {
+      handleError(error);
+    }
+  }
+
+  static async post(path, payload) {
+    try {
+      const response = await api.post(path, payload);
+      return response.data;
+    } catch (error) {
+      handleError(error);
+    }
+  }
+
+  static async put(path, payload) {
+    try {
+      const response = await api.put(path, payload);
+      return response.data;
+    } catch (error) {
+      handleError(error);
+    }
+  }
+
+  static async delete(path) {
+    try {
+      const response = await api.delete(path);
+      return response.data;
+    } catch (error) {
+      handleError(error);
+    }
+  }
+}
+````
+
+**Utilisation**
+
+````typescript
+import ApiService from './ApiService';
+
+const fetchData = async () => {
+  const data = await ApiService.get('/data');
+  return data;
+};
+````
+
 [Back to top](#http)     
 
 ## Intercepteur http
