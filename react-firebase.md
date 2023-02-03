@@ -45,7 +45,7 @@ const firebaseConfig = {
 };
 ````
 
-<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : Lors de la mise en production, évite de stocker les clés d'api dans l'application, même si elles se trouvent dans le fichier *.env*. Il est préférable d'héberger la configuration sur le serveur (ou en utilisant Next en stockant les valeurs dans les staticsProps)
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : Lors de la mise en production, évite de stocker les clés d'api dans l'application, même si elles se trouvent dans le fichier *.env*. Il est préférable d'héberger la configuration sur le serveur (ou en utilisant Next en stockant les valeurs dans les staticsProps) car le fichier*.env* n'est pas sécurisé et accessible une fois l'application déployée
 
 **Pour l'exemple**, nous allons stocker les clés dans un fichier *.env*
 
