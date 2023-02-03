@@ -58,6 +58,7 @@ VITE_API_PROJECT_ID = "xxxxxxxx-9999"
 VITE_API_STORAGE_BUCKET = "xxxxxxxx-99999.appspot.com"
 VITE_API_MESSAGING_SENDER_ID = "999999999999"
 VITE_API_APP_ID = "9999999999:web:9999999999999"
+VITE_TABLE = "test_data"
 ````
 
 #### Service de configuration
@@ -88,22 +89,43 @@ export const firestore = getFirestore(app);
 Pour tester la connexion et le fonctionnement, nous allons créer un fichier *handlesubmit.ts*
 
 ````typescript
-import { addDoc, collection } from "@firebase/firestore";
+import { addDoc, getDocs, collection } from "@firebase/firestore";
 import { firestore } from "./firebase";
 
-export const handleSubmit = (testdata: any) => {
-  const ref = collection(firestore, "test_data"); // Firebase creates this automatically
-  
+export const handleSubmit = (table: string, testdata: any) => {
+  const ref = collection(firestore, table); // Firebase creates this automatically
+  console.log('firestore ref', ref);
+
   let data = {
     testData: testdata,
   };
-  
+  console.log('data', data);
+
+
   try {
     addDoc(ref, data);
   } catch (err) {
     console.log(err);
   }
 };
+
+export const fetchFirestoreData = async (table: string) => {
+  const ref = await getDocs(collection(firestore, table));
+  const result: any[] = [];
+
+  try {
+    ref.forEach(d => {
+      result.push({
+        id: d.id,
+        ...d.data()
+      })
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
+  return result;
+}
 ````
 
 On créer ensuite un formulaire simple permettant de tester l'ajout de données dans la base de données Firestore :
@@ -111,21 +133,31 @@ On créer ensuite un formulaire simple permettant de tester l'ajout de données 
 *app.tsx*
 
 ````typescript
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import { handleSubmit } from "./firebase/handlesubmit";
+import { handleSubmit, fetchFirestoreData } from "./firebase/handlesubmit";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [data, setData] = useState<any[]>([]);
 
   const submitHandler = (e: any) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const data = formData.get("dataref");
-    handleSubmit(data);
+    handleSubmit(import.meta.env.VITE_TABLE, data);
     form.reset();
+    fetchData();
   };
+
+  const fetchData = async () => {
+    const res = await fetchFirestoreData(import.meta.env.VITE_TABLE);
+    setData([...res]);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="App">
@@ -133,11 +165,15 @@ function App() {
         <input type="text" name="dataref" id="dataref" />
         <button type="submit">Save</button>
       </form>
+      {data.map((item) => (
+        <div key={item.id}>{item.testData}</div>
+      ))}
     </div>
   );
 }
 
 export default App;
+
 ````
 
 [Back to top](#firebase)      
