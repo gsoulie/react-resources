@@ -126,6 +126,19 @@ export const fetchFirestoreData = async (table: string) => {
 
   return result;
 }
+
+export const updateItem = async (table: string, id: string, newValue: string) => {
+  const ref = doc(firestore, table, id);
+  await updateDoc(ref, {
+    testData: newValue
+  });
+}
+
+export const deleteItem = async (table: string, id: string) => {
+  const ref = doc(firestore, table, id);
+  await deleteDoc(ref)
+    .catch(err => console.log(err));
+}
 ````
 
 On créer ensuite un formulaire simple permettant de tester l'ajout de données dans la base de données Firestore :
@@ -135,10 +148,16 @@ On créer ensuite un formulaire simple permettant de tester l'ajout de données 
 ````typescript
 import { useEffect, useState } from "react";
 import "./App.css";
-import { handleSubmit, fetchFirestoreData } from "./firebase/handlesubmit";
+import {
+  handleSubmit,
+  fetchFirestoreData,
+  deleteItem,
+  updateItem,
+} from "./firebase/handlesubmit";
 
 function App() {
   const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const submitHandler = (e: any) => {
     e.preventDefault();
@@ -153,11 +172,24 @@ function App() {
   const fetchData = async () => {
     const res = await fetchFirestoreData(import.meta.env.VITE_TABLE);
     setData([...res]);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  const deleteData = (id) => {
+    deleteItem(import.meta.env.VITE_TABLE, id).then(() => fetchData());
+  };
+
+  const updateData = (item) => {
+    updateItem(
+      import.meta.env.VITE_TABLE,
+      item.id,
+      item.testData + ` (updated : ${new Date(Date.now()).toISOString()})`
+    ).then(() => fetchData());
+  };
 
   return (
     <div className="App">
@@ -165,8 +197,15 @@ function App() {
         <input type="text" name="dataref" id="dataref" />
         <button type="submit">Save</button>
       </form>
+      {loading && <h1>Chargement des données...</h1>}
       {data.map((item) => (
-        <div key={item.id}>{item.testData}</div>
+        <div key={item.id}>
+          {item.testData}
+          &nbsp;
+          <button onClick={() => deleteData(item.id)}>delete</button>
+          &nbsp;
+          <button onClick={() => updateData(item)}>update</button>
+        </div>
       ))}
     </div>
   );
