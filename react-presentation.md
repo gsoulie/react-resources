@@ -27,6 +27,7 @@ npm i react-router-dom
 * [Hooks](https://github.com/gsoulie/react-resources/blob/master/react-hooks.md)    
 * [Forms](https://github.com/gsoulie/react-resources/blob/master/react-forms.md)    
 * [Http](https://github.com/gsoulie/react-resources/blob/master/react-http.md)     
+* [Firebase](https://github.com/gsoulie/react-resources/blob/master/react-firebase.md)     
 * [Routing](https://github.com/gsoulie/react-resources/blob/master/react-routing.md)     
 * [Local Storage](https://github.com/gsoulie/react-resources/blob/master/react-localstorage.md)     
 * [Charts avec Nivo](https://github.com/gsoulie/react-resources/blob/master/react-chart.md)     
