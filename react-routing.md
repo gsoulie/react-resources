@@ -494,6 +494,7 @@ export const routes = createBrowserRouter([
 
 ````tsx
 import { routes } from './app-routing'
+import { RouterProvider } from 'react-router-dom';
 
 const router = routes;
 
