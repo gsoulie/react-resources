@@ -314,6 +314,18 @@ const PlayerCtx = createContext<{
 // custom provider
 const PlayerContextProvider = ({ children }) => {
   const [players, setPlayers] = useState<PlayerType[]>([]);
+  
+  // Initialisation depuis Firebase par exemple
+  useEffect(() => {
+    const fetchData = async () => {
+      const firebaseData = await fetchFirestoreData(
+        "players_table"
+      );
+      setPlayers(firebaseData);
+    };
+
+    fetchData();
+  }, []);
 
   const deletePlayers = () => {
     setPlayers([]);
