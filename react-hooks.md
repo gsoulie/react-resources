@@ -113,7 +113,7 @@ Pour utiliser la propriété ````key```` il suffit donc de l'ajouter
 
 ## Custom hook
 
-Exemple de définition d'un custom hook
+Exemple de définition d'un custom hook qui expose 2 fonctions *searchData* et *getDetails*
 
 *useApi.tsx*
 
@@ -122,8 +122,7 @@ export const useApi = () => {
 	const url = 'https://xxxxxxx';
 	
 	const searchData = async (title: string): Promise<any> => {
-		const result = await fetch(`${url}?title=${encodeURI(title)}`);
-		
+		const result = await fetch(`${url}?title=${encodeURI(title)}`);		
 		return result.json();
 	}
 	
