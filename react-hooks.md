@@ -5,6 +5,7 @@
 * [Librairie complète](#librairie-complète)      
 * [Bonnes pratiques](#bonnes-pratiques-hook)     
 * [key](#key)     
+* [Custom hook](#custom-hook)     
 * [useState](#usestate)     
 * [useEffect](#useeffect)      
 * [useLayoutEffect](#uselayouteffect)      
@@ -107,6 +108,55 @@ Pour utiliser la propriété ````key```` il suffit donc de l'ajouter
       userId={userId}
       key={userId}
     />
+````
+[Back to top](#hooks)      
+
+## Custom hook
+
+Exemple de définition d'un custom hook
+
+*useApi.tsx*
+
+````typescript
+export const useApi = () => {
+	const url = 'https://xxxxxxx';
+	
+	const searchData = async (title: string): Promise<any> => {
+		const result = await fetch(`${url}?title=${encodeURI(title)}`);
+		
+		return result.json();
+	}
+	
+	const getDetails = async (id: string): Promise<DetailsResult> => {
+		const result = await fetch(`${url}?id=${id}`)
+		return result.json();
+	}
+	
+	return {
+		searchData,
+		getDetails
+	}
+}
+````
+
+*Utilisation*
+
+````typescript
+import useApi from '../hooks/useApi';
+
+const Home = () => {
+	const  { searchData } = useApi();
+	const [searchTerm, setSearchTerm] = useState('');
+	const [result, setResult] = useState([]);
+	
+	// rafraichir la recherche à chaque fois que le searchTerm change
+	useEffect(() => {
+		searchData(searchTerm)
+		.then((res) => {
+			
+		})
+	}, [searchTerm])
+}
 ````
 
 ## useState
