@@ -151,10 +151,17 @@ const Home = () => {
 	
 	// rafraichir la recherche à chaque fois que le searchTerm change
 	useEffect(() => {
-		searchData(searchTerm)
-		.then((res) => {
-			
-		})
+		if (searchTerm === '') {
+			setResult([]);
+			return;
+		}
+		
+		const loadData = async () => {
+			const result = await searchData(searchTerm);
+			setResult(result);
+		}
+		loadData();
+		
 	}, [searchTerm])
 }
 ````
