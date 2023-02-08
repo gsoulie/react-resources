@@ -157,7 +157,9 @@ const Home = () => {
 		
 		const loadData = async () => {
 			const result = await searchData(searchTerm);
-			setResult(result);
+			if (result) {
+				setResult(result);
+			}			
 		}
 		loadData();
 		
