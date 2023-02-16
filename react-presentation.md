@@ -10,6 +10,13 @@ npm i sass
 npm i react-router-dom
 ````
 
+*Ionic*
+````
+ionic cap add android
+ionic build
+ionic cap build android
+````
+
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/react-generalites.md)    
   * Principes     
   * ViteJS    
