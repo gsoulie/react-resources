@@ -9,7 +9,7 @@ Cettte méthode est à privilégier dans la majorité des cas car elle ne procè
 
 ````tsx
 const Form = () => {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 	e.preventDefault();
 	const form = e.target
 	
