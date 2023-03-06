@@ -58,6 +58,8 @@ Cela permet de passer du contenu complexe en paramètre d'un composant
 
 *Hello.tsx*
 ````tsx
+import { PropsWithChildren } from 'react';
+	
 type HelloProps = PropsWithChildren<{
   name: string
 }>;
