@@ -30,6 +30,7 @@ ionic cap build android
   * Déploiement
   * Icons     
   * Services     
+  * Lazy loading     
 * [Redux](https://www.youtube.com/watch?v=1lvnT2oE0_4&ab_channel=LiorCHAMLA-WebDevelopMe)     
 * [Hooks](https://github.com/gsoulie/react-resources/blob/master/react-hooks.md)    
 * [Forms](https://github.com/gsoulie/react-resources/blob/master/react-forms.md)    
