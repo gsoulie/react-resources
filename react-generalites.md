@@ -360,3 +360,54 @@ export const Player = () => {
 ````
 
 [Back to top](#généralités)    
+	
+## Lazy-loading
+
+### Fonctionnement
+
+
+*Import classique*
+
+````typescript
+import Main from './pages/Main';
+````
+
+*Import Lazy*
+
+````typescript
+import { lazy, Suspense } from 'react';
+
+const Main = lazy(() => import('./pages/Main'));
+
+function App() {
+	<Router>
+		<Suspense fallback={<h1>Loading...</h1>}>
+			<Routes>
+				<Route path="/" element={<Main />} />
+				<Route path="/login" element={<Login />} />
+			</Routes>
+		</Suspense>
+	</Router>
+}
+````
+
+La fonction ````fallback```` permet de fournir une interface à afficher pendannt le temps de chargement des composants.
+
+Attention, cette notation ne fonctionne que si le composant a été déclaré comme ````export default````
+
+````typescript
+export default function MyCompo() {}
+
+// OU
+
+const MyCompo = () => {}
+export default MyCompo;
+````
+
+**Ne fonctionnera pas** pour la déclaration suivante :
+
+````typescript
+export const MyCompo = () => {}
+````
+
+[Back to top](#généralités)    
