@@ -15,6 +15,7 @@
 * [Déploiement](#déploiement)    
 * [Icons](#icons)     
 * [Services](#services)     
+* [Lazy loading](#lazy-loading)     
 
 ## Principes
 
