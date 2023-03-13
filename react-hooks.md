@@ -19,6 +19,7 @@
 * [useMemo et useCallback](#usememo-et-usecallback)     
 * [useLoaderData](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#useloaderdata)    
 * [useRouteError](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#userouteerror)     
+* [useQuery et zod](#useQuery)     
 
 ## Librairie complète
 
@@ -700,6 +701,115 @@ const [other, setOther] = useState(0);
 
 const total = useMemo(() => expensiveCalculation(count), [count]);	// ne sera rejoué uniquement si le state *count* est modifié
 
+````
+
+[Back to top](#hooks)   
+
+## useQuery
+
+Le hook useQuery est un hook fourni par la bibliothèque React Query qui permet de **faciliter la gestion des requêtes** de données dans une application React.
+
+Plus précisément, useQuery permet de définir une requête de données à partir d'une fonction qui récupère les données à partir d'une source de données (par exemple, une API). Lorsque cette fonction est appelée, **useQuery gère le cycle de vie de la requête** et renvoie un objet contenant plusieurs informations importantes, telles que l'état de la requête, les données récupérées et une fonction permettant de mettre à jour manuellement les données.
+
+useQuery est un **state manager** et garde les données en cache
+
+
+Il est possible de simplifier le code suivant 
+
+````typescript
+
+const fetchUser = () =>  fetch('https://jsonplaceholder.typicode.com/users').then((res) => res.json());
+
+const Users = () => {
+  const [data, setData] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchUsers()
+      .then((data) => setData(data))
+      .catch((error) => setIsError(true))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error...</p>;
+  }
+
+  return (
+    <ul>
+      {data.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+};
+````
+
+En :
+
+````typescript
+const fetchUser = () =>  fetch('https://jsonplaceholder.typicode.com/users').then((res) => res.json());
+
+const Users = () => {
+  const { data, isError, isLoading, isSuccess } = useQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+  });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error...</p>;
+  }
+
+  return (
+    <ul>
+      {isSuccess && data.map((user) => <li key={user.id}>{user.name}</li>)}
+    </ul>
+  );
+};
+````
+
+### Zod
+
+Zod est une **bibliothèque de validation de schémas** pour TypeScript. Elle permet de définir et de valider des schémas de données pour garantir que les données sont conformes à un format spécifique.
+
+En utilisant Zod avec React, vous pouvez définir des schémas de validation pour les données entrantes dans vos composants, afin de garantir que les données respectent un format spécifique. Cela peut aider à prévenir les erreurs et les bugs, en s'assurant que les données sont bien formatées avant d'être traitées par votre application.
+
+En reprenant l'exemple précédent, on pourrait modifier le code de la manière suivante pour être plus *type safe*
+
+````typescript
+import { z } from 'zod';
+
+// Créer un UserSchema
+const UserSchema = z.array(
+  z.object({
+    id: z.number(),
+    name: z.string(),
+  })
+);
+
+const fetchUsers = () =>
+  fetch('https://jsonplaceholder.typicode.com/users')
+    .then((res) => res.json())
+    .then((json) => UserSchema.parse(json));
+
+const Users = () => {
+  const { data, isLoading, isError } = useQuery({
+    queryFn: fetchUsers,
+    queryKey: ['users'],
+  });
+  
+  // ...
+}
 ````
 
 [Back to top](#hooks)   
