@@ -566,6 +566,8 @@ export default function Toolbar() {
 
 ## useReducer
 
+https://www.builder.io/blog/use-reducer     
+
 *useReducer* est une alternative à *useState*, de type ````(state, action) => newState```` qui retourne le state courant associé à une fonction *dispatch* (utilise le pattern Redux)
 
 Il faut préférer l'utilisation de *useReducer*  à *useState* lorsqu'on doit gérer une logique de state complexe qui implique plusieurs sous-valeurs ou lorsque le state suivant dépends du state précédent.
