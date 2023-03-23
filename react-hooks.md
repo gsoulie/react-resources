@@ -3,7 +3,8 @@
 # Hooks
 
 * [Librairie complète](#librairie-complète)      
-* [Bonnes pratiques](#bonnes-pratiques-hook)     
+* [Bonnes pratiques](#bonnes-pratiques-hook)    
+	* useEffect et AbortController     
 * [key](#key)     
 * [Custom hook](#custom-hook)     
 * [useState](#usestate)     
@@ -135,6 +136,48 @@ return(<h2>{title}</h2>);
 ````
 
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> ne pas oublier qu'une variable dépendant d'un state sera mise à jour si le state change car ce dernier déclenche un re-render du composant !
+
+### useEffect et AbortController
+
+Le **AbortController** est utilisé pour annuler une requête fetch en cours. Cela est utile pour empêcher une réponse inutile de revenir après que le composant a été démonté ou lorsque l'utilisateur a navigué vers une autre page.
+
+Dans le code donné, le AbortController est créé dans la fonction useEffect qui est appelée lorsque le composant est monté pour la première fois. Lorsque la réponse fetch est retournée avec succès, la réponse est stockée dans le state à l'aide de setData. Ensuite, la fonction de nettoyage retourne controller.abort(), ce qui annule la requête fetch si elle est toujours en cours d'exécution. Cette annulation est importante pour éviter de gaspiller des ressources du navigateur.
+
+Si le AbortController n'était pas utilisé et que l'utilisateur naviguait rapidement hors de la page avant que la réponse fetch ne soit retournée, le composant serait démonté et le state serait mis à jour avec la réponse retournée. Cela peut entraîner des erreurs car le composant n'existe plus et ne peut pas être mis à jour. En outre, la requête fetch peut continuer à s'exécuter en arrière-plan, gaspillant les ressources du navigateur.
+
+````typescript
+
+const [data, setData] = useState('');
+const [error, setError] = useState('');
+
+useEffect(() => {
+	fetch('https://api.agify.io?name=john')
+	.then((response) => response.json())
+	.then((data) => {
+		setData(data);
+	});
+}, [])
+````
+
+Ajout du *AbortController*
+
+````typescript
+
+const [data, setData] = useState('');
+const [error, setError] = useState('');
+
+useEffect(() => {
+	const controller = new AbortController();
+	fetch('https://api.agify.io?name=john', { signal: controller.signal })
+	.then((response) => response.json())
+	.then((data) => {
+		setData(data);
+	});
+	
+	// cleanup function
+	return () => controller.abort();
+}, [])
+````
 
 ## key
 
