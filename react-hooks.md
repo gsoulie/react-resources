@@ -28,6 +28,49 @@ Librairie de snippet de hook (ex : copy to clipboard) https://www.youtube.com/wa
 
 ## Bonnes pratiques hook
 
+Le Hook *useState* est **asynchrone**, ce qui signifie qu'accéder à la valeur du *useState* tout de suite après son affectation retournera son **ancienne** valeur.
+
+````typescript
+function App() {
+  const [count, setCount] = useState(0);
+
+  const increase = () => {
+    setCount((count) => count + 1);
+    console.log("count = ", count);	// <== affichera toujours la valeur précédente
+  };
+
+  return (
+      <div>
+        {count}
+        <button onClick={increase}>+</button>
+      </div>
+  );
+}
+````
+
+La **solution** consiste à utiliser un **useEffect** qui sera déclenché à chaque modification du state
+
+````typescript
+function App() {
+  const [count, setCount] = useState(0);
+
+  const increase = () => {
+    setCount((count) => count + 1);
+  };
+  
+  useEffect(() => {
+    console.log("count effect = ", count);	// <== affichage console avec la bonne valeur
+  }, [count]);
+
+  return (
+      <div>
+        {count}
+        <button onClick={increase}>+</button>
+      </div>
+  );
+}
+````
+
 ### Side effects
 
 mettre à jour un localStorage en fonction d'un state :
