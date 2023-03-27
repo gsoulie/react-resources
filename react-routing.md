@@ -509,6 +509,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 *App.tsx*
 
 ````tsx
+import { Outlet } from "react-router-dom";
+
  return (
     <>      
 	<Header />
