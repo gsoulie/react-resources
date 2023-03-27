@@ -139,7 +139,7 @@ return(<h2>{title}</h2>);
 
 ### useEffect et AbortController
 
-Le **AbortController** est utilisé pour annuler une requête fetch en cours. Cela est utile pour empêcher une réponse inutile de revenir après que le composant a été démonté ou lorsque l'utilisateur a navigué vers une autre page.
+Le **AbortController** est utilisé pour annuler une requête fetch en cours. Cela est utile pour empêcher une réponse inutile de revenir **après que le composant a été démonté ou lorsque l'utilisateur a navigué vers une autre page**.
 
 Dans le code donné, le AbortController est créé dans la fonction useEffect qui est appelée lorsque le composant est monté pour la première fois. Lorsque la réponse fetch est retournée avec succès, la réponse est stockée dans le state à l'aide de setData. Ensuite, la fonction de nettoyage retourne controller.abort(), ce qui annule la requête fetch si elle est toujours en cours d'exécution. Cette annulation est importante pour éviter de gaspiller des ressources du navigateur.
 
