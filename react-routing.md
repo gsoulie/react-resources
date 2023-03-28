@@ -4,6 +4,7 @@
 
 * [Utilisation](#utilisation)     
 * [Naviguer](#naviguer)    
+* [useHistory](https://github.com/gsoulie/react-resources/blob/main/react-hooks.md#usehistory)      
 * [Routes dynamiques](#routes-dynamiques)     
 * [Route par défaut](#route-par-défaut)     
 * [Routes imbriquées](#routes-imbriquées)     
