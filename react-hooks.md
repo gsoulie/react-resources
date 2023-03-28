@@ -21,6 +21,7 @@
 * [useLoaderData](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#useloaderdata)    
 * [useRouteError](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#userouteerror)     
 * [useQuery et zod](#useQuery)     
+* [useHistory](#useHistory)    
 
 ## Librairie complète
 
@@ -898,6 +899,25 @@ const Users = () => {
   
   // ...
 }
+````
+
+[Back to top](#hooks)   
+
+## useHistory
+
+Ce hook permet de naviguer dans l'historique de navigation : https://v5.reactrouter.com/web/api/history
+
+````typescript
+import { useHistory } from 'react-router-dom';
+
+const history = useHistory();
+
+history.push('/home');
+history.go(-1);	// naviguer vers la page précédente
+history.go(2); // naviguer 2 niveau plus loin
+history.goBack();
+history.goForward();
+history.replace(location)
 ````
 
 [Back to top](#hooks)   
