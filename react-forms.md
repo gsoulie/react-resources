@@ -8,6 +8,8 @@
 Cettte méthode est à privilégier dans la majorité des cas car elle ne procède pas à un repaint du composant à chaque saisie et c'est le dom qui gère tout seul les données
 
 ````tsx
+import { FormEvent } from "react";
+
 const Form = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 	e.preventDefault();
