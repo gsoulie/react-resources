@@ -22,6 +22,7 @@
 * [useRouteError](https://github.com/gsoulie/react-resources/blob/main/react-routing.md#userouteerror)     
 * [useQuery et zod](#useQuery)     
 * [useHistory](#useHistory)    
+* [useTransition](#useTransition)     
 
 ## Librairie complète
 
@@ -920,4 +921,52 @@ history.goForward();
 history.replace(location)
 ````
 
+[Back to top](#hooks)   
+
+
+## useTransition
+
+https://fr.reactjs.org/docs/concurrent-mode-reference.html#usetransition
+
+Par défaut les rendus de composants ont tous la même priorité, si plusieurs rendus sont déclenchés, ils s'exécutent en même temps, ce qui peut 
+créer un ralentissement dans le rendu.
+
+On peut alors utiliser le hook **useTransition** afin d’éviter aux composants, des états de chargement indésirables en attendant que le contenu soit chargé avant de transiter vers le prochain écran. Il permet aussi aux composants de différer des chargements de données plus lents vers des rendus ultérieurs afin que les mises à jour les plus cruciales puissent être affichées immédiatement.
+
+*A tester avec et sans la fonction startTransition()*
+````typescript
+import { useTransition } from "react";
+
+export default function Home() {
+
+  const [input, setInput] = useState("");
+  const [list, setList] = useState([]);
+  const [isPending, startTransition] = useTransition();
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
+
+    startTransition(() => {
+      let tempList = [];
+
+      for (let i = 0; i < 20000; i++) {
+        tempList.push(e.target.value);
+      }
+
+      setList(tempList);
+    });
+  };
+
+	return (
+    <>
+      <input type="text" value={input} onChange={handleChange} />
+      {isPending
+        ? "Loading..."
+        : list.map((item, index) => {
+            return <div key={index}>{item}</div>;
+	  })}
+	</>
+  );
+}
+````
 [Back to top](#hooks)   
