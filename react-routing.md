@@ -16,6 +16,7 @@
 * [Route guard](#route-guard)     
 * [Lazy loading](#lazy-loading)      
 * [Déclaration des routes dans fichier externe](#déclaration-des-routes-dans-fichier-externe)     
+* [Exemple avec guard](#exemple-avec-guard)       
 
 
 Par défaut il n'y a pas de gestion de des routes dans React comme sous Angular / Vue (Vue Router est maintenant intégré). 
@@ -520,4 +521,123 @@ import { Outlet } from "react-router-dom";
     </>
   )
 ````
+[Back to top](#routing)     
+
+## Exemple avec guard
+
+Une autre syntaxe consiste à séparer les routing dans différent composants. Dans cet exemple nous avons 3 zones de routage, une publique, une privée et une pour l'authentification
+
+*App.tsx*
+````
+<BrowserRouter>
+	<BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<PublicRouter />}/>
+          <Route path="/admin/*" element={
+            <AuthGuard>
+              <AdminRouter />
+            </AuthGuard>
+          }/>
+          <Route path="/auth/*" element={<AuthRouter/>}/>
+        </Routes>
+      </BrowserRouter>
+</BrowserRouter>
+````
+
+*Guard*
+````
+import { Navigate } from "react-router-dom";
+import { accountService } from "@/_services/account.service";
+
+export const AuthGuard = ({children}) => {
+
+    if(!accountService.isLogged()){
+        return <Navigate to="/auth/login"/>
+    }
+   
+    return children
+};
+````
+
+*PublicRouter.tsx*
+````
+import { Routes, Route } from "react-router-dom"
+
+export const PublicRouter = () => {
+	return (
+		<Routes>
+			<Route element={<Layout />} >
+				<Route index element={<Home />} />
+				<Route path="home" element={<Home />} />
+				<Route path="service/:id" element={<Service />} />
+				<Route path="*" element={<Error />} />
+			</Route>
+		</Routes>
+	)
+}
+
+export const Layout = () => {
+	return (
+		<>
+			<Header />
+			
+			<Outlet />
+		</>
+	)
+}
+````
+
+*AdminRouter.tsx*
+````
+import { Routes, Route } from "react-router-dom"
+
+export const AdminRouter = () => {
+	return (
+		<Routes>
+			<Route element={<AdminLayout />} >
+				<Route index element={<Dashboard />} />
+				<Route path="user">
+					<Route path="index" element={<User />} />
+					<Route path="edit/:id" element={<UserEdit />} />
+					<Route path="add" element={<UserAdd />} />
+				</Route>
+				<Route path="product">
+					<Route path="index" element={<Product />} />
+					<Route path="edit/:id" element={<ProductEdit />} />
+					<Route path="add" element={<ProductAdd />} />
+				</Route>
+				<Route path="*" element={<Error />} />
+			</Route>
+		</Routes>
+	)
+}
+
+export const AdminLayout = () => {
+	return (
+		<>
+			<Header/>
+            <div id="admin">
+                <SideMenu/>
+                <div>
+					<Outlet/>
+				</div>
+            </div>
+		</>
+	)
+}
+````
+
+*AuthRouter.tsx*
+````
+export const AuthRouter = () => {
+	return (
+		<Routes>
+			<Route index element={<Login/>}/>
+			<Route path="login" element={<Login />} />
+			<Route path="*" element={<Error />} />
+		</Routes>
+	)
+}
+````
+
 [Back to top](#routing)     
