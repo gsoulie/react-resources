@@ -240,4 +240,52 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 )
 ````
 
+### Interceptor Axios vs Fetch classique
+
+*Interceptor Axios*
+
+````typescript
+import axios from "axios";
+
+// Créez une instance d'Axios avec une configuration par défaut
+const instance = axios.create({
+  baseURL: "http://localhost:3000",
+});
+
+// Ajouter un interceptor pour injecter le bearer token dans le header de chaque requête
+instance.interceptors.request.use((config) => {
+  // Récupérer le token depuis localStorage, ou tout autre endroit où vous l'avez stocké
+  const token = localStorage.getItem("token");
+
+  // Si un token existe, ajoutez-le dans le header de la requête
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+export default instance;
+
+````
+
+*Interceptor Fetch*
+
+````typescript
+function fetchWithAuth(url, options) {
+  const token = localStorage.getItem("token");
+  const authHeaders = token ? { Authorization: `Bearer ${token}` } : {};
+  const headers = Object.assign({}, authHeaders, options.headers || {});
+  return fetch(url, { ...options, headers });
+}
+
+
+// Appel
+
+fetchWithAuth("http://example.com/api/data")
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error));
+````
+
 [Back to top](#http)     
