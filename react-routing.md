@@ -528,7 +528,8 @@ import { Outlet } from "react-router-dom";
 Une autre syntaxe consiste à séparer les routing dans différent composants. Dans cet exemple nous avons 3 zones de routage, une publique, une privée et une pour l'authentification
 
 *App.tsx*
-````
+
+````typescript
 <BrowserRouter>
 	<BrowserRouter>
         <Routes>
@@ -545,7 +546,8 @@ Une autre syntaxe consiste à séparer les routing dans différent composants. D
 ````
 
 *Guard*
-````
+
+````typescript
 import { Navigate } from "react-router-dom";
 import { accountService } from "@/_services/account.service";
 
@@ -560,7 +562,8 @@ export const AuthGuard = ({children}) => {
 ````
 
 *PublicRouter.tsx*
-````
+
+````typescript
 import { Routes, Route } from "react-router-dom"
 
 export const PublicRouter = () => {
@@ -588,7 +591,8 @@ export const Layout = () => {
 ````
 
 *AdminRouter.tsx*
-````
+
+````typescript
 import { Routes, Route } from "react-router-dom"
 
 export const AdminRouter = () => {
@@ -628,7 +632,8 @@ export const AdminLayout = () => {
 ````
 
 *AuthRouter.tsx*
-````
+
+````typescript
 export const AuthRouter = () => {
 	return (
 		<Routes>
