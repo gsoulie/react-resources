@@ -41,6 +41,12 @@ npx next export
 
 -> Génère un répertoire *.out* qu'on va poser sur le serveur
 
+# Next 13
+
+
+
+# OLD Next 12
+
 ## Fonctionnement
 
 React 18 et Next 12 introduisent une version alpha des composants serveur React. Les composants serveur sont entièrement rendus sur le serveur et ne nécessitent pas de JavaScript côté client pour être rendus. De plus, les composants serveur permettent aux développeurs de conserver une certaine logique sur le serveur et d'envoyer uniquement le résultat de cette logique au client. Cela réduit la taille du bundle envoyé au client et améliore les performances de rendu côté client.
