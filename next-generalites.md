@@ -20,7 +20,7 @@ présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart
 ## Installation
 
 ````
-npx create-next-app@latest --typescript
+npx create-next-app@latest --typescript myApp
 ````
 
 **Using sass**
