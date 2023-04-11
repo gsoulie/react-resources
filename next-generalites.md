@@ -43,7 +43,9 @@ npx next export
 
 # Next 13
 
-
+https://blog.logrocket.com/next-js-13-app-directory/       
+https://stackoverflow.blog/2022/12/20/best-practices-to-increase-the-speed-for-next-js-apps/       
+https://codedamn.com/news/nextjs/next-js-best-practices       
 
 # OLD Next 12
 
