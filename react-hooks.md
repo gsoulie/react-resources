@@ -256,6 +256,24 @@ const Home = () => {
 }
 ````
 
+### Autre exemple
+
+````typescript
+function useFetchData(url) {
+	const [data, setData] = useState(null);
+	useEffect(() => {
+		fetch(url)
+		.then((res) => res.json())
+		.then((data) => setData(data))
+		.catch((err) => console.log(err)
+	}, [url]);
+	
+	return {data}
+}
+
+export default useFecthData;
+````
+
 ## useState
 
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> bien positionner ses states. Trop souvent on a tendance à positionner les states dans le composant parent alors que ce dernier n'utilise pas forcément le contenu => https://www.youtube.com/watch?v=NZqMVUEiDIw&ab_channel=WebDevSimplified
