@@ -27,11 +27,12 @@ async fetchData<T>(url: string) => {
 }
 
 const Component = () => {
-    
+    const [posts, setPosts] = useState<Post[]>([]);
     useEffect(() => {
         fetchData<Post>('/api/posts')
 	.then((json) => {
 	    ...
+	    setPosts(json)
 	})
     }, [])
 }
