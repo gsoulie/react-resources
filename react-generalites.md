@@ -107,6 +107,28 @@ comme s'il s'agissait d'un vrai élément html ````<button>````
 ````tsx
 <CustomButton type="submit">Submit button</CustomButton>
 ````
+	
+**Autre exemple**
+
+*Soit le code suivant*
+````typescript
+function OrderList() {
+ return <Order id="1" username="john" item="pizza" price="$17.40" />
+}
+````
+	
+*Peut être simplifié de la manière suivante :*
+````typescript
+function OrderList() {
+  const order = {
+    id: 1,
+    username: 'john',
+    item: 'pizza',
+    price: '$17.40'
+  }
+
+  return <Order {...order} />
+}
 
 [Back to top](#généralités)    
 	
