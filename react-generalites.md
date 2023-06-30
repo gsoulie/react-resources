@@ -129,6 +129,7 @@ function OrderList() {
 
   return <Order {...order} />
 }
+````
 
 [Back to top](#généralités)    
 	
@@ -147,7 +148,6 @@ export interface IProps {
 }
 
 export const ProductTile = ({product, user}: IProps) => { return ( <h1>{ product.title }</h1> }
-
 ````
 
 #### Méthode PropsWithChildren
