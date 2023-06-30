@@ -150,6 +150,29 @@ export interface IProps {
 export const ProductTile = ({product, user}: IProps) => { return ( <h1>{ product.title }</h1> }
 ````
 
+#### Méthode avec destructuration
+
+````tsx
+export interface Concept {
+  title: string;
+  image: string;
+  description: string;
+}
+// ...
+<Tile key={c.title} concept={c} />
+
+// composant enfant : 
+export const Tile = ({ concept }: { concept: Concept }) => {
+  return (
+    <div>
+      <img src={concept.image} />
+      <h2>{concept.title}</h2>
+      <p>{concept.description}</p>
+    </div>
+  );
+};
+````
+
 #### Méthode PropsWithChildren
 
 ````typescript
