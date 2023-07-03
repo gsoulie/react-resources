@@ -45,6 +45,20 @@ const Form = () => {
 };
 ````
 
+### Conversion des valeurs du formulaire
+
+Pour convertir les résultats, il faut au préalable passer par un *toString()*
+
+````typescript
+// Conversion d'un input date
+const date = formData.get("date")?.toString() || "";
+const dateValue = date ? new Date(Date.parse(date)) : null;
+
+// Conversion d'un input number
+const amount = formData.get("amount")?.toString() || 0;
+const amountValue = amount ? parseFloat(amount) : 0;
+````
+
 ## Méthode useState
 
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> la manipulation de formulaires via la méthode *useState* a pour conséquence de re-rendre la vue à chaque modification de la valeur d'un champ de saisie. C'est pourquoi cette méthode n'est à privilégier que pour les champs de type searchbar (avec recherche sans validation via un bouton) ou lorsqu'on a besoin de faire un traitement dès que l'on observe une modification d'un champ ou si l'on souhaite gérer l'affichage d'erreurs de saisie en direct.
