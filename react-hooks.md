@@ -291,6 +291,9 @@ const handleAddNewData = (newData) => {
     setData((previousData) => {
       return [...previousData, newData]
     });
+
+    // Ou en écriture abrégée
+    setData((previousData) => [...previousData, newData]);
 };
 ````
 
