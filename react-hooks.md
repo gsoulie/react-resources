@@ -280,6 +280,20 @@ export default useFecthData;
 
 Il faut garder à l'esprit que toute modification d'un state entraine un repaint du composant, de fait, modifier un state lors d'une saisie n'a pas forcément d'intérêt si visuellement nous n'avons pas de nécessité de rafraichir l'affichage.
 
+**Bonne pratique**
+
+Pour mettre à jour un state, la façon la plus propre de le faire est la suivante :
+
+````typescript
+const [data, setData] = useState([])
+
+const handleAddNewData = (newData) => {
+    setData((previousData) => {
+      return [...previousData, newData]
+    });
+};
+````
+
 [Back to top](#hooks)      
 
 ## useEffect
