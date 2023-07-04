@@ -737,6 +737,7 @@ const handleSubmit = (e) => {
 	e.preventDefault();
 	
 	const value = inputRef.current.value;
+	inputRef.current.value = '';	// vider le champ après validation
 } 
 
 return (
@@ -747,7 +748,7 @@ return (
 )
 ````
 
-<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Pour gérer les données dans un formulaire, il n'est **pas recommandé** d'utiliser *useRef()* car ce dernier ne provoque pas de re-render automatique de l'affichage.
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Pour gérer les données dans un **formulaire**, il n'est **pas recommandé** d'utiliser *useRef()* car ce dernier ne provoque pas de re-render automatique de l'affichage.
 
 [Back to top](#hooks)      
 
