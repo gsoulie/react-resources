@@ -724,6 +724,52 @@ function Counter() {
   );
 }
 ````
+
+*autre exemple pour vérifier une saisie*
+
+````typescript
+const emailReducer = (state, action) => {
+  if (action.type === "USER_INPUT") {
+    return { value: action.val, isValid: action.val.includes("@") };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.includes("@") }; // check de la valeur de l'ancien state
+  }
+  return { value: "", isValid: false };
+};
+
+const Login = (props) => {
+    const [emailState, dispatchEmail] = useReducer(emailReducer, {
+        value: "",
+        isValid: null,
+    });
+
+    const emailChangeHandler = (event) => {
+        dispatchEmail({ type: "USER_INPUT", val: event.target.value });
+    };
+
+ return (
+   
+      <form onSubmit={submitHandler}>
+        <div
+          className={`${classes.control} ${
+            emailState.isValid === false ? classes.invalid : ""
+          }`}
+        >
+          <label htmlFor="email">E-Mail</label>
+          <input
+            type="email"
+            id="email"
+            value={emailState.value}
+            onChange={emailChangeHandler}
+            onBlur={validateEmailHandler}
+          />
+        </div>
+    </form>
+)
+}
+````
+
 [Back to top](#hooks)      
 
 ## useRef
