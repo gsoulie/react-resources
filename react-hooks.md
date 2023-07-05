@@ -444,6 +444,10 @@ le Contexte est conçu pour **partager des données qui peuvent être considér�
 
 Exemple d'utilisation : https://openclassrooms.com/fr/courses/7150606-creez-une-application-react-complete/7256029-partagez-vos-donnees-avec-le-contexte-et-usecontext#:~:text=Le%20Contexte%20est%20une%20fonctionnalit%C3%A9,d'acc%C3%A9der%20au%20State%20partag%C3%A9.  
 
+> important: le contexte React n'est **pas optimisé dans le cas de changements de state très fréquents**
+
+> important: le contexte ne **doit pas** être utilisé pour remplacer la communication et les props utilisés entre les composants
+
 ### En résumé
 
 Le Contexte est une fonctionnalité de React permettant de partager le state entre plusieurs composants parents et enfants, à l'aide d'un Provider.
