@@ -459,7 +459,7 @@ L'utilisation du Contexte est une des méthodes de State Management, qui peut se
 > Il est conseillé de créer un fichier séparé pour gérer chaque contexte. Ce fichier doit décrire la forme que va avoir le context (pas les valeurs).
 
 
-1 - Créer le fichier contexte
+1 - Créer le fichier contexte **attention le fichier doit être en .js** (le .ts ne peut pas retourner de html)
 
 ````typescript
 import { createContext, useMemo, useState } from "react";
