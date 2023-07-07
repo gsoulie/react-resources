@@ -842,7 +842,7 @@ https://www.w3schools.com/react/react_usememo.asp
 
 Ce hook permet de retourner une valeur mémorisé (assimilable à une valeur mise en cache), généralement très utile pour mémoriser des traitements lourds qu'on souhaite éviter de recalculer lors du changement d'un state dans le composant par exemple.
 
-le useMemo ne sera alors rejoué **uniquement** si l'une de ses dépendances est mise à jour 
+le useMemo ne sera alors rejoué **uniquement** si l'une de ses dépendances est mise à jour. Ce hook prend en paramètres (tout comme useEffect, useCallback), une fonction (qui retourne la valeur que l'on souhaite mémoriser), ainsi qu'un tableau de dépendances.
 
 *Exemple d'utilisation*
 
