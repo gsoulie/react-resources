@@ -867,6 +867,16 @@ function TodoList({ todos, filter }) {
 }
 ````
 
+*autre exemple*
+
+````typescript
+const sortedList = useMemo(() => {
+	return props.items.sort((a, b) => a - b);
+}, [props.items])
+
+const arrayOfData = useMemo(() => [1, 2, 3], []);
+````
+
 ````useCallback```` est similaire à la différence qu'il retourne une **fonction** mémorisée au lieu d'une **valeur** mémorisée
 
 ````typescript
