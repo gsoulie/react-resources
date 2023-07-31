@@ -3,6 +3,8 @@
 
 # Forms
 
+## [Exemples de validation basique de formulaire avec utilisation de custom hook](https://github.com/gsoulie/react-resources/tree/main/react-forms)
+
 ## Méthode avec champ uncontrolled
 
 Cettte méthode est à privilégier dans la majorité des cas car elle ne procède pas à un repaint du composant à chaque saisie et c'est le dom qui gère tout seul les données
