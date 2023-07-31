@@ -307,6 +307,68 @@ export const useCounter = (forward = true) => {
 }
 ````
 
+### Custom hook useHttp
+
+*use-http.tsx*
+````typescript
+import { useCallback, useState } from "react";
+
+export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+export interface RequestConfig {
+  url: string;
+  method?: HttpMethod;
+  headers?: any;
+  body?: any;
+}
+
+export const useHttp = (applyData) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const sendRequest = useCallback(
+    async (requestConfig: RequestConfig) => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch(requestConfig.url, {
+          method: requestConfig.method || "GET",
+          headers: requestConfig.headers || {},
+          body: JSON.stringify(requestConfig.body) || null,
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error("Something went wrong");
+        }
+
+        applyData(data);
+      } catch (e) {
+        setError(e.message);
+      }
+      setIsLoading(false);
+    },
+    [applyData]
+  );
+
+  return {
+    isLoading,
+    error,
+    sendRequest,
+  };
+};
+````
+
+*utilisation*
+
+````typescript
+ const {
+    isLoading,
+    error,
+    sendRequest: fetchMovies, // alias
+  } = useHttp(transformMovies);
+````
+
 ## useState
 
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> bien positionner ses states. Trop souvent on a tendance à positionner les states dans le composant parent alors que ce dernier n'utilise pas forcément le contenu => https://www.youtube.com/watch?v=NZqMVUEiDIw&ab_channel=WebDevSimplified
