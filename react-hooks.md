@@ -882,7 +882,7 @@ const handleSubmit = (e) => {
 	e.preventDefault();
 	
 	const value = inputRef.current.value;
-	inputRef.current.value = '';	// vider le champ après validation
+	inputRef.current.value = '';	// vider le champ après validation ==> PAS IDEAL CAR MANIPULE LE DOM, A NE PAS FAIRE !
 } 
 
 return (
