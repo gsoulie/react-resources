@@ -3,7 +3,7 @@
 # Redux
 
 * [Présentation](#presentation)
-* [React context ou Redux ?](#react-context-ou-redux-?)
+* [React context ou Redux ?](#react-context-ou-redux-)
 * [Bonnes pratiques](#bonnes-pratiques)
 * [Redux toolkit](#redux-toolkit)
 * [Projet complet redux toolkit](https://github.com/gsoulie/react-resources/blob/main/react-redux-toolkit/)    
