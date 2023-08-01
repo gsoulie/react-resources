@@ -4,6 +4,8 @@
 
 * [Présentation](#presentation)
 * [React context ou Redux ?](#react-context-ou-redux-)
+* [Utilisation basique de redux](#utilisation-basique-de-redux)     
+* [Utilisation avec React](#utilisation-avec-react)       
 * [Bonnes pratiques](#bonnes-pratiques)
 * [Redux toolkit](#redux-toolkit)
 * [Projet complet redux toolkit](https://github.com/gsoulie/react-resources/blob/main/react-redux-toolkit/)    
@@ -231,7 +233,7 @@ Afin de gérer plus facilement les bonnes pratiques évoquées précédemment, i
 npm i @reduxjs/toolkit
 ````
 
-> Important : redux toolkit intègre déjà la librairie redux. Il faut donc penser à désinstaller le package redux du projet s'il était déjà présent
+> <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : redux toolkit intègre déjà la librairie redux. Il faut donc penser à désinstaller le package redux du projet s'il était déjà présent
 
 **Exemple de conversion du state avec Redux Toolkit**
 
