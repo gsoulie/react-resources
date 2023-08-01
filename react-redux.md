@@ -14,37 +14,47 @@
 
 Dans une application, il existe 3 niveaux de states :
 
-* local state : au niveau d'un seul composant => useState, useReducer
-* cross-component state : affecte plusieurs composants ou par exemple state open/close d'une modale. Induit du prop chains / props drilling
-* app-wide state : affecte l'ensemble, ou la majorité des composants d'une application. Par exemple le statut d'authentification, navbar etc...Induit du prop chains / props drilling
+* **local state** : au niveau d'un seul composant => useState, useReducer
+* **cross-component state** : affecte plusieurs composants ou par exemple state open/close d'une modale. Induit du prop chains / props drilling
+* **app-wide state** : affecte l'ensemble, ou la majorité des composants d'une application. Par exemple le statut d'authentification, navbar etc...Induit du prop chains / props drilling
 
-Les states cross-component ET app-wide peuvent être gérés soit par un context React *useContext* ou par *Redux*
+Les states **cross-component** et **app-wide** peuvent être gérés soit par un context React *useContext* ou par *Redux*
 
 **Redux** est un gestionnaire de state adapté à un environnement cross-component ou app-wide.
 
 [Back to top](#redux)     
 ## React context ou Redux ?
 
-Mais pourquoi utiliser Redux si nous avons accès au context React ? 
+Mais pourquoi utiliser Redux si nous avons accès nativement au React Context ? 
 
-**Inconvénients du context React**
-* mise en place pouvant être complexe dans une grosse application devant gérer plusieurs contexts (authentification, theming, gestion des inputs...)
-* peu performant si les données du context changent souvent. Mais très bien dans le cas de contexts ne changeant pas souvent (theming, authentification...)
+**React Context présente certains inconvénients**
+* mise en place pouvant être complexe dans une grosse application devant gérer plusieurs contextes (authentification, theming, gestion des inputs...)
+* peu performant si les données du contexte changent souvent. Mais très bien dans le cas de contextes ne changeant pas souvent (theming, authentification...)
 
-L'avantage principal de Redux est qu'il possède **un seul** *Data store** (*state*) central. Les composants, s'abonnent (subscribe) à ce state global, qui en cas de modification, enverra une notification aux composants abonnés en leur passant une copie du state (slice).
-L'autre point **important** est que les composants ne **manipulent jamais** le state directement ! Les modifications se font par le biais de **fonctions reducer** qui sont en charge de la *mutation* des données.
-Les composants déclenchent donc des **actions** par l'intermédiaire d'un **dispatch**, qui vont être transmises aux *reducer functions**, qui vont à leur tour mettre à jour les données. Enfin, le state notifiera les composants de la modification.
+> **Quand utiliser React Context ?** Dans le contexte d'une **petite / moyenne applications**, ne nécessitant pas une modification très fréquente des states.
+
+**Qu'apporte Redux alors ?**
+
+L'avantage principal de Redux est qu'il possède **un seul Data store** (*state*) central. Les composants, s'abonnent (*subscribe*) à ce state global, qui en cas de modification, enverra une notification aux composants abonnés en leur passant une copie du state (slice).
+
+L'autre point **important** est que, **les composants ne manipulent jamais le state directement !** Les modifications se font par le biais de **fonctions reducer** qui sont en charge de la *mutation* des données.
+Les composants déclenchent donc des **actions** par l'intermédiaire d'un mécanisme **dispatch**, qui vont être transmises aux *reducer functions*, qui vont à leur tour mettre à jour les données. 
+
+Enfin, le state notifiera les composants de la modification.
 
 Les *reducer functions* prennent en paramètres, l'ancien state, ainsi que l'action dispatchée et retournent l'objet du nouveau state
+
+> **A noter** : Il est tout à fait possible d'utiliser ensemble React Context et Redux
 
 [Back to top](#redux)     
 
 ## Utilisation basique de redux
-
+*Installation*
 ````
 npm i redux
 ````
 
+*index.js*
 ````typescript
 const redux = require('redux');
 
@@ -71,7 +81,7 @@ const counterReducer = (state = initialState, action) => {	// Remarque : la vale
 	return initialState;
 }
 
-const store = redux.createStore(counterReducer);
+const store = redux.createStore(counterReducer);   // Création du store
 
 const counterSubscriber = () => {
 	const latestState = store.getState();	// récupère le dernier snapshot du state
@@ -87,11 +97,12 @@ store.dispatch({type: 'custom-increment', value: 5);
 
 ## Utilisation avec React
 
+*Installation*
 ````
 npm i redux react-redux
 ````
 
-**1 - créer le store**
+**1 - Créer le store**
 
 *store/index.tsx*
 
@@ -125,10 +136,11 @@ const counterReducer = (state: StateType = initialState, action: { type: string,
 export const store = createStore(counterReducer);
 ````
 
-**2 - connecter le store à react**
+**2 - Connecter le store à react**
 
-au plus au niveau de l'application *main.tsx* (ou index.js pour les applications les plus anciennes)
+au plus au niveau de l'application, dans le *main.tsx* (ou index.js pour les applications les plus anciennes)
 
+*main.tsx*
 ````typescript
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
@@ -144,9 +156,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 ````
 
-**3 - useSelector**
+**3 - Utilisation et souscription au store avec useSelector**
 
-En fonction des besoins des composants, on peut ensuite demander à redux d'extraire une partie du state avec laquelle on souhaite travailler. Cette opération se fait via ````useSelector````. En faisant cela, redux va créé automatiquement une souscription au store pour ce composant
+En fonction des besoins des composants, on peut ensuite demander à redux d'extraire une partie du state avec laquelle on souhaite travailler. Cette opération se fait via ````useSelector````. En faisant cela, redux va créér automatiquement une souscription au store pour ce composant
 
 *Counter.tsx*
 ````typescript
@@ -187,7 +199,9 @@ export const Counter = () => {
 
 ## Bonnes pratiques
 
-Il ne faut **JAMAIS** modifier un state manuellement !! La bonne pratique est de toujours travailler sur une **copie** du state principal est de laisser redux gérer la mutation. Le risque est d'introduire des comportements non maitrisés (desynchronisation du state, effets de bords indésirables...) et de rendre plus compliqué le debuggage en cas de problème.
+Il ne faut **JAMAIS** modifier un state manuellement !! La bonne pratique est de toujours travailler sur une **copie** du state principal est de laisser redux gérer la mutation. 
+
+Le risque est d'introduire des comportements non maîtrisés (desynchronisation du state, effets de bords indésirables...) et de rendre plus compliqué le debuggage en cas de problème.
 
 Le code exemple ci-dessous est à **bannir**
 
@@ -221,14 +235,24 @@ const counterReducer = (state = initialState, action) => {
 * créer un *enum* pour définir les mots clés des action dispatch
 * créer un *type* ou une *interface* pour décrire la structure du state
 * créer un objet pour définir le state initial
-* utiliser le *spread operator* ````...state```` pour définir le state à retourner et ne surcharger que les propriétés concernés par la modification de la dispatch action. Cela évite l'oubli de propriétés dans le state de retour
+* utiliser le *spread operator* ````...state```` pour définir le state à retourner et ne surcharger que les propriétés concernés par la modification de la dispatch action. Cela évite l'oubli de propriétés dans le state de retour (voir ex ci-dessous)
+
+````typescript
+if (action.type === 'updateUserAge') {
+    return {
+        ...state,
+        age: action.age
+    }
+}	
+````
 
 [Back to top](#redux)     
 
 ## Redux Toolkit
 
-Afin de gérer plus facilement les bonnes pratiques évoquées précédemment, il existe un outil **Redux Toolkit** permettant de nous faciliter la vie.
+Afin de gérer plus facilement les bonnes pratiques évoquées précédemment, il existe un outil : **Redux Toolkit** permettant de nous faciliter la vie et de simplifier grandement la syntaxe des reducers.
 
+*Installation*
 ````
 npm i @reduxjs/toolkit
 ````
@@ -236,6 +260,8 @@ npm i @reduxjs/toolkit
 > <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : redux toolkit intègre déjà la librairie redux. Il faut donc penser à désinstaller le package redux du projet s'il était déjà présent
 
 **Exemple de conversion du state avec Redux Toolkit**
+
+(basé sur l'exemple précédent du compteur)
 
 *store/index.tsx*
 ````typescript
@@ -270,13 +296,9 @@ export const store = configureStore({
 });
 ````
 
-> Remarque : avec Redux Toolkit, on peut modifier "manuellement" la valeur de l'objet state car en arrière plan, Redux Toolkit créé un clone du state initial sur lequel on travaille réellement
+> **Remarque** : avec Redux Toolkit, on peut modifier "manuellement" la valeur de l'objet state car en arrière plan, Redux Toolkit créé un clone du state initial sur lequel on travaille réellement
 
 **Utilisation du dispatch**
-
-````
-counterSlice.actions.increment() 	// retourne un objet action de la forme { type: '<auto-generated-unique-identifier>' }
-````
 
 *Counter.tsx*
 ````typescript
@@ -308,8 +330,9 @@ export const Counter = () => {
 
 ### Slices multiples
 
-Pour utiliser plusieurs reducer (slices) il suffit de procéder comme suit : 
+Dans le cas ou l'on utiliserait plusieurs reducer (1 slice par domaine fonctionnel par exemple) il suffit de procéder comme suit : 
 
+*store/index.ts*
 ````typescript
 const counterSlice = createSlice({
 	name: 'counterSlice',
@@ -342,9 +365,11 @@ const authSlice = createSlice({
 	}
 });
 
+// Exporter les actions des différens slices
 export const counterActions = counterSlice.actions;
 export const authActions = authSlice.actions;
 
+// Configurer le store avec slices multiples
 export const store = configureStore({
 	reducer: {	// ===> ICI, redux toolkit var merger les différents reducer en un seul reducer unique !!
 		counterReducer: counterSlice.reducer,
@@ -352,6 +377,8 @@ export const store = configureStore({
 	}
 });
 ````
+
+L'appel depuis les composants conserve la même logique à la différence qu'il faut maintenant **ne pas oublier de spécifier le reducer à utiliser** 
 
 *Counter.tsx*
 ````typescript
@@ -364,4 +391,86 @@ export const Counter = () => {
   // ...
 };
 ````
-[Back to top](#redux)     
+[Back to top](#redux)  
+
+### Slices multiples (bonus)
+
+Pour plus de clareté et dans un soucis de respect du principe de **separation of concern**, on peut découper notre *store* de la manière suivante **sans oublier** de mettre à jours les nouveaux chemins d'import dans les composants :
+
+*store/index.ts*
+````typescript
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from './counter-slice';
+import authReducer from './auth-slice';
+
+export const store = configureStore({
+  reducer: {
+    counterReducer: counterReducer,
+    authReducer: authReducer
+  }
+});
+
+
+````
+
+*store/auth-slice.ts*
+````typescript
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = { isAuthenticated: false };
+
+const authSlice = createSlice({
+  name: "authentication",
+  initialState,
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    },
+  },
+});
+
+export const authActions = authSlice.actions;
+
+export default authSlice.reducer;
+
+````
+
+*store/counter-slice.ts*
+````typescript
+import { createSlice } from "@reduxjs/toolkit";
+
+export type StateType = {
+  counter: number;
+  toggle: boolean;
+};
+
+const initialState: StateType = { counter: 0, toggle: true };
+
+const counterSlice = createSlice({
+  name: "counterSlice",
+  initialState,
+  reducers: {
+    increment(state) {
+      state.counter++;
+    },
+    decrement(state) {
+      state.counter--;
+    },
+    incrementByValue(state, action) {
+      state.counter = state.counter + action.payload;
+    },
+    toggle(state) {
+      state.toggle = !state.toggle;
+    },
+  },
+});
+
+export const counterActions = counterSlice.actions;
+
+export default counterSlice.reducer;
+
+````
+[Back to top](#redux)  
