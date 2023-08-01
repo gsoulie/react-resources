@@ -32,7 +32,7 @@ ionic cap build android
   * Services     
   * Lazy loading     
 * [Infinite scroll](https://www.youtube.com/watch?v=R1FG54FY-18&ab_channel=Joshtriedcoding)     
-* [Redux](https://www.youtube.com/watch?v=1lvnT2oE0_4&ab_channel=LiorCHAMLA-WebDevelopMe)     
+* [Redux](https://github.com/gsoulie/react-resources/blob/master/react-redux.md)     
 * [Hooks](https://github.com/gsoulie/react-resources/blob/master/react-hooks.md)    
 * [Forms](https://github.com/gsoulie/react-resources/blob/master/react-forms.md)    
 * [Http](https://github.com/gsoulie/react-resources/blob/master/react-http.md)     
