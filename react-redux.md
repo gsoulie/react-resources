@@ -254,7 +254,6 @@ Afin de gérer plus facilement les bonnes pratiques évoquées précédemment, i
 
 *Installation*
 ````
-npm i redux react-redux     
 npm i @reduxjs/toolkit
 ````
 
