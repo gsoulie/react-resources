@@ -8,7 +8,9 @@
 * [Utilisation avec React](#utilisation-avec-react)       
 * [Bonnes pratiques](#bonnes-pratiques)
 * [Redux toolkit](#redux-toolkit)
-* [Projet complet redux toolkit](https://github.com/gsoulie/react-resources/blob/main/react-redux-toolkit/)    
+* [Projet complet redux toolkit basique](https://github.com/gsoulie/react-resources/blob/main/react-redux-toolkit/)
+* [Redux toolkit Avancé : traitements asynchrones](#redux-toolkit-avancé--traitements-asynchrones)
+* [Redux toolkit avancé projet complet](https://github.com/gsoulie/react-resources/tree/main/projects/advanced-react)     
 
 ## Présentation
 
