@@ -15,7 +15,7 @@
 * [Naviguer par code](#naviguer-par-code)     
 * [Route guard](#route-guard)     
 * [Lazy loading](#lazy-loading)      
-* [Déclaration des routes dans fichier externe](#déclaration-des-routes-dans-fichier-externe)     
+* [Déclaration des routes dans fichier externe - Best practice](#déclaration-des-routes-dans-fichier-externe)     
 * [Exemple avec guard](#exemple-avec-guard)       
 
 
@@ -46,7 +46,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
 </details>
 
-## Utilisation
+## Utilisation React Router < 6.4
 
 <details>
   <summary>Utilisation</summary>
