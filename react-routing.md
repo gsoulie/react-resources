@@ -182,6 +182,43 @@ const router = createBrowserRouter([
 ])
 ````
 
+### path ..
+
+Il existe une manière simple de remonter à la route **parente** supérieure, via la route relative **..**
+
+````typescript
+<Link to="..">Back</Link>
+````
+
+> par défaut, la propriété ````relative```` est positionnée à ````route````
+
+En considérant le routage précédent : 
+
+````typescript
+const router = createBrowserRouter([
+{
+	path: '/root',
+ 	element: <RootLayout />,
+	errorElement: <GlobalErrorPage />,
+	children: [
+		{ path: '', element: <HomePage /> },
+		{ path: 'products', element: <Products />,
+		{ path: 'products/:id', element: <ProductsDetail /> }
+	]
+}
+])
+````
+
+````to=".."```` nous ramènera sur ````/root```` et non pas sur ````/products```` qui est une route "soeur", non parent.
+
+En modifiant la propriété ````relative```` avec la valeur ````path````, le router va désormais regarder la route active et lui retirer un segment
+
+````typescript
+<Link to=".." relative="path">Back</Link>
+````
+Le bouton Back nous ramène maintenant sur la route ````/products````
+
+
 [Back to top](#routing)    
 
 </details>
