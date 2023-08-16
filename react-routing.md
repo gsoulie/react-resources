@@ -44,6 +44,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
 ## Utilisation
 
+<details>
+  <summary>Utilisation</summary>
 Pour utiliser le routing dans un composant, il faut importer les modules ````Route```` et ````Routes````. 
 
 Ensuite on va encadrer le code qui dépend d'un routage avec une balise ````<Routes>```` qui va contenir chaque ````<Route>````.
@@ -80,6 +82,7 @@ function App() {
 ````
 
 [Back to top](#routing)     
+</details>
 
 ## Naviguer
 
