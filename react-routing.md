@@ -86,6 +86,22 @@ export default App;
 
 > Note : Le ````<RouterProvider>```` peut être placé dans le fichier **main.tsx**
 
+### Bonne pratique 
+
+Il est conseillé de créer un composant *racine* de type ````RouteLayout```` dans lequel se trouve le ````<Outlet>````, pour y loger le menu général qui serait ainsi visible sur toutes les pages par exemple.
+
+*RouteLayout.tsx*
+````typescript
+export const RouteLayout = () => {
+  return (
+    <>
+      <MainNavigation />
+      <Outlet />
+    </>
+  );
+};
+````
+
 </details>
 
 <details>
