@@ -46,7 +46,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
 <details>
   <summary>Utilisation</summary>
-Pour utiliser le routing dans un composant, il faut importer les modules ````import { Route, Routes } from 'react-router-dom';````. 
+Pour utiliser le routing dans un composant, il faut importer les modules 
+````typescript
+import { Route, Routes } from 'react-router-dom';
+````
 
 Ensuite on va encadrer le code qui dépend d'un routage avec une balise ````<Routes>```` qui va contenir chaque ````<Route>````.
 
