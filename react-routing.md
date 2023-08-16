@@ -46,7 +46,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
 <details>
   <summary>Utilisation</summary>
+
 Pour utiliser le routing dans un composant, il faut importer les modules 
+
 ````typescript
 import { Route, Routes } from 'react-router-dom';
 ````
@@ -91,7 +93,12 @@ function App() {
 
 <details>
   <summary>Navigation dans React</summary>
-Tout comme Angular / Vue, utiliser une balise ````<a href="">```` permet de naviguer entre les routes mais a pour inconvénient de déclencher un rafraichissement de toute la page.
+Tout comme Angular / Vue, utiliser une balise 
+
+````html
+<a href="">
+````
+permet de naviguer entre les routes mais a pour inconvénient de déclencher un rafraichissement de toute la page.
 
 Avec React Router on va donc utiliser l'élément ````<Link>````
 
