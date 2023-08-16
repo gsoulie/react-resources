@@ -130,7 +130,7 @@ return (
 	<nav>
 		<NavLink to="/" className={({isActive}) => (isActive ? 'activeLink' : undefined)} end="true">Accueil</NavLink>
 		<NavLink to="/users" className={({isActive}) => (isActive ? 'activeLink' : undefined)} end="true">Utilisateurs</NavLink>
-		<NavLink to="/profile/1234545" className={({isActive}) => (isActive ? 'activeLink' : undefined)}>Profil</NavLink>
+		<NavLink to="/profile/1234545" style={{({isActive}) => (isActive ? (color: 'red') : undefined)}}>Profil</NavLink>
 	</nav>
 )
 ````
