@@ -177,6 +177,26 @@ La route par défaut (i.e '**' sous Angular) se définie par le chemin ````/*```
 <details>
   <summary>Utilisation des routes imbriquées</summary>
 
+
+### React router > 6.4
+
+````typescript
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <RootLayout />,
+		children: [
+			{ path: '/', element: <HomePage /> },
+			{ path: '/products', element: <Products /> }
+		]
+	},{
+		path: '/admin',
+		element: <Admin />
+	}
+])
+````
+
+### React router < 6.4
 *Parent.tsx*
 ````tsx
 return (
