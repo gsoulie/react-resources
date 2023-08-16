@@ -25,8 +25,10 @@ Une des solutions pour gérer les routes en React est d'ajouter le plugin **Reac
 
 > Remarque : Avec cette ajout, React devient un peu plus un framework et perd un peu son côté simple librairie
 
-*Installation*
-````npm install react-router-dom````
+<details>
+	<summary>Installation</summary>
+
+ ````npm install react-router-dom````
 
 Initialisation dans le *index.js* ou *main.tsx*
 
@@ -41,6 +43,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   </BrowserRouter>
 )
 ````
+
+</details>
 
 ## Utilisation
 
@@ -87,6 +91,7 @@ function App() {
 ````
 
 [Back to top](#routing)     
+
 </details>
 
 ## Naviguer
@@ -114,6 +119,7 @@ return (
 )
 ````
 [Back to top](#routing)    
+
 </details>
 
 ## Routes dynamiques
@@ -238,6 +244,7 @@ export default function Profile() {
 }
 ````
 [Back to top](#routing)     
+
 </details>
 
 ## Informations sur la route
@@ -270,6 +277,7 @@ state: null		// state passé en paramètre de navigation
 ````
   
 [Back to top](#routing)     	
+
 </details>
 
 ## Route index
@@ -288,6 +296,7 @@ La route de type **index** est la route par défaut qui sera appelée lorsque la
 ````
 
 [Back to top](#routing)     
+
 </details>
 
 ## useLoaderData
@@ -340,6 +349,7 @@ import { loader as postDetailLoader } from '../components/PostDetail';
 A voir utilisation de ````defer```` pour retarder le chargement de certaines données lors du routage
 
 [Back to top](#routing)     
+
 </details>
 
 ## Gestion des erreurs
@@ -386,6 +396,7 @@ return (
 ````
 
 [Back to top](#routing)     
+
 </details>
 
 ## Naviguer par code
@@ -407,6 +418,7 @@ export default function Cart() {
 ````
 
 [Back to top](#routing)     
+
 </details>
 
 ## Route guard
@@ -459,6 +471,7 @@ return (
   )
 ````
 [Back to top](#routing)     
+
 </details>
 
 ## Lazy loading des routes
@@ -570,6 +583,7 @@ import { Outlet } from "react-router-dom";
   )
 ````
 [Back to top](#routing)     
+
 </details>
 
 ## Exemple avec guard
@@ -696,6 +710,7 @@ export const AuthRouter = () => {
 	)
 }
 ````
+
 </details>
 
 [Back to top](#routing)     
