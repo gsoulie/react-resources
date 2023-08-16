@@ -126,7 +126,7 @@ return (
 L'élément *NavLink* est **smiliaire** à l'élément *Link*, à la différence qu'il permet de paramétrer la classe css en fonction de si le lien est actif ou non 
 
 ````tsx
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, NavLink  } from 'react-router-dom';
 
 return (
 	<nav>
