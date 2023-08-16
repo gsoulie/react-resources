@@ -86,6 +86,8 @@ function App() {
 
 ## Naviguer
 
+<details>
+  <summary>Navigation dans React</summary>
 Tout comme Angular / Vue, utiliser une balise ````<a href="">```` permet de naviguer entre les routes mais a pour inconvénient de déclencher un rafraichissement de toute la page.
 
 Avec React Router on va donc utiliser l'élément ````<Link>````
@@ -102,9 +104,12 @@ return (
 )
 ````
 [Back to top](#routing)    
+</details>
 
 ## Routes dynamiques
 
+<details>
+  <summary>Configuration et utilisation des routes dynamiques</summary>
 ````tsx
 return (
     <div className='main-container'>
@@ -135,6 +140,7 @@ export default function Profile() {
 }
 ````
 [Back to top](#routing)     
+</details>
 
 ## Route par défaut
 
@@ -148,6 +154,9 @@ La route par défaut (i.e '**' sous Angular) se définie par le chemin ````/*```
 [Back to top](#routing)     
 
 ## Routes imbriquées
+
+<details>
+  <summary>Utilisation des routes imbriquées</summary>
 
 *Parent.tsx*
 ````tsx
@@ -216,9 +225,12 @@ export default function Profile() {
 }
 ````
 [Back to top](#routing)     
-  
+</details>
+
 ## Informations sur la route
 
+<details>
+  <summary>Ajouter des informations dans la route</summary>
 L'utilisation du hook ````useLocation```` de *react-router-dom* permet de récupérer certaines informations sur la route
 
 ````tsx
@@ -244,9 +256,12 @@ state: null		// state passé en paramètre de navigation
 ````
   
 [Back to top](#routing)     	
+</details>
 
 ## Route index
 
+<details>
+  <summary>Route par défaut</summary>
 La route de type **index** est la route par défaut qui sera appelée lorsque la route parent sera activée. Dans l'exemple ci-dessous, la route */profile/<id>* chargera le composant <Profile>
 à l'intérieur duquel sera chargé l'élément ````<h1>Route index</h1>```` dans le *Outlet*
 
@@ -259,9 +274,12 @@ La route de type **index** est la route par défaut qui sera appelée lorsque la
 ````
 
 [Back to top](#routing)     
-	
+</details>
+
 ## useLoaderData
 
+<details>
+  <summary>Utilisation du hook useLoaderData</summary>
 https://www.youtube.com/watch?v=L2kzUg6IzxM&ab_channel=Academind
 
 useLoaderData est un hook de React Router. Il permet de déclencher un chargement de data lors de l'activation d'une route. 
@@ -307,9 +325,12 @@ import { loader as postDetailLoader } from '../components/PostDetail';
 A voir utilisation de ````defer```` pour retarder le chargement de certaines données lors du routage
 
 [Back to top](#routing)     
+</details>
 
 ## Gestion des erreurs
 
+<details>
+  <summary>Gérer les erreurs avec le routing</summary>
 Depuis React Router 6.4, un nouveau paramètre ````errorElement```` permet de gérer un affichage en cas d'erreur levée par le ````loader````
 
 ````tsx
@@ -349,10 +370,12 @@ return (
 ````
 
 [Back to top](#routing)     
+</details>
 
 ## Naviguer par code
 
-La navigation via le code se fait par l'intermédiaire du hook *useNavigate()*
+<details>
+  <summary>La navigation via le code se fait par l'intermédiaire du hook *useNavigate()*</summary>
 
 ````tsx
 export default function Cart() {
@@ -368,9 +391,12 @@ export default function Cart() {
 ````
 
 [Back to top](#routing)     
+</details>
 
 ## Route guard
 
+<details>
+  <summary>Gestion des guards</summary>
 Il existe plusieurs solution pour protéger un ensemble de route. Une des plus simple est la suivante 
 
 1 - Créer un fichier permettant d'activer un ensemble de route si le critère choisi est validé (ex : authentification)
@@ -416,8 +442,7 @@ return (
   )
 ````
 [Back to top](#routing)     
-
-## Lazy loading
+</details>
 
 ## Lazy loading des routes
 
@@ -440,6 +465,9 @@ const App = () => (
 [Back to top](#routing)     
 
 ## Déclaration des routes dans fichier externe
+
+<details>
+  <summary>Gérer les routes dans un fichiers séparé</summary>
 
 *app-routing.tsx*
 
@@ -525,9 +553,12 @@ import { Outlet } from "react-router-dom";
   )
 ````
 [Back to top](#routing)     
+</details>
 
 ## Exemple avec guard
 
+<details>
+  <summary>Exemple de route avec Guard</summary>
 Une autre syntaxe consiste à séparer les routing dans différent composants. Dans cet exemple nous avons 3 zones de routage, une publique, une privée et une pour l'authentification
 
 *App.tsx*
@@ -647,5 +678,5 @@ export const AuthRouter = () => {
 	)
 }
 ````
-
+</details>
 [Back to top](#routing)     
