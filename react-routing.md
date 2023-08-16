@@ -48,10 +48,48 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
 </details>
 
-## Utilisation React Router < 6.4
+## Utilisation React Router
 
 <details>
-  <summary>Utilisation</summary>
+  <summary>Utilisation React Router > 6.4</summary>
+
+*router.tsx*
+````typescript
+import { createBrowserRouter } from "react-router-dom";
+
+export const router = createBrowserRouter([
+{
+	path: '/root',
+ 	element: <RootLayout />,
+	errorElement: <GlobalErrorPage />,
+	children: [
+		{ path: '', element: <HomePage /> },
+		{ path: 'products', element: <Products />,
+		{ path: 'products/:id', element: <ProductsDetail /> }
+	]
+}
+])
+````
+
+*App.tsx*
+````typescript
+import { RouterProvider } from "react-router-dom";
+import { routes } from "./routing/route";
+
+function App() {
+  const router = routes;
+  return <RouterProvider router={router}></RouterProvider>;
+}
+
+export default App;
+````
+
+> Note : Le ````<RouterProvider>```` peut être placé dans le fichier **main.tsx**
+
+</details>
+
+<details>
+  <summary>Utilisation React Router < 6.4</summary>
 
 Pour utiliser le routing dans un composant, il faut importer les modules 
 
