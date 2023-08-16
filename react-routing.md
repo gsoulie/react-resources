@@ -441,7 +441,8 @@ return (
 ## Naviguer par code
 
 <details>
-  <summary>La navigation via le code se fait par l'intermédiaire du hook *useNavigate()*</summary>
+	
+  <summary>La navigation via le code se fait par l'intermédiaire du hook useNavigate()</summary>  
 
 ````tsx
 export default function Cart() {
