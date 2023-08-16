@@ -120,7 +120,8 @@ return (
 
 <details>
   <summary>Configuration et utilisation des routes dynamiques</summary>
-````tsx
+
+````typescript
 return (
     <div className='main-container'>
       <Link to="/profile/1234545">Route avec paramètre</Link>
@@ -135,7 +136,7 @@ return (
 
 *Récupération des paramètres de route côté enfant*
 
-````tsx
+````typescript
 import { useParams } from 'react-router-dom';	// <-- importer le hook useParams
 
 export default function Profile() {
@@ -149,6 +150,7 @@ export default function Profile() {
   )
 }
 ````
+
 [Back to top](#routing)     
 </details>
 
@@ -156,11 +158,12 @@ export default function Profile() {
 
 La route par défaut (i.e '**' sous Angular) se définie par le chemin ````/*````. Tout comme Angular, cette route doit être la dernière spécifiée.
 
-````tsx
+````typescript
 <Route path="/*" element={
   <h1>Erreur 404</h1>
 } />
 ````
+
 [Back to top](#routing)     
 
 ## Routes imbriquées
@@ -241,7 +244,8 @@ export default function Profile() {
 
 <details>
   <summary>Ajouter des informations dans la route</summary>
-L'utilisation du hook ````useLocation```` de *react-router-dom* permet de récupérer certaines informations sur la route
+	
+L'utilisation du hook **useLocation** de *react-router-dom* permet de récupérer certaines informations sur la route
 
 ````tsx
 import React from 'react'
@@ -272,8 +276,8 @@ state: null		// state passé en paramètre de navigation
 
 <details>
   <summary>Route par défaut</summary>
-La route de type **index** est la route par défaut qui sera appelée lorsque la route parent sera activée. Dans l'exemple ci-dessous, la route */profile/<id>* chargera le composant <Profile>
-à l'intérieur duquel sera chargé l'élément **Route index** dans le *Outlet*
+	
+La route de type **index** est la route par défaut qui sera appelée lorsque la route parent sera activée. Dans l'exemple ci-dessous, la route */profile/<id>* chargera le composant ````<Profile>```` à l'intérieur duquel sera chargé l'élément **Route index** dans le *Outlet*
 
 ````tsx
 <Route path="/profile/:id" element={<Profile />}>
@@ -290,6 +294,7 @@ La route de type **index** est la route par défaut qui sera appelée lorsque la
 
 <details>
   <summary>Utilisation du hook useLoaderData</summary>
+
 https://www.youtube.com/watch?v=L2kzUg6IzxM&ab_channel=Academind
 
 useLoaderData est un hook de React Router. Il permet de déclencher un chargement de data lors de l'activation d'une route. 
@@ -341,6 +346,7 @@ A voir utilisation de ````defer```` pour retarder le chargement de certaines don
 
 <details>
   <summary>Gérer les erreurs avec le routing</summary>
+	
 Depuis React Router 6.4, un nouveau paramètre ````errorElement```` permet de gérer un affichage en cas d'erreur levée par le ````loader````
 
 ````tsx
@@ -407,6 +413,7 @@ export default function Cart() {
 
 <details>
   <summary>Gestion des guards</summary>
+	
 Il existe plusieurs solution pour protéger un ensemble de route. Une des plus simple est la suivante 
 
 1 - Créer un fichier permettant d'activer un ensemble de route si le critère choisi est validé (ex : authentification)
@@ -569,6 +576,7 @@ import { Outlet } from "react-router-dom";
 
 <details>
   <summary>Exemple de route avec Guard</summary>
+	
 Une autre syntaxe consiste à séparer les routing dans différent composants. Dans cet exemple nous avons 3 zones de routage, une publique, une privée et une pour l'authentification
 
 *App.tsx*
