@@ -263,7 +263,7 @@ state: null		// state passé en paramètre de navigation
 <details>
   <summary>Route par défaut</summary>
 La route de type **index** est la route par défaut qui sera appelée lorsque la route parent sera activée. Dans l'exemple ci-dessous, la route */profile/<id>* chargera le composant <Profile>
-à l'intérieur duquel sera chargé l'élément ````Route index```` dans le *Outlet*
+à l'intérieur duquel sera chargé l'élément **Route index** dans le *Outlet*
 
 ````tsx
 <Route path="/profile/:id" element={<Profile />}>
