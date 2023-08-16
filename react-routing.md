@@ -3,7 +3,8 @@
 # Routing
 
 * [Utilisation](#utilisation)     
-* [Naviguer](#naviguer)    
+* [Naviguer](#naviguer)
+* [Chemins relatifs et absolus](#chemins-relatifs-et-absolus)     
 * [useHistory](https://github.com/gsoulie/react-resources/blob/main/react-hooks.md#usehistory)      
 * [Routes dynamiques](#routes-dynamiques)     
 * [Route par défaut](#route-par-défaut)     
@@ -16,7 +17,8 @@
 * [Route guard](#route-guard)     
 * [Lazy loading](#lazy-loading)      
 * [Déclaration des routes dans fichier externe - Best practice](#déclaration-des-routes-dans-fichier-externe)     
-* [Exemple avec guard](#exemple-avec-guard)       
+* [Exemple avec guard](#exemple-avec-guard)
+
 
 
 Par défaut il n'y a pas de gestion de des routes dans React comme sous Angular / Vue (Vue Router est maintenant intégré). 
@@ -136,6 +138,48 @@ return (
 ````
 
 > Remarque importante : par défaut, le router regarde si la route demandée **commence** par la chaîne spécifiée dans l'attribut **to**. De cette manière, **toutes** les routes correspondantes à ce motif seront marquées comme *active*. Dans l'exemple, la première route étant la toute "/", alors toutes les routes seront marquées comme active. Ceci étant un problème, il faut alors renseigner la propriété **end** à *true* pour éviter de marquer toutes les routes comme active. Pour les routes ayant un path "unique', il n'est pas nécessaire de spécifier l'attribut *end*
+
+[Back to top](#routing)    
+
+</details>
+
+## Chemins relatifs et absolus
+
+<details>
+	<summary>Comprendre les chemins absolus et relatifs</summary>
+
+* chemins absolus : commençent par un "/"
+* chemins relatifs : ne commençent **pas** par un "/" est sont **concaténés à la route parent**
+  
+````typescript
+const router = createBrowserRouter([
+{
+	path: '/',
+ 	element: <RootLayout />,
+	errorElement: <GlobalErrorPage />,
+	children: [
+		{ path: '/', element: <HomePage /> },
+		{ path: '/products', element: <Products />, errorElement: <ProductErrorPage /> }
+	]
+}
+])
+````
+
+*Chemins relatifs*
+````typescript
+const router = createBrowserRouter([
+{
+	path: '/root',
+ 	element: <RootLayout />,
+	errorElement: <GlobalErrorPage />,
+	children: [
+		{ path: '', element: <HomePage /> },
+		{ path: 'products', element: <Products />,
+		{ path: 'products/:id', element: <ProductsDetail /> }
+	]
+}
+])
+````
 
 [Back to top](#routing)    
 
@@ -399,12 +443,17 @@ A voir utilisation de ````defer```` pour retarder le chargement de certaines don
 Depuis React Router 6.4, un nouveau paramètre ````errorElement```` permet de gérer un affichage en cas d'erreur levée par le ````loader````
 
 ````tsx
-<Route 
-	path=":id" 
-	element={<PostDetail />} 
-	loader="{postDetailLoader}"
-	errorElement={<h1>Une erreur est survenue lors du chargement des données</h1>}
-/>
+const router = createBrowserRouter([
+{
+	path: '/',
+ 	element: <RootLayout />,
+	errorElement: <GlobalErrorPage />,
+	children: [
+		{ path: '/', element: <HomePage /> },
+		{ path: '/products', element: <Products />, errorElement: <ProductErrorPage /> }
+	]
+}
+])
 ````
 
 Ce paramètre peut être positionné sur n'importe quel route à n'importe quel niveau (note : en plaçant le paramètre au niveau parent, si une erreur est levée par un enfant, cela déclenchera l'affichage défini dans le niveau parent). Cela permet de pouvoir gérer une page d'erreur pour chaque route si besoin
@@ -754,3 +803,4 @@ export const AuthRouter = () => {
 </details>
 
 [Back to top](#routing)     
+
