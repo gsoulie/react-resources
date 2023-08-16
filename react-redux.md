@@ -474,3 +474,51 @@ export default counterSlice.reducer;
 
 ````
 [Back to top](#redux)  
+
+### Redux toolkit Avancé : traitements asynchrones
+
+Parce que les reducer sont **pure** et **synchrones**, on ne peut pas faire d'appels http à l'intérieur pour mettre à jour ou fetch les data. Il est **INTERDIT** de mettre du code asynchrone à l'intérieur d'un reducer.
+
+Dans le cas de traitement asynchrone, il ne faut PAS utiliser les Reducers, mais préférer la gestion dans le composant (Action Creator)
+
+La **bonne pratique** consiste à créer un *Action Creator* dans le répertoire store par exemple, dont l'objectif est de traiter les effets de bord (fetch, mise à jour de data vers le backend...).
+Ce *Action Creator* va réaliser les ````dispatch```` des actions du reducer concerné. 
+
+Les *Action Creator* sont ensuite exécuté depuis le composant, via des ````useEffect````
+
+*Extrait App.tsx*
+````
+function App() {
+  const cartIsVisible = useSelector((state) => state.uiReducer.cartVisible);
+  const notification = useSelector((state) => state.uiReducer.notification);
+  const cart = useSelector((state) => state.cartReducer);
+
+  const dispatch = useDispatch<AppDispatch>(); // typage nécessaire pour éviter une erreur typescript
+
+  // Effect pour charger les data
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
+
+  // Effect pour mettre à jour les data à chaque modification du store
+  useEffect(() => {
+    // Empêcher l'appel à firebase lors du premier rendu
+    if (initialRender) {
+      initialRender = false;
+      return;
+    }
+
+    // test pour éviter une boucle infinie entre les 2 UseEffect
+    if (cart.changed) {
+      // Dispatch Action creator
+      dispatch(sendCartData(cart));
+    }
+  }, [cart, dispatch]);
+
+...
+}
+````
+
+[**> Projet complet Redux toolkit avec traitements asynchrones (backend Firebase)**](https://github.com/gsoulie/react-resources/tree/main/projects/advanced-react)      
+
+
