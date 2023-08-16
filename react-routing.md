@@ -118,6 +118,25 @@ return (
 	</nav>
 )
 ````
+
+### Elément NavLink
+
+L'élément *NavLink* est **smiliaire** à l'élément *Link*, à la différence qu'il permet de paramétrer la classe css en fonction de si le lien est actif ou non 
+
+````tsx
+import { Route, Routes, Link } from 'react-router-dom';
+
+return (
+	<nav>
+		<NavLink to="/" className={({isActive}) => (isActive ? 'activeLink' : undefined)} end="true">Accueil</NavLink>
+		<NavLink to="/users" className={({isActive}) => (isActive ? 'activeLink' : undefined)} end="true">Utilisateurs</NavLink>
+		<NavLink to="/profile/1234545" className={({isActive}) => (isActive ? 'activeLink' : undefined)}>Profil</NavLink>
+	</nav>
+)
+````
+
+> Remarque importante : par défaut, le router regarde si la route demandée **commence** par la chaîne spécifiée dans l'attribut **to**. De cette manière, **toutes** les routes correspondantes à ce motif seront marquées comme *active*. Dans l'exemple, la première route étant la toute "/", alors toutes les routes seront marquées comme active. Ceci étant un problème, il faut alors renseigner la propriété **end** à *true* pour éviter de marquer toutes les routes comme active. Pour les routes ayant un path "unique', il n'est pas nécessaire de spécifier l'attribut *end*
+
 [Back to top](#routing)    
 
 </details>
