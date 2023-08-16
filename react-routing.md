@@ -150,7 +150,8 @@ return (
 
 * chemins absolus : commençent par un "/"
 * chemins relatifs : ne commençent **pas** par un "/" est sont **concaténés à la route parent**
-  
+
+*Chemins absolus*
 ````typescript
 const router = createBrowserRouter([
 {
