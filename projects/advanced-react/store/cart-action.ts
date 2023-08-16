@@ -11,6 +11,7 @@ const FIREBASE_URL = '<YOUR-FIREBASE-URL>.firebasedatabase.app'
 
 export const fetchCartData = () => {
   return async dispatch => {
+    // Fonction de récupération des data dans le backend Firebase
     const fetchDataFromFirebase = async () => {
       const response = await fetch(`${FIREBASE_URL}/cart.json`);
 
@@ -26,12 +27,14 @@ export const fetchCartData = () => {
     try {
       const cartData = await fetchDataFromFirebase();
 
+      // Mise à jour du dataset avec les données du backend
       dispatch(cartSliceActions.replaceCart({
         items: cartData.items || [],
         totalQte: cartData.totalQte
       }));
 
     } catch (err) {
+      // Affcihage d'une notification via une action
       dispatch(
         uiSliceActions.showNotification({
           status: NotificationStatus.error,
@@ -44,14 +47,20 @@ export const fetchCartData = () => {
   }
 }
 
+/**
+ * Mettre à jour les données du backend
+**/
 export const sendCartData = (cart) => {
   return async (dispatch) => {
+    // Affichage d'un loader
     dispatch(
       uiSliceActions.showNotification({
         status: NotificationStatus.pending,
         title: "Sending cart data...",
       })
     );
+
+    // Envoi de la requête au backend
     const sendRequest = async () => {
       const response = await fetch(
         `${FIREBASE_URL}/cart.json`,
@@ -69,6 +78,7 @@ export const sendCartData = (cart) => {
     }
     try {
       await sendRequest();
+      // Notification de succes
       dispatch(
         uiSliceActions.showNotification({
           status: NotificationStatus.success,
