@@ -10,8 +10,10 @@
 
 ## Fetch
 
-La méthode basique pour faire des appels http consiste à utiliser la méthode *fetch*
+<details>
+	<summary>La méthode basique pour faire des appels http consiste à utiliser la méthode *fetch*</summary>
 
+ 
 ````tsx
 type Post = {
     title: string;
@@ -49,10 +51,14 @@ const res = await fetch('/user', {
 })
 ````
 
+</details>
+
 ## Axios
 
-Comme avec Vue, il est pratique d'utiliser **Axios** pour gérer les appels http
+<details>
+	<summary>Comme avec Vue, il est pratique d'utiliser **Axios** pour gérer les appels http</summary>
 
+ 
 ````npm i axios````
 
 ````tsx
@@ -84,9 +90,10 @@ export const UserList = () => {
 }
 ````
 
-### Exemple de Helper basé sur axios
+<details>
+	<summary>Exemple de Helper basé sur axios</summary>
 
-````typescript
+ ````typescript
 import axios from 'axios';
 
 const api = axios.create({
@@ -159,6 +166,9 @@ const fetchData = async () => {
   return data;
 };
 ````
+</details>
+
+</details>
 
 [Back to top](#http)     
 
