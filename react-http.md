@@ -12,7 +12,6 @@
 
 <details>
 	<summary>La méthode basique pour faire des appels http consiste à utiliser la méthode *fetch*</summary>
-
  
 ````tsx
 type Post = {
@@ -49,6 +48,31 @@ const res = await fetch('/user', {
   method: 'POST',
   body: JSON.stringify({ name: 'Steve Sewell', company: 'Builder.io' })
 })
+````
+
+### Ecriture simpliste
+
+````typescript
+  const [isLoading, setIsLoading] = useState(false);
+  const [fetchedEvents, setFetchedEvents] = useState();
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    async function fetchEvents() {
+      setIsLoading(true);
+      const response = await fetch("http://localhost:8080/events");
+
+      if (!response.ok) {
+        setError("Fetching events failed.");
+      } else {
+        const resData = await response.json();
+        setFetchedEvents(resData.events);
+      }
+      setIsLoading(false);
+    }
+
+    fetchEvents();
+  }, []);
 ````
 
 </details>
@@ -90,9 +114,9 @@ export const UserList = () => {
 }
 ````
 
+### Helper Axios
+
 <details>
-	### Helper Axios
-	
 	<summary>Exemple de Helper basé sur axios</summary>
 
  ````typescript
@@ -254,9 +278,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 )
 ````
 
-<details>
-	### Interceptor Axios vs Fetch classique
-	
+### Interceptor Axios vs Fetch classique
+
+<details>	
 	<summary>Interceptor Axios vs Fetch classique</summary>
 
  *Interceptor Axios*
@@ -308,11 +332,4 @@ fetchWithAuth("http://example.com/api/data")
 
 </details>
  
-
-
-
-
-
-
-
 [Back to top](#http)     
