@@ -56,7 +56,7 @@ const res = await fetch('/user', {
 ## Axios
 
 <details>
-	<summary>Comme avec Vue, il est pratique d'utiliser **Axios** pour gérer les appels http</summary>
+	<summary>Comme avec Vue, il est pratique d'utiliser Axios pour gérer les appels http</summary>
 
  
 ````npm i axios````
@@ -91,6 +91,8 @@ export const UserList = () => {
 ````
 
 <details>
+	### Helper Axios
+	
 	<summary>Exemple de Helper basé sur axios</summary>
 
  ````typescript
@@ -174,9 +176,10 @@ const fetchData = async () => {
 
 ## Intercepteur http
 
-Gestion des intercepteurs http avec axios : 
+<details>
+	<summary>Gestion des intercepteurs http avec axios :</summary>
 
-*httpInterceptor.ts*
+ *httpInterceptor.ts*
 
 ````typescript
 import axios from 'axios';
@@ -251,9 +254,12 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 )
 ````
 
-### Interceptor Axios vs Fetch classique
+<details>
+	### Interceptor Axios vs Fetch classique
+	
+	<summary>Interceptor Axios vs Fetch classique</summary>
 
-*Interceptor Axios*
+ *Interceptor Axios*
 
 ````typescript
 import axios from "axios";
@@ -298,5 +304,15 @@ fetchWithAuth("http://example.com/api/data")
   .then((data) => console.log(data))
   .catch((error) => console.error(error));
 ````
+</details>
+
+</details>
+ 
+
+
+
+
+
+
 
 [Back to top](#http)     
