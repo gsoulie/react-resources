@@ -133,19 +133,19 @@ Le routage précédent n'est pas totalement optimisé, on peut voir que les rout
 ### Routes imbriquées
 
 ````typescript
-	const router = createBrowserRouter([
-		{
-			path: '/',
-			element: <RootLayout />,
-			children: [
-				{ path: '/', element: <HomePage /> },
-				{ path: '/products', element: <Products /> }
-			]
-		},{
-			path: '/admin',
-			element: <Admin />
-		}
-	])
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <RootLayout />,
+		children: [
+			{ path: '/', element: <HomePage /> },
+			{ path: '/products', element: <Products /> }
+		]
+	},{
+		path: '/admin',
+		element: <Admin />
+	}
+])
 ````
 
 ### Route par défaut
@@ -153,9 +153,9 @@ Le routage précédent n'est pas totalement optimisé, on peut voir que les rout
 La route par défaut (i.e '**' sous Angular) se définie par le chemin ````/*````. Tout comme Angular, cette route doit être la dernière spécifiée.
 
 ````typescript
-	<Route path="/*" element={
-	  <h1>Erreur 404</h1>
-	} />
+<Route path="/*" element={
+  <h1>Erreur 404</h1>
+} />
 ````
 	
 ### Cablage du router
@@ -164,18 +164,21 @@ Le router principal peut être ajouté soit dans le fichier **main.tsx** ou **Ap
 
 *Intégration dans le App.tsx*
 ````typescript
-	import { RouterProvider } from "react-router-dom";
-	import { routes } from "./routing/route";
+import { RouterProvider } from "react-router-dom";
+import { routes } from "./routing/route";
 
-	function App() {
-	  const router = routes;
+function App() {
+  const router = routes;
 
-	  return <RouterProvider router={router}></RouterProvider>;
-	}
+  return <RouterProvider router={router}></RouterProvider>;
+}
 ````
 
 *Intégration dans le main.tsx*
 ````typescript
+<RouterProvider router={router}>
+	<App />
+</RouterProvider>
 ````
 
 ### Router Outlet
