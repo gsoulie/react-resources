@@ -215,15 +215,15 @@ export const RouteLayout = () => {
 *Chemins absolus*
 ````typescript
 const router = createBrowserRouter([
-{
-path: '/',
-element: <RootLayout />,
-errorElement: <GlobalErrorPage />,
-children: [
-	{ path: '/', element: <HomePage /> },
-	{ path: '/products', element: <Products />, errorElement: <ProductErrorPage /> }
-]
-}
+	{
+		path: '/',
+		element: <RootLayout />,
+		errorElement: <GlobalErrorPage />,
+		children: [
+			{ path: '/', element: <HomePage /> },
+			{ path: '/products', element: <Products />, errorElement: <ProductErrorPage /> }
+		]
+	}
 ])
 ````
 
@@ -384,7 +384,7 @@ export default function Profile() {
 <details>
 <summary>Utilisation du hook useLoaderData</summary>
 
-useLoaderData est un hook de React Router. Il permet de déclencher un chargement de data lors de l'activation d'une route. les fonctions loader sont chargées au moment où l'on commence à naviguer, et donc pas après que la page ait été rendue, mais **avant** qu'on arrive sur la parge
+useLoaderData est un hook de React Router. Il permet de déclencher un chargement de data lors de l'activation d'une route. les fonctions loader sont chargées au moment où l'on commence à naviguer, et donc pas après que la page ait été rendue, mais **avant** qu'on arrive sur la page.
 
 Pour simplifier l'écriture d'un composant ayant un chargement de données dans son initialisation et par conséquent, se passer de l'utilisation d'un *useEffect*, il est possible de déclarer une fonction loader directement dans le composant (ou dans un service).
 Cette fonction pourra ensuite être déclenchée directement dans le fichier de routing lors de la navigation vers ce composant.
@@ -432,28 +432,22 @@ export const loader = async ({ request, params }) => {
 import { EventsPage, loader as eventsLoader } from "../pages/Event/EventsPage";
 
 export const routes = createBrowserRouter([
-{
-path: "/",
-element: <RouteLayout />,
-errorElement: <Error />,
-children: [
-{
-index: true,
-element: <HomePage />,
-},
-{
-path: "events",
-element: <EventsLayout />,
-children: [
-  {
-    index: true,
-    element: <EventsPage />,
-    loader: eventsLoader,	// <-- déclencheur de la fonction loader
-  },
-],
-},
-],
-},
+	{
+		path: "/",
+		element: <RouteLayout />,
+		errorElement: <Error />,
+		children: [
+		{ index: true, element: <HomePage /> },
+		{ path: "events", element: <EventsLayout />,
+			children: [
+			  {
+			    index: true,
+			    element: <EventsPage />,
+			    loader: eventsLoader,	// <-- déclencheur de la fonction loader
+			  },
+			],
+		}],
+	},
 ]);
 ````
 
@@ -492,7 +486,7 @@ export const RouteLayout = () => {
 <details>
 <summary>Gestion des erreurs avec le hook useRouterError</summary>
 
-Il est possible de gérer les erreurs depuis le fichier de routing via la propriété ````errorElement````. Chaque route peut avoir son propre élément, et c'est celui qui est le plus proche de la route qui sera déclenché.
+Il est possible de gérer les erreurs depuis le fichier de routing via la propriété ````errorElement````. Chaque route peut avoir son propre élément erreur, et c'est celui qui est le plus proche de la route qui sera déclenché.
 
 *routes.tsx*
 ````typescript
@@ -521,7 +515,7 @@ export const Error = () => {
 
   if (error.status === 500) {
 	// message = JSON.parse(error.data).message;	// voir methode 1 du loader ci-après : JSON.parse car l'erreur a été stringifier depuis le loader
-	message = error.data.message					// voir methode 2 du loader ci-après (à préférer)
+	message = error.data.message	// voir methode 2 du loader ci-après (à préférer)
   }
   if (error.status === 404) {
 	title = "404 - Not Found !";
@@ -566,7 +560,7 @@ export const loader = async () => {
 	//   status: 500,
 	// });
 	
-	// methode 2 - json
+	// methode 2 - json <---- BONNE PRATIQUE
 	throw json({ message: 'Could not fetch events' }, { status: 500 })
   } else {
 	return response;
@@ -637,9 +631,9 @@ Il est possible d'envoyer des données au backend via des *actions* déclenchée
 import { action as newEventAction } from '../Components/NewEvent.tsx';
 ...
 {
-path: "new",
-element: <NewEventPage />,
-action: newEventAction
+	path: "new",
+	element: <NewEventPage />,
+	action: newEventAction
 },
 ````
 
@@ -651,35 +645,35 @@ import { json, redirect } from "react-router-dom";
 import { EventForm } from "../../components/EventForm";
 
 export const NewEventPage = () => {
-return <EventForm />;
+	return <EventForm />;
 };
 
 /**
 * Fonction action
 **/
 export const action = async ({ request, params }) => {
-const data = await request.formData(); // récupère les données du formulaire concerné
+	const data = await request.formData(); // récupère les données du formulaire concerné
 
-const eventData = {
-title: data.get("title"),
-image: data.get("image"),
-date: data.get("date"),
-description: data.get("description"),
-};
-
-const response = await fetch("http://localhost:8080/events", {
-method: "POST",
-headers: {
-"Content-Type": "application/json",
-},
-body: JSON.stringify(eventData),
-});
-
-if (!response.ok) {
-throw json({ message: "Could not save event" }, { status: 500 });
-}
-
-return redirect("/events"); // redirige automatiquement sur la page après traitement
+	const eventData = {
+		title: data.get("title"),
+		image: data.get("image"),
+		date: data.get("date"),
+		description: data.get("description"),
+	};
+	
+	const response = await fetch("http://localhost:8080/events", {
+		method: "POST",
+		headers: {
+		"Content-Type": "application/json",
+		},
+		body: JSON.stringify(eventData),
+	});
+	
+	if (!response.ok) {
+		throw json({ message: "Could not save event" }, { status: 500 });
+	}
+	
+	return redirect("/events"); // redirige automatiquement sur la page après traitement
 };
 ````
 
@@ -694,27 +688,27 @@ import { Form, useNavigate } from "react-router-dom";
 export const EventForm = ({ method, event }) => {
 
 return (
-<Form method="post">
-<p>
-<label htmlFor="title">Title</label>
-<input
-  id="title"
-  type="text"
-  name="title"
-  required
-  defaultValue={event ? event.title : ""}
-/>
-</p>
-  
-<!-- etc ... -->
-  
-<div className={classes.actions}>
-<button type="button" onClick={cancelHandler}>
-  Cancel
-</button>
-<button>Save</button>
-</div>
-</Form>
+	<Form method="post">
+		<p>
+			<label htmlFor="title">Title</label>
+			<input
+			  id="title"
+			  type="text"
+			  name="title"
+			  required
+			  defaultValue={event ? event.title : ""}
+			/>
+		</p>
+	  
+		<!-- etc ... -->
+	  
+		<div className={classes.actions}>
+			<button type="button" onClick={cancelHandler}>
+			  Cancel
+			</button>
+			<button>Save</button>
+		</div>
+	</Form>
 );
 };
 
@@ -724,14 +718,14 @@ return (
 
 ### Spécificité des formulaires associés
 
-Il est nécessaire de remplacer les balises ````<form>```` classiques par des balises ````<Form method='post'>``` provenant de *react-router-dom*. Ensuite il faut s'assurer que chaque champ de saisi possède bien un attribut **name**
+Il est nécessaire de remplacer les balises ````<form>```` classiques par des balises ````<Form method='post'>```` provenant de *react-router-dom*. Ensuite il faut s'assurer que chaque champ de saisi possède bien un attribut **name**
 
 Ainsi, la sousmission du formulaire déclenchera automatiquement l'action associée à la **route active** et aura en paramètre tous les champs du formulaire.
 
 ### Déclenchement manuel d'une action associée à la route
 
 <details>
-<summary>Utilisation du hook useSubmit</summary>
+	<summary>Utilisation du hook useSubmit</summary>
 
 Il est aussi possible de déclencher une action **manuellement** via le hook ````useSubmit````qui prend en paramètre les éventuelles données à fournir à l'action, et les options.
 
@@ -741,17 +735,17 @@ Exemple : ici un bouton *delete* permet de supprimer un élément.
 import { Link, useSubmit } from "react-router-dom";
 
 function EventItem({ event }) {
-const submit = useSubmit();
-
-const  startDeleteHandler = () => {
-const proceed = window.confirm('Are you sure ?');
-
-if (!proceed) {
-return false;
-}
-
-submit(null, { method: 'DELETE' });
-}
+	const submit = useSubmit();
+	
+	const  startDeleteHandler = () => {
+		const proceed = window.confirm('Are you sure ?');
+		
+		if (!proceed) {
+			return false;
+		}
+		
+		submit(null, { method: 'DELETE' });
+	}
 }
 ````
 
@@ -759,26 +753,25 @@ submit(null, { method: 'DELETE' });
 ````typescript
 /** route.ts **/
 /*{
-index: true,
-element: <EventDetailPage />,
-action: deleteAction,
+	index: true,
+	element: <EventDetailPage />,
+	action: deleteAction,
 }*/
 		  
 export const deleteAction = async ({ request, params }) => {
-const eventId = params.id; // récupération du paramètre de la route
-
-const response = await fetch(`http://localhost:8080/events/${eventId}`, {
-method: request.method, // récupère la méthode spécifiée lors de l'appel. On pourrait aussi mettre 'DELETE'
-});
-
-if (!response.ok) {
-throw json(
-{ message: "Could not delete selected event." },
-{ status: 500 }
-);
-}
-
-redirect('/events');
+	const eventId = params.id; // récupération du paramètre de la route
+	
+	const response = await fetch(`http://localhost:8080/events/${eventId}`, {
+		method: request.method, // récupère la méthode spécifiée lors de l'appel. On pourrait aussi mettre 'DELETE'
+	});
+	
+	if (!response.ok) {
+		throw json({ message: "Could not delete selected event." },
+			{ status: 500 }
+		);
+	}
+	
+	redirect('/events');
 };
 ````
 
@@ -789,7 +782,7 @@ redirect('/events');
 ### Déclenchement manuel d'une action par un composant non attaché à cette route
 
 <details>
-<summary>Utilisation du hook useFetcher</summary>
+	<summary>Utilisation du hook useFetcher</summary>
 
 n'initialise pas de transition vers une autre route
 
@@ -797,9 +790,9 @@ n'initialise pas de transition vers une autre route
 ````typescript
 ...
 {
-path: "newsletter",
-element: <NewsletterPage />,
-action: newsletterAction,
+	path: "newsletter",
+	element: <NewsletterPage />,
+	action: newsletterAction,
 },
 ````
 
@@ -815,26 +808,25 @@ Pour ce faire, il faut utiliser le hook ````useFetcher```` et modifier la balise
 import { useFetcher } from "react-router-dom";
 
 export const NewsletterSignup = () => {
-const fetcher = useFetcher();
-
-/* === propriétés intéressantes === */
-// fetcher.state
-// fetcher.data
-
-return (
-<fetcher.Form
-method="post"
-action="/newsletter"
-className={classes.newsletter}
->
-<input
-type="email"
-placeholder="Sign up for newsletter..."
-aria-label="Sign up for newsletter"
-/>
-<button>Sign up</button>
-</fetcher.Form>
-);
+	const fetcher = useFetcher();
+	
+	/* === propriétés intéressantes === */
+	// fetcher.state
+	// fetcher.data
+	
+	return (
+		<fetcher.Form
+			method="post"
+			action="/newsletter"
+		>
+			<input
+				type="email"
+				placeholder="Sign up for newsletter..."
+				aria-label="Sign up for newsletter"
+			/>
+			<button>Sign up</button>
+		</fetcher.Form>
+	);
 };
 ````
 
@@ -848,48 +840,41 @@ aria-label="Sign up for newsletter"
 ## useActionData
 
 <details>
-<summary>Traitement des erreurs backend avec useActionData</summary>
+	<summary>Traitement des erreurs backend avec useActionData</summary>
 
 Ce hook permet de récupérer les éventuelles erreurs levées par le backend et d'y réagir
 
-Imaginons que le backend fournisse une api *POST* permettant d'avjouter un nouvel event avec un titre, image, date, description. Cette api contrôle la validité des champs avant d'ajouter la donnée en base. En cas de non conformité, elle retournera une erreur ````422```` avec un objet error contenant la liste des champs en défaut
+Imaginons que le backend fournisse une api *POST* permettant d'avjouter un nouvel event avec un titre, image, date, description. Cette api contrôle la validité des champs avant d'ajouter la donnée en base. 
+En cas de non conformité, elle retournera une erreur ````422```` avec un objet error contenant la liste des champs en défaut
 
 *structure de l'api*
 ````typescript
 router.post('/', async (req, res, next) => {
-const data = req.body;
-
-let errors = {};
-
-if (!isValidText(data.title)) {
-errors.title = 'Invalid title.';
-}
-
-if (!isValidText(data.description)) {
-errors.description = 'Invalid description.';
-}
-
-if (!isValidDate(data.date)) {
-errors.date = 'Invalid date.';
-}
-
-if (!isValidImageUrl(data.image)) {
-errors.image = 'Invalid image.';
-}
-
-if (Object.keys(errors).length > 0) {
-return res.status(422).json({
-message: 'Adding the event failed due to validation errors.',
-errors,
-});
-}
-
-try {
-await add(data);
-res.status(201).json({ message: 'Event saved.', event: data });
-} catch (error) {
-next(error);
-}
+	const data = req.body;
+	
+	let errors = {};
+	
+	if (!isValidText(data.title)) { errors.title = 'Invalid title.'; }
+	
+	if (!isValidText(data.description)) { errors.description = 'Invalid description.'; }
+	
+	if (!isValidDate(data.date)) { errors.date = 'Invalid date.'; }
+	
+	if (!isValidImageUrl(data.image)) { errors.image = 'Invalid image.'; }
+	
+	if (Object.keys(errors).length > 0) {
+		return res.status(422).json({
+			message: 'Adding the event failed due to validation errors.',
+			errors,
+		});
+	}
+	
+	try {
+		await add(data);
+		res.status(201).json({ message: 'Event saved.', event: data });
+	} catch (error) {
+		next(error);
+	}
 });
 ````
 
@@ -906,95 +891,89 @@ useNavigation,
 } from "react-router-dom";
 
 export const EventForm = ({ method, event }) => {
-const navigate = useNavigate();
+	const navigate = useNavigate();
+	
+	const navigation = useNavigation();
+	const isSubmitting = navigation.state === "submitting";
+	
+	const data = useActionData(); // <-- récupération des données de l'action la plus proche
 
-const navigation = useNavigation();
-const isSubmitting = navigation.state === "submitting";
-
-const data = useActionData(); // <-- récupération des données de l'action la plus proche
-
-function cancelHandler() {
-navigate("..");
-}
+const cancelHandler = () => { navigate(".."); }
 
 return (
-<Form method={method} className={classes.form}>
-{/* Traitement des erreurs de validation provenant du backend, récupérée par useActionData */}
-{data && data.errors && (
-<ul>
-  {Object.values(data.errors).map((err) => (
-    <li key={err}>{err}</li>
-  ))}
-</ul>
-)}
+	<Form method={method} className={classes.form}>
 
-<p>
-<label htmlFor="title">Title</label>
-<input
-  id="title"
-  type="text"
-  name="title"
-  required
-  defaultValue={event ? event.title : ""}
-/>
-</p>
-  
-  <!-- Autres champs ... -->
-  
-<div className={classes.actions}>
-<button type="button" disabled={isSubmitting} onClick={cancelHandler}>
-  Cancel
-</button>
-<button disabled={isSubmitting}>
-  {isSubmitting ? "Submitting..." : "Save"}
-</button>
-</div>
-</Form>
+		{/* Traitement des erreurs de validation provenant du backend, récupérée par useActionData */}
+	
+		{data && data.errors && (
+			<ul>
+			  {Object.values(data.errors).map((err) => (
+			    <li key={err}>{err}</li>
+			  ))}
+			</ul>
+		)}
+		
+		<p>
+		<label htmlFor="title">Title</label>
+		<input
+		  id="title"
+		  type="text"
+		  name="title"
+		  required
+		  defaultValue={event ? event.title : ""}
+		/>
+		</p>
+		  
+		<!-- Autres champs ... -->
+		  
+		<div className={classes.actions}>
+			<button type="button" disabled={isSubmitting} onClick={cancelHandler}>
+			  Cancel
+			</button>
+			<button disabled={isSubmitting}>
+			  {isSubmitting ? "Submitting..." : "Save"}
+			</button>
+		</div>
+	</Form>
 );
 };
 
 export const action = async ({ request, params }) => {
-const data = await request.formData(); // récupère les données du formulaire concerné
-
-const eventData = {
-title: data.get("title"),
-image: data.get("image"),
-date: data.get("date"),
-description: data.get("description"),
-};
-
-let url = "http://localhost:8080/events";
-
-if (request.method === "PATCH") {
-// test sur lowercase important !!
-url += `/${params.id}`;
-}
-
-const response = await fetch(url, {
-method: request.method, // props venant du composant EventForm
-headers: {
-"Content-Type": "application/json",
-},
-body: JSON.stringify(eventData),
-});
-
-// Voir projet backend code retour 442 si champs formulaire non valides
-if (response.status === 422) {
-return response;
-}
-
-if (!response.ok) {
-throw json({ message: "Could not save event" }, { status: 500 });
-}
-
-return redirect("/events"); // redirige automatiquement sur la page après traitement
+	const data = await request.formData(); // récupère les données du formulaire concerné
+	
+	const eventData = {
+		title: data.get("title"),
+		image: data.get("image"),
+		date: data.get("date"),
+		description: data.get("description"),
+	};
+	
+	let url = "http://localhost:8080/events";
+	
+	if (request.method === "PATCH") {
+		// test sur lowercase important !!
+		url += `/${params.id}`;
+	}
+	
+	const response = await fetch(url, {
+		method: request.method, // props venant du composant EventForm
+		headers: { "Content-Type": "application/json", },
+		body: JSON.stringify(eventData),
+	});
+	
+	// Voir projet backend code retour 442 si champs formulaire non valides
+	if (response.status === 422) { return response; }
+	
+	if (!response.ok) { throw json({ message: "Could not save event" }, { status: 500 }); }
+	
+	return redirect("/events"); // redirige automatiquement sur la page après traitement
 };
 ````
 
 **Les parties importantes** sont le feedback utilisateur géré avec 
 
 ````typescript
- {/* Traitement des erreurs de validation provenant du backend, récupérée par useActionData */}
+{/* Traitement des erreurs de validation provenant du backend, récupérée par useActionData */}
 {data && data.errors && (
 <ul>
   {Object.values(data.errors).map((err) => (
