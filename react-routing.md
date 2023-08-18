@@ -20,6 +20,8 @@
 
 ## Installation
 
+````npm i react-router-dom````
+
 ## Construction du routing
 
 <details>
