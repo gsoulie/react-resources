@@ -27,15 +27,15 @@
 <details>
 	<summary>Bonne pratique de construction du routage</summary>
  	
-	### Déclaration des route
-	
-	Une bonne pratique pour la construction du routage consiste à déclarer les routes dans un fichier séparé, en utilisant la fonction ````createBrowserRouter```` de react-router
-	
-	Voici un exemple complet de définition de routes :
-	
-	*route.ts*
-	````typescript
-	export const routes = createBrowserRouter([
+### Déclaration des route
+
+Une bonne pratique pour la construction du routage consiste à déclarer les routes dans un fichier séparé, en utilisant la fonction ````createBrowserRouter```` de react-router
+
+Voici un exemple complet de définition de routes :
+
+*route.ts*
+````typescript
+export const routes = createBrowserRouter([
   {
     path: "/",
     element: <RouteLayout />,
@@ -75,10 +75,10 @@
 ]);
 ````
 	
-	Le routage précédent n'est pas totalement optimisé, on peut voir que les routes */events/:id* et */events/id/edit* partagent la même racine */events/id* ainsi que le le même loader. On pourrait donc factoriser le code et rajouter un niveau d'imbrication :
+Le routage précédent n'est pas totalement optimisé, on peut voir que les routes */events/:id* et */events/id/edit* partagent la même racine */events/id* ainsi que le le même loader. On pourrait donc factoriser le code et rajouter un niveau d'imbrication :
 	
-	*route.ts*
-	````typescript
+*route.ts*
+````typescript
 	export const routes = createBrowserRouter([
 	  {
 		path: "/",
@@ -125,14 +125,14 @@
 		],
 	  },
 	]);
-	````
+````
+
+> **IMPORTANT** : en utilisant un loader partagé entre plusieurs routes, il faut spécifier un identifiant qui servira à récupérer les données avec ````const data = useRouteLoaderData("event-detail");```` et non plus avec ````const data = useLoaderData()````
 	
-	> **IMPORTANT** : en utilisant un loader partagé entre plusieurs routes, il faut spécifier un identifiant qui servira à récupérer les données avec ````const data = useRouteLoaderData("event-detail");```` et non plus avec ````const data = useLoaderData()````
-	
-	
-	### Routes imbriquées
-	
-	````typescript
+
+### Routes imbriquées
+
+````typescript
 	const router = createBrowserRouter([
 		{
 			path: '/',
@@ -146,24 +146,24 @@
 			element: <Admin />
 		}
 	])
-	````
-	
-	### Route par défaut
+````
 
-	La route par défaut (i.e '**' sous Angular) se définie par le chemin ````/*````. Tout comme Angular, cette route doit être la dernière spécifiée.
+### Route par défaut
 
-	````typescript
+La route par défaut (i.e '**' sous Angular) se définie par le chemin ````/*````. Tout comme Angular, cette route doit être la dernière spécifiée.
+
+````typescript
 	<Route path="/*" element={
 	  <h1>Erreur 404</h1>
 	} />
-	````
+````
 	
-	### Cablage du router
-	
-	Le router principal peut être ajouté soit dans le fichier **main.tsx** ou **App.tsx**
-	
-	*Intégration dans le App.tsx*
-	````typescript
+### Cablage du router
+
+Le router principal peut être ajouté soit dans le fichier **main.tsx** ou **App.tsx**
+
+*Intégration dans le App.tsx*
+````typescript
 	import { RouterProvider } from "react-router-dom";
 	import { routes } from "./routing/route";
 
@@ -172,39 +172,39 @@
 
 	  return <RouterProvider router={router}></RouterProvider>;
 	}
-	````
-	
-	*Intégration dans le main.tsx*
-	````typescript
-	````
-	
-	### Router Outlet
-	
-	Le dernier élément indispensable au routage est l'ajout de l'élément ````<Outlet />````
-	
-	*RouteLayout.tsx*
-	````typescript
-	import { Outlet } from "react-router-dom";
+````
 
-	export const RouteLayout = () => {
-	  return (
-		<>
-		  <MainNavigation />
-		  <Outlet />
-		</>
-	  );
-	};
-	````
-	
-	[Back to top](#routing)     
-	
+*Intégration dans le main.tsx*
+````typescript
+````
+
+### Router Outlet
+
+Le dernier élément indispensable au routage est l'ajout de l'élément ````<Outlet />````
+
+*RouteLayout.tsx*
+````typescript
+import { Outlet } from "react-router-dom";
+
+export const RouteLayout = () => {
+  return (
+	<>
+	  <MainNavigation />
+	  <Outlet />
+	</>
+  );
+};
+````
+
+[Back to top](#routing)     
+
 </details>
 
 
 ## Chemins absolus et chemins relatifs
 
 <details>
-	<summary>Comprendre les chemins absolus et relatifs</summary>
+<summary>Comprendre les chemins absolus et relatifs</summary>
 
 * chemins absolus : commençent par un "/"
 * chemins relatifs : ne commençent **pas** par un "/" est sont **concaténés à la route parent**
@@ -213,13 +213,13 @@
 ````typescript
 const router = createBrowserRouter([
 {
-	path: '/',
- 	element: <RootLayout />,
-	errorElement: <GlobalErrorPage />,
-	children: [
-		{ path: '/', element: <HomePage /> },
-		{ path: '/products', element: <Products />, errorElement: <ProductErrorPage /> }
-	]
+path: '/',
+element: <RootLayout />,
+errorElement: <GlobalErrorPage />,
+children: [
+	{ path: '/', element: <HomePage /> },
+	{ path: '/products', element: <Products />, errorElement: <ProductErrorPage /> }
+]
 }
 ])
 ````
@@ -228,14 +228,14 @@ const router = createBrowserRouter([
 ````typescript
 const router = createBrowserRouter([
 {
-	path: '/root',
- 	element: <RootLayout />,
-	errorElement: <GlobalErrorPage />,
-	children: [
-		{ path: '', element: <HomePage /> },
-		{ path: 'products', element: <Products />,
-		{ path: 'products/:id', element: <ProductsDetail /> }
-	]
+path: '/root',
+element: <RootLayout />,
+errorElement: <GlobalErrorPage />,
+children: [
+	{ path: '', element: <HomePage /> },
+	{ path: 'products', element: <Products />,
+	{ path: 'products/:id', element: <ProductsDetail /> }
+]
 }
 ])
 ````
@@ -255,14 +255,14 @@ En considérant le routage précédent :
 ````typescript
 const router = createBrowserRouter([
 {
-	path: '/root',
- 	element: <RootLayout />,
-	errorElement: <GlobalErrorPage />,
-	children: [
-		{ path: '', element: <HomePage /> },
-		{ path: 'products', element: <Products />,
-		{ path: 'products/:id', element: <ProductsDetail /> }
-	]
+path: '/root',
+element: <RootLayout />,
+errorElement: <GlobalErrorPage />,
+children: [
+	{ path: '', element: <HomePage /> },
+	{ path: 'products', element: <Products />,
+	{ path: 'products/:id', element: <ProductsDetail /> }
+]
 }
 ])
 ````
@@ -284,7 +284,7 @@ Le bouton Back nous ramène maintenant sur la route ````/products````
 ## Navigation avec Link et NavLink
 
 <details>
-  <summary>Navigation dans React</summary>
+<summary>Navigation dans React</summary>
 Tout comme Angular / Vue, utiliser une balise 
 
 ````html
@@ -298,11 +298,11 @@ Avec React Router on va donc utiliser l'élément ````<Link>````
 import { Route, Routes, Link } from 'react-router-dom';
 
 return (
-	<nav>
-		<Link to="/">Accueil</Link>&nbsp;|&nbsp;
-		<Link to="/users">Utilisateurs</Link>&nbsp;|&nbsp;
-		<Link to="/profile/1234545">Profil</Link>
-	</nav>
+<nav>
+	<Link to="/">Accueil</Link>&nbsp;|&nbsp;
+	<Link to="/users">Utilisateurs</Link>&nbsp;|&nbsp;
+	<Link to="/profile/1234545">Profil</Link>
+</nav>
 )
 ````
 
@@ -314,11 +314,11 @@ L'élément *NavLink* est **smiliaire** à l'élément *Link*, à la différence
 import { Route, Routes, NavLink  } from 'react-router-dom';
 
 return (
-	<nav>
-		<NavLink to="/" className={({isActive}) => (isActive ? 'activeLink' : undefined)} end="true">Accueil</NavLink>
-		<NavLink to="/users" className={({isActive}) => (isActive ? 'activeLink' : undefined)} end="true">Utilisateurs</NavLink>
-		<NavLink to="/profile/1234545" style={{({isActive}) => (isActive ? (color: 'red') : undefined)}}>Profil</NavLink>
-	</nav>
+<nav>
+	<NavLink to="/" className={({isActive}) => (isActive ? 'activeLink' : undefined)} end="true">Accueil</NavLink>
+	<NavLink to="/users" className={({isActive}) => (isActive ? 'activeLink' : undefined)} end="true">Utilisateurs</NavLink>
+	<NavLink to="/profile/1234545" style={{({isActive}) => (isActive ? (color: 'red') : undefined)}}>Profil</NavLink>
+</nav>
 )
 ````
 
@@ -331,255 +331,255 @@ return (
 ## Navigation par code avec useNavigate
 
 <details>
-	<summary>Utilisation du hook useNavigate</summary>
-	
-	````tsx
-	export default function Cart() {
-	  const navigate = useNavigate();
-	  
-	  return (
-		<div>
-		  <h3>Votre panier</h3>
-		  <button onClick={() => navigate('/')}>Retour accueil</button>
-		</div>
-	  )
-	}
-	````
-	
-	[Back to top](#routing)     
-	
+<summary>Utilisation du hook useNavigate</summary>
+
+````tsx
+export default function Cart() {
+  const navigate = useNavigate();
+  
+  return (
+	<div>
+	  <h3>Votre panier</h3>
+	  <button onClick={() => navigate('/')}>Retour accueil</button>
+	</div>
+  )
+}
+````
+
+[Back to top](#routing)     
+
 </details>
 
 ## Récupération des paramètres de route avec useParams
 
 <details>
-	<summary>Utilisation du hook useParams</summary>
-	
-	Voici comment récupérer le paramètre *id* de la route suivante : ````"/profile/:id"```` avec le hook *useParams*
-	
-	````typescript
-	import { useParams } from 'react-router-dom';	// <-- importer le hook useParams
+<summary>Utilisation du hook useParams</summary>
 
-	export default function Profile() {
-	  const routeParams = useParams();
+Voici comment récupérer le paramètre *id* de la route suivante : ````"/profile/:id"```` avec le hook *useParams*
 
-	  return (
-		<div>
-		  <h2>Votre profil</h2>
-		  <h4>Utilisateur N°#{ routeParams.id }</h4>
-		</div>
-	  )
-	}
-	````
-	
-	[Back to top](#routing)     
-	
+````typescript
+import { useParams } from 'react-router-dom';	// <-- importer le hook useParams
+
+export default function Profile() {
+  const routeParams = useParams();
+
+  return (
+	<div>
+	  <h2>Votre profil</h2>
+	  <h4>Utilisateur N°#{ routeParams.id }</h4>
+	</div>
+  )
+}
+````
+
+[Back to top](#routing)     
+
 </details>
 
 ## Chargement des data avec useLoaderData
 
 <details>
-	<summary>Utilisation du hook useLoaderData</summary>
-	
-	useLoaderData est un hook de React Router. Il permet de déclencher un chargement de data lors de l'activation d'une route. les fonctions loader sont chargées au moment où l'on commence à naviguer, et donc pas après que la page ait été rendue, mais **avant** qu'on arrive sur la parge
-	
-	Pour simplifier l'écriture d'un composant ayant un chargement de données dans son initialisation et par conséquent, se passer de l'utilisation d'un *useEffect*, il est possible de déclarer une fonction loader directement dans le composant (ou dans un service).
-	Cette fonction pourra ensuite être déclenchée directement dans le fichier de routing lors de la navigation vers ce composant.
-	
-	*EventPage.tsx*
-	````typescript
-	import EventsList from "../../components/EventsList";
-	import "./Event.css";
-	import { useLoaderData } from "react-router-dom";
+<summary>Utilisation du hook useLoaderData</summary>
 
-	export const EventsPage = () => {
-	  const data = useLoaderData();	// <-- récupérer le résultat de la fonction loader
-	  const fetchedEvents = data.events;
+useLoaderData est un hook de React Router. Il permet de déclencher un chargement de data lors de l'activation d'une route. les fonctions loader sont chargées au moment où l'on commence à naviguer, et donc pas après que la page ait été rendue, mais **avant** qu'on arrive sur la parge
 
-	  return (
-		<>
-		  <EventsList events={fetchedEvents} />
-		</>
-	  );
-	};
+Pour simplifier l'écriture d'un composant ayant un chargement de données dans son initialisation et par conséquent, se passer de l'utilisation d'un *useEffect*, il est possible de déclarer une fonction loader directement dans le composant (ou dans un service).
+Cette fonction pourra ensuite être déclenchée directement dans le fichier de routing lors de la navigation vers ce composant.
 
-	/**
-	 * Fonction loader : fait un appel http qui récupère les data ou retourne une erreur
-	 **/
-	export const loader = async ({ request, params }) => {
-	  // const eventId = params.id	// <-- récupérer l'éventuel paramètre de route
-	  
-	  const response = await fetch("http://localhost:8080/events");
+*EventPage.tsx*
+````typescript
+import EventsList from "../../components/EventsList";
+import "./Event.css";
+import { useLoaderData } from "react-router-dom";
 
-	  if (!response.ok) {
-		throw new Response(JSON.stringify({ message: "Something went wrong" }), {
-		  status: 500,
-		});
-	  } else {
-		return response;
-	  }
-	};
+export const EventsPage = () => {
+  const data = useLoaderData();	// <-- récupérer le résultat de la fonction loader
+  const fetchedEvents = data.events;
 
-	````
-	
-	> **Note** : la fonction ````loader = async ({ request, params })```` accepte 2 paramètres dont ````params```` qui permet de récupérer l'éventuel paramètre dynamique de la route. Car pour rappel, les hooks ne sont **pas accessibles** en dehors des composants. En l'occurrence une fonction loader n'est **pas** un composant react
-	
-	*routes.tsx*
-	````typescript
-	import { EventsPage, loader as eventsLoader } from "../pages/Event/EventsPage";
+  return (
+	<>
+	  <EventsList events={fetchedEvents} />
+	</>
+  );
+};
+
+/**
+ * Fonction loader : fait un appel http qui récupère les data ou retourne une erreur
+ **/
+export const loader = async ({ request, params }) => {
+  // const eventId = params.id	// <-- récupérer l'éventuel paramètre de route
+  
+  const response = await fetch("http://localhost:8080/events");
+
+  if (!response.ok) {
+	throw new Response(JSON.stringify({ message: "Something went wrong" }), {
+	  status: 500,
+	});
+  } else {
+	return response;
+  }
+};
+
+````
+
+> **Note** : la fonction ````loader = async ({ request, params })```` accepte 2 paramètres dont ````params```` qui permet de récupérer l'éventuel paramètre dynamique de la route. Car pour rappel, les hooks ne sont **pas accessibles** en dehors des composants. En l'occurrence une fonction loader n'est **pas** un composant react
+
+*routes.tsx*
+````typescript
+import { EventsPage, loader as eventsLoader } from "../pages/Event/EventsPage";
 
 export const routes = createBrowserRouter([
+{
+path: "/",
+element: <RouteLayout />,
+errorElement: <Error />,
+children: [
+{
+index: true,
+element: <HomePage />,
+},
+{
+path: "events",
+element: <EventsLayout />,
+children: [
   {
-    path: "/",
-    element: <RouteLayout />,
-    errorElement: <Error />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: "events",
-        element: <EventsLayout />,
-        children: [
-          {
-            index: true,
-            element: <EventsPage />,
-            loader: eventsLoader,	// <-- déclencheur de la fonction loader
-          },
-        ],
-      },
-    ],
+    index: true,
+    element: <EventsPage />,
+    loader: eventsLoader,	// <-- déclencheur de la fonction loader
   },
+],
+},
+],
+},
 ]);
-	````
-	
-	[Back to top](#routing)     
-	
+````
+
+[Back to top](#routing)     
+
 </details>
 
 ## Gérer le status de chargement avec useNavigation
 
 <details>
-	<summary>Utilisation du hook useNavigation</summary>
-	
-	Le hook *useNavigation* permet de récupérer entre autre le **state** (````state: "idle" | "loading" | "submitting"````) de la navigation en cours. Ceci nous permet de pouvoir afficher un feedback à l'utilisateur en fonction de ce state.
-	
-	````typescript
-	import { Outlet, useNavigation } from "react-router-dom";
+<summary>Utilisation du hook useNavigation</summary>
 
-	export const RouteLayout = () => {
-	  const navigation = useNavigation();
-	  return (
-		<>
-		  <MainNavigation />
-		  {navigation.state === "loading" && <p>Loading...</p>}
-		  <Outlet />
-		</>
-	  );
-	};
-	````
-	
-	[Back to top](#routing)     
-	
+Le hook *useNavigation* permet de récupérer entre autre le **state** (````state: "idle" | "loading" | "submitting"````) de la navigation en cours. Ceci nous permet de pouvoir afficher un feedback à l'utilisateur en fonction de ce state.
+
+````typescript
+import { Outlet, useNavigation } from "react-router-dom";
+
+export const RouteLayout = () => {
+  const navigation = useNavigation();
+  return (
+	<>
+	  <MainNavigation />
+	  {navigation.state === "loading" && <p>Loading...</p>}
+	  <Outlet />
+	</>
+  );
+};
+````
+
+[Back to top](#routing)     
+
 </details>
 
 ## Gestion des erreurs
 
 <details>
-	<summary>Gestion des erreurs avec le hook useRouterError</summary>
-	
-	Il est possible de gérer les erreurs depuis le fichier de routing via la propriété ````errorElement````. Chaque route peut avoir son propre élément, et c'est celui qui est le plus proche de la route qui sera déclenché.
-	
-	*routes.tsx*
-	````typescript
-	export const routes = createBrowserRouter([
-	{
-		path: "/",
-		element: <RouteLayout />,
-		errorElement: <Error />,	// <-- Elément error
-		children: [...]
-	})]
-	````
-	
-	> Bonne pratique : créer une page Error générique composée d'un composant layout gérant l'affichage de l'erreur (voir exemple ci-dessous)
-	
-	*Error.tsx*
-	````typescript
-	import React from "react";
-	import { PageContent } from "./PageContent";
-	import { useRouteError } from "react-router-dom";
+<summary>Gestion des erreurs avec le hook useRouterError</summary>
 
-	export const Error = () => {
-	  const error = useRouteError();	// <-- permet de récupérer les informations relatives à l'erreur levée durant le routage
+Il est possible de gérer les erreurs depuis le fichier de routing via la propriété ````errorElement````. Chaque route peut avoir son propre élément, et c'est celui qui est le plus proche de la route qui sera déclenché.
 
-	  let title = "An error occurred !";
-	  let message = "Something went wrong";
+*routes.tsx*
+````typescript
+export const routes = createBrowserRouter([
+{
+	path: "/",
+	element: <RouteLayout />,
+	errorElement: <Error />,	// <-- Elément error
+	children: [...]
+})]
+````
 
-	  if (error.status === 500) {
-		// message = JSON.parse(error.data).message;	// voir methode 1 du loader ci-après : JSON.parse car l'erreur a été stringifier depuis le loader
-		message = error.data.message					// voir methode 2 du loader ci-après (à préférer)
-	  }
-	  if (error.status === 404) {
-		title = "404 - Not Found !";
-		message = "Could not find resource or page !";
-	  }
-	  return (
-		<>
-		  <MainNavigation />
-		  <PageContent title={title}>
-			<p>{message}</p>
-		  </PageContent>
-		</>
-	  );
-	};
-	````
-	
-	*PageContent.tsx*
-	````typescript
-	export const PageContent = ({ title, children }) => {
-	  return (
-		<div>
-		  <h1>{title}</h1>
-		  {children}
-		</div>
-	  );
-	};
-	````
-	
-	
-	*Exemple de gestion d'erreur déclenchée dans le loader lors du routage*
-	````typescript
-	import { json } from "react-router-dom";
-	
-	export const loader = async () => {
-	  const response = await fetch("http://localhost:8080/events");
+> Bonne pratique : créer une page Error générique composée d'un composant layout gérant l'affichage de l'erreur (voir exemple ci-dessous)
 
-	  if (!response.ok) {
-		// --> Gestion de l'erreur remontée au router
-		
-		// methode 1 - Response
-		// throw new Response(JSON.stringify({ message: "Something went wrong" }), {
-		//   status: 500,
-		// });
-		
-		// methode 2 - json
-		throw json({ message: 'Could not fetch events' }, { status: 500 })
-	  } else {
-		return response;
-	  }
-	};
-	````
+*Error.tsx*
+````typescript
+import React from "react";
+import { PageContent } from "./PageContent";
+import { useRouteError } from "react-router-dom";
+
+export const Error = () => {
+  const error = useRouteError();	// <-- permet de récupérer les informations relatives à l'erreur levée durant le routage
+
+  let title = "An error occurred !";
+  let message = "Something went wrong";
+
+  if (error.status === 500) {
+	// message = JSON.parse(error.data).message;	// voir methode 1 du loader ci-après : JSON.parse car l'erreur a été stringifier depuis le loader
+	message = error.data.message					// voir methode 2 du loader ci-après (à préférer)
+  }
+  if (error.status === 404) {
+	title = "404 - Not Found !";
+	message = "Could not find resource or page !";
+  }
+  return (
+	<>
+	  <MainNavigation />
+	  <PageContent title={title}>
+		<p>{message}</p>
+	  </PageContent>
+	</>
+  );
+};
+````
+
+*PageContent.tsx*
+````typescript
+export const PageContent = ({ title, children }) => {
+  return (
+	<div>
+	  <h1>{title}</h1>
+	  {children}
+	</div>
+  );
+};
+````
+
+
+*Exemple de gestion d'erreur déclenchée dans le loader lors du routage*
+````typescript
+import { json } from "react-router-dom";
+
+export const loader = async () => {
+  const response = await fetch("http://localhost:8080/events");
+
+  if (!response.ok) {
+	// --> Gestion de l'erreur remontée au router
 	
-	[Back to top](#routing)     
+	// methode 1 - Response
+	// throw new Response(JSON.stringify({ message: "Something went wrong" }), {
+	//   status: 500,
+	// });
+	
+	// methode 2 - json
+	throw json({ message: 'Could not fetch events' }, { status: 500 })
+  } else {
+	return response;
+  }
+};
+````
+
+[Back to top](#routing)     
 
 </details>
 
 ## Informations sur la route avec useLocation
 
 <details>
-  <summary>Ajouter des informations dans la route</summary>
-	
+<summary>Ajouter des informations dans la route</summary>
+
 L'utilisation du hook **useLocation** de *react-router-dom* permet de récupérer certaines informations sur la route
 
 ````tsx
@@ -587,10 +587,10 @@ import React from 'react'
 import { useLocation } from 'react-router-dom';
 
 export default function Cart() {
-  const locationInfo = useLocation();
-  console.log(locationInfo);
-  
-  return ()
+const locationInfo = useLocation();
+console.log(locationInfo);
+
+return ()
 }
 ````
 
@@ -603,7 +603,7 @@ pathname: "/profile/1234545/cart"
 search: ""		// paramètres de requête ex avec '?param=valeur'
 state: null		// state passé en paramètre de navigation
 ````
-  
+
 [Back to top](#routing)     	
 
 </details>
@@ -611,10 +611,10 @@ state: null		// state passé en paramètre de navigation
 ## Route guards
 
 <details>
-  <summary>Gestion des guards</summary>
-	
-	// WORK IN PROGRESS...
-	
+<summary>Gestion des guards</summary>
+
+// WORK IN PROGRESS...
+
 [Back to top](#routing)     
 
 </details>
@@ -623,20 +623,20 @@ state: null		// state passé en paramètre de navigation
 ## Envoyer des data au router avec action
 
 <details>
-	<summary>Utilisation des router actions</summary>
-	
-	Il est possible d'envoyer des données au backend via des *actions* déclenchées lors du routage. On utilise pour cela le paramètre ````action```` des routes
-	
-	**Déclaration de l'action dans la route**
-	
-	*routes.tsx*
+<summary>Utilisation des router actions</summary>
+
+Il est possible d'envoyer des données au backend via des *actions* déclenchées lors du routage. On utilise pour cela le paramètre ````action```` des routes
+
+**Déclaration de l'action dans la route**
+
+*routes.tsx*
 ````typescript
 import { action as newEventAction } from '../Components/NewEvent.tsx';
 ...
- {
-	path: "new",
-	element: <NewEventPage />,
-	action: newEventAction
+{
+path: "new",
+element: <NewEventPage />,
+action: newEventAction
 },
 ````
 
@@ -648,35 +648,35 @@ import { json, redirect } from "react-router-dom";
 import { EventForm } from "../../components/EventForm";
 
 export const NewEventPage = () => {
-  return <EventForm />;
+return <EventForm />;
 };
 
 /**
- * Fonction action
- **/
+* Fonction action
+**/
 export const action = async ({ request, params }) => {
-  const data = await request.formData(); // récupère les données du formulaire concerné
+const data = await request.formData(); // récupère les données du formulaire concerné
 
-  const eventData = {
-    title: data.get("title"),
-    image: data.get("image"),
-    date: data.get("date"),
-    description: data.get("description"),
-  };
+const eventData = {
+title: data.get("title"),
+image: data.get("image"),
+date: data.get("date"),
+description: data.get("description"),
+};
 
-  const response = await fetch("http://localhost:8080/events", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(eventData),
-  });
+const response = await fetch("http://localhost:8080/events", {
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+},
+body: JSON.stringify(eventData),
+});
 
-  if (!response.ok) {
-    throw json({ message: "Could not save event" }, { status: 500 });
-  }
+if (!response.ok) {
+throw json({ message: "Could not save event" }, { status: 500 });
+}
 
-  return redirect("/events"); // redirige automatiquement sur la page après traitement
+return redirect("/events"); // redirige automatiquement sur la page après traitement
 };
 ````
 
@@ -690,29 +690,29 @@ import { Form, useNavigate } from "react-router-dom";
 
 export const EventForm = ({ method, event }) => {
 
-  return (
-    <Form method="post">
-      <p>
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          type="text"
-          name="title"
-          required
-          defaultValue={event ? event.title : ""}
-        />
-      </p>
-	  
-      <!-- etc ... -->
-	  
-      <div className={classes.actions}>
-        <button type="button" onClick={cancelHandler}>
-          Cancel
-        </button>
-        <button>Save</button>
-      </div>
-    </Form>
-  );
+return (
+<Form method="post">
+<p>
+<label htmlFor="title">Title</label>
+<input
+  id="title"
+  type="text"
+  name="title"
+  required
+  defaultValue={event ? event.title : ""}
+/>
+</p>
+  
+<!-- etc ... -->
+  
+<div className={classes.actions}>
+<button type="button" onClick={cancelHandler}>
+  Cancel
+</button>
+<button>Save</button>
+</div>
+</Form>
+);
 };
 
 ````
@@ -728,9 +728,9 @@ Ainsi, la sousmission du formulaire déclenchera automatiquement l'action associ
 ### Déclenchement manuel d'une action associée à la route
 
 <details>
-	<summary>Utilisation du hook useSubmit</summary>
-	
-	Il est aussi possible de déclencher une action **manuellement** via le hook ````useSubmit````qui prend en paramètre les éventuelles données à fournir à l'action, et les options.
+<summary>Utilisation du hook useSubmit</summary>
+
+Il est aussi possible de déclencher une action **manuellement** via le hook ````useSubmit````qui prend en paramètre les éventuelles données à fournir à l'action, et les options.
 
 Exemple : ici un bouton *delete* permet de supprimer un élément. 
 
@@ -738,17 +738,17 @@ Exemple : ici un bouton *delete* permet de supprimer un élément.
 import { Link, useSubmit } from "react-router-dom";
 
 function EventItem({ event }) {
-  const submit = useSubmit();
+const submit = useSubmit();
 
-  const  startDeleteHandler = () => {
-    const proceed = window.confirm('Are you sure ?');
+const  startDeleteHandler = () => {
+const proceed = window.confirm('Are you sure ?');
 
-    if (!proceed) {
-      return false;
-    }
+if (!proceed) {
+return false;
+}
 
-    submit(null, { method: 'DELETE' });
-  }
+submit(null, { method: 'DELETE' });
+}
 }
 ````
 
@@ -756,26 +756,26 @@ function EventItem({ event }) {
 ````typescript
 /** route.ts **/
 /*{
-	index: true,
-	element: <EventDetailPage />,
-	action: deleteAction,
+index: true,
+element: <EventDetailPage />,
+action: deleteAction,
 }*/
-			  
+		  
 export const deleteAction = async ({ request, params }) => {
-  const eventId = params.id; // récupération du paramètre de la route
+const eventId = params.id; // récupération du paramètre de la route
 
-  const response = await fetch(`http://localhost:8080/events/${eventId}`, {
-    method: request.method, // récupère la méthode spécifiée lors de l'appel. On pourrait aussi mettre 'DELETE'
-  });
+const response = await fetch(`http://localhost:8080/events/${eventId}`, {
+method: request.method, // récupère la méthode spécifiée lors de l'appel. On pourrait aussi mettre 'DELETE'
+});
 
-  if (!response.ok) {
-    throw json(
-      { message: "Could not delete selected event." },
-      { status: 500 }
-    );
-  }
-  
-  redirect('/events');
+if (!response.ok) {
+throw json(
+{ message: "Could not delete selected event." },
+{ status: 500 }
+);
+}
+
+redirect('/events');
 };
 ````
 
@@ -786,55 +786,55 @@ export const deleteAction = async ({ request, params }) => {
 ### Déclenchement manuel d'une action par un composant non attaché à cette route
 
 <details>
-	<summary>Utilisation du hook useFetcher</summary>
-	
-	n'initialise pas de transition vers une autre route
-	
-	*routes.tsx*
-	````typescript
-	...
-	{
-        path: "newsletter",
-        element: <NewsletterPage />,
-        action: newsletterAction,
-      },
-	````
-	
-	Soit le composant suivant, intégré à la fois sur la page *NewsletterPage* (dont l'action *newsletterAction* est associée à la route), et également intégré dans le menu de navigation global de l'application.
-	
-	Dans le cas d'une sousmission du formulaire via le composant intégré dans la navigation générale de l'application, nous devons pouvoir déclencher l'action ````newsletterAction```` depuis une route totalement différente de celle associée à l'action, ici ````/newsletter````.
-	Pour ce faire, il faut utiliser le hook ````useFetcher```` et modifier la balise ````<form>````par ````<fetcher.Form action="/newsletter" method="post">````.
-	
-	> note : En utilisant ````<Form action="/newsletter" method="post">````, la sousmission entrainerait un déclenchement du routage vers la route ````/newsletter````, ce qui n'est pas souhaitable dans le cas d'une utilisation de l'action depuis une autre route, on ne souhaite pas changer de page.
-	
-	*NewsletterSignup.tsx*
-	````typescript
-	import { useFetcher } from "react-router-dom";
+<summary>Utilisation du hook useFetcher</summary>
+
+n'initialise pas de transition vers une autre route
+
+*routes.tsx*
+````typescript
+...
+{
+path: "newsletter",
+element: <NewsletterPage />,
+action: newsletterAction,
+},
+````
+
+Soit le composant suivant, intégré à la fois sur la page *NewsletterPage* (dont l'action *newsletterAction* est associée à la route), et également intégré dans le menu de navigation global de l'application.
+
+Dans le cas d'une sousmission du formulaire via le composant intégré dans la navigation générale de l'application, nous devons pouvoir déclencher l'action ````newsletterAction```` depuis une route totalement différente de celle associée à l'action, ici ````/newsletter````.
+Pour ce faire, il faut utiliser le hook ````useFetcher```` et modifier la balise ````<form>````par ````<fetcher.Form action="/newsletter" method="post">````.
+
+> note : En utilisant ````<Form action="/newsletter" method="post">````, la sousmission entrainerait un déclenchement du routage vers la route ````/newsletter````, ce qui n'est pas souhaitable dans le cas d'une utilisation de l'action depuis une autre route, on ne souhaite pas changer de page.
+
+*NewsletterSignup.tsx*
+````typescript
+import { useFetcher } from "react-router-dom";
 
 export const NewsletterSignup = () => {
-  const fetcher = useFetcher();
+const fetcher = useFetcher();
 
-  /* === propriétés intéressantes === */
-  // fetcher.state
-  // fetcher.data
+/* === propriétés intéressantes === */
+// fetcher.state
+// fetcher.data
 
-  return (
-    <fetcher.Form
-      method="post"
-      action="/newsletter"
-      className={classes.newsletter}
-    >
-      <input
-        type="email"
-        placeholder="Sign up for newsletter..."
-        aria-label="Sign up for newsletter"
-      />
-      <button>Sign up</button>
-    </fetcher.Form>
-  );
+return (
+<fetcher.Form
+method="post"
+action="/newsletter"
+className={classes.newsletter}
+>
+<input
+type="email"
+placeholder="Sign up for newsletter..."
+aria-label="Sign up for newsletter"
+/>
+<button>Sign up</button>
+</fetcher.Form>
+);
 };
-	````
-	
+````
+
 </details>
 
 [Back to top](#routing)     
@@ -845,171 +845,171 @@ export const NewsletterSignup = () => {
 ## useActionData
 
 <details>
-	<summary>Traitement des erreurs backend avec useActionData</summary>
-	
-	Ce hook permet de récupérer les éventuelles erreurs levées par le backend et d'y réagir
-	
-	Imaginons que le backend fournisse une api *POST* permettant d'avjouter un nouvel event avec un titre, image, date, description. Cette api contrôle la validité des champs avant d'ajouter la donnée en base. En cas de non conformité, elle retournera une erreur ````422```` avec un objet error contenant la liste des champs en défaut
-	
-	*structure de l'api*
-	````typescript
-	router.post('/', async (req, res, next) => {
-  const data = req.body;
+<summary>Traitement des erreurs backend avec useActionData</summary>
 
-  let errors = {};
+Ce hook permet de récupérer les éventuelles erreurs levées par le backend et d'y réagir
 
-  if (!isValidText(data.title)) {
-    errors.title = 'Invalid title.';
-  }
+Imaginons que le backend fournisse une api *POST* permettant d'avjouter un nouvel event avec un titre, image, date, description. Cette api contrôle la validité des champs avant d'ajouter la donnée en base. En cas de non conformité, elle retournera une erreur ````422```` avec un objet error contenant la liste des champs en défaut
 
-  if (!isValidText(data.description)) {
-    errors.description = 'Invalid description.';
-  }
+*structure de l'api*
+````typescript
+router.post('/', async (req, res, next) => {
+const data = req.body;
 
-  if (!isValidDate(data.date)) {
-    errors.date = 'Invalid date.';
-  }
+let errors = {};
 
-  if (!isValidImageUrl(data.image)) {
-    errors.image = 'Invalid image.';
-  }
+if (!isValidText(data.title)) {
+errors.title = 'Invalid title.';
+}
 
-  if (Object.keys(errors).length > 0) {
-    return res.status(422).json({
-      message: 'Adding the event failed due to validation errors.',
-      errors,
-    });
-  }
+if (!isValidText(data.description)) {
+errors.description = 'Invalid description.';
+}
 
-  try {
-    await add(data);
-    res.status(201).json({ message: 'Event saved.', event: data });
-  } catch (error) {
-    next(error);
-  }
+if (!isValidDate(data.date)) {
+errors.date = 'Invalid date.';
+}
+
+if (!isValidImageUrl(data.image)) {
+errors.image = 'Invalid image.';
+}
+
+if (Object.keys(errors).length > 0) {
+return res.status(422).json({
+message: 'Adding the event failed due to validation errors.',
+errors,
 });
-	````
-	
-	Notre frontend expose le formulaire suivant :
-	
-	````typescript
-	import {
-  Form,
-  json,
-  redirect,
-  useActionData,
-  useNavigate,
-  useNavigation,
+}
+
+try {
+await add(data);
+res.status(201).json({ message: 'Event saved.', event: data });
+} catch (error) {
+next(error);
+}
+});
+````
+
+Notre frontend expose le formulaire suivant :
+
+````typescript
+import {
+Form,
+json,
+redirect,
+useActionData,
+useNavigate,
+useNavigation,
 } from "react-router-dom";
 
 export const EventForm = ({ method, event }) => {
-  const navigate = useNavigate();
+const navigate = useNavigate();
 
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+const navigation = useNavigation();
+const isSubmitting = navigation.state === "submitting";
 
-  const data = useActionData(); // <-- récupération des données de l'action la plus proche
+const data = useActionData(); // <-- récupération des données de l'action la plus proche
 
-  function cancelHandler() {
-    navigate("..");
-  }
+function cancelHandler() {
+navigate("..");
+}
 
-  return (
-    <Form method={method} className={classes.form}>
-      {/* Traitement des erreurs de validation provenant du backend, récupérée par useActionData */}
-      {data && data.errors && (
-        <ul>
-          {Object.values(data.errors).map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-      )}
+return (
+<Form method={method} className={classes.form}>
+{/* Traitement des erreurs de validation provenant du backend, récupérée par useActionData */}
+{data && data.errors && (
+<ul>
+  {Object.values(data.errors).map((err) => (
+    <li key={err}>{err}</li>
+  ))}
+</ul>
+)}
 
-      <p>
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          type="text"
-          name="title"
-          required
-          defaultValue={event ? event.title : ""}
-        />
-      </p>
-	  
-	  <!-- Autres champs ... -->
-	  
-      <div className={classes.actions}>
-        <button type="button" disabled={isSubmitting} onClick={cancelHandler}>
-          Cancel
-        </button>
-        <button disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Save"}
-        </button>
-      </div>
-    </Form>
-  );
+<p>
+<label htmlFor="title">Title</label>
+<input
+  id="title"
+  type="text"
+  name="title"
+  required
+  defaultValue={event ? event.title : ""}
+/>
+</p>
+  
+  <!-- Autres champs ... -->
+  
+<div className={classes.actions}>
+<button type="button" disabled={isSubmitting} onClick={cancelHandler}>
+  Cancel
+</button>
+<button disabled={isSubmitting}>
+  {isSubmitting ? "Submitting..." : "Save"}
+</button>
+</div>
+</Form>
+);
 };
 
 export const action = async ({ request, params }) => {
-  const data = await request.formData(); // récupère les données du formulaire concerné
+const data = await request.formData(); // récupère les données du formulaire concerné
 
-  const eventData = {
-    title: data.get("title"),
-    image: data.get("image"),
-    date: data.get("date"),
-    description: data.get("description"),
-  };
-
-  let url = "http://localhost:8080/events";
-
-  if (request.method === "PATCH") {
-    // test sur lowercase important !!
-    url += `/${params.id}`;
-  }
-
-  const response = await fetch(url, {
-    method: request.method, // props venant du composant EventForm
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(eventData),
-  });
-
-  // Voir projet backend code retour 442 si champs formulaire non valides
-  if (response.status === 422) {
-    return response;
-  }
-
-  if (!response.ok) {
-    throw json({ message: "Could not save event" }, { status: 500 });
-  }
-
-  return redirect("/events"); // redirige automatiquement sur la page après traitement
+const eventData = {
+title: data.get("title"),
+image: data.get("image"),
+date: data.get("date"),
+description: data.get("description"),
 };
-	````
-	
-	**Les parties importantes** sont le feedback utilisateur géré avec 
-	
-	````typescript
-	 {/* Traitement des erreurs de validation provenant du backend, récupérée par useActionData */}
-      {data && data.errors && (
-        <ul>
-          {Object.values(data.errors).map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-      )}
-	````
-	  
-	Ainsi que l'interception de l'erreur ````422```` dans l'action 
-	
-	````typescript
-	 // Voir projet backend code retour 442 si champs formulaire non valides
-	  if (response.status === 422) {
-		return response;
-	  }
-	````
-	
+
+let url = "http://localhost:8080/events";
+
+if (request.method === "PATCH") {
+// test sur lowercase important !!
+url += `/${params.id}`;
+}
+
+const response = await fetch(url, {
+method: request.method, // props venant du composant EventForm
+headers: {
+"Content-Type": "application/json",
+},
+body: JSON.stringify(eventData),
+});
+
+// Voir projet backend code retour 442 si champs formulaire non valides
+if (response.status === 422) {
+return response;
+}
+
+if (!response.ok) {
+throw json({ message: "Could not save event" }, { status: 500 });
+}
+
+return redirect("/events"); // redirige automatiquement sur la page après traitement
+};
+````
+
+**Les parties importantes** sont le feedback utilisateur géré avec 
+
+````typescript
+ {/* Traitement des erreurs de validation provenant du backend, récupérée par useActionData */}
+{data && data.errors && (
+<ul>
+  {Object.values(data.errors).map((err) => (
+    <li key={err}>{err}</li>
+  ))}
+</ul>
+)}
+````
+  
+Ainsi que l'interception de l'erreur ````422```` dans l'action 
+
+````typescript
+ // Voir projet backend code retour 442 si champs formulaire non valides
+  if (response.status === 422) {
+	return response;
+  }
+````
+
 </details>
 
 [Back to top](#routing)     
