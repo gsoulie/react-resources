@@ -230,16 +230,16 @@ const router = createBrowserRouter([
 *Chemins relatifs*
 ````typescript
 const router = createBrowserRouter([
-{
-path: '/root',
-element: <RootLayout />,
-errorElement: <GlobalErrorPage />,
-children: [
-	{ path: '', element: <HomePage /> },
-	{ path: 'products', element: <Products />,
-	{ path: 'products/:id', element: <ProductsDetail /> }
-]
-}
+	{
+		path: '/root',
+		element: <RootLayout />,
+		errorElement: <GlobalErrorPage />,
+		children: [
+			{ path: '', element: <HomePage /> },
+			{ path: 'products', element: <Products />,
+			{ path: 'products/:id', element: <ProductsDetail /> }
+		]
+	}
 ])
 ````
 
@@ -257,16 +257,16 @@ En considérant le routage précédent :
 
 ````typescript
 const router = createBrowserRouter([
-{
-path: '/root',
-element: <RootLayout />,
-errorElement: <GlobalErrorPage />,
-children: [
-	{ path: '', element: <HomePage /> },
-	{ path: 'products', element: <Products />,
-	{ path: 'products/:id', element: <ProductsDetail /> }
-]
-}
+	{
+		path: '/root',
+		element: <RootLayout />,
+		errorElement: <GlobalErrorPage />,
+		children: [
+			{ path: '', element: <HomePage /> },
+			{ path: 'products', element: <Products />,
+			{ path: 'products/:id', element: <ProductsDetail /> }
+		]
+	}
 ])
 ````
 
