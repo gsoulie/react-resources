@@ -27,7 +27,7 @@
 <details>
 	<summary>Bonne pratique de construction du routage</summary>
  	
-### Déclaration des route
+### Déclaration des routes
 
 Une bonne pratique pour la construction du routage consiste à déclarer les routes dans un fichier séparé, en utilisant la fonction ````createBrowserRouter```` de react-router
 
