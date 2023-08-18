@@ -26,8 +26,8 @@
 
 <details>
 	<summary>Bonne pratique de construction du routage</summary>
-	
-	### Déclaration des routes
+ 	
+	### Déclaration des route
 	
 	Une bonne pratique pour la construction du routage consiste à déclarer les routes dans un fichier séparé, en utilisant la fonction ````createBrowserRouter```` de react-router
 	
@@ -73,7 +73,7 @@
     ],
   },
 ]);
-	````
+````
 	
 	Le routage précédent n'est pas totalement optimisé, on peut voir que les routes */events/:id* et */events/id/edit* partagent la même racine */events/id* ainsi que le le même loader. On pourrait donc factoriser le code et rajouter un niveau d'imbrication :
 	
