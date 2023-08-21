@@ -16,7 +16,7 @@
 * [Route guards](#route-guards)    
 * [Lazy-loading](#lazy--loading)    
 * [Envoyer des data au router avec action](#envoyer-des-data-au-router-avec-action)
-* [Déclenchement manuel d'une action associée à une route avec useSubmit](#déclenchement-manuel-d--une-action-associée-à-la-route)
+* [Déclenchement manuel d'une action associée à une route avec useSubmit](#déclenchement-manuel-dune-action-associée-à-la-route)
 * [useActionData](#useactiondata)    
 * [Projet complet]()      
 ## Installation
