@@ -17,8 +17,11 @@
 * [Lazy-loading](#lazy--loading)    
 * [Envoyer des data au router avec action](#envoyer-des-data-au-router-avec-action)
 * [Déclenchement manuel d'une action associée à une route avec useSubmit](#déclenchement-manuel-dune-action-associée-à-la-route)
-* [Déclenchement manuel d'une action par un composant non attaché à cette route avec useFetcher](#déclenchement-manuel-dune-action-par-un-composant-non-attaché-à-cette-route)      
-* [useActionData](#useactiondata)    
+* [Déclenchement manuel d'une action par un composant non attaché à cette route avec useFetcher](#déclenchement-manuel-dune-action-par-un-composant-non-attaché-à-cette-route)
+* [Déclencher l'action d'une route sans passer par le routing](#déclencher-laction-dune-route-sans-passer-par-le-routing)       
+* [useActionData](#useactiondata)
+* [Authentification simple avec token](#authentification-simple-avec-token)
+* [Ajout Bearer dans url](#ajout-bearer-dans-url)     
 * [Projet complet]()      
 ## Installation
 
@@ -962,6 +965,51 @@ export const NewsletterSignup = () => {
 	);
 };
 ````
+</details>
+
+## Déclencher l'action d'une route sans passer par le routing
+
+<details>
+	<summary>Exemple de bonne pratique avec un bouton logout</summary>
+
+Cet exemple montre la gestion du logout en utilisant les *route actions*
+
+Le composant *Logout* est vide, il a pour rôle de vider le token dans le local storage et de re-router vers la route principale.
+
+*Logout.tsx*
+````typescript
+import { redirect } from "react-router-dom";
+import { KEY_TOKEN } from "../Util/auth";
+
+export function action() {
+  localStorage.removeItem(KEY_TOKEN);
+  return redirect("/");
+}
+
+````
+
+Dans le fichier *routes.ts* on ajoute une route sans composant, avec pour action, l'action de logout
+
+*routes.ts*
+````typescript
+{ path: "logout", action: logoutAction },
+````
+
+On peut ensuite câbler l'action de logout depuis un bouton du menu principal en utilisant un ````<Form>````
+
+````typescript
+import { Form } from "react-router-dom";
+
+export const MenuComponent = () => {
+
+return(
+	<Form action="/logout" method="post">
+		<button>Logout</button>
+	</Form>
+)}
+````
+
+[Back to top](#routing)     
 
 </details>
 
@@ -1123,4 +1171,195 @@ Ainsi que l'interception de l'erreur ````422```` dans l'action
 
 </details>
 
+## Authentification simple avec token
+
+<details>
+	<summary>Authentification simple avec token</summary>
+	
+Dans cet exemple, on déclenche une *action* d'authentification sur la route ````/auth```` via un formulaire d'authentification. Pour savoir si le formulaire est mode mode 'login' ou 'signup', on contrôle les paramètres de l'URL ````/auth?mode=login```` ou ````/auth?mode=signup````
+	
+*Authentication.ts*
+````tsx
+// ... Component stuff
+return (<AuthForm />)
+
+/**
+ * Action signup / login déclenchée par le routage du formulaire d'authentification
+ */
+export const authAction = async ({ request, params }) => {
+  const authFormData = await request.formData(); // récupération des données du formulaire d'authentification
+
+  const authData = {
+    email: authFormData.get("email"),
+    password: authFormData.get("password"),
+  };
+
+  const searchParams = new URL(request.url).searchParams;
+  const mode = searchParams.get("mode") || "login";
+
+  if (mode !== "login" && mode !== "signup") {
+    throw json({ message: "Unssuported mode" }, { status: 422 });
+  }
+
+  const response = await fetch(`http://localhost:8080/${mode}`, { // AUTHENTIFICATION
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(authData),
+  });
+
+  if (response.status === 422 || response.status === 401) {
+    return response;
+  }
+
+  if (!response) {
+    throw json({ message: "Could not authenticate user" }, { status: 500 });
+  }
+
+  // manage token
+  const resData = await response.json();
+  const token = resData.token;
+  localStorage.setItem(KEY_TOKEN, token);
+  const expiration = new Date(); // Enregistrer la date d'expiration du token, ici (date + 1h)
+  expiration.setHours(expiration.getHours() + 1);
+  localStorage.setItem(KEY_TOKEN_EXPIRATION, expiration.toISOString());
+
+  return redirect("/");
+};````
+
+*routes.ts*
+````tsx
+// Other routes...
+{ path: "auth", element: <AuthenticationPage />, action: authAction },
+````
+
+Formulaire d'authentification avec gestion des erreurs
+
+*AuthForm.tsx*
+````tsx
+import {  Form,  Link,  useActionData,  useNavigation,  useSearchParams,} from "react-router-dom";
+
+function AuthForm() {
+  const data = useActionData();	// récupérer les données de la réponse http (pour afficher le détail de l'erreur par ex)
+  const navigation = useNavigation();
+
+  const [searchParams] = useSearchParams();	// paramètre de la route, vient-on de /auth?mode=login ou /aut?mode=signup
+  const isLoginMode = searchParams.get("mode") === "login";
+
+  const isSubmitting = navigation.state === "submitting";	// feedback utilisateur
+
+  return (
+    <>
+      <Form method="post" className={classes.form}>
+        <h1>{isLoginMode ? "Log in" : "Create a new user"}</h1>
+        {data && data.errors && (
+          <ul>
+            {Object.values(data.errors).map((err) => (
+              <li key={err}>{err}</li>
+            ))}
+          </ul>
+        )}
+        {data && data.message && <p>{data.message}</p>}
+
+        <p>
+          <label htmlFor="email">Email</label>
+          <input id="email" type="email" name="email" required />
+        </p>
+        <p>
+          <label htmlFor="image">Password</label>
+          <input id="password" type="password" name="password" required />
+        </p>
+        <div className={classes.actions}>
+          <Link to={`?mode=${isLoginMode ? "signup" : "login"}`}>
+            {isLoginMode ? "Create new user" : "Login"}
+          </Link>
+          <button disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Save"}
+          </button>
+        </div>
+      </Form>
+    </>
+  );
+}
+
+export default AuthForm;
+````	
 [Back to top](#routing)     
+
+### Service Auth.ts
+
+````typescript
+import { redirect } from "react-router-dom";
+
+export const KEY_TOKEN = "token";
+export const KEY_TOKEN_EXPIRATION = "token_expiration";
+
+//export getAuthToken = () => {
+export function getAuthToken() {
+  const token = localStorage.getItem(KEY_TOKEN);
+
+  if (!token) { return null; }
+
+  const tokenDuration = getTokenDuration();
+  console.log(tokenDuration);
+
+  if (tokenDuration < 0) { return "EXPIRED"; }
+
+  return token;
+}
+
+export function tokenLoader() { return getAuthToken(); }
+
+export function getTokenDuration() {
+  const storedDate = localStorage.getItem(KEY_TOKEN_EXPIRATION);
+  const expirationDate = new Date(storedDate);
+  const now = new Date();
+  const duration = expirationDate.getTime() - now.getTime();
+  return duration;
+}
+
+/**
+ * Route GUARD
+ * @returns
+ */
+export function checkAuthLoader() {
+  // this function will be added in the next lecture
+  // make sure it looks like this in the end
+  const token = getAuthToken();
+
+  if (!token) {
+    return redirect("/auth");
+  }
+
+  return null; // this is missing in the next lecture video and should be added by you
+}
+
+export function logout() {
+  localStorage.removeItem(KEY_TOKEN);
+  localStorage.removeItem(KEY_TOKEN_EXPIRATION);
+}
+
+````
+[Back to top](#routing)     
+
+</details>
+
+## Ajout Bearer dans url
+
+<details>
+	<summary>Gérer les entêtes Http</summary>
+	
+````typescript
+const response = await fetch("http://localhost:8080/events/" + eventId, {
+    headers: {
+      Authorization: `Bearer ${getAuthToken()}`,
+    },
+    method: request.method,
+});
+````
+
+[Back to top](#routing)     
+
+</details>
+
