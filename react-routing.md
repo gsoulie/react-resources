@@ -15,7 +15,6 @@
 * [Gestion des erreurs](#gestion-des-erreurs)     
 * [Informations sur la route avec useLocation](#informations-sur-la-route-avec-uselocation)    
 * [Route guards](#route-guards)    
-* [Lazy-loading](#lazy--loading)    
 * [Envoyer des data au router avec action](#envoyer-des-data-au-router-avec-action)
 * [Déclenchement manuel d'une action associée à une route avec useSubmit](#déclenchement-manuel-dune-action-associée-à-la-route)
 * [Déclenchement manuel d'une action par un composant non attaché à cette route avec useFetcher](#déclenchement-manuel-dune-action-par-un-composant-non-attaché-à-cette-route)
@@ -1434,7 +1433,7 @@ export const router = createBrowserRouter([
 ]);
 ````
 
-<img src="https://img.shields.io/badge/Bonne%20pratique?logo=LOGO"> : le code suivant ne suffit pas à faire du lazy-loading. En effet, le code suivant ne retourne pas un composant fonctionnel, mais une promise !
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : le code suivant ne suffit pas à faire du lazy-loading. En effet, le code suivant ne retourne pas un composant fonctionnel, mais une promise !
 
 ````typescript
 const BlogPage = () => import('./pages/Blog'); 
