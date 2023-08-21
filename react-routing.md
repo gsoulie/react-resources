@@ -390,8 +390,8 @@ Cette fonction pourra ensuite être déclenchée directement dans le fichier de 
 
 <img src="https://img.shields.io/badge/A%20RETENIR-DD0031.svg?logo=LOGO">
 
-````useLoaderData() // Utiliser les données du loader de la route actuelle uniquement````       
-````useRouteLoaderData('routeId')	// Utiliser les données du loader de la route correspondante à l'id spécifié````      
+* ````useLoaderData()```` Utiliser les données du loader de la **route actuelle uniquement**     
+* ````useRouteLoaderData('routeId')```` Utiliser les données du loader de la **route correspondante à l'id spécifié**            
 
 *EventPage.tsx*
 ````typescript
@@ -575,7 +575,7 @@ export const routes = createBrowserRouter([
 })]
 ````
 
-> Bonne pratique : créer une page Error générique composée d'un composant layout gérant l'affichage de l'erreur (voir exemple ci-dessous)
+<img src="https://img.shields.io/badge/Bonne%20pratique?logo=LOGO"> : créer une page Error générique composée d'un composant layout gérant l'affichage de l'erreur (voir exemple ci-dessous)
 
 *Error.tsx*
 ````typescript
