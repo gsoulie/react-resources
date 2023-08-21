@@ -462,6 +462,7 @@ export const routes = createBrowserRouter([
 
 Le hook *useNavigation* permet de récupérer entre autre le **state** (````state: "idle" | "loading" | "submitting"````) de la navigation en cours. Ceci nous permet de pouvoir afficher un feedback à l'utilisateur en fonction de ce state.
 
+*Exemple 1*
 ````typescript
 import { Outlet, useNavigation } from "react-router-dom";
 
@@ -475,6 +476,30 @@ export const RouteLayout = () => {
 	</>
   );
 };
+````
+
+*Exemple 2*
+````typescript
+function AuthForm() {
+  const navigation = useNavigation();
+
+  const [searchParams] = useSearchParams();
+  const isLoginMode = searchParams.get("mode") === "login";
+
+  const isSubmitting = navigation.state === "submitting";
+
+  return (
+    <>
+      <Form method="post" className={classes.form}>
+        <!-- form inputs -->
+
+        <button disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Save"}
+        </button>
+      </Form>
+    </>
+  );
+}
 ````
 
 [Back to top](#routing)     
