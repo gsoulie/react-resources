@@ -1226,7 +1226,8 @@ export const authAction = async ({ request, params }) => {
   localStorage.setItem(KEY_TOKEN_EXPIRATION, expiration.toISOString());
 
   return redirect("/");
-};````
+};
+````
 
 *routes.ts*
 ````tsx
