@@ -8,7 +8,7 @@
 * [Navigation avec Link et NavLink](#navigation-avec-link-et-navlink)      
 * [Navigation par code avec useNavigate](#navigation-par-code-avec-usenavigate)    
 * [Récupération des paramètres de route avec useParams](#récupération-des-paramètres-de-route-avec-useparams)
-* [Récupération des paramètres d'URL avec useSearchParams](#récupération-des-paramètres-de-durl-avec-usesearchparams)     
+* [Récupération des paramètres d'URL avec useSearchParams](#récupération-des-paramètres-durl-avec-usesearchparams)     
 * [Chargement des data avec useLoaderData](#chargement-des-data-avec-useloaderdata)
 * [Utiliser les données de la loader function avec useRouteLoaderData](#utiliser-les-données-de-la-loader-function-avec-userouteloaderdata)      
 * [Gérer le status de chargement avec useNavigation](#gérer-le-status-de-chargement-avec-usenavigation)     
