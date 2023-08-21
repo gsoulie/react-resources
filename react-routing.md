@@ -894,6 +894,20 @@ export const deleteAction = async ({ request, params }) => {
 };
 ````
 
+**Exemple de déclenchement de l'action logout**
+
+*routes.ts*
+````tsx
+{ path: "logout", action: logoutAction },
+````
+
+*Menu.tsx*
+````tsx
+const submit = useSubmit();
+
+submit(null, { action: '/logout', method: 'post'})
+````
+
 [Back to top](#routing)     
 
 </details>
