@@ -127,7 +127,7 @@ Le routage précédent n'est pas totalement optimisé, on peut voir que les rout
 	]);
 ````
 
-> **IMPORTANT** : en utilisant un loader partagé entre plusieurs routes, il faut spécifier un identifiant qui servira à récupérer les données avec ````const data = useRouteLoaderData("event-detail");```` et non plus avec ````const data = useLoaderData()````
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : en utilisant un loader partagé entre plusieurs routes, il faut spécifier un identifiant qui servira à récupérer les données avec ````const data = useRouteLoaderData("event-detail");```` et non plus avec ````const data = useLoaderData()````
 	
 
 ### Routes imbriquées
@@ -208,7 +208,9 @@ export const RouteLayout = () => {
 <details>
 	<summary>Utilisation du hook useRouteLoaderData</summary>
 	
-> **IMPORTANT** : en utilisant un loader partagé entre plusieurs routes, il faut spécifier un identifiant qui servira à récupérer les données avec ````const data = useRouteLoaderData("event-detail");```` et non plus avec ````const data = useLoaderData()````
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : Les *loader functions* **doivent** retourner une valeur ou **null**
+
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : en utilisant un loader partagé entre plusieurs routes, il faut spécifier un identifiant qui servira à récupérer les données avec ````const data = useRouteLoaderData("event-detail");```` et non plus avec ````const data = useLoaderData()````
 
 Dans cet exemple, on souhaite associer une *loader function* à la route principale ````/````, permettant de charger le token depuis le localstorage afin de savoir si l'utilisateur est authentifié.
 	
@@ -369,7 +371,7 @@ return (
 )
 ````
 
-> Remarque importante : par défaut, le router regarde si la route demandée **commence** par la chaîne spécifiée dans l'attribut **to**. De cette manière, **toutes** les routes correspondantes à ce motif seront marquées comme *active*. Dans l'exemple, la première route étant la toute "/", alors toutes les routes seront marquées comme active. Ceci étant un problème, il faut alors renseigner la propriété **end** à *true* pour éviter de marquer toutes les routes comme active. Pour les routes ayant un path "unique', il n'est pas nécessaire de spécifier l'attribut *end*
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : par défaut, le router regarde si la route demandée **commence** par la chaîne spécifiée dans l'attribut **to**. De cette manière, **toutes** les routes correspondantes à ce motif seront marquées comme *active*. Dans l'exemple, la première route étant la toute "/", alors toutes les routes seront marquées comme active. Ceci étant un problème, il faut alors renseigner la propriété **end** à *true* pour éviter de marquer toutes les routes comme active. Pour les routes ayant un path "unique', il n'est pas nécessaire de spécifier l'attribut *end*
 
 [Back to top](#routing)    
 
