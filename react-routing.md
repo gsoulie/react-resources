@@ -4,12 +4,12 @@
 
 * [Installation](#installation)     
 * [Construction du routing](#construction-du-routing)
-* [Utiliser les données de la loader function avec useRouteLoaderData](#utiliser-les-données-de-la-loader-function-avec-userouteloaderdata)      
 * [Chemins absolus et chemins relatifs](#chemins-absolus-et-chemins-relatifs)      
 * [Navigation avec Link et NavLink](#navigation-avec-link-et-navlink)      
 * [Navigation par code avec useNavigate](#navigation-par-code-avec-usenavigate)    
 * [Récupération des paramètres de route avec useParams](#récupération-des-paramètres-de-route-avec-useparams)      
-* [Chargement des data avec useLoaderData](#chargement-des-data-avec-useloaderdata)     
+* [Chargement des data avec useLoaderData](#chargement-des-data-avec-useloaderdata)
+* [Utiliser les données de la loader function avec useRouteLoaderData](#utiliser-les-données-de-la-loader-function-avec-userouteloaderdata)      
 * [Gérer le status de chargement avec useNavigation](#gérer-le-status-de-chargement-avec-usenavigation)     
 * [Gestion des erreurs](#gestion-des-erreurs)     
 * [Informations sur la route avec useLocation](#informations-sur-la-route-avec-uselocation)    
@@ -203,53 +203,6 @@ export const RouteLayout = () => {
 
 </details>
 
-## Utiliser les données de la loader function avec useRouteLoaderData
-
-<details>
-	<summary>Utilisation du hook useRouteLoaderData</summary>
-	
-<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : Les *loader functions* **doivent** retourner une valeur ou **null**
-
-<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : en utilisant un loader partagé entre plusieurs routes, il faut spécifier un identifiant qui servira à récupérer les données avec ````const data = useRouteLoaderData("event-detail");```` et non plus avec ````const data = useLoaderData()````
-
-Dans cet exemple, on souhaite associer une *loader function* à la route principale ````/````, permettant de charger le token depuis le localstorage afin de savoir si l'utilisateur est authentifié.
-	
-*routes.ts*
-````typescript
-{
-    path: "/",
-    element: <RootLayout />,
-    errorElement: <ErrorPage />,
-	
-    loader: tokenLoader, // <-- le token sera chargé à chaque fois qu'on changera de route
-    id: "root",	// <-- id 
-    children: [...]
-}
-````
-
-*auth.js*
-````tsx
-export function getAuthToken() {
-  const token = localStorage.getItem(KEY_TOKEN);
-  return token;
-}
-
-export function tokenLoader() {
-  return getAuthToken();
-}
-````
-
-Il suffit ensuite depuis n'importe quel composant, de récupérer le token chargé par la *loader function* avec le hook **useRouteLoaderData** en spécifiant l'id défini dans le fichier *routes.ts*
-
-*RandomComponent.tsx*
-````tsx
-const token = useRouteLoaderData("root"); // <-- récupération du token chargé dans le loader de la route principale
-````	
-
-[Back to top](#routing)     
-
-</details>
-
 ## Chemins absolus et chemins relatifs
 
 <details>
@@ -435,10 +388,10 @@ useLoaderData est un hook de React Router. Il permet de déclencher un chargemen
 Pour simplifier l'écriture d'un composant ayant un chargement de données dans son initialisation et par conséquent, se passer de l'utilisation d'un *useEffect*, il est possible de déclarer une fonction loader directement dans le composant (ou dans un service).
 Cette fonction pourra ensuite être déclenchée directement dans le fichier de routing lors de la navigation vers ce composant.
 
-<img src="https://img.shields.io/badge/A-RETENIR-DD0031.svg?logo=LOGO">
+<img src="https://img.shields.io/badge/A%20RETENIR-DD0031.svg?logo=LOGO">
 
-````useLoaderData() // Utiliser les données du loader de la route actuelle uniquement````
-````useRouteLoaderData('routeId')	// Utiliser les données du loader de la route correspondante à l'id spécifié````
+````useLoaderData() // Utiliser les données du loader de la route actuelle uniquement````       
+````useRouteLoaderData('routeId')	// Utiliser les données du loader de la route correspondante à l'id spécifié````      
 
 *EventPage.tsx*
 ````typescript
@@ -501,6 +454,53 @@ export const routes = createBrowserRouter([
 	},
 ]);
 ````
+
+[Back to top](#routing)     
+
+</details>
+
+## Utiliser les données de la loader function avec useRouteLoaderData
+
+<details>
+	<summary>Utilisation du hook useRouteLoaderData</summary>
+	
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : Les *loader functions* **doivent** retourner une valeur ou **null**
+
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : en utilisant un loader partagé entre plusieurs routes, il faut spécifier un identifiant qui servira à récupérer les données avec ````const data = useRouteLoaderData("event-detail");```` et non plus avec ````const data = useLoaderData()````
+
+Dans cet exemple, on souhaite associer une *loader function* à la route principale ````/````, permettant de charger le token depuis le localstorage afin de savoir si l'utilisateur est authentifié.
+	
+*routes.ts*
+````typescript
+{
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+	
+    loader: tokenLoader, // <-- le token sera chargé à chaque fois qu'on changera de route
+    id: "root",	// <-- id 
+    children: [...]
+}
+````
+
+*auth.js*
+````tsx
+export function getAuthToken() {
+  const token = localStorage.getItem(KEY_TOKEN);
+  return token;
+}
+
+export function tokenLoader() {
+  return getAuthToken();
+}
+````
+
+Il suffit ensuite depuis n'importe quel composant, de récupérer le token chargé par la *loader function* avec le hook **useRouteLoaderData** en spécifiant l'id défini dans le fichier *routes.ts*
+
+*RandomComponent.tsx*
+````tsx
+const token = useRouteLoaderData("root"); // <-- récupération du token chargé dans le loader de la route principale
+````	
 
 [Back to top](#routing)     
 
