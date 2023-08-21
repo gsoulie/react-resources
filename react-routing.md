@@ -679,9 +679,46 @@ state: null		// state passé en paramètre de navigation
 ## Route guards
 
 <details>
-<summary>Gestion des guards</summary>
+	<summary>Gérer la protection des routes</summary>
 
-// WORK IN PROGRESS...
+La création d'un guard est très simple en React, il suffit de créer une fonction qui permet, soit de rediriger l'utilisateur sur la page de login s'il n'est pas déjà identifié, sinon retourner null.
+On peut en outre, rediriger vers une page d'erreur ou autre.
+	
+*auth.ts*
+````tsx
+export function checkAuthLoader() {
+  // this function will be added in the next lecture
+  // make sure it looks like this in the end
+  const token = getAuthToken();
+  
+  if (!token) {
+    return redirect('/auth');
+  }
+ 
+  return null;	// Rappel : une fonction loader DOIT retourner une valeur OU null
+}
+````
+
+Il suffit ensuite d'assigner cette fonction au loader des pages que l'on souhaite protéger 
+
+*routes.ts*
+````tsx
+	children: [
+	  {
+		path: "edit",
+		element: <EditEventPage />,
+		action: manipulateEventAction,
+		loader: checkAuthLoader, // <-- GUARD
+	  },
+	],
+},
+{
+	path: "new",
+	element: <NewEventPage />,
+	action: manipulateEventAction,
+	loader: checkAuthLoader, // <-- GUARD
+},
+````
 
 [Back to top](#routing)     
 
