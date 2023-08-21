@@ -3,7 +3,8 @@
 # Routing
 
 * [Installation](#installation)     
-* [Construction du routing](#construction-du-routing)    
+* [Construction du routing](#construction-du-routing)
+* [Utiliser les données de la loader function avec useRouteLoaderData](#utiliser-les-données-de-la-loader-function-avec-userouteloaderdata)      
 * [Chemins absolus et chemins relatifs](#chemins-absolus-et-chemins-relatifs)      
 * [Navigation avec Link et NavLink](#navigation-avec-link-et-navlink)      
 * [Navigation par code avec useNavigate](#navigation-par-code-avec-usenavigate)    
@@ -202,6 +203,50 @@ export const RouteLayout = () => {
 
 </details>
 
+## Utiliser les données de la loader function avec useRouteLoaderData
+
+<details>
+	<summary>Utilisation du hook useRouteLoaderData</summary>
+	
+> **IMPORTANT** : en utilisant un loader partagé entre plusieurs routes, il faut spécifier un identifiant qui servira à récupérer les données avec ````const data = useRouteLoaderData("event-detail");```` et non plus avec ````const data = useLoaderData()````
+
+Dans cet exemple, on souhaite associer une *loader function* à la route principale ````/````, permettant de charger le token depuis le localstorage afin de savoir si l'utilisateur est authentifié.
+	
+*routes.ts*
+````typescript
+{
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+	
+    loader: tokenLoader, // <-- le token sera chargé à chaque fois qu'on changera de route
+    id: "root",	// <-- id 
+    children: [...]
+}
+````
+
+*auth.js*
+````tsx
+export function getAuthToken() {
+  const token = localStorage.getItem(KEY_TOKEN);
+  return token;
+}
+
+export function tokenLoader() {
+  return getAuthToken();
+}
+````
+
+Il suffit ensuite depuis n'importe quel composant, de récupérer le token chargé par la *loader function* avec le hook **useRouteLoaderData** en spécifiant l'id défini dans le fichier *routes.ts*
+
+*RandomComponent.tsx*
+````tsx
+const token = useRouteLoaderData("root"); // <-- récupération du token chargé dans le loader de la route principale
+````	
+
+[Back to top](#routing)     
+
+</details>
 
 ## Chemins absolus et chemins relatifs
 
