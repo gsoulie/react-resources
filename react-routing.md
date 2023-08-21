@@ -17,6 +17,7 @@
 * [Lazy-loading](#lazy--loading)    
 * [Envoyer des data au router avec action](#envoyer-des-data-au-router-avec-action)
 * [Déclenchement manuel d'une action associée à une route avec useSubmit](#déclenchement-manuel-dune-action-associée-à-la-route)
+* [Déclenchement manuel d'une action par un composant non attaché à cette route](#déclenchement-manuel-dune-action-par-un-composant-non-attaché-à-cette-route)      
 * [useActionData](#useactiondata)    
 * [Projet complet]()      
 ## Installation
@@ -836,7 +837,11 @@ Il est nécessaire de remplacer les balises ````<form>```` classiques par des ba
 
 Ainsi, la sousmission du formulaire déclenchera automatiquement l'action associée à la **route active** et aura en paramètre tous les champs du formulaire.
 
-### Déclenchement manuel d'une action associée à la route
+[Back to top](#routing)     
+
+</details>
+
+## Déclenchement manuel d'une action associée à la route
 
 <details>
 	<summary>Utilisation du hook useSubmit</summary>
@@ -893,7 +898,7 @@ export const deleteAction = async ({ request, params }) => {
 
 </details>
 
-### Déclenchement manuel d'une action par un composant non attaché à cette route
+## Déclenchement manuel d'une action par un composant non attaché à cette route
 
 <details>
 	<summary>Utilisation du hook useFetcher</summary>
@@ -943,10 +948,6 @@ export const NewsletterSignup = () => {
 	);
 };
 ````
-
-</details>
-
-[Back to top](#routing)     
 
 </details>
 
