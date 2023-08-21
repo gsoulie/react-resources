@@ -22,7 +22,8 @@
 * [Déclencher l'action d'une route sans passer par le routing](#déclencher-laction-dune-route-sans-passer-par-le-routing)       
 * [useActionData](#useactiondata)
 * [Authentification simple avec token](#authentification-simple-avec-token)
-* [Ajout Bearer dans url](#ajout-bearer-dans-url)     
+* [Ajout Bearer dans url](#ajout-bearer-dans-url)
+* [Lazy loading](#lazy-loading)    
 * [Projet complet]()      
 ## Installation
 
@@ -1393,4 +1394,80 @@ const response = await fetch("http://localhost:8080/events/" + eventId, {
 [Back to top](#routing)     
 
 </details>
+
+## Lazy loading
+
+<details>
+	<summary>Optimiser le chargement des composants</summary>
+
+**Chargement classique des ressources**
+	
+*routes.ts*
+````typescript
+import BlogPage, { loader as postsLoader } from "./pages/Blog";
+
+export const router = createBrowserRouter([
+  {
+    path: "posts",
+	element: <BlogPage />,
+	loader: postsLoader
+  },
+]);
+````
+
+**Chargement optimisé**
+
+*routes.ts*
+````typescript
+import { lazy, Suspense } from 'react';
+
+const BlogPage = lazy(import('./pages/Blog'))
+
+export const router = createBrowserRouter([
+  {
+    path: "posts",
+	element: <Suspense fallback={<p>Loading...</p>}>
+				<BlogPage />
+			</Suspense>,
+	loader: () => import('./pages/Blog').then(module => module.loader())
+  },
+]);
+````
+
+<img src="https://img.shields.io/badge/Bonne%20pratique?logo=LOGO"> : le code suivant ne suffit pas à faire du lazy-loading. En effet, le code suivant ne retourne pas un composant fonctionnel, mais une promise !
+
+````typescript
+const BlogPage = () => import('./pages/Blog'); 
+````
+
+**Autre spécificité pour les routes dynamiques**
+
+Penser à passer les meta-data de la route en paramètre de la fonction loader 
+
+````typescript
+{
+	path: ":id",
+	element: (
+	  <Suspense fallback={<p>Loading...</p>}>
+		<PostPage />
+	  </Suspense>
+	),
+	// uniquement les params
+	loader: ({ params }) =>
+	  import("./pages/Post").then((module) =>
+		module.loader({ params })
+	  ),
+	  
+	// ou alors passer l'ensemble des meta-data (contient aussi params)
+	//loader: (meta) =>
+	//  import("./pages/Post").then((module) =>
+	//	module.loader(meta)
+	//  ),
+  },
+````
+
+[Back to top](#routing)     
+
+</details>
+
 
