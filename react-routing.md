@@ -435,6 +435,11 @@ useLoaderData est un hook de React Router. Il permet de déclencher un chargemen
 Pour simplifier l'écriture d'un composant ayant un chargement de données dans son initialisation et par conséquent, se passer de l'utilisation d'un *useEffect*, il est possible de déclarer une fonction loader directement dans le composant (ou dans un service).
 Cette fonction pourra ensuite être déclenchée directement dans le fichier de routing lors de la navigation vers ce composant.
 
+<img src="https://img.shields.io/badge/A-RETENIR-DD0031.svg?logo=LOGO">
+
+````useLoaderData() // Utiliser les données du loader de la route actuelle uniquement````
+````useRouteLoaderData('routeId')	// Utiliser les données du loader de la route correspondante à l'id spécifié````
+
 *EventPage.tsx*
 ````typescript
 import EventsList from "../../components/EventsList";
