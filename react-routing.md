@@ -7,7 +7,8 @@
 * [Chemins absolus et chemins relatifs](#chemins-absolus-et-chemins-relatifs)      
 * [Navigation avec Link et NavLink](#navigation-avec-link-et-navlink)      
 * [Navigation par code avec useNavigate](#navigation-par-code-avec-usenavigate)    
-* [Récupération des paramètres de route avec useParams](#récupération-des-paramètres-de-route-avec-useparams)      
+* [Récupération des paramètres de route avec useParams](#récupération-des-paramètres-de-route-avec-useparams)
+* [Récupération des paramètres d'URL avec useSearchParams](#récupération-des-paramètres-de-durl-avec-usesearchparams)     
 * [Chargement des data avec useLoaderData](#chargement-des-data-avec-useloaderdata)
 * [Utiliser les données de la loader function avec useRouteLoaderData](#utiliser-les-données-de-la-loader-function-avec-userouteloaderdata)      
 * [Gérer le status de chargement avec useNavigation](#gérer-le-status-de-chargement-avec-usenavigation)     
@@ -381,6 +382,35 @@ export default function Profile() {
 
 [Back to top](#routing)     
 
+</details>
+
+## Récupération des paramètres d'URL avec useSearchParams
+ 
+ <details>
+	<summary>Lire les paramètres d'URL avec le hook useSearchParams</summary>
+	
+Le hook ````useSearchParams```` permet de lire les paramètres des URLs (ex : ````/auth?mode=login````). Ce hook retourne un state ainsi qu'une fonction permettant ainsi de lire et écrire les paramètres des URLs
+	
+````typescript
+import { Form, Link, useSearchParams } from "react-router-dom";
+
+
+function AuthForm() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isLoginMode = searchParams.get("mode") === "login";
+
+  return (
+    <>      
+	  <Link to={`?mode=${isLoginMode ? "signup" : "login"}`}>
+		{isLoginMode ? "Create new user" : "Login"}
+	  </Link>
+    </>
+  );
+}
+````
+
+[Back to top](#routing)    
+	
 </details>
 
 ## Chargement des data avec useLoaderData
