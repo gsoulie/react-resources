@@ -41,8 +41,9 @@ ionic cap build android
 * [Local Storage](https://github.com/gsoulie/react-resources/blob/master/react-localstorage.md)     
 * [Charts avec Nivo](https://github.com/gsoulie/react-resources/blob/master/react-chart.md)     
 * [Rendering en dehors de la div root avec React Portal](https://www.youtube.com/watch?v=LyLa7dU5tp8&ab_channel=WebDevSimplified)
-* [Authentification simple et Routage](https://github.com/gsoulie/react-resources/tree/main/projects/authentication-example)      
-* [i18n](https://github.com/gsoulie/react-resources/blob/master/react-i18n.md)     
+* [Authentification simple et Routage](https://github.com/gsoulie/react-resources/tree/main/projects/authentication-example)     
+* [i18n](https://github.com/gsoulie/react-resources/blob/master/react-i18n.md)
+* [Tests](https://github.com/gsoulie/react-resources/blob/master/react-test.md)     
 
 # Next
 
