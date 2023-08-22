@@ -94,18 +94,7 @@ import { Greeting } from "./Greeting";
 import userEvent from "@testing-library/user-event";
 
 describe("Greeting component", () => {
-  test("renders greeting as a text", () => {
-    // Arrange
-    render(<Greeting />);
-
-    // Act - Perform main action
-
-    // Assert - compare
-    //screen : accéder au virtual dom
-    const greetingElement = screen.getByText("Greeting", { exact: false });
-    expect(greetingElement).toBeInTheDocument();
-  });
-
+  
   test("initial text without changed", () => {
     render(<Greeting />);
     const initial = screen.getByText("Good to see you", { exact: false });
