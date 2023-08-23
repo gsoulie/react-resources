@@ -539,9 +539,9 @@ le Contexte est conçu pour **partager des données qui peuvent être considér�
 
 Exemple d'utilisation : https://openclassrooms.com/fr/courses/7150606-creez-une-application-react-complete/7256029-partagez-vos-donnees-avec-le-contexte-et-usecontext#:~:text=Le%20Contexte%20est%20une%20fonctionnalit%C3%A9,d'acc%C3%A9der%20au%20State%20partag%C3%A9.  
 
-> <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO">: le contexte React n'est **pas optimisé dans le cas de changements de state très fréquents**, dans le cas contraire il est recommandé d'utiliser **Redux toolkit**
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO">: le contexte React n'est **pas optimisé dans le cas de changements de state très fréquents**, dans le cas contraire il est recommandé d'utiliser **Redux toolkit**
 
-> <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO">: le contexte ne **doit pas** être utilisé pour remplacer la communication et les props utilisés entre les composants
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO">: le contexte ne **doit pas** être utilisé pour remplacer la communication et les props utilisés entre les composants
 
 ### En résumé
 
