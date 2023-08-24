@@ -98,3 +98,23 @@ export const Form = ({ addTodoEvent }) => {
 ````
 
 [Back to top](#forms)     
+
+## Méthode useRef
+
+La dernière méthode consiste à utiliser le hook **useRef**
+
+````typescript
+const userNameRef = useRef<HTMLInputElement>(null);
+
+const submitHandler = (e: React.FormEvent) {
+	e.preventDefault();
+
+	const value = userNameRef.current?.value;
+}
+
+return (
+	<form onSubmit={submitHandler}>
+		<input id="username" ref={userNameRef} />
+	...
+)
+````
