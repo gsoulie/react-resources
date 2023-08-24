@@ -300,8 +300,13 @@ export default useFecthData;
 ````typescript
 export const CounterComponent = () => {
 	const counter = useCounter();
+	const decrementCounter = useCounter(true);
 	
-	return <div>{counter}</div>
+	return (
+	<>
+		<div>{counter}</div>
+		<div>{decrementCounter}</div>
+	</>)
 }
 ````
 
