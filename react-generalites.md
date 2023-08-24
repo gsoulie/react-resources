@@ -244,8 +244,9 @@ export const NewUser: React.FC<{onAddUser: (name: string) => void }> = (props) =
 [Back to top](#généralités)    
 	
 ### Astuce spread props
-	
-Astuce pour faciliter le passage d'un grand nombre de props il est possible d'utiliser la notation *spread* props
+
+<details>
+	<summary>Astuce pour faciliter le passage d'un grand nombre de props il est possible d'utiliser la notation spread props</summary>	
 
 Afin d'éviter ceci : 
 
@@ -273,6 +274,8 @@ const data = {
 <User {...data} />
 ````
 [Back to top](#généralités)    
+
+</details>
 	
 ## StrictMode
 
@@ -295,10 +298,11 @@ Pour désactiver le mode strict, il suffit de retirer la balise ````<React.Stric
 ## Sass
 
 ````npm i sass````
-	
-### Utiliser un fichier variables.scss
 
-**Créer un fichier variables.scss**
+<details>
+	<summary>Utiliser un fichier variables.scss</summary>
+
+ **Créer un fichier variables.scss**
 
 ````css
 :root {
@@ -318,10 +322,15 @@ Pour désactiver le mode strict, il suffit de retirer la balise ````<React.Stric
 }
 ````
 
+</details>
+
 [Back to top](#généralités)      
 
 ## Généricité
-  
+
+<details>
+	<summary>Principe de généricité</summary>
+	
 Pour rendre un composant générique au maximum, on met un maximum de paramètres dans les props
 
 *Parent.tsx*
@@ -353,6 +362,8 @@ De cette manière, depuis le parent on peut définir n'importe quelle action sur
 On pourrait faire de même avec la valeur *fruitInfo* pour gérer autre chose que des fruits
 
 [Back to top](#généralités)      
+
+</details>
 
 ## Tips
 
@@ -418,8 +429,11 @@ return (
 [Back to top](#généralités)    
 	
 ## Services
-	
-````typescript
+
+ <details>
+	 <summary>Créer des services</summary>
+
+  ````typescript
 import { SelectedColor, COLORS } from './../enum/colors.enum';
 class ColorHelper {
   constructor() { }
@@ -446,55 +460,7 @@ export const Player = () => {
 }
 ````
 
+</details>
+
 [Back to top](#généralités)    
 	
-## Lazy-loading
-
-### Fonctionnement
-
-
-*Import classique*
-
-````typescript
-import Main from './pages/Main';
-````
-
-*Import Lazy*
-
-````typescript
-import { lazy, Suspense } from 'react';
-
-const Main = lazy(() => import('./pages/Main'));
-
-function App() {
-	<Router>
-		<Suspense fallback={<h1>Loading...</h1>}>
-			<Routes>
-				<Route path="/" element={<Main />} />
-				<Route path="/login" element={<Login />} />
-			</Routes>
-		</Suspense>
-	</Router>
-}
-````
-
-La fonction ````fallback```` permet de fournir une interface à afficher pendannt le temps de chargement des composants.
-
-Attention, cette notation ne fonctionne que si le composant a été déclaré comme ````export default````
-
-````typescript
-export default function MyCompo() {}
-
-// OU
-
-const MyCompo = () => {}
-export default MyCompo;
-````
-
-**Ne fonctionnera pas** pour la déclaration suivante :
-
-````typescript
-export const MyCompo = () => {}
-````
-
-[Back to top](#généralités)    
