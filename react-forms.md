@@ -13,7 +13,7 @@ Cettte méthode est à privilégier dans la majorité des cas car elle ne procè
 import { FormEvent } from "react";
 
 const Form = () => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {	// typage alternatif (e: FormEvent<HTMLFormElement>)
 	e.preventDefault();
 	const form = e.target
 	
