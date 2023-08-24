@@ -139,7 +139,8 @@ Il existe plusieurs façon de typer les *props* d'un composant, voici les plus c
 
 #### Méthode interface
 
-Utilisable avec et sans destructuration
+<details>
+	<summary>Utilisable avec et sans destructuration</summary>
 
 ````tsx
 export interface IProps {
@@ -150,8 +151,13 @@ export interface IProps {
 export const ProductTile = ({product, user}: IProps) => { return ( <h1>{ product.title }</h1> }
 ````
 
+</details>
+
 #### Méthode avec destructuration
 
+<details>
+	<summary>Destructuration avec interface</summary>
+ 
 ````tsx
 export interface Concept {
   title: string;
@@ -172,9 +178,13 @@ export const Tile = ({ concept }: { concept: Concept }) => {
   );
 };
 ````
+</details>
 
 #### Méthode PropsWithChildren
 
+<details>
+	<summary>PropsWithChildren</summary>
+	
 ````typescript
 import React, {PropsWithChildren} from 'react';
 
@@ -185,8 +195,13 @@ export interface Props {
 const ProductDetail = (props: PropsWithChildren<Props>) => {...}
 ````
 
+</details>
+
 #### Méthode React.FC
 
+<details>
+	<summary>Typage React.FC</summary>
+	
 La méthode avec ````React.FC```` utilise ````PropsWithChildren```` de manière transparente
 
 ````tsx
@@ -202,6 +217,30 @@ export const ProductTile: React.FC<Props> = (props) => {
 	)
 }
 ````
+
+**Autre exemple**
+
+````typescript
+export const NewUser: React.FC<{onAddUser: (name: string) => void }> = (props) => {
+	const userNameRef = useRef<HTMLInputElement>(null);
+	
+	const submitHandler = (e: React.FormEvent) {
+		e.preventDefault();	
+		const value = userNameRef.current?.value;
+
+		props.onAddUser(value);
+	}
+	
+	return (
+		<form onSubmit={submitHandler}>
+			<input id="username" ref={userNameRef} />
+		...
+	)
+}
+````
+
+</details>
+
 [Back to top](#généralités)    
 	
 ### Astuce spread props
