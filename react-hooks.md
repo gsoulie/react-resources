@@ -271,7 +271,7 @@ const Home = () => {
 ### Autre exemple
 
 <details>
-	<summary></summary>
+	<summary>Fetch hhttp</summary>
 
  ````typescript
 function useFetchData(url) {
@@ -289,8 +289,13 @@ function useFetchData(url) {
 export default useFecthData;
 ````
 
-### Exemple simple compteur
+</details>
 
+### Autre exemple
+
+<details>
+	<summary>Compteur avec mode incrémentation / décrémentation</summary>
+	
 *Composant utilisant le hook*
 ````typescript
 export const CounterComponent = () => {
