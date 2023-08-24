@@ -31,7 +31,10 @@ Librairie de snippet de hook (ex : copy to clipboard) https://www.youtube.com/wa
 
 ## Bonnes pratiques hook
 
-Le Hook *useState* est **asynchrone**, ce qui signifie qu'accéder à la valeur du *useState* tout de suite après son affectation retournera son **ancienne** valeur.
+<details>
+	<summary>Quelques bonnes pratiques</summary>
+
+ Le Hook *useState* est **asynchrone**, ce qui signifie qu'accéder à la valeur du *useState* tout de suite après son affectation retournera son **ancienne** valeur.
 
 ````typescript
 function App() {
@@ -180,9 +183,14 @@ useEffect(() => {
 	return () => controller.abort();
 }, [])
 ````
+</details>
+
 
 ## key
 
+<details>
+	<summary>La propriété key</summary>
+	
 source : https://beta.reactjs.org/learn/you-might-not-need-an-effect#resetting-all-state-when-a-prop-changes
 
 La propriété ````key```` de React est principalement utilisée dans les boucles afin d'optimiser le repaint des éléments (comme le *trackBy* Angular). Mais la propriété ````key```` permet aussi de pouvoir contrôler les instances des composants.
@@ -200,8 +208,13 @@ Pour utiliser la propriété ````key```` il suffit donc de l'ajouter
 ````
 [Back to top](#hooks)      
 
+</details>
+
 ## Custom hook
 
+<details>
+	<summary>Comment créer un hook personnalisé</summary>
+	
 Exemple de définition d'un custom hook qui expose 2 fonctions *searchData* et *getDetails*
 
 *useApi.tsx*
@@ -258,7 +271,10 @@ const Home = () => {
 
 ### Autre exemple
 
-````typescript
+<details>
+	<summary></summary>
+
+ ````typescript
 function useFetchData(url) {
 	const [data, setData] = useState(null);
 	useEffect(() => {
@@ -307,9 +323,14 @@ export const useCounter = (forward = true) => {
 }
 ````
 
+</details>
+
 ### Custom hook useHttp
 
-*use-http.tsx*
+<details>
+	<summary>Appel http</summary>
+
+ *use-http.tsx*
 ````typescript
 import { useCallback, useState } from "react";
 
@@ -369,11 +390,24 @@ export const useHttp = (applyData) => {
   } = useHttp(transformMovies);
 ````
 
+</details>
+
+[Back to top](#hooks)      
+
+</details>
+
 ## useState
 
-<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> bien positionner ses states. Trop souvent on a tendance à positionner les states dans le composant parent alors que ce dernier n'utilise pas forcément le contenu => https://www.youtube.com/watch?v=NZqMVUEiDIw&ab_channel=WebDevSimplified
+<details>
+	<summary>Utilisation des states</summary>
+
+ <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> bien positionner ses states. Trop souvent on a tendance à positionner les states dans le composant parent alors que ce dernier n'utilise pas forcément le contenu => https://www.youtube.com/watch?v=NZqMVUEiDIw&ab_channel=WebDevSimplified
 
 Il faut garder à l'esprit que toute modification d'un state entraine un repaint du composant, de fait, modifier un state lors d'une saisie n'a pas forcément d'intérêt si visuellement nous n'avons pas de nécessité de rafraichir l'affichage.
+
+Lors de la création d'un composant utilisant des states, React va créé les states nécessaires. Par la suite, à chaque fois que le composant sera re-rendu, React mettra à jour ces states si nécessaires mais n'en recrééra pas de nouveaux tant que le composant est attaché au DOM.
+
+De nouveaux states pourront être créés uniquement si le composant est complètement retiré du DOM, puis recréé
 
 **Bonne pratique**
 
@@ -394,7 +428,13 @@ const handleAddNewData = (newData) => {
 
 [Back to top](#hooks)      
 
+</details>
+
+
 ## useEffect
+
+<details>
+	<summary>Utilisation du hook useEffect</summary>
 
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Avant de se lancer, il faut bien se questionner sur la nécessité ou non d'utiliser un effect : https://beta.reactjs.org/learn/you-might-not-need-an-effect, on abuse trop souvent du useEffect pour de mauvaises raisons
 
@@ -482,8 +522,9 @@ Cette fonction de rappelle va s'exécuter lors du démontage du composant. Vous 
     }, []);
 ````
 
-[Back to top](#hooks)      
-
+[Back to top](#hooks)     
+</details>
+ 
 ## useLayoutEffect
 
 Fonctionne comme *useEffect* à la différence qu'il s'exécute **après** le calcul du rendu d'un composant mais **avant** l'affichage du dom à l'écran. Ce qui signifie que React attend la fin du traitement avant de rendre le dom visible pour l'utilisateur
@@ -530,7 +571,10 @@ const App = () => {
 
 ## useContext
 
-Le Contexte nous permet de récupérer simplement nos datas sans avoir à tout passer manuellement. Pour cela, on englobe le composant parent le plus haut dans l’arborescence de composants avec ce qu’on appelle un *Provider*. Tous les composants enfants pourront alors se connecter au Provider et ainsi accéder aux props, sans avoir à passer par tous les composants intermédiaires. On dit que les composants enfants sont les Consumers 
+<details>
+	<summary>Utilisation des contextes</summary>
+
+ Le Contexte nous permet de récupérer simplement nos datas sans avoir à tout passer manuellement. Pour cela, on englobe le composant parent le plus haut dans l’arborescence de composants avec ce qu’on appelle un *Provider*. Tous les composants enfants pourront alors se connecter au Provider et ainsi accéder aux props, sans avoir à passer par tous les composants intermédiaires. On dit que les composants enfants sont les Consumers 
 
 le Contexte est conçu pour **partager des données qui peuvent être considérées comme globales** :
 * des données sur l’utilisateur actuellement authentifié, 
@@ -701,7 +745,10 @@ export const ScoreSheet = () => {
 
 ### Autre méthode (moins propre)
 
-1 - Créer le fichier contexte
+<details>
+	<summary>Alternative</summary>
+
+ 1 - Créer le fichier contexte
 
 ````tsx
 import React from 'react';
@@ -784,11 +831,19 @@ export default function Toolbar() {
 }
 ````
 
+</details>
+
+
 [Back to top](#hooks)      
+	
+</details>
 
 ## useReducer
 
-https://www.builder.io/blog/use-reducer     
+<details>
+	<summary>Utilisation des reducer</summary>
+
+ https://www.builder.io/blog/use-reducer     
 
 *useReducer* est une alternative à *useState*, de type ````(state, action) => newState```` qui retourne le state courant associé à une fonction *dispatch* (utilise le pattern Redux)
 
@@ -868,12 +923,16 @@ const Login = (props) => {
 )
 }
 ````
+[Back to top](#hooks)    
 
-[Back to top](#hooks)      
+</details>
 
 ## useRef
 
-hook qui permet de faire une référence à un objet de la vue comme ````ViewChild```` en Angular
+<details>
+	<summary>Référencer un objet avec useRef</summary>
+
+ hook qui permet de faire une référence à un objet de la vue comme ````ViewChild```` en Angular
 
 ````tsx
 const inputRef = useRef();
@@ -896,6 +955,8 @@ return (
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Pour gérer les données dans un **formulaire**, il n'est **pas recommandé** d'utiliser *useRef()* car ce dernier ne provoque pas de re-render automatique de l'affichage.
 
 [Back to top](#hooks)      
+
+</details>
 
 ## useParams
 
@@ -933,7 +994,10 @@ function MyCompo() {
 
 ## useMemo et useCallback
 
-https://www.w3schools.com/react/react_usememo.asp
+<details>
+	<summary>Optimiser la mémoire</summary>
+
+ https://www.w3schools.com/react/react_usememo.asp
 
 Ce hook permet de retourner une valeur mémorisé (assimilable à une valeur mise en cache), généralement très utile pour mémoriser des traitements lourds qu'on souhaite éviter de recalculer lors du changement d'un state dans le composant par exemple.
 
@@ -972,8 +1036,6 @@ const sortedList = useMemo(() => {
 const arrayOfData = useMemo(() => [1, 2, 3], []);
 ````
 
-````useCallback```` est similaire à la différence qu'il retourne une **fonction** mémorisée au lieu d'une **valeur** mémorisée
-
 ````typescript
 const [count, setCount] = useState(0);
 const [other, setOther] = useState(0);
@@ -981,12 +1043,34 @@ const [other, setOther] = useState(0);
 //const total = expensiveCalculation(count);	// sera rejoué à chaque modification d'un state du composant même s'il s'agit du state *other*
 
 const total = useMemo(() => expensiveCalculation(count), [count]);	// ne sera rejoué uniquement si le state *count* est modifié
+````
 
+````useCallback```` est similaire à la différence qu'il retourne une **fonction** mémorisée au lieu d'une **valeur** mémorisée. Ce hook nous permet d'enregistrer une fonction à travers l'exécution du composant. On demande à React "d'enregistrer" cette fonction et que cette fonction ne doit pas être recréée à chaque rééxécution du composant. 
+C'est très utile si l'on sait que la-dite fonction ne changera pas.
+
+> Pour rappel, à chaque repaint d'un composant, toutes les fonctions qui le composent (ainsi que ses composants enfants qui sont par extension des fonctions JS) sont rejouées
+
+L'utilisation du hook *useCallback* permet donc de réutiliser le même objet fonction lors du repaint et donc de ne pas le recréer.
+
+````typescript
+const togglePragraph = () => {
+	setShowParagraph((prevShowParagraph) => !prevShowParagraph);
+}
+
+// Peut être enregistrer avec useCallback de la manière suivante
+const togglePragraph = useCallback(() => {
+	setShowParagraph((prevShowParagraph) => !prevShowParagraph);
+}, []);
 ````
 
 [Back to top](#hooks)   
 
+</details>
+
 ## useQuery
+
+<details>
+	<summary>Faciliter la gestion des requêtes http</summary>
 
 Le hook useQuery est un hook fourni par la bibliothèque React Query qui permet de **faciliter la gestion des requêtes** de données dans une application React.
 
@@ -1061,7 +1145,10 @@ const Users = () => {
 
 ### Zod
 
-Zod est une **bibliothèque de validation de schémas** pour TypeScript. Elle permet de définir et de valider des schémas de données pour garantir que les données sont conformes à un format spécifique.
+<details>
+	<summary>Alternative avec la lib Zod</summary>
+
+ Zod est une **bibliothèque de validation de schémas** pour TypeScript. Elle permet de définir et de valider des schémas de données pour garantir que les données sont conformes à un format spécifique.
 
 En utilisant Zod avec React, vous pouvez définir des schémas de validation pour les données entrantes dans vos composants, afin de garantir que les données respectent un format spécifique. Cela peut aider à prévenir les erreurs et les bugs, en s'assurant que les données sont bien formatées avant d'être traitées par votre application.
 
@@ -1093,10 +1180,17 @@ const Users = () => {
 }
 ````
 
+</details>
+
 [Back to top](#hooks)   
+	
+</details>
 
 ## useHistory
 
+<details>
+	<summary>Naviguer dans l'historique de navigation</summary>
+	
 Ce hook permet de naviguer dans l'historique de navigation : https://v5.reactrouter.com/web/api/history
 
 ````typescript
@@ -1113,11 +1207,15 @@ history.replace(location)
 ````
 
 [Back to top](#hooks)   
-
+ 
+</details>
 
 ## useTransition
 
-https://fr.reactjs.org/docs/concurrent-mode-reference.html#usetransition
+<details>
+	<summary>Différer les chargement de données</summary>
+
+ https://fr.reactjs.org/docs/concurrent-mode-reference.html#usetransition
 
 Par défaut les rendus de composants ont tous la même priorité, si plusieurs rendus sont déclenchés, ils s'exécutent en même temps, ce qui peut 
 créer un ralentissement dans le rendu.
@@ -1160,4 +1258,7 @@ export default function Home() {
   );
 }
 ````
+
+</details>
+
 [Back to top](#hooks)   
