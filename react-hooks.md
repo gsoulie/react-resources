@@ -271,7 +271,7 @@ const Home = () => {
 ### Autre exemple
 
 <details>
-	<summary>Fetch hhttp</summary>
+	<summary>Fetch http</summary>
 
  ````typescript
 function useFetchData(url) {
@@ -392,11 +392,28 @@ export const useHttp = (applyData) => {
 *utilisation*
 
 ````typescript
- const {
+const [movies, setMovies] = useState([]);
+
+const transformMovies = useCallback((moviesObj) => {
+    const loadedMovies = [];
+
+    // Transform data from Firebase
+    for (const key in moviesObj) {
+      loadedMovies.push({
+        id: key,
+        title: moviesObj[key].title,
+        openingText: moviesObj[key].openingText,
+        releaseDate: moviesObj[key].releaseDate,
+      });
+    }
+    setMovies(loadedMovies);
+}, []);
+
+const {
     isLoading,
     error,
     sendRequest: fetchMovies, // alias
-  } = useHttp(transformMovies);
+} = useHttp(transformMovies);
 ````
 
 </details>
