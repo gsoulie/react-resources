@@ -21,6 +21,9 @@ présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart
 
 ````
 npx create-next-app@latest --typescript myApp
+
+> src/ directory ? No
+> App Router ? No  // Yes = génère le répertoire app sans répertoire pages
 ````
 
 **Using sass**
