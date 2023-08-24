@@ -14,8 +14,7 @@
 * [Variables d'environnement](#variables-denvironnement)     
 * [Déploiement](#déploiement)    
 * [Icons](#icons)     
-* [Services](#services)     
-* [Lazy loading](#lazy-loading)     
+* [Services](#services)      
 
 ## Principes
 
