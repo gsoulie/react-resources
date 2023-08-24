@@ -45,6 +45,9 @@ npm run dev
 
 ### children
 
+<details>
+	<summary>Utilisation de la propriété children</summary>
+	
 La propriété *children* est un mot clé destiné à une propriété spéciale de react. Cette props peut être assimilée à du slot de transclusion un peu à la manière de *<ng-content>* en angular
 
 Cela permet de passer du contenu complexe en paramètre d'un composant 
@@ -82,9 +85,14 @@ boucle for
 </ul>
 ````
 [Back to top](#généralités)      
+
+</details>
   
 ### Passage de props avancé
 
+<details>
+	<summary></summary>
+	
 Par exemple on souhaite créer un composant *<CustomButton>* dont le but est de surcharger le bouton standard html
 
 *CustomButton.tsx*
@@ -131,6 +139,8 @@ function OrderList() {
 ````
 
 [Back to top](#généralités)    
+
+</details>
 	
 ### Props typées
 
