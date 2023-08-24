@@ -310,7 +310,7 @@ export const CounterComponent = () => {
 }
 ````
 
-*use-counter.hook.ts*
+*use-counter.hook.tsx*
 
 ````typescript
 export const useCounter = (forward = true) => {
