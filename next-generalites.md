@@ -4,8 +4,13 @@
 
 * [Navigation](#navigation)     
 
-## Description
+## Présentation
 
+NextJS est un **framework fullstack** pour React. Il permet de rendre le développement de grosses applications plus facile en ajoutant des fonctionnalités et en améliorant certaines autres.
+
+* support SSR : avantage SEO
+* routage basé sur l'arborescence : moins de code à développer pour gérer le routage
+  
 La création d'un projet *Next* va générer les répertoires suivants :
 
 * public : contient tout le contenu public de l'appli
