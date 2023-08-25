@@ -38,8 +38,8 @@ pages
      + index.tsx // réprésente la route /news
      |
      + other
-     |
-     + index.tsx // représente la route /news/other
+         |
+         + index.tsx // représente la route /news/other
  
 ````
 
@@ -65,7 +65,7 @@ pages
   |
   + [productId]
          |
-	 + index.tsx
+	 + index.tsx	// représente la route /1
  
 ````
 
