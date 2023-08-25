@@ -351,12 +351,12 @@ export interface RequestConfig {
   body?: any;
 }
 
-export const useHttp = (applyData) => {
+export const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const sendRequest = useCallback(
-    async (requestConfig: RequestConfig) => {
+  const sendRequest = use callback(
+    async (requestConfig: RequestConfig, applyData) => {
       setIsLoading(true);
       setError(null);
 
@@ -378,7 +378,7 @@ export const useHttp = (applyData) => {
       }
       setIsLoading(false);
     },
-    [applyData]
+    []
   );
 
   return {
@@ -394,26 +394,30 @@ export const useHttp = (applyData) => {
 ````typescript
 const [movies, setMovies] = useState([]);
 
-const transformMovies = useCallback((moviesObj) => {
+const transformMovies = (moviesObj) => {
     const loadedMovies = [];
 
     // Transform data from Firebase
     for (const key in moviesObj) {
       loadedMovies.push({
-        id: key,
-        title: moviesObj[key].title,
-        openingText: moviesObj[key].openingText,
-        releaseDate: moviesObj[key].releaseDate,
+	id: key,
+	title: moviesObj[key].title,
+	openingText: moviesObj[key].openingText,
+	releaseDate: moviesObj[key].releaseDate,
       });
     }
     setMovies(loadedMovies);
-}, []);
+};
 
 const {
     isLoading,
     error,
     sendRequest: fetchMovies, // alias
-} = useHttp(transformMovies);
+} = useHttp();
+
+useEffect(() => {
+	fetchMovies({url: <your-url>}, transformMovies);
+}, [fetchTasks]);
 ````
 
 </details>
