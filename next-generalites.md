@@ -57,6 +57,9 @@ https://codedamn.com/news/nextjs/next-js-best-practices
 
 # OLD Next 12
 
+<details>
+  <summary>Différences Next 12 / Next 13</summary>
+
 ## Fonctionnement
 
 React 18 et Next 12 introduisent une version alpha des composants serveur React. Les composants serveur sont entièrement rendus sur le serveur et ne nécessitent pas de JavaScript côté client pour être rendus. De plus, les composants serveur permettent aux développeurs de conserver une certaine logique sur le serveur et d'envoyer uniquement le résultat de cette logique au client. Cela réduit la taille du bundle envoyé au client et améliore les performances de rendu côté client.
@@ -217,3 +220,6 @@ Quand utiliser la fonction ````getStaticPaths```` ?
 ### getStaticProps
 
 La fonction ````getServerSideProps```` ne peut être exécutée que côté **serveur**. Elle ne peut pas être exécuté côté client et ne sera même pas inclue dans le bundle navigateur.
+  
+</details>
+
