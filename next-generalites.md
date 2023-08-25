@@ -69,33 +69,6 @@ export default MyCompo = () => {
 }
 ````
 
-### Récupérer des données asynchrone côté client
-
-Pour pouvoir récupérer des données asynchrone côté client, il existe un hook **use** qui agit comme un **await**
-
-````typescript
-'use client';
-
-async function getData() {
-  const res = await fetch('https://xxxxxx');
-  return res.json();
-}
-
-export default MyCompo = () => {
-  const name = use(getData());
-}
-````
-
-## Navigation
-
-Next est un meta-framework orienté **file-based routing**. Les pages sont associées à une route en fonction de leur nom de fichier. Par exemple, en développement :
-
-````pages/index.js```` est associé à la route ````/````.     
-````pages/posts/first-post.js```` est associé à la route ````/posts/first-post````.     
-Nous avons déjà le fichier ````pages/index.js````, alors créons ````pages/posts/first-post.js```` pour voir comment cela fonctionne.
-
-
-
 https://www.youtube.com/watch?v=6aP9nyTcd44&ab_channel=SonnySangha
 
 Depuis Next 13 l'arborescence fichier intègre un répertoire **app** dont le but est de contenir les *layouts*, *routes imbriquées*,
@@ -144,53 +117,6 @@ export async function getStaticProps() {
       posts,
     },
   }
-}
-````
-
-### Route dynamique d'une page statique
-
-Dans le cas ou la route de la page à charger est dynamique ````pages/posts/[id].tsx```` et qu'elle dépend de données externes (api...), il faut pouvoir connaître l'id à passer à la route dynamique.
-
-Il faudra alors exporter la fonction asynchrone **getStaticPaths** qui sera appelée lors de la compilation
-
-````tsx
-// This function gets called at build time
-export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
-  const res = await fetch('https://.../posts')
-  const posts = await res.json()
-
-  // Get the paths we want to pre-render based on posts
-  const paths = posts.map((post) => ({
-    params: { id: post.id },
-  }))
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false }
-}
-````
-
-Il faut aussi dans la page dynamique, exporter **getStaticProps** pour pouvoir requêter les données associées à l'id
-
-````tsx
-export default function Post({ post }) {
-  // Render post...
-}
-
-export async function getStaticPaths() {
-  // ...
-}
-
-// This also gets called at build time
-export async function getStaticProps({ params }) {
-  // params contains the post `id`.
-  // If the route is like /posts/1, then params.id is 1
-  const res = await fetch(`https://.../posts/${params.id}`)
-  const post = await res.json()
-
-  // Pass post data to the page via props
-  return { props: { post } }
 }
 ````
 
