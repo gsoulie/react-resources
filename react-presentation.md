@@ -39,7 +39,8 @@ npm i react-router-dom
 
 # Next
 
-* [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)      
+* [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)
+* [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)      
 
 # React Native
 
