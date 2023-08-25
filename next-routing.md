@@ -20,9 +20,9 @@ pages
   |
   + news
       |
-	  + index.tsx // réprésente la route /news
-	  |
-	  + other.tsx // représente la route /news/other
+      + index.tsx // réprésente la route /news
+      |
+      + other.tsx // représente la route /news/other
  
 ````
 
@@ -34,12 +34,12 @@ pages
   + index.tsx // représente la route /
   |
   + news
-      |
-	  + index.tsx // réprésente la route /news
-	  |
-	  + other
-	      |
-		  + index.tsx // représente la route /news/other
+     |
+     + index.tsx // réprésente la route /news
+     |
+     + other
+     |
+     + index.tsx // représente la route /news/other
  
 ````
 
@@ -59,13 +59,13 @@ pages
   |
   + news
       |
-	  + index.tsx // réprésente la route /news
-	  |
-	  + [newsId].tsx // représente la route /news/1
+      + index.tsx // réprésente la route /news
+      |
+      + [newsId].tsx // représente la route /news/1
   |
   + [productId]
          |
-		 + index.tsx
+	 + index.tsx
  
 ````
 
