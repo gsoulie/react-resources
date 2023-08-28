@@ -199,23 +199,6 @@ export const Tile = ({ concept }: { concept: Concept }) => {
 ````
 </details>
 
-#### Méthode PropsWithChildren
-
-<details>
-	<summary>PropsWithChildren</summary>
-	
-````typescript
-import React, {PropsWithChildren} from 'react';
-
-export interface Props {
-  product: Product;
-}
-
-const ProductDetail = (props: PropsWithChildren<Props>) => {...}
-````
-
-</details>
-
 #### Méthode React.FC
 
 <details>
