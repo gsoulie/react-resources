@@ -75,6 +75,16 @@ export const Hello = ({name, children}: HelloProps) => {
 }  
 ````
 
+*Ecriture alternative*
+
+*Hello.tsx*
+````tsx	
+type HelloProps = { name: string };
+export const Hello = ({name, children}: PropsWithChildren<HelloProps>) => {
+  ...
+}  
+````
+
 boucle for
 
 ````
