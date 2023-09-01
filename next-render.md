@@ -141,7 +141,6 @@ export const getServerSideProps = async (context) => {
 	}
 }
 ````
-</details>
 
 ````getStaticProps()```` est plus appropriée dans les cas où les données de la page ne sont pas souvent mises à jour. A l'inverse, si les données doivent être actualisées à chaque demande de la page, alors il faut privilégier l'usage de ````getServerSideProps````
 
