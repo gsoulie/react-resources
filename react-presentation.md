@@ -40,7 +40,12 @@ npm i react-router-dom
 # Next
 
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)
-* [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)      
+* [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)
+* [Pré-render et Apis](https://github.com/gsoulie/react-resources/blob/master/next-render.md)
+  * getStaticProps
+  * getServerSideProps
+  * getStaticPaths
+  * CRUD Firebase
 
 # React Native
 
