@@ -4,7 +4,8 @@
 
 # Http
 
-* [fetch](#fetch)     
+* [fetch](#fetch)
+* [abortController](#abortcontroller)     
 * [axios](#axios)    
 * [Intercepteur http](#intercepteur-http)     
 
@@ -75,6 +76,34 @@ const res = await fetch('/user', {
   }, []);
 ````
 
+</details>
+
+## abortController 
+
+<details>
+	<summary>Bonne pratique : utilisation du abortController</summary>
+
+ Afin de limiter les risques liés aux requêtes http asynchrones (scenario : envoi requête -> coupure réseau -> utilisateur renvoi une requête avec d'autres param = déphasage à la reconnexion), il est conseillé d'utiliser un ***AbortController**. Ce dernier permet d'annuler toute requête en cours lors d'un problème et ainsi éviter tout problème d'accès concurrent 
+
+````typescript
+const getUser = (signal) => {
+	return fetch('https://<your_url>', {
+		signal: signal,
+	})
+	.then((res) => res.json())
+}
+
+useEffect(() => {
+	const abortController = new AbortController();
+	
+	getUser(abortController.signal)
+	.then((data) => setusers(data));
+	
+	return () => {
+		abortController.abort();
+	}
+}, [])
+````
 </details>
 
 ## Axios
