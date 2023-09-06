@@ -931,6 +931,8 @@ export const deleteAction = async ({ request, params }) => {
 
 *routes.ts*
 ````tsx
+import { action as logoutAction } from "./pages/Logout";
+
 { path: "logout", action: logoutAction },
 ````
 
@@ -1022,6 +1024,8 @@ Dans le fichier *routes.ts* on ajoute une route sans composant, avec pour action
 
 *routes.ts*
 ````typescript
+import { action as logoutAction } from "./pages/Logout";
+
 { path: "logout", action: logoutAction },
 ````
 
