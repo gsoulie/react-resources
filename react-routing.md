@@ -182,9 +182,10 @@ function App() {
 
 *Intégration dans le main.tsx*
 ````typescript
-<RouterProvider router={router}>
-	<App />
-</RouterProvider>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <RouterProvider router={router} />
+);
+
 ````
 
 ### Router Outlet
