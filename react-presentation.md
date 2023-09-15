@@ -35,7 +35,8 @@ npm i react-router-dom
 * [Rendering en dehors de la div root avec React Portal](https://www.youtube.com/watch?v=LyLa7dU5tp8&ab_channel=WebDevSimplified)
 * [Authentification simple et Routage](https://github.com/gsoulie/react-resources/tree/main/projects/authentication-example)     
 * [i18n](https://github.com/gsoulie/react-resources/blob/master/react-i18n.md)
-* [Tests](https://github.com/gsoulie/react-resources/blob/master/react-test.md)     
+* [Tests](https://github.com/gsoulie/react-resources/blob/master/react-test.md)
+* [SVG](https://github.com/gsoulie/react-resources/blob/master/react-svg.md)     
 
 # Next
 
