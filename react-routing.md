@@ -789,14 +789,20 @@ Il suffit ensuite d'assigner cette fonction au loader des pages que l'on souhait
 
 *routes.ts*
 ````tsx
-	children: [
+ {
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    loader: tokenLoader, // <-- Charger le token à chaque changement de route
+    id: "root",
+    children: [
 	  {
 		path: "edit",
 		element: <EditEventPage />,
 		action: manipulateEventAction,
 		loader: checkAuthLoader, // <-- GUARD
 	  },
-	],
+    ],
 },
 {
 	path: "new",
