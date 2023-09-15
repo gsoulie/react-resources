@@ -37,9 +37,9 @@
 
 Une bonne pratique pour la construction du routage consiste à déclarer les routes dans un fichier séparé, en utilisant la fonction ````createBrowserRouter```` de react-router
 
-Voici un exemple complet de définition de routes :
+Voici un exemple complet de définition de routes dans un fichier **tsx (important)** :
 
-*route.ts*
+*route.tsx*
 ````typescript
 export const routes = createBrowserRouter([
   {
@@ -83,7 +83,7 @@ export const routes = createBrowserRouter([
 	
 Le routage précédent n'est pas totalement optimisé, on peut voir que les routes */events/:id* et */events/id/edit* partagent la même racine */events/id* ainsi que le le même loader. On pourrait donc factoriser le code et rajouter un niveau d'imbrication :
 	
-*route.ts*
+*route.tsx*
 ````typescript
 	export const routes = createBrowserRouter([
 	  {
