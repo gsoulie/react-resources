@@ -22,7 +22,8 @@ npm i react-router-dom
   * Variables d'environnement     
   * Déploiement
   * Icons     
-  * Services     
+  * Services
+  * Définir le titre des pages     
 * [Infinite scroll](https://www.youtube.com/watch?v=R1FG54FY-18&ab_channel=Joshtriedcoding)     
 * [Redux](https://github.com/gsoulie/react-resources/blob/master/react-redux.md)     
 * [Hooks](https://github.com/gsoulie/react-resources/blob/master/react-hooks.md)    
