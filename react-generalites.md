@@ -14,7 +14,8 @@
 * [Variables d'environnement](#variables-denvironnement)     
 * [Déploiement](#déploiement)    
 * [Icons](#icons)     
-* [Services](#services)      
+* [Services](#services)
+* [Définir le titre des pages](#définir-le-titre-des-pages)      
 
 ## Principes
 
@@ -465,4 +466,37 @@ export const Player = () => {
 </details>
 
 [Back to top](#généralités)    
+
+## Définir le titre des pages
+
+<details>
+	<summary></summary>
+
+Custom hook
+
+*useDocumentTitle.tsx*
+````typescript
+import { useEffect, useState } from "react";
+
+const useDocumentTitle = (title: string) => {
+  const [document_title, setDocumentTitle] = useState(title);
+  useEffect(() => {
+    document.title = document_title;
+  }, [document_title]);
+
+  return [document_title, setDocumentTitle];
+};
+
+export { useDocumentTitle };
+
+````
+
+*App.tsx*
+````typescript
+export const MainBoard = () => {
+  const [document_title, setDocumentTitle] = useDocumentTitle("Accueil");
+}
+````
+
+</details>
 	
