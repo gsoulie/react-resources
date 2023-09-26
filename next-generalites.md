@@ -2,7 +2,11 @@
 
 # Généralités
 
-* [Navigation](#navigation)     
+* [Installation](#installation)
+* [Architecture recommandée](#architecture-recommandée)
+* [Sass](#sass)
+* [Build](#build)
+* [Next 13](#next-13)    
 
 ## Présentation
 
@@ -49,6 +53,7 @@ styles
   + button.scss
   + colors.scss
   + custom.scss
+  + inputs.scss
   + ... // etc
 public
 ````
@@ -83,6 +88,7 @@ module.exports = nextConfig;
 @import '~bootstrap/scss/mixins/_breakpoints'; // bootstrap
 @import './buttons';
 // Tous les autres imports fichiers locaux sass
+@import './inputs'; 
 @import './custom'; 
 @import './colors'; 
 
