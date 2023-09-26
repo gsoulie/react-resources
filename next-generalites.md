@@ -31,11 +31,69 @@ npx create-next-app@latest --typescript myApp
 > App Router ? No  // Yes = génère le répertoire app sans répertoire pages
 ````
 
-**Using sass**
+## Architecture recommandée
+
+````
+app
+ + components
+ |     |
+ |     + ui
+ |
+ + layout.tsx
+ + page.tsx
+assets  // contient les images que l'on ne souhaite pas exposer publiquement via url
+helpers // contient les services custom
+lib     // contient les custom hooks
+styles
+  + app.scss  // remplace le global.css
+  + button.scss
+  + colors.scss
+  + custom.scss
+  + ... // etc
+public
+````
+
+## Sass
+
+<details>
+  <summary>Configurer le projet en mode sass</summary>
 
 ````
 npm install --save-dev sass
 ````
+
+*next.config.ts*
+
+````typescript
+/** @type {import('next').NextConfig} */
+const path = require("path");
+
+const nextConfig = {  
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+};
+module.exports = nextConfig;
+````
+
+*app.scss*
+````css
+@import '~bootstrap/scss/functions'; // bootstrap
+@import '~bootstrap/scss/variables'; // bootstrap
+@import '~bootstrap/scss/mixins/_breakpoints'; // bootstrap
+@import './buttons';
+// Tous les autres imports fichiers locaux sass
+@import './custom'; 
+@import './colors'; 
+
+// import du fichier principal de la librairie bootstrap 
+// (provenant de node_modules)
+@import '~bootstrap/scss/bootstrap';
+
+// ... définition des styles
+````
+
+</details>
 
 ## Build
 
