@@ -48,7 +48,9 @@ npm i react-router-dom
   * getServerSideProps
   * getStaticPaths
   * CRUD Firebase
-* [SVG](https://github.com/gsoulie/react-resources/blob/master/next-svg.md)     
+* [SVG](https://github.com/gsoulie/react-resources/blob/master/next-svg.md)
+* [SWR](https://github.com/gsoulie/react-resources/blob/master/next-swr.md)
+* [Http](https://github.com/gsoulie/react-resources/blob/master/next-http.md)     
 
 # React Native
 
