@@ -6,11 +6,16 @@
 * [Architecture recommandée](#architecture-recommandée)
 * [Sass](#sass)
 * [Build](#build)
-* [Next 13](#next-13)    
+* [NextTopLoader](#nexttoploader)     
+* [Next 13](#next-13)
+* [Référencement](#référencement)     
 
 ## Présentation
 
-NextJS est un **framework fullstack** pour React. Il permet de rendre le développement de grosses applications plus facile en ajoutant des fonctionnalités et en améliorant certaines autres.
+<details>
+  <summary>NextJS est un framework fullstack pour React</summary>
+
+Il permet de rendre le développement de grosses applications plus facile en ajoutant des fonctionnalités et en améliorant certaines autres.
 
 * support SSR : avantage SEO
 * routage basé sur l'arborescence : moins de code à développer pour gérer le routage
@@ -26,6 +31,14 @@ le contenu est dynamique (comme angular, vue...)
 
 présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart.fr     
 
+</details>
+
+## Stack recommandée
+
+* SWR (= redux / context)
+* react-bootstrap
+* NextTopLoader : https://www.npmjs.com/package/nextjs-toploader
+
 ## Installation
 
 ````
@@ -39,12 +52,20 @@ npx create-next-app@latest --typescript myApp
 
 ````
 app
- + components
- |     |
- |     + ui
+ + layout.tsx  // layout global
+ + page.tsx  // page principale
+ + not-found.tsx // gère le 404
  |
- + layout.tsx
- + page.tsx
+ + user
+ |  + page.tsx // correspond à la route /user
+ |  + layout.tsx // layout custom éventuel
+ + products
+ |  + [productId]
+ |        + page.tsx // correspond à la route /products/<productId>
+ + api 
+
+components
+|   + ui  // contieent les boutons, inputs et autres éléments UI commun à toute l'application
 assets  // contient les images que l'on ne souhaite pas exposer publiquement via url
 helpers // contient les services custom
 lib     // contient les custom hooks
@@ -57,6 +78,32 @@ styles
   + ... // etc
 public
 ````
+
+### Noeud de routage
+
+Dans certains cas on veut pouvoir avoir un layout différent entre plusieurs routes, c'est à dire empêcher l'héritage du layout principal sur toutes les pages. Pour ce faire on utilise des noms de répertoire avec des ````( )````. Un répertoire avec des parenthèse n'est pas considéré comme un segment de route, mais uniquement comme un "noeud de routage".
+
+Dans l'exemple ci-dessous, on souhaite dissocier la partie authentification des autres pages du site, car elle se différencie avec un layout différent. On créé donc 2 noeuds de routage ````(auth) et (dashboard)```` qui possèdent chacun leur layout.
+
+````
+app
+ + (auth)
+ |   + auth
+ |   |   + page.tsx  // correspond à la route "/auth"
+ |   |   + layout.tsx
+ |   + register
+ |   |   + page.tsx  // correspond à la route "/auth/register"    
+ + (dashboard)
+ |     + page.tsx  // correspond à la route "/"
+ |     + layout.tsx  // layout global appliqué à toutes les pages en temps normal
+ |     + not-found.tsx
+ |     + users
+ |         + page.tsx  // correspond à la route "/users"
+````
+
+les nom de répertoire avec ( ) sont à considérer comme des "noeud" de routage pour séparer les layouts. 
+Ils ne sont pas considérés comme des routes mais permettent aux routes de ne pas partager les même layout. 
+Sans ça, le layout principal sera appliqués sur toutes les pages 
 
 ## Sass
 
@@ -112,6 +159,61 @@ npx next export
 ````
 
 -> Génère un répertoire *.out* qu'on va poser sur le serveur
+
+## NextTopLoader
+
+<details>
+	<summary>Gérer un indicateur de chargement de page avec toploader</summary>
+
+https://www.npmjs.com/package/nextjs-toploader
+
+````
+npm i nextjs-toploader
+````
+
+### Utilisation
+
+Dans le layout principal ajouter la balise NextTopLoader dans le body
+
+````typescript
+import NextTopLoader from "nextjs-toploader";
+
+return (
+    <html lang="en">
+      <body className={inter.className}>
+	  
+        <NextTopLoader />
+		
+        <HeaderWrapper />
+        <div className="main-wrapper">{children}</div>
+        <Footer />
+      </body>
+    </html>
+  );
+````
+
+</details>
+
+## Référencement
+
+<details>
+  <summary>Gérer le référencement des pages</summary>
+
+Le code suivant permet d'écarter des pages du référencement google ou autre
+
+````typescript
+export function generateMetadata(): Metadata {
+  return {
+    robots: {
+      follow: false,
+      index: false,
+    },
+  };
+}
+````
+
+</details>
+
 
 # Next 13
 
