@@ -1,6 +1,7 @@
 [< Back to main Menu](https://github.com/gsoulie/react-resources/blob/master/react-presentation.md)    
 
 # Http
+* [Interceptor - Middleware](#interceptor)    
 
 ## Exemple d'utilisation type
 
@@ -59,3 +60,9 @@ const response: Response = await fetch("url", {
   body: JSON.stringify(requestConfig.body) || null,
 });
 ````
+
+## Interceptor
+
+https://nextjs.org/docs/app/building-your-application/routing/middleware
+
+Le middleware permet d'exécuter du code avant qu'une requête ne soit terminée. Ensuite, en fonction de la demande entrante, il est possible de modifier la réponse en réécrivant, en redirigeant, en modifiant les en-têtes de demande ou de réponse, ou en répondant directement.
