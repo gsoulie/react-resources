@@ -52,10 +52,10 @@ npx create-next-app@latest --typescript myApp
 
 ````
 app
- ├── page.tsx	// page principale (/)
- ├── layout.tsx	// layout global
+ ├── page.tsx		// page principale (/)
+ ├── layout.tsx		// layout global
  ├── not-found.tsx	// page 404
- ├── loading.tsx		// composant de loading éventuel
+ ├── loading.tsx	// composant de loading éventuel
  │
  ├── user
  │   └── page.tsx	// page correspondant à la route /user
@@ -85,33 +85,6 @@ styles
  ├── input.scss
  ├── custom.scss
  ├── settings.scss
-
-app
- + layout.tsx  // layout global
- + page.tsx  // page principale
- + not-found.tsx // gère le 404
- |
- + user
- |  + page.tsx // correspond à la route /user
- |  + layout.tsx // layout custom éventuel
- + products
- |  + [productId]
- |        + page.tsx // correspond à la route /products/<productId>
- + api 
-
-components
-|   + ui  // contieent les boutons, inputs et autres éléments UI commun à toute l'application
-assets  // contient les images que l'on ne souhaite pas exposer publiquement via url
-helpers // contient les services custom
-lib     // contient les custom hooks
-styles
-  + app.scss  // remplace le global.css
-  + button.scss
-  + colors.scss
-  + custom.scss
-  + inputs.scss
-  + ... // etc
-public
 ````
 
 ### Noeud de routage
@@ -122,18 +95,24 @@ Dans l'exemple ci-dessous, on souhaite dissocier la partie authentification des 
 
 ````
 app
- + (auth)
- |   + auth
- |   |   + page.tsx  // correspond à la route "/auth"
- |   |   + layout.tsx
- |   + register
- |   |   + page.tsx  // correspond à la route "/auth/register"    
- + (dashboard)
- |     + page.tsx  // correspond à la route "/"
- |     + layout.tsx  // layout global appliqué à toutes les pages en temps normal
- |     + not-found.tsx
- |     + users
- |         + page.tsx  // correspond à la route "/users"
+├── (auth)
+│     ├── auth
+│         ├── [...not-found]
+│         │          └── page.tsx
+│         ├── layout.tsx	// layout spécifique pour la route auth
+│         ├── not-found.tsx
+│         ├── page.tsx		// correspond à la route (/auth)
+│         └── register           
+│                └── page.tsx	// correspond à la route (/auth/register)
+└── (dashboard)
+    ├── [...not-found]
+    │       └── page.tsx
+    ├── page.tsx	// correspond à la route (/)
+    ├── layout.tsx	// layout global
+    ├── not-found.tsx
+    └── user
+          └── page.tsx	// correspond à la route (/user)
+
 ````
 
 les nom de répertoire avec ( ) sont à considérer comme des "noeud" de routage pour séparer les layouts. 
