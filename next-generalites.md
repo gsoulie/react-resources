@@ -6,6 +6,7 @@
 * [Architecture recommandée](#architecture-recommandée)
 * [Sass](#sass)
 * [Build](#build)
+* [Runtime](#runtime)     
 * [NextTopLoader](#nexttoploader)     
 * [Next 13](#next-13)
 * [Référencement](#référencement)     
@@ -173,6 +174,22 @@ npx next export
 ````
 
 -> Génère un répertoire *.out* qu'on va poser sur le serveur
+
+## Runtime
+
+<details>
+	<summary>Gérer le type de runtime selon l'OS de la machine</summary>
+
+En fonction de la machine sur laquelle est déployée l'application (window, mac, linux) il est possible que certaines fonctionnalités ne soient pas accessibles (ex : gestion des cookies).
+Ceci est du à un bug lié au mode **runtime** (par défaut "nodejs"). 
+
+*page.tsx*
+````typescript
+// à positionner APRES tous les imports
+export const runtime = "edge" // pour une machine mac / linux;
+````
+
+</details>
 
 ## NextTopLoader
 
