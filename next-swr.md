@@ -116,6 +116,7 @@ import { swrKeys } from "@/helpers/swrKeys";
 import useSWR from "swr";
 
 const fetcher = async () => {
+  // ==> Appel l'api définie dans le répertoire api
   const response = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + apiRoutes.suppliers,
       { method: 'GET' }
@@ -128,6 +129,30 @@ const useSuppliers = () => {
   return { suppliers: data, error, isLoading, setSuppliers: mutate };
 };
 export default useSuppliers;
+````
+
+Déclaration de l'api 
+
+*app/api/suppliers/route.ts*
+````typescript
+import { routesAPI } from "@/helpers/routesBackendAPI";
+import { useHttp } from "@/lib/hooks/useHttp";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(req: NextRequest, res: NextResponse): Promise<Response> {
+
+  const apiResponse = await useHttp({
+    url: process.env.NEXT_PUBLIC_API_URL + routesAPI.suppliers.getAllAvailable,
+    method: 'GET'
+  });
+  
+  if (apiResponse.err) {
+    console.log('GET suppliers Error', apiResponse.err);
+    return NextResponse.json({ suppliers: null, error: apiResponse.err });
+  }
+
+  return NextResponse.json({ suppliers: apiResponse.data || null });
+}
 ````
 
 S'utilise de la manière suivante dans les composants :
