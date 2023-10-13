@@ -2,6 +2,10 @@
 
 # SWR
 
+* [Présentation](#présentation)
+* [Chargement des données](#chargement-des-données)
+* [Configuration globale](#configuration-blogale)     
+
 * https://swr.vercel.app/docs/getting-started
 * https://paco.me/writing/shared-hook-state-with-swr 
 
@@ -20,7 +24,7 @@ useSWR(<key>, {fallbackData: <objet json ou type de base>})
 
 > Bonne pratique : nommer la key avec un format de type "path" pour éviter toute collision
 
-> Attention : ````useSWR```` n'est accessible que côté client
+> Attention : ````useSWR```` n'est **accessible que côté client**
 
 ## Chargement de données
 
@@ -100,6 +104,36 @@ const handleChangeName = (e) => {
     </div>
   );
 };
+````
+
+### Déclaration swr sous forme de hook
+
+*useSuppliers.tsx*
+````typescript
+import { apiRoutes } from "@/helpers/api-routes";
+import { SupplierDTO } from "@/helpers/models/supplier.model";
+import { swrKeys } from "@/helpers/swrKeys";
+import useSWR from "swr";
+
+const fetcher = async () => {
+  const response = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + apiRoutes.suppliers,
+      { method: 'GET' }
+    );
+  const resultat = await response.json();
+  return resultat?.suppliers as SupplierDTO[] || [];
+};
+const useSuppliers = () => {
+  const { data, mutate, error, isLoading } = useSWR(swrKeys.suppliers, fetcher);
+  return { suppliers: data, error, isLoading, setSuppliers: mutate };
+};
+export default useSuppliers;
+````
+
+S'utilise de la manière suivante dans les composants :
+
+````typescript
+const { suppliers, isLoading, error } = useSuppliers();
 ````
 
 </details>
