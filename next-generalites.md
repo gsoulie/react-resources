@@ -52,6 +52,41 @@ npx create-next-app@latest --typescript myApp
 
 ````
 app
+ ├── page.tsx	// page principale (/)
+ ├── layout.tsx	// layout global
+ ├── not-found.tsx	// page 404
+ ├── loading.tsx		// composant de loading éventuel
+ │
+ ├── user
+ │   └── page.tsx	// page correspondant à la route /user
+ │
+ ├── products	
+ │   ├── page.tsx	// page correspondante à la route /products
+ │   └── [productId]
+ │            └── page.tsx	// page correspondante à la route /products/<productId>
+ │
+ ├── api		// répertoire contenant les api
+ │    └── healthcheck
+ │            └── route.ts
+ │
+components
+ ├── ui		// Contient les boutons, inputs et autres éléments UI communs à toute l'application
+ │
+assets		// Contient les images que l'on ne souhaite pas exposer publiquement via une url (icones...)
+ │
+helpers		// Contient les services custom
+ │
+lib		// Contient les custom hooks
+ │
+styles
+ ├── app.scss	// remplace le global.scss
+ ├── colors.scss
+ ├── button.scss
+ ├── input.scss
+ ├── custom.scss
+ ├── settings.scss
+
+app
  + layout.tsx  // layout global
  + page.tsx  // page principale
  + not-found.tsx // gère le 404
