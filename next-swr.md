@@ -3,7 +3,7 @@
 # SWR
 
 * [Présentation](#présentation)
-* [Chargement des données](#chargement-des-données)
+* [Chargement de données](#chargement-de-données)
 * [Configuration globale](#configuration-blogale)     
 
 * https://swr.vercel.app/docs/getting-started
