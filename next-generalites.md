@@ -50,6 +50,12 @@ npx create-next-app@latest --typescript myApp
 > App Router ? No  // Yes = génère le répertoire app sans répertoire pages
 ````
 
+### Mise à jour 
+
+````
+npm i next@latest
+````
+
 ## Architecture recommandée
 
 ````
