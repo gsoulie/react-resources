@@ -6,6 +6,7 @@
 * [Architecture recommandée](#architecture-recommandée)
 * [Sass](#sass)
 * [Build](#build)
+* [Variables d'environnement](#variables-d-environnement)     
 * [Runtime](#runtime)     
 * [NextTopLoader](#nexttoploader)     
 * [Next 13](#next-13)
@@ -174,6 +175,19 @@ npx next export
 ````
 
 -> Génère un répertoire *.out* qu'on va poser sur le serveur
+
+## Variables d'environnement
+
+les variables d'environnement sont **par défaut accessibles uniquement serveur**. Afin de pouvoir les utiliser côté client, il faut les préfixer par ````NEXT_PUBLIC_````
+
+*.env.production*
+````
+URL_PREFIX="https://www.hello.com"
+BASE_PATH="/hello"
+NEXT_PUBLIC_BASE_URL="https://www.hello.com/my-app"
+NEXT_PUBLIC_API_URL="https://www.hello.com/api/"
+
+````
 
 ## Runtime
 
