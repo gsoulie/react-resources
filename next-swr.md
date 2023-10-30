@@ -19,7 +19,7 @@ SWR peut être utilisé pour la récupération de données http ou bien pour gé
 ````
 useSWR(<key>, <data fetching function>)
 // ou
-useSWR(<key>, {fallbackData: <objet json ou type de base>})
+useSWR(<key>, {fallbackData: <chaîne de caractère>})
 ````
 
 > Bonne pratique : nommer la key avec un format de type "path" pour éviter toute collision
