@@ -417,7 +417,7 @@ const {
 
 useEffect(() => {
 	fetchMovies({url: <your-url>}, transformMovies);
-}, [fetchTasks]);
+}, [fetchMovies]);
 ````
 
 </details>
