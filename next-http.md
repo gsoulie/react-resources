@@ -1,7 +1,8 @@
 [< Back to main Menu](https://github.com/gsoulie/react-resources/blob/master/react-presentation.md)    
 
 # Http
-* [Interceptor - Middleware](#interceptor)    
+* [Interceptor - Middleware](#interceptor)
+* [Middleware](#middleware)    
 
 ## Exemple d'utilisation type
 
@@ -66,3 +67,29 @@ const response: Response = await fetch("url", {
 https://nextjs.org/docs/app/building-your-application/routing/middleware
 
 Le middleware permet d'exécuter du code avant qu'une requête ne soit terminée. Ensuite, en fonction de la demande entrante, il est possible de modifier la réponse en réécrivant, en redirigeant, en modifiant les en-têtes de demande ou de réponse, ou en répondant directement.
+
+## Middleware
+
+<details>
+  <summary>Exemple d'implémentation de middleware</summary>
+
+````typescript
+import { NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
+import { CustomKeys } from './helpers/keys';
+
+export async function middleware(request: NextRequest) {
+
+  const token = request.cookies.get(CustomKeys.token)?.value;  
+
+  if (token) {
+    // const requestHeaders = new Headers(request.headers);
+    // requestHeaders.set('Authorization', `Bearer ${token}`);
+    const newRequest = new NextRequest(request, { headers: { Authorization: `Bearer ${token}` } });
+    return NextResponse.next(newRequest);
+  }
+  
+  return NextResponse.next();
+}
+````
+</details>
