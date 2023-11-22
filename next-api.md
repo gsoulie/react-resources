@@ -2,6 +2,8 @@
 
 # api
 
+* [Template basique](#template-basique)     
+
 Une bonne pratique consiste à créer des api "middleware" qui auront pour role d'effectuer les appels http. De cette manière, les appels http seront "masqués" côté navigateur
 
 Pour pravenir à ceci, il faut utiliser le répertoire ````api```` à l'intérieur du répertoire ````app````
@@ -21,7 +23,9 @@ Une api se définie dans un fichier ````route.ts```` à l'intérieur duquel nous
 
 Le fichier route.ts contiendra alors toutes les méthodes ````GET, POST, PUT, PATCH, DELETE```` de sa route. 
 
-Par exemple : 
+<details>
+  <summary>Exemple d'implémentation</summary>
+
 
 */api/session/route.ts*
 ````typescript
@@ -109,3 +113,41 @@ const response = await fetch(
 ````
 
 > Important : un fichier api pouvant contenir plusieurs méthodes http (POST, GET, DELETE...), il est important de spécifier la méthode voulue lors du fetch pour sélectionner la bonne fonction à exécuter
+</details>
+
+## template basique
+
+<details>
+ <summary>Exemple de template api</summary>
+
+*api/user/route.ts*
+
+````typescript
+export async function GET(req: NextRequest, res: NextResponse): Promise<Response> {
+  try {
+    const response = await fetch('<url>');
+    const data = await response.json();
+
+    return new Response(data, { status: 200 })
+  } catch (error) {
+    return new Response('Erreur du serveur', { status: 500});
+  }
+}
+
+export async function POST(req: NextRequest, res: NextResponse): Promise<Response> {
+  try {
+	const requestData = await req.json();
+    const response = await fetch('<url>', {
+		method: 'POST',
+		body: JSON.stringify(requestData),
+		headers: { 'Content-Type': 'application/json'}
+	});
+    const data = await response.json();
+
+    return new Response(data, { status: 201 })
+  } catch (error) {
+    return new Response('Erreur du serveur', { status: 500});
+  }
+}
+````
+</details>
