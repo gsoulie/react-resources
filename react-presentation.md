@@ -2,6 +2,12 @@
 
 # Next
 
+````
+npx create-next-app@latest --typescript myApp
+> src/ directory ? No
+> App Router ? No  // Yes = génère le répertoire app sans répertoire pages
+````
+
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)
 * [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)
 * [Pré-render et Apis](https://github.com/gsoulie/react-resources/blob/master/next-render.md)
