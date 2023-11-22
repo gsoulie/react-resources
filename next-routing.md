@@ -4,7 +4,8 @@
 
 * [Structure](#structure)
 * [Routes dynamiques](#routes-dynamiques)
-* [Navigation](#navigation)      
+* [Navigation](#navigation)
+* [Récupéartion paramètre url](#récupération-paramètre-url)    
 
 ## Structure
 
@@ -105,5 +106,41 @@ router.push('/details' + props.id);
 ````
 
 </details>
+
+## Récupération paramètre url
+
+Route type : /filters/profession/[professionId]/domain/[domainId]/subDomain/[subDomainId]
+
+````
+filters
+├── profession
+│       └── [professionId]
+│                 ├── page.tsx
+│   	          │
+│                 └── domain
+│                       └── [domainId]
+│                               ├── page.tsx
+│					            └── subDomain
+│                                       └── [subDomainId]
+│                                                 └── page.tsx
+````
+
+composant page : 
+
+````typescript
+const ProfessionPage = async ({ params }: { params: { slug: string } }) => {
+
+  return <FilterClient params={params} />;
+};
+````
+
+composant client
+
+````typescript
+export const FilterClient = (props: any) => {
+
+  const { professionId, domainId, subDomainId } = props?.params || null;  
+}
+````
 
 [Back top top](#routing)    
