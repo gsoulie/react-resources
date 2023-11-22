@@ -113,6 +113,7 @@ const response = await fetch(
 ````
 
 > Important : un fichier api pouvant contenir plusieurs méthodes http (POST, GET, DELETE...), il est important de spécifier la méthode voulue lors du fetch pour sélectionner la bonne fonction à exécuter
+> 
 </details>
 
 ## template basique
