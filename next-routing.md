@@ -5,7 +5,8 @@
 * [Structure](#structure)
 * [Routes dynamiques](#routes-dynamiques)
 * [Navigation](#navigation)
-* [Récupéartion paramètre url](#récupération-paramètre-url)    
+* [Récupéartion paramètre url](#récupération-paramètre-url)
+* [Routage multiple avec page unique](#routage-multiple-avec-page-unique)    
 
 ## Structure
 
@@ -144,3 +145,39 @@ export const FilterClient = (props: any) => {
 ````
 
 [Back top top](#routing)    
+
+## Routage multiple avec page unique
+
+<details>
+	<summary>Dans certains cas, on peut vouloir accéder à une même page depuis différentes routes (afin d'éviter de créer plusieurs pages identiques et 
+avoir un chargement pour chacune)
+</summary>
+
+ Soit les routes suivantes :
+
+/search/product/profession/12345
+/search/product/profession/12345/domain/445
+/search/product/profession/12345/domain/445/subDomain/6
+
+On souhaite que toute ces routes pointent vers la même page, mais exécutent une requête différente en fonction des paramètres fournis
+
+Pour éviter de créer 3 pages qui feraient la même chose, et n'ayant que la requête de fetch différente, il suffit de créer l'arborescence suivante :
+
+app/search/product/[[...params]]/page.tsx
+
+ATTENTION les paramètres sont récupérés sous forme d'un tableau ['profession', '12345', 'domain', '445', 'subDomain', '6']
+
+````typescript
+const page = async ({ params }) => {
+  console.log("params", params);
+
+  return (
+    <>
+      ...
+    </>
+  );
+};
+export default page;
+````
+
+</details>
