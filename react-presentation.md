@@ -52,7 +52,8 @@ npm i react-router-dom
 * [SVG](https://github.com/gsoulie/react-resources/blob/master/next-svg.md)
 * [SWR](https://github.com/gsoulie/react-resources/blob/master/next-swr.md)
 * [Http](https://github.com/gsoulie/react-resources/blob/master/next-http.md)
-* [Page not-found](https://github.com/gsoulie/react-resources/blob/master/next-not-found.md)     
+* [Page not-found](https://github.com/gsoulie/react-resources/blob/master/next-not-found.md)
+* [Checkbox](https://github.com/gsoulie/react-resources/blob/master/next-checkbox.md)      
 
 # React Native
 
