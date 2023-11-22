@@ -20,7 +20,8 @@ npx create-next-app@latest --typescript myApp
 * [SWR](https://github.com/gsoulie/react-resources/blob/master/next-swr.md)
 * [Http](https://github.com/gsoulie/react-resources/blob/master/next-http.md)
 * [Page not-found](https://github.com/gsoulie/react-resources/blob/master/next-not-found.md)
-* [Checkbox](https://github.com/gsoulie/react-resources/blob/master/next-checkbox.md)      
+* [Checkbox](https://github.com/gsoulie/react-resources/blob/master/next-checkbox.md)
+* [Image](https://github.com/gsoulie/react-resources/blob/master/next-images.md)
 
 # React
 
