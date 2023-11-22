@@ -41,6 +41,12 @@ présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart
 * react-bootstrap
 * NextTopLoader : https://www.npmjs.com/package/nextjs-toploader
 
+## Bonnes pratiques
+
+* Il est fortement conseillé de déclarer toutes les pages serveur en asynchrone et de créer au même niveau un composant client pour gérer les traitements clients s'il y en a.
+* Toujours faire **un maximum d'appels http côté serveur**
+* Utilise *SWR* uniquement sur les éléments **fréquemment mis à jour** car il est très gourmand et il est **asynchrone** ce qui peut poser quelques difficultés d'utilisation si un traitement nécessite les données issues du swr
+
 ## Installation
 
 ````
@@ -218,6 +224,8 @@ export const runtime = "edge" // pour une machine mac / linux;
 
 https://www.npmjs.com/package/nextjs-toploader
 
+Alternative : https://github.com/Skyleen77/next-nprogress-bar
+
 ````
 npm i nextjs-toploader
 ````
@@ -241,6 +249,29 @@ return (
       </body>
     </html>
   );
+````
+
+### Bug des liens de type anchor "#"
+
+Un clic sur des liens de type "#" déclenche le toploader alors qu'on ne navigue sur aucune page. Pour contourner ce bug :
+
+````typescript
+  const handlePaginationClick = (e, page: number) => {
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+
+    // traitement callback custom
+    onPageChange(page);
+  }
+  
+  
+   <Pagination.Item
+	key={index}
+	active={page === currentPage}
+	onClick={(e) => handlePaginationClick(e, page)}
+  >
+	{page}
+  </Pagination.Item>
 ````
 
 </details>
