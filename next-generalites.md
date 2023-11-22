@@ -2,6 +2,7 @@
 
 # Généralités
 
+* [Bonnes pratiques](#bonnes-pratiques)     
 * [Installation](#installation)
 * [Architecture recommandée](#architecture-recommandée)
 * [Sass](#sass)
@@ -46,6 +47,8 @@ présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart
 * Il est fortement conseillé de déclarer toutes les pages serveur en asynchrone et de créer au même niveau un composant client pour gérer les traitements clients s'il y en a.
 * Toujours faire **un maximum d'appels http côté serveur**
 * Utilise *SWR* uniquement sur les éléments **fréquemment mis à jour** car il est très gourmand et il est **asynchrone** ce qui peut poser quelques difficultés d'utilisation si un traitement nécessite les données issues du swr
+* DTO / classes : utiliser class-validator de typescript et class-transformer
+* Formulaires : utiliser react-form avec yup
 
 ## Installation
 
