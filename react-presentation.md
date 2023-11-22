@@ -1,5 +1,21 @@
 [< Back to main Menu](https://github.com/gsoulie/Mobile-App-Development)    
 
+# Next
+
+* [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)
+* [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)
+* [Pré-render et Apis](https://github.com/gsoulie/react-resources/blob/master/next-render.md)
+  * getStaticProps
+  * getServerSideProps
+  * getStaticPaths
+  * CRUD Firebase
+* [api](https://github.com/gsoulie/react-resources/blob/master/next-api.md)     
+* [SVG](https://github.com/gsoulie/react-resources/blob/master/next-svg.md)
+* [SWR](https://github.com/gsoulie/react-resources/blob/master/next-swr.md)
+* [Http](https://github.com/gsoulie/react-resources/blob/master/next-http.md)
+* [Page not-found](https://github.com/gsoulie/react-resources/blob/master/next-not-found.md)
+* [Checkbox](https://github.com/gsoulie/react-resources/blob/master/next-checkbox.md)      
+
 # React
 
 *Création d'un projet*
@@ -38,22 +54,6 @@ npm i react-router-dom
 * [i18n](https://github.com/gsoulie/react-resources/blob/master/react-i18n.md)
 * [Tests](https://github.com/gsoulie/react-resources/blob/master/react-test.md)
 * [SVG](https://github.com/gsoulie/react-resources/blob/master/react-svg.md)     
-
-# Next
-
-* [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)
-* [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)
-* [Pré-render et Apis](https://github.com/gsoulie/react-resources/blob/master/next-render.md)
-  * getStaticProps
-  * getServerSideProps
-  * getStaticPaths
-  * CRUD Firebase
-* [api](https://github.com/gsoulie/react-resources/blob/master/next-api.md)     
-* [SVG](https://github.com/gsoulie/react-resources/blob/master/next-svg.md)
-* [SWR](https://github.com/gsoulie/react-resources/blob/master/next-swr.md)
-* [Http](https://github.com/gsoulie/react-resources/blob/master/next-http.md)
-* [Page not-found](https://github.com/gsoulie/react-resources/blob/master/next-not-found.md)
-* [Checkbox](https://github.com/gsoulie/react-resources/blob/master/next-checkbox.md)      
 
 # React Native
 
