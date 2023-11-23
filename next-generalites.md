@@ -260,8 +260,8 @@ Un clic sur des liens de type "#" déclenche le toploader alors qu'on ne navigue
 
 ````typescript
   const handlePaginationClick = (e, page: number) => {
-    e.preventDefault();
-    e.nativeEvent.stopImmediatePropagation();
+    e.preventDefault();		// trick
+    e.nativeEvent.stopImmediatePropagation();	// trick
 
     // traitement callback custom
     onPageChange(page);
