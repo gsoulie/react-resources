@@ -11,7 +11,8 @@
 * [Runtime](#runtime)     
 * [NextTopLoader](#nexttoploader)     
 * [Next 13](#next-13)
-* [Référencement](#référencement)     
+* [Référencement](#référencement)
+* [Type générique T](#type-générique-t)    
 
 ## Présentation
 
@@ -474,3 +475,16 @@ La fonction ````getServerSideProps```` ne peut être exécutée que côté **ser
   
 </details>
 
+## Type générique T
+
+Voici comment écrire une arrow fonction avec type ````<T>```` dans un fichier TSX
+
+````typescript
+// méthode classique avec function
+function useSortableData<T>(items: T[], config = null) { }
+
+// méthode avec arrow function
+const useSortableDataT = <T extends React.ReactNode>(items: T[], config = null) => { }
+````
+
+**Explication** : Les fichiers TSX interprètent les balises html, de fait, déclarer le type générique avec ````<T>```` dans une arrow fonction lève une erreur. Il est donc nécessaire de lui ajouter ````extends React.ReactNode```` si l'on souhaite utiliser l'écriture arrow function
