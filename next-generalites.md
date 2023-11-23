@@ -51,6 +51,105 @@ présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart
 * DTO / classes : utiliser class-validator de typescript et class-transformer
 * Formulaires : utiliser react-form avec yup
 
+### Bonnes pratiques utilisation pages serveur
+
+<details>
+	<summary>L'objectif est de toujours réaliser les requêtes côté serveur et de passer les données + filtres éventuels au composant client 
+afin de limiter au maximum l'utilisation de state / effect.</summary>
+
+Côté client, le but consiste à mettre à jour les paramètres de route (dans l'url) à chaque modification de filtre ou autre,
+et à refaire un router.push() ou router.redirect().
+
+De cette manière, on revient sur la page (serveur) qui va récupérer les nouveaux paramètres (filtrage etc...) et relancer une requête.
+
+> A noter, cette méthode ne recharge pas toute la page, mais uniquement son state interne, ce qui est optimisé
+
+*app/search/page.tsx*
+
+````typescript
+export type DataParams = {
+	token?: string,
+	page?: number,
+	size?: number,
+	sortBy?: string,
+	total?: number,
+	categories?: FilterCatregoryType,
+	...
+}
+
+export default async ProductPage = ({params, searchParams}: {params: {lang: Locale}, searchParams?: {[key: string]: string | string[] | undefined}}) => {
+	if (isEmpty(searchParams.page) || isEmpty(searchParams.size) || isEmpty(searchParams.sortBy)) {
+		const destination: string = `/products?page=1&size=10&sortBy=supplier`;
+		
+		return redirect(destination);
+	}
+	
+	const apiEndpoint: string = process.env.NEXT_PUBLIC_API_URL;
+	const cookieStore = cookies();
+	const token: string = cookieStore.get('token')?.value;
+	
+	// APPEL HTTP
+	const httpResponseData = ...
+	
+	const data: DataParams = {
+		token: token | null,
+		total: httpResponseData?.total,
+		page: Number(searchParams.page),
+		size: Number(searchParams.size),
+		sortBy: String(searchParams.sortBy),
+		categories: httpResponseData?.categories || null
+	}
+	
+	return (
+		<>
+			<ProductsPageClient apiEndpoint={apiEndpoint} data={data}/>
+		</>
+	)
+	
+}
+````
+
+*app/search/client.tsx*
+
+````typescript
+// ...
+// affichage des datas...
+
+<ProductFilters totalResults={total} filters={filters} />
+````
+
+*components/Search/ProductFilters.tsx*
+
+````typescript
+import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
+
+const ProductFilters = <{totalResults: number, filters}>({titalResults, filters]) => {
+	const searchParams: ReadonlyURLSearchParams = useSearchParams();
+	const router = useRouter();
+	const pathname = usePathname();
+	const [itemsPerPage, setItemsPerPage] = useState(filters.size || 50);
+	const [currentPage, setCurrentPage] = useState(filters.page || 1);
+	const itemOrderList: SearchRequestSortOrder[] = [SearchRequestSortOrder.ASC, SearchRequestSortOrder.DESC];
+	const [sortBy, setSortBy] = useState(filters.sortBy || '');
+	
+	const onUpdateFilter = (
+	page: number = 1,
+	itemsPerPageParams: number,
+	sortByVal: SearchRequestSortOrder | string): void => {
+		const newParams: URLSearchParams = new URLSearchParams(searchParams.toString());
+		
+		newParams.set('page', page.toString());
+		newParams.set('size', itemsPerPage.toString());
+		newParams.set('sortBy', sortByVal.toString());
+		
+		const url: string = `${pathname}/?${newParams.toString()}`;
+		
+		router.push(url);
+	}
+}
+````
+</details>
+
 ## Installation
 
 ````
