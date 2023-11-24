@@ -592,7 +592,7 @@ Voici comment écrire une arrow fonction avec type ````<T>```` dans un fichier T
 function useSortableData<T>(items: T[], config = null) { }
 
 // méthode avec arrow function
-const useSortableDataT = <T extends React.ReactNode>(items: T[], config = null) => { }
+const useSortableDataT = <T,>(items: T[], config = null) => { }
 ````
 
-**Explication** : Les fichiers TSX interprètent les balises html, de fait, déclarer le type générique avec ````<T>```` dans une arrow fonction lève une erreur. Il est donc nécessaire de lui ajouter ````extends React.ReactNode```` si l'on souhaite utiliser l'écriture arrow function
+**Explication** : Les fichiers TSX interprètent les balises html, de fait, déclarer le type générique avec ````<T>```` dans une arrow fonction lève une erreur. Il est donc nécessaire de lui ajouter ````,```` si l'on souhaite utiliser l'écriture arrow function
