@@ -130,7 +130,7 @@ export default async ProductPage = ({
 ````typescript
 import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-const ProductFilters = <{totalResults: number, filters}>({titalResults, filters]) => {
+const ProductFilters: React.FC<{ totalResults: number, filters: any }> = ({ totalResults, filters }) => {
 	const searchParams: ReadonlyURLSearchParams = useSearchParams();
 	const router = useRouter();
 	const pathname = usePathname();
