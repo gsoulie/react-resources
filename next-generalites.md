@@ -64,6 +64,8 @@ De cette manière, on revient sur la page (serveur) qui va récupérer les nouve
 
 > A noter, cette méthode ne recharge pas toute la page, mais uniquement son state interne, ce qui est optimisé
 
+> Exemple fonctionnel : https://github.com/gsoulie/react-resources/tree/main/next-server-page-best-practices     
+
 *app/search/page.tsx*
 
 ````typescript
