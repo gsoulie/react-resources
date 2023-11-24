@@ -77,7 +77,14 @@ export type DataParams = {
 	...
 }
 
-export default async ProductPage = ({params, searchParams}: {params: {lang: Locale}, searchParams?: {[key: string]: string | string[] | undefined}}) => {
+export default async ProductPage = ({
+	params,
+	searchParams
+}:
+{
+	params: {lang: Locale},
+	searchParams?: {[key: string]: string | string[] | undefined}
+}) => {
 	if (isEmpty(searchParams.page) || isEmpty(searchParams.size) || isEmpty(searchParams.sortBy)) {
 		const destination: string = `/products?page=1&size=10&sortBy=supplier`;
 		
