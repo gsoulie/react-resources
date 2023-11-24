@@ -2,11 +2,12 @@ import { Contact } from "@/helpers/models/users.model";
 import { routes } from "@/helpers/routes";
 import { Texts } from "@/helpers/texts/texts"
 import { getApiUrl } from "@/helpers/utils/utils.service";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import ArrowUp from '@/assets/icons/chevronH.svg';
 import ArrowDown from "@/assets/icons/chevronB.svg";
 import { Button } from "@/components/ui/buttons/Button";
+import { useSortableData } from "@/helpers/utils/useTableSort";
 
 export type Contact = {
   id: number;
@@ -48,56 +49,9 @@ const dummyContacts: Contact[] = [
 ];
 
 
-export type SortDirection = 'ascending' | 'descending';
-export type SortConfig = {
-  key: string;
-  direction: SortDirection;
-} | null;
-
-function useSortableData<T>(items: T[], config = null) {
-  const [sortConfig, setSortConfig] = useState<SortConfig>(config);
-
-  const sortedItems = useMemo(() => {
-    let sortableItems = [...items];
-    if (sortConfig !== null) {
-      sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return sortableItems;
-  }, [items, sortConfig]);
-
-  const requestSort = (key: string) => {
-    let direction: SortDirection = "ascending";
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "ascending"
-    ) {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
-  };
-
-  return { items: sortedItems, requestSort, sortConfig };
-};
-
 export const Contacts = () => {
 
-  const { items, requestSort, sortConfig } = useSortableData<Contact>(dummyContacts);
-  
-  const getClassNamesFor = (name: string): SortDirection | undefined => {
-    if (!sortConfig) {
-      return undefined;
-    }
-    return sortConfig.key === name ? sortConfig.direction : undefined;
-  };
+  const { items, requestSort, sortConfig, getClassNamesFor } = useSortableData<Contact>(dummyContacts);  
 
   return (
     <div>
