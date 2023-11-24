@@ -24,6 +24,7 @@ npx create-next-app@latest --typescript myApp
 * [Page not-found](https://github.com/gsoulie/react-resources/blob/master/next-not-found.md)
 * [Checkbox](https://github.com/gsoulie/react-resources/blob/master/next-checkbox.md)
 * [Images](https://github.com/gsoulie/react-resources/blob/master/next-images.md)
+* [Composant table avec tri sur colonne](https://github.com/gsoulie/react-resources/blob/main/next-server-page-best-practices/react-custom-table-with-sorting/Contacts.tsx)      
 
 # React
 
