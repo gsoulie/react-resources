@@ -5,7 +5,7 @@ import { predicateBy } from '@/helpers/utils/utils.service';
 
 export const isEmpty = (val: any) => val == null || !(Object.keys(val) || val).length;
 
-const dummy = [
+const products = [
   {
     id: 1,
     name: "tube acier 32mm",
@@ -60,7 +60,7 @@ const TestPage = async ({
       return redirect(destination);
     }
 
-    const apiEndpoint: string = "gecet.api"; //process.env.NEXT_PUBLIC_API_URL;
+    const apiEndpoint: string = "my.api"; //process.env.NEXT_PUBLIC_API_URL;
     // const cookieStore = cookies();
     // const token: string = cookieStore.get('token')?.value;
 
@@ -75,7 +75,7 @@ const TestPage = async ({
         items: { id: number; name: string; supplier: string; page: number }[];
       } = { total: 0, items: [] };
       
-      let res = dummy.filter(d => d.page === Number(searchParams?.page ?? 1))
+      let res = products.filter(d => d.page === Number(searchParams?.page ?? 1))
         
       if (searchParams?.sortBy) {
         res = res.sort(predicateBy(searchParams?.sortBy.toString()));
