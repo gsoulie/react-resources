@@ -3,7 +3,9 @@
 # Images
 
 * [Utilisation du composant Image](#utilisation-du-composant-image)
-* [Image background](#image-background)     
+* [Image background](#image-background)
+* [Image 404](#image-404)    
+* [Problème de cache image](#problème-de-cache-image)     
 
 ## Utilisation du composant Image
 
@@ -104,4 +106,28 @@ const ProductPhoto = (props: { image: string, alt: string }) => {
 }
 ````
 
+</details>
+
+## Problème de cache image
+
+<details>
+	<summary>Problème de cache image, parfois les images affichées ne sont pas les bonnes. ceci à ccause du cache</summary>
+
+````typescript
+<Link
+    href={image}
+    rel="preload"	// <--- ajout
+    className="profession-tile-link"
+    style={{ position: "relative" }}
+  >
+    <Image
+      src={image}
+      alt={`Logo`}
+      fill
+      sizes="100%"
+      priority
+      className="profession-tile__image"
+    />
+  </Link>
+````
 </details>
