@@ -23,7 +23,7 @@ Image with src "<image-source-url>" has "fill" and parent element with invalid "
 
 Il faut aussi configurer la div parent comme ayant une position relative.
 
-````
+````html
 <div style={{ position: "relative" }}>
   <Image
       src={props.url}
