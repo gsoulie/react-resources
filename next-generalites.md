@@ -593,6 +593,10 @@ function useSortableData<T>(items: T[], config = null) { }
 
 // méthode avec arrow function
 const useSortableDataT = <T,>(items: T[], config = null) => { }
+
+
+// Appel
+const { items, requestSort, getClassNamesFor } = useSortableData<AddressDTO>(data ?? []);
 ````
 
 **Explication** : Les fichiers TSX interprètent les balises html, de fait, déclarer le type générique avec ````<T>```` dans une arrow fonction lève une erreur. Il est donc nécessaire de lui ajouter ````,```` si l'on souhaite utiliser l'écriture arrow function
