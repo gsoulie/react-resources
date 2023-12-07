@@ -13,7 +13,7 @@ const POSTAL_CODE_REGEX = /^(?:[0-8]\d|9[0-8])\d{3}$/g;
 
 // definition du schéma
 const schema = yup.object().shape({
-  addressLine1: yup.string().required("Le champ adresse ligne 1 est requis").default(""),
+  addressLine1: yup.string().trim().required("Le champ adresse ligne 1 est requis").default(""),
   addressLine2: yup.string().default(""),
   addressLine3: yup.string().default(""),
   postalCode: yup.string().matches(POSTAL_CODE_REGEX, "Le code postal n'est pas au bon format"),
