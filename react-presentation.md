@@ -25,7 +25,7 @@ npx create-next-app@latest --typescript myApp
 * [Checkbox](https://github.com/gsoulie/react-resources/blob/master/next-checkbox.md)
 * [Images](https://github.com/gsoulie/react-resources/blob/master/next-images.md)
 * [Composant table avec tri sur colonne](https://github.com/gsoulie/react-resources/blob/main/next-server-page-best-practices/react-custom-table-with-sorting/Contacts.tsx)
-* [Formulaires](https://github.com/gsoulie/react-resources/blob/master/next-forms.md)     
+* [Formulaires - ReactForm et Yup](https://github.com/gsoulie/react-resources/blob/master/next-forms.md)     
 
 # React
 
