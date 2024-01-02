@@ -9,6 +9,7 @@ npx create-next-app@latest --typescript myApp
 ````
 
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)
+  * [react-bootstrap classes display](https://getbootstrap.com/docs/5.1/utilities/flex/)     
 * [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)
 * [Pré-render et Apis](https://github.com/gsoulie/react-resources/blob/master/next-render.md)
   * getStaticProps
