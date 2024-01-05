@@ -4,6 +4,9 @@
 
 ## Formulaire avec Yup et React form
 
+<details>
+  <summary>Exemple global</summary>
+
 ````typescript
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -132,3 +135,29 @@ export const AddressForm = (props: { address: AddressDTO }) => {
 ````
 
 > IMPORTANT : le nom des champs bindés et le nom des champs Input **doit** être le même que les noms des champs du schema yup
+  
+</details>
+
+
+## Paramétrage du schema yup
+
+<details>
+  <summary>Configuration des champs du schéma</summary>
+
+````typescript
+const POSTAL_CODE_REGEX = /^(?:[0-8]\d|9[0-8])\d{3}$/g;
+
+// definition du schéma
+const schema = yup.object().shape({
+  addressLine1: yup.string().trim().required("Le champ adresse ligne 1 est requis").default(""),
+  addressLine2: yup.string().default(""),
+  addressLine3: yup.string().default(""),
+  postalCode: yup.string().matches(POSTAL_CODE_REGEX, "Le code postal n'est pas au bon format"),
+  phone: yup.string().matches(PHONE_CODE_REGEX, { message: "Le code postal n'est pas au bon format", excludeEmptyString: true }),  // <-- ne pas activer le contrôle sir le champ est vide (sinon rend le champ obligatoire)
+  city: yup.string(),
+});
+
+````
+ 
+</details>
+
