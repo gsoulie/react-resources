@@ -524,7 +524,9 @@ ici, le traitement du useEffect sera déclenché une première fois à l'initial
 
 <img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Si aucune dépendance n'est ajoutée en second paramètre, alors la fonction sera exécutée à chaque fois qu'un state du composant sera mis à jour
 
- **Si un tableau vide** est fourni en second paramètre, cela indique "aucune dépendance" au hook, de ce fait la fonction passée en premier paramètre ne sera exécuté que lors du montage et démontage du composant. Comme un ngOnInit sous Angular
+ > **Si un tableau vide** est fourni en second paramètre, cela indique "aucune dépendance" au hook, de ce fait la fonction passée en premier paramètre ne sera exécuté que lors du montage et démontage du composant. Comme un ngOnInit sous Angular
+
+ > **Si rien n'est passé en second paramètre** alors le hook sera joué tout le temps, peut importe s'il contient une dépendance ou non. Ce cas d'usage est à prendre avec beaucoup de précaution !
 
 <img src="https://img.shields.io/badge/ATTENTION-DD0031.svg?logo=LOGO"> il est **très** important de noter que l'exécution du *useEffect* intervient aussi à l'initialisation de la valeur du state !!  
  
