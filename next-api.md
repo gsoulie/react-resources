@@ -155,3 +155,47 @@ export async function POST(req: NextRequest, res: NextResponse): Promise<Respons
 }
 ````
 </details>
+
+<details>
+	<summary>Template POST</summary>
+
+````typescript
+export async function POST(req: NextRequest, res: NextResponse): Promise<Response> {
+  const cookieStore = cookies();
+  const tokenCookie = cookieStore.get(CustomKeys.token);
+  const headers = getHttpHeader(tokenCookie);
+
+  Object.assign(headers, { "Content-Type": "application/json" });
+  Object.assign(headers, { Accept: "application/json" });
+
+  const body = await req.json();
+
+  try {
+
+    const company = body?.company;
+    const url = "https://<url>";
+
+    const httpResponse: Response = await fetch(url, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body?.company)
+    });
+
+    if (httpResponse.ok) {
+      if (httpResponse.status === 200) {
+        return NextResponse.json({ data: (await httpResponse.json()) as CompanyDTO || null })
+      } else {
+        return NextResponse.json({ data: null, error: { status: httpResponse.status, statusText: httpResponse.statusText } })
+      }
+    } else {
+      const { status, statusText } = await httpResponse;
+      throw { err: { status, statusText }, data: null };
+    }
+
+  } catch (e: any) {
+    throw { err: { status: e?.err.status ?? 500, statusText: e?.err?.statusText ?? 'Server error' }, data: null };
+  }
+}
+````
+</details>
+
