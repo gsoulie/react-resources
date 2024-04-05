@@ -124,8 +124,9 @@ const fetcher = async () => {
   const resultat = await response.json();
   return resultat?.suppliers as SupplierDTO[] || [];
 };
+
 const useSuppliers = () => {
-  const { data, mutate, error, isLoading } = useSWR(swrKeys.suppliers, fetcher);
+  const { data, mutate, error, isLoading } = useSWR(swrKeys.suppliers, fetcher, { refreshInterval: 60000, revalidateOnFocus: true });
   return { suppliers: data, error, isLoading, setSuppliers: mutate };
 };
 export default useSuppliers;
