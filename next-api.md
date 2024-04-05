@@ -125,6 +125,9 @@ const response = await fetch(
 
 ````typescript
 export async function GET(req: NextRequest, res: NextResponse): Promise<Response> {
+  Object.assign(headers, { "Content-Type": "application/json" });
+  Object.assign(headers, { Accept: "application/json" });
+
   try {
     const response = await fetch('<url>');
     const data = await response.json();
