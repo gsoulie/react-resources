@@ -12,7 +12,8 @@
 * [NextTopLoader](#nexttoploader)     
 * [Next 13](#next-13)
 * [Référencement](#référencement)
-* [Type générique T](#type-générique-t)    
+* [Type générique T](#type-générique-t)
+* [Configuration eslint](#configuration-eslint)     
 
 ## Présentation
 
@@ -617,3 +618,37 @@ const { items, requestSort, getClassNamesFor } = useSortableData<AddressDTO>(dat
 ````
 
 **Explication** : Les fichiers TSX interprètent les balises html, de fait, déclarer le type générique avec ````<T>```` dans une arrow fonction lève une erreur. Il est donc nécessaire de lui ajouter ````,```` si l'on souhaite utiliser l'écriture arrow function
+
+## Configuration ESlint
+
+<details>
+	<summary>Exemple de fichier .eslintrc.json</summary>
+
+*.eslintrc.json*
+````json
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "react/display-name": 0,
+    "react/prop-types": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "@typescript-eslint/indent": 0,
+    "@typescript-eslint/member-delimiter-style": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "no-console": [
+      2,
+      {
+        "allow": ["warn", "error"]
+      }
+    ]
+  }
+}
+
+````
+
+</details>
+
