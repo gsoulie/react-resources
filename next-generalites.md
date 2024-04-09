@@ -254,7 +254,24 @@ Sans ça, le layout principal sera appliqués sur toutes les pages
 npm install --save-dev sass
 ````
 
-*next.config.ts*
+*next.config.mjs*
+````typescript
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const nextConfig = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+};
+
+export default nextConfig;
+````
+
+OU *next.config.ts*
 
 ````typescript
 /** @type {import('next').NextConfig} */
