@@ -4,8 +4,12 @@
 
 ````
 npx create-next-app@latest --typescript myApp
-> src/ directory ? No
-> App Router ? No  // Yes = génère le répertoire app sans répertoire pages
+
+√ Would you like to use ESLint? ... Yes
+√ Would you like to use Tailwind CSS? ... No
+√ Would you like to use `src/` directory? ... No
+√ Would you like to use App Router? (recommended) ... No // Sinon "Yes" ne génère pas le rép app mais un rép pages à la place
+√ Would you like to customize the default import alias (@/*)? ... No
 ````
 
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)
