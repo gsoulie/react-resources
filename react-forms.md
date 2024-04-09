@@ -7,6 +7,8 @@
 
 ## Méthode avec champ uncontrolled
 
+**ATTENTION** : à placer dans un composant **client** avec ````"use client"````
+
 Cettte méthode est à privilégier dans la majorité des cas car elle ne procède pas à un repaint du composant à chaque saisie et c'est le dom qui gère tout seul les données
 
 ````tsx
