@@ -78,7 +78,7 @@ export const config = {
 
 ## Exemple
 
-Le middleware suivant, se déclenche lorsque le matcher "/api" est appelé. En d'autres termes, si on essaye de naviguer vers une route contenant "/api/...", le middleware redirige automatiquement vers la page /login
+Le middleware suivant, se déclenche lorsque le matcher détecte qu'une route "/api/..." ou "/dashboard/..." ou "/admin/..." est appelée. Le middleware redirige ensuite automatiquement vers la page /login si aucun token n'est présent
 
 ````typescript
 export function middleware(request: NextRequest) {
@@ -91,6 +91,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/:path*"]
+  matcher: ["/api/:path*", "/dashboard/:path*", "/admin/:path*"]
 }
 ````
