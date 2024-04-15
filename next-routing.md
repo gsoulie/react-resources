@@ -99,6 +99,39 @@ Next propose aussi un balise ````<Link>```` comme *react-router-dom* pour la nav
 <li>
 ````
 
+Gérer une classe "active" 
+
+````typescript
+'use client'
+ 
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+ 
+export function Links() {
+  const pathname = usePathname()
+ 
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link className={`link ${pathname === '/' ? 'active' : ''}`} href="/">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`link ${pathname === '/about' ? 'active' : ''}`}
+            href="/about"
+          >
+            About
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  )
+}
+````
+
 **Naviguer par code**
 
 ````typescript
