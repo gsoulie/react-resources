@@ -23,8 +23,7 @@ export function AddToFavoritesButton({ id }) {
 }
 ````
 
-autre exemple
-
+*Exemple - Interaction avec formulaire*
 ````typescript
 async function create(formData: FormData) {
   'use server';
@@ -44,8 +43,7 @@ export default function Page() {
 }
 ````
 
-Interaction directe avec la BDD (prisma)
-
+*Exemple - Interaction directe avec la BDD (prisma)*
 ````typescript
 import { prisma } from "@/db/db";
 
@@ -57,7 +55,7 @@ export default function Page() {
 
     const content = formData.get('content');
 
-    prisma.todo.create({
+    await prisma.todo.create({
         data: { content: content as string }
     })
   }
