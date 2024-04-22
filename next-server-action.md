@@ -58,6 +58,8 @@ export default function Page() {
     await prisma.todo.create({
         data: { content: content as string }
     })
+
+    revalidatePath('/todos');    // Important : invalider les data en cache pour redéclencher le chargement des données
   }
   return (
     <form action={addTodo}>
