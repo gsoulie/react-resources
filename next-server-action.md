@@ -2,7 +2,7 @@
 
 # Server actions
 
-Next 13.4 introduit les *server actions*, qui permettent d'exécuter du code serveur depuis un composant client.
+Next 13.4 introduit les *server actions*, qui permettent d'exécuter du code serveur depuis un composant client. Tout code nécessitant d'être joué côté serveur, doit donc être préfixé par ````'use server'````
 
 Voici  par exemple un bouton qui exécute un fetch depuis un formulaire
 
@@ -58,7 +58,7 @@ export default function Page() {
     const content = formData.get('content');
 
     prisma.todo.create({
-        data: { content }
+        data: { content: content as string }
     })
   }
   return (
