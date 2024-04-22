@@ -4,6 +4,8 @@
 
 Next 13.4 introduit les *server actions*, qui permettent d'exécuter du code serveur depuis un composant client. Tout code nécessitant d'être joué côté serveur, doit donc être préfixé par ````'use server'````
 
+Server Actions are asynchronous functions that are executed on the server. They can be used in Server and Client Components to handle form submissions and data mutations in Next.js applications.
+
 Voici  par exemple un bouton qui exécute un fetch depuis un formulaire
 
 > **Remarque** : Dans un formulaire, on utilisera ````action```` et non plus ````submit````
