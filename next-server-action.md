@@ -43,3 +43,28 @@ export default function Page() {
   )
 }
 ````
+
+Interaction directe avec la BDD (prisma)
+
+````typescript
+import { prisma } from "@/db/db";
+
+export default function Page() {
+  const todos = await prisma.todo.findMany();
+
+  const addTodo = async (formData: FormData) => {
+    'use server';
+
+    const content = formData.get('content');
+
+    prisma.todo.create({
+        data: { content }
+    })
+  }
+  return (
+    <form action={addTodo}>
+    ...
+    </form>
+  )
+}
+````
