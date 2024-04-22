@@ -10,7 +10,7 @@ Voici  par exemple un bouton qui exécute un fetch depuis un formulaire
 
 ````typescript
 export function AddToFavoritesButton({ id }) {
-    async function addToFavorites(data) {
+    const addToFavorites = async (data: FormData) => {
         'use server';
 
         await fetch(`/api/tracks/${id}/favorites`, { method: 'POST' });
