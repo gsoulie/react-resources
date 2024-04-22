@@ -24,6 +24,10 @@ export function AddToFavoritesButton({ id }) {
 ````
 
 *Exemple - Interaction avec formulaire*
+
+<details>
+    <summary>code</summary>
+
 ````typescript
 async function create(formData: FormData) {
   'use server';
@@ -43,7 +47,13 @@ export default function Page() {
 }
 ````
 
+</details>
+
 *Exemple - Interaction directe avec la BDD (prisma)*
+
+<details>
+    <summary>code</summary>
+
 ````typescript
 import { prisma } from "@/db/db";
 
@@ -68,3 +78,66 @@ export default function Page() {
   )
 }
 ````
+    
+</details>
+
+*Refactoring propore*
+
+<details>
+    <summary>code</summary>
+
+Pour plus de clarté, il est recommandé de séparer les *server actions* dans des fichiers spécifiques (dans un répertoire "actions") et de séparer le code des composants serveur., du code des composants clients.
+
+Ici, nous allons déplacer le formulaire dans un composant *client*, la serveur action dans un fichier *actions.ts* et le serveur dans son *page.tsx*
+
+
+*Server component Page.tsx*
+````typescript
+import Form from "@/components/form";
+
+export default async function TodosPage() {
+    const todos = await prisma.todo.findMany();
+
+    return (
+        <Form />
+
+        <ul>
+            { todos.map((todo) => (<li>...</li>)) }
+        </ul>
+    )
+}
+````
+
+*actions.ts*
+````typescript
+"use server"
+
+import { prisma } from "@/db/db";
+import { revalidatePath } from "next/cache";
+
+export const addTodo = async (formData: FormData) => {
+    const content = formData.get('content');
+
+    await prisma.todo.create({
+        data: { content: content as string }
+    })
+
+    revalidatePath('/todos');
+}
+````
+
+*Form.tsx*
+````typescript
+"use client"
+
+export default function Form() {
+   return (
+    <form action={addTodo}>
+    ...
+        <button>Add</button>
+    </form>
+  )
+}
+````
+    
+</details>
