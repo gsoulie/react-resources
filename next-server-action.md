@@ -6,6 +6,8 @@ Next 13.4 introduit les *server actions*, qui permettent d'exécuter du code ser
 
 Voici  par exemple un bouton qui exécute un fetch depuis un formulaire
 
+> **Remarque** : Dans un formulaire, on utilisera ````action```` et non plus ````submit````
+
 ````typescript
 export function AddToFavoritesButton({ id }) {
     async function addToFavorites(data) {
