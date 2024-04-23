@@ -94,3 +94,16 @@ export const config = {
   matcher: ["/api/:path*", "/dashboard/:path*", "/admin/:path*"]
 }
 ````
+
+## Ajout d'un Bearer token dans les requêtes
+
+````typescript
+export function middleware(request: NextRequest) {
+ const token = request.cookies.get(CustomKeys.token)?.value;  
+ 
+  if (token) {  
+    const newRequest = new NextRequest(request, { headers: { Authorization: `Bearer ${token}` } });
+    return NextResponse.next(newRequest);
+  }
+}
+````
