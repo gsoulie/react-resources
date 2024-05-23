@@ -3,7 +3,7 @@
 # Http
 * [Interceptor - Middleware](#interceptor)
 * [Middleware](#middleware)
-* [Tanstack react-query](#tanstack-react--query)     
+* [Tanstack react-query](#tanstack-react-query)     
 
 ## Exemple d'utilisation type
 
