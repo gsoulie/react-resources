@@ -133,6 +133,8 @@ Dans cet exemple on utilise deux composants ````<TanstackGET />```` et ````<Tans
 
 Les *server actions* doivent être définies dans un composant **server** en ajoutant ````"use server"````
 
+> **Important** : Il n'y a pas de mise en cache avec les *server actions*, d'autre part, ces dernières s'exécutent séquentiellement et non en parrallèle.
+
 */app/actions.ts*
 ````typescript
 "use server"
