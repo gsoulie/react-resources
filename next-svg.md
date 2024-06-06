@@ -36,5 +36,5 @@ Placer ensuite les images dans le répertoire ````/assets```` à la racine du pr
 ````typescript
 import ProductIcon from "@/assets/icons/produit.svg";
 
-<ProductIcon stroke="#ffffff" height="36px" width="36px" />
+<ProductIcon stroke="#ffffff" strokeWidth="2" height="36px" width="36px" />
 ````
