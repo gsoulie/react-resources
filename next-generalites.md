@@ -13,7 +13,8 @@
 * [Next 13](#next-13)
 * [Référencement](#référencement)
 * [Type générique T](#type-générique-t)
-* [Configuration eslint](#configuration-eslint)     
+* [Configuration eslint](#configuration-eslint)
+* [Authentification](#authentification)     
 
 ## Présentation
 
@@ -652,3 +653,53 @@ const { items, requestSort, getClassNamesFor } = useSortableData<AddressDTO>(dat
 
 </details>
 
+## Authentification
+
+<details>
+	<summary>Gestion redirection</summary>
+
+Sur le layout global
+````layout.tsx
+export default async function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    // l'utilisateur n'est pas connecté
+    if (!sessionIsActive()) {
+        // On le renvoi vers la page de login
+        return redirect(routes.pages.auth.login);
+    }
+
+    return (
+        <html lang="en">
+            <body className={inter.className} suppressHydrationWarning={true}>
+                <div className="page-wrapper">
+                    <AppProvider>
+                        {children}
+                    </AppProvider>
+                    <Footer />
+                </div>
+            </body>
+        </html >
+    );
+}
+````
+
+*cookies.service.ts*
+
+````typescript
+import { cookies } from "next/headers";
+
+export const sessionIsActive = (): boolean => {
+  try {
+    const cookieStore = cookies();
+    const tokenCookie = cookieStore.get('my-app-token-key');
+    return tokenCookie ? true : false;
+  } catch (e) {
+    return false;
+  }
+};
+````
+ 
+</details>
