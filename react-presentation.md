@@ -37,7 +37,9 @@ npm run dev
 * [Composant table avec tri sur colonne](https://github.com/gsoulie/react-resources/blob/main/next-server-page-best-practices/react-custom-table-with-sorting/Contacts.tsx)
 * [Formulaires - ReactForm et Yup](https://github.com/gsoulie/react-resources/blob/master/next-forms.md)
 * [Gestion des cookies](https://github.com/gsoulie/react-resources/blob/master/next-cookies.md)
-* [Server actions](https://github.com/gsoulie/react-resources/blob/master/next-server-action.md)     
+* [Server actions](https://github.com/gsoulie/react-resources/blob/master/next-server-action.md)
+* Composants
+  * [Bouton panier avec popover au survol](https://github.com/gsoulie/react-resources/tree/main/react-cart-popover)       
 
 # React
 
