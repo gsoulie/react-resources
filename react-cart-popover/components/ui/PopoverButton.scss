@@ -1,0 +1,25 @@
+#shop-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+.cart-modal-wrapper {
+  position: absolute;
+  top: 83px;
+  right: 10px !important;
+  width: 500px !important;
+  display: inline-flex;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px !important;
+
+  ::before {
+    content: "";
+    top: -20px;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background: transparent;
+    height: 21px;
+  }
+}
