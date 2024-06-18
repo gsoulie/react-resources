@@ -28,7 +28,7 @@ Il faut aussi configurer la div parent comme ayant une position relative.
 ````html
 <div style={{ position: "relative" }}>
   <Image
-      src={props.url}
+      src={encodeURI(props.url)}
       alt={""}
       fill
       sizes="100%"
@@ -48,6 +48,46 @@ Il faut aussi configurer la div parent comme ayant une position relative.
 ````
 
 </details>
+
+### Bonnes pratiques, pour aller plus loin
+
+Afin d'éviter les erreurs 404 lors du chargement d'images dont l'url est fournie par une api, il est conseillé d'utiliser un **loader resolver**
+
+````typescript
+export const ProductPhoto = (props: {
+  image: string;
+  alt: string;
+  height?: number | undefined;
+  width?: number | undefined
+}) => {
+  const [imageError, setImageError] = useState(false);
+  
+  const imageLoader = () => {
+    return `${encodeURI(props.image)}?w=${props.width}&q=${75}`;
+  };
+  
+  return (
+    <>
+      {props.image && !imageError && (
+        <Image
+          loader={imageLoader}
+          src={encodeURI(props.image) ?? ""}
+          alt={""}
+          fill={!props.height && !props.width ? true : undefined}
+          sizes={!props.height && !props.width ? "100%" : undefined}
+          height={props.height ?? undefined}
+          width={props.width ?? undefined}
+          className="product-tile__image"
+          onError={() => setImageError(true)}
+        />
+      )}
+      {(!props.image || imageError) && (
+        <NotFoundImage small={props?.smallVersion} />
+      )}
+    </>
+  );
+};
+````
 
 ## Image background
 
