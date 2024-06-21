@@ -42,7 +42,7 @@ présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart
 ## Stack recommandée
 
 * SWR (= redux / context)
-* react-bootstrap | voir aussi Shadcn https://ui.shadcn.com/ (très sympa)
+* react-bootstrap | voir aussi Shadcn https://ui.shadcn.com/ (très sympa) | NextUI https://nextui.org/docs/components/table
 * NextTopLoader : https://www.npmjs.com/package/nextjs-toploader
 
 ## Bonnes pratiques
