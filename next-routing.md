@@ -141,6 +141,22 @@ router.push('/details' + props.id);
 
 </details>
 
+## Récupération des searchParams
+
+<details>
+	<summary>Lire les paramètres d'url "?<param>&<param>"</summary>
+
+*page.tsx*
+````typescript
+export default async function Page({searchParams}) {
+	retrun <h1>{searchParams.hello}</h1>
+}
+````
+
+Avec l'url suivante : **localhost:3000/?hello=world** retournera "world"
+ 
+</details>
+
 ## Récupération paramètre url
 
 Route type : /filters/profession/[professionId]/domain/[domainId]/subDomain/[subDomainId]
