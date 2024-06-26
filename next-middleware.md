@@ -46,7 +46,7 @@ export const config = {
 }
 ````
 
-L'option matcher vous permet de cibler des chemins spécifiques sur lesquels le Middleware doit s'exécuter. Vous pouvez spécifier ces chemins de plusieurs manières :
+L'option matcher vous permet de cibler ou exclure des chemins spécifiques sur lesquels le Middleware doit s'exécuter. Vous pouvez spécifier ces chemins de plusieurs manières :
 
 * Pour un seul chemin : Utilisez directement une chaîne de caractères pour définir le chemin, comme '/about'.
 * Pour plusieurs chemins : Utilisez un tableau pour répertorier plusieurs chemins, par exemple matcher: ['/about', '/contact'], ce qui applique le Middleware à la fois à /about et /contact.
@@ -75,6 +75,25 @@ export const config = {
   ],
 }
 ````
+
+**Exemple de matcher qui exclut les chemins suivants** : *api, _next/static, _next/image, auth, register, forgot_password, favicon.ico, images*
+
+````typescript
+export const config = {
+  matcher: [
+    `/((?!api|_next/static|_next/image|auth|register|forgot_password|favicon.ico|robots.txt|images|$).*)`,
+  ],
+};
+````
+
+**Exemple de matcher qui se déclenche uniquement sur l'api suivante** : */api/products*
+
+````typescript
+export const config = {
+  matcher: '/api/products'
+}
+````
+
 
 ## Exemple
 
