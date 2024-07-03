@@ -6,7 +6,8 @@
 * [Routes dynamiques](#routes-dynamiques)
 * [Navigation](#navigation)
 * [Récupéartion paramètre url](#récupération-paramètre-url)
-* [Routage multiple avec page unique](#routage-multiple-avec-page-unique)    
+* [Routage multiple avec page unique](#routage-multiple-avec-page-unique)
+* [Gérer la classe css lien actif](#gérer-la-classe-css-lien-actif)      
 
 ## Structure
 
@@ -229,4 +230,49 @@ const page = async ({ params }) => {
 export default page;
 ````
 
+</details>
+
+
+## Gérer la classe css lien actif
+
+<details>
+	<summary>Implémentation</summary>
+
+````typescript
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
+import React from "react";
+
+export const NarvbarLink = ({ text, href }: { text: string; href: string }) => {
+  const segment = useSelectedLayoutSegment();
+  
+  const unactiveLink =
+    "border-b-1 border-transparent hover:border-b-1 hover:border-red-700 duration-200";
+  const activeLink = "border-b-2 border-red-700 duration-200";
+
+  const handleGetLastUrlSegment = (url: string): string => {
+    const urlSegments = url.split("/");
+    const urlFinalSegment = urlSegments[urlSegments.length - 1];
+    return urlFinalSegment;
+  };
+
+  const getCssClass = (): string => {
+    return segment === handleGetLastUrlSegment(href)
+      ? activeLink
+      : unactiveLink;
+  };
+
+  return (
+    <Link href={href} className={getCssClass()}>
+      {text}
+    </Link>
+  );
+};
+
+
+<NarvbarLink text="dashboard" href="/dashboard" />
+<NarvbarLink text="products" href="/products" />
+<NarvbarLink text="contact" href="/contact" />
+````
+ 
 </details>
