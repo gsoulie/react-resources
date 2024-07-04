@@ -39,7 +39,8 @@ npm run dev
 * [Gestion des cookies](https://github.com/gsoulie/react-resources/blob/master/next-cookies.md)
 * [Server actions](https://github.com/gsoulie/react-resources/blob/master/next-server-action.md)
 * Composants
-  * [Bouton panier avec popover au survol](https://github.com/gsoulie/react-resources/tree/main/react-cart-popover)       
+  * [Bouton panier avec popover au survol](https://github.com/gsoulie/react-resources/tree/main/react-cart-popover)
+* CMS headless : (https://strapi.io/)     
 
 # React
 
