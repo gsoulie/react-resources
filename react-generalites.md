@@ -381,6 +381,84 @@ Dans VSCode, utiliser le préfixe ````rfc```` pour déclencher un snippet de cr�
 ````
 npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
 ````
+
+<details>
+	<summary>Implémentation</summary>
+
+# Material UI
+
+## Installation et configuration
+
+````
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+````
+
+Material UI est une librairie mobile-first. Pour s'assurer que ce soit bien le cas, rajouter la ligne suivante 
+dans les meta-tags de la balise <head>
+
+````html
+<meta name="viewport" content="initial-scale=1, width=device-width" />
+```` 
+
+## Theme
+
+[Theming](https://mui.com/material-ui/customization/theme-components/)     
+
+
+## Customisation composant
+
+### Customisation unitaire
+
+[MUI customisation](https://mui.com/material-ui/customization/how-to-customize/)     
+
+La propriété ````sx```` permet de modifier le style d'un composant de manière unitaire.
+
+````typescript
+<Slider
+  defaultValue={30}
+  sx={{
+    width: 300,
+    color: 'success.main',
+  }}
+/>
+````
+
+**Identification des styles MUI**
+
+Dans la console chrome developer, on peut identifier les éléments de style MUI avec le format suivant
+
+Mui[Component name]-[name of the slot]
+
+par exemple ````span.MuiSlider-thumb````
+
+### Surcharger le style d'un composant
+
+````css
+.Button {
+  color: black;
+}
+
+/* Increase the specificity */
+.Button:disabled {
+  color: white;
+}
+
+.MenuItem {
+  color: black;
+}
+
+/* Increase the specificity */
+.MenuItem.Mui-selected {
+  color: blue;
+}
+````
+
+````html
+<Button disabled className="Button">
+<MenuItem selected className="MenuItem">
+````
+ 
+</details>
 	
 * Konsta UI : https://konstaui.com/
 	
