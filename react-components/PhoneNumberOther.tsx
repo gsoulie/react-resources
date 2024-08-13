@@ -1,4 +1,6 @@
 
+import { useForm } from "react-hook-form";
+
 const PhoneNumberInput = ({ value }: { value: string }) => {
   const { register, handleSubmit } = useForm();
 
@@ -28,6 +30,7 @@ const PhoneNumberInput = ({ value }: { value: string }) => {
       inputMode="numeric"
       autoComplete="cc-number"
       defaultValue={normalizePhoneNumber(value)}
+      ref={register}
     />
   );
 };
