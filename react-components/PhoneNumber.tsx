@@ -13,7 +13,7 @@ const PhoneNumberInput: React.FC = () => {
       if (i > 0) {
         formattedNumber += ' ';
       }
-      formattedNumber += cleanedValue.substr(i, 2);
+      formattedNumber += cleanedValue.substring(i, 2);
     }
     return formattedNumber;
   };
