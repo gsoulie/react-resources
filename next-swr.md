@@ -4,7 +4,8 @@
 
 * [Présentation](#présentation)
 * [Chargement de données](#chargement-de-données)
-* [Configuration globale](#configuration-blogale)     
+* [Configuration globale](#configuration-blogale)
+* [Utilisation simple](#utilisation-simple)    
 
 * https://swr.vercel.app/docs/getting-started
 * https://paco.me/writing/shared-hook-state-with-swr 
@@ -183,4 +184,29 @@ import { MyProvider } from './my-provider'
 export default function Layout({ children }) {
   return <MyProvider>{children}</MyProvider>
 }
+````
+
+## Utilisation simple
+
+````typescript
+import useSWR from "swr";
+
+const getTodos = () => {
+  const response = await fetch(...);
+  return await response.json();
+}
+
+const { isLoading, error, data: todos } = useSWR('/my-key', getTodos)	// getTodos est une fonction qui fait le fetch et retourne une promise
+
+if (isLoading) {
+	return <div>Loading...</div>
+}
+
+if (error) {
+	return <div>Error : {error}</div>
+}
+
+return (
+	<TodoList todos={todos} />
+)
 ````
