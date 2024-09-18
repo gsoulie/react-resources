@@ -188,6 +188,8 @@ export default function Layout({ children }) {
 
 ## Utilisation simple
 
+> tutos [utiliser SWR simplement](https://www.youtube.com/watch?v=yPHzgrtLpQw&ab_channel=MonsterlessonsAcademy)     
+
 ````typescript
 import useSWR from "swr";
 
