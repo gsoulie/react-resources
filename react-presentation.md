@@ -40,7 +40,25 @@ npm run dev
 * [Server actions](https://github.com/gsoulie/react-resources/blob/master/next-server-action.md)
 * Composants
   * [Bouton panier avec popover au survol](https://github.com/gsoulie/react-resources/tree/main/react-cart-popover)
-* CMS headless : (https://strapi.io/)     
+* CMS headless : (https://strapi.io/)
+
+<details>
+  <summary>Détection mobile formfactor</summary>
+
+````typescript
+import { Box, useMediaQuery } from '@mui/material';
+import { theme } from '@/theme/theme';
+import Toolbar from './Toolbar';
+
+const Layout = ({ children }) => {
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+
+  return (
+     {!isMobile && <Toolbar />}
+};
+````
+ 
+</details>
 
 # React
 
