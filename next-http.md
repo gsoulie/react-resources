@@ -95,6 +95,158 @@ export async function middleware(request: NextRequest) {
 ````
 </details>
 
+### Autre exemple d'interceptor
+
+<details>
+  <summary>http.js</summary>
+
+````typescript
+
+*http.js*
+
+import axios from 'axios';
+import { useAuthStore } from '../store/authStore';
+
+const rootUrlBackend = process.env.NEXT_PUBLIC_ROOT_URL;
+
+const instance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+});
+
+const instancePublic = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+});
+
+instance.interceptors.request.use(
+  (config) => {
+    if (config.url.includes('/public')) {
+      return config;
+    }
+
+    if (config.method === 'post' && config.url === '/security/refresh') {
+      return config;
+    }
+
+    if (config.method === 'patch') {
+      config.headers['Content-Type'] = 'application/merge-patch+json';
+    }
+
+    if (config.authorization !== false) {
+      const token = useAuthStore.getState().accessToken;
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+instance.interceptors.response.use(
+  (config) => config,
+  (error) => {
+    const originalRequest = error.config;
+    originalRequest.headers = JSON.parse(JSON.stringify(originalRequest.headers || {}));
+    const refreshToken = useAuthStore.getState().refreshToken;
+
+    const handleError = (error) => {
+      useAuthStore.getState().logout();
+      window.location.reload();
+      return Promise.reject(error);
+    };
+
+    if (error.response?.status === 401) {
+      if (refreshToken && error.response?.data?.error === 'Expired token') {
+        instance
+          .post('/security/refresh', {
+            refreshToken: refreshToken,
+          })
+          .then((response) => {
+            const refreshedAuthDatas = {
+              accessToken: response.data.accessToken,
+              refreshToken: response.data.refreshToken,
+              roles: response.data.roles ?? [],
+              permissions: response.data.permissions ?? [],
+            };
+            useAuthStore.getState().setRefreshedAuthDatas(refreshedAuthDatas);
+            return Promise.resolve();
+          }, handleError);
+      } else {
+        useAuthStore.getState().logout();
+        return Promise.reject(error);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+export default instance;
+export { instancePublic, rootUrlBackend };
+````
+
+<details>
+  <summary>authStore.js</summary>
+
+````typescript
+import Cookies from 'js-cookie';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+export const useAuthStore = create(
+  persist(
+    (set) => ({
+      isLoggedIn: false,
+      accessToken: null,
+      refreshToken: null,
+      fullName: '',
+      login: (authData) => {
+        Cookies.set('token', authData.token, { sameSite: 'strict' });
+        return set(() => ({
+          isLoggedIn: true,
+          accessToken: authData.token,
+          refreshToken: authData.refreshToken,
+          fullName: authData.fullName,
+          roles: authData.roles,
+          permissions: authData.permissions,
+        }));
+      },
+      logout: () => {
+        Cookies.remove('token');
+        return set(() => ({
+          isLoggedIn: false,
+          accessToken: null,
+          refreshToken: null,
+          fullName: '',
+          roles: [],
+          permissions: [],
+        }));
+      },
+      setRefreshedAuthDatas: (authDatas) => {
+        Cookies.set('token', authDatas.accessToken, { sameSite: 'strict' });
+        return set(() => ({
+          accessToken: authDatas.accessToken,
+          refreshToken: authDatas.refreshToken,
+          roles: authDatas.roles,
+          permissions: authDatas.permissions,
+        }));
+      },
+    }),
+    {
+      name: 'auth',
+    }
+  )
+);
+
+````
+  
+</details>
+  
+</details>
+
 ## Tanstack react-query
 
 TanStack Query (souvent appelé React Query lorsqu'il est utilisé avec React) est une bibliothèque de gestion de l'état serveur pour les applications JavaScript, particulièrement populaires dans l'écosystème React. Elle facilite la gestion des données asynchrones (comme les appels API) en offrant des outils pour la récupération, la mise en cache, la synchronisation et la mise à jour des données serveur.
