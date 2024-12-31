@@ -4,10 +4,9 @@
 # Udemy : NextJS The Complete Guide
 
 
-* data fetching
 
-bonnes pratiques :
---------------------------------
+## Bonnes pratiques :
+
 - répertoire *components* en dehors de *app* => Plus claire de garder app uniquement pour les pages
 
 - répertoire *actions* pour loger les server actions
