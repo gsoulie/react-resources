@@ -13,6 +13,8 @@
 
 - nommage des fichiers page et composants en minuscule et snake-case
 
+- Utiliser la fonction ````notFound()```` pour les redirections en cas d'échec de fetch d'une ressource
+
 - récupération des paramètres de route 
 
 */blog/[slug]/page.tsx*
