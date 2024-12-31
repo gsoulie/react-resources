@@ -8,15 +8,15 @@
 
 bonnes pratiques :
 --------------------------------
-- répertoire components en dehors de app. Plus claire de garder app uniquement pour les pages
+- répertoire *components* en dehors de *app* => Plus claire de garder app uniquement pour les pages
 
-- répertoire actions pour loger les server actions
+- répertoire *actions* pour loger les server actions
 
 - nommage des fichiers page et composants en minuscule et snake-case
 
-- bonne récupération des paramètres de route 
+- récupération des paramètres de route 
 
-/blog/[slug]/page.tsx
+*/blog/[slug]/page.tsx*
 ````typescript
 const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const { slug } = await params;
@@ -32,7 +32,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
 export default BlogPost;
 ````
 
-- nommage des composants page.tsx suffixés par Page
+- nommage des composants *page.tsx* suffixés par Page
 ````typescript
 const CommunityPage = () => {
   return <div>Community</div>;
@@ -41,19 +41,22 @@ const CommunityPage = () => {
 export default CommunityPage;
 ````
 
-- utilisation simple des images 
+- utilisation simple des images : 
 
+````typescript
 import logoImg from "@/assets/logo.png";
 
 <Image src={logoImg.src} alt="logo" />
+````
+- customiser une couleur à la volée dans *tailwind*
 
-- customiser une couleur à la volée dans tailwind
-
+````typescript
 <div className="text-[#ddd6cb]">
+````
 
 - destructurer les paramètres
 
-remplacer  
+*remplacer  *
 ````typescript
 <MealItem
             title={m.title}
@@ -64,27 +67,25 @@ remplacer
           />
 ````
 
-par
+*par*
 
 ````typescript
-<MealItem
-            {...meal}
-          />
+<MealItem {...meal}/>
 ````
 
 
-- loading.tsx est un mot clé réservé. Si cette page est créée au niveau app/ elle sera appliquée pour toutes les routes. Il est possible 
+- *loading.tsx* est un mot clé réservé. Si cette page est créée au niveau *app/* elle sera appliquée pour toutes les routes. Il est possible 
 de définir un loading.tsx pour chaque route si nécessaire et donc de le créer dans le chemin souhaité
 
-L'uitilisation d'un loading.tsx va avoir pour conséquence d'afficher un composant loading en pleine page (et donc masquer tout le reste)
+L'uitilisation d'un *loading.tsx* va avoir pour conséquence d'afficher un composant loading en pleine page (et donc masquer tout le reste)
 
-L'utilisation de <Suspense> pour gérer les états de loading, permet d'afficher un loading dans une portion du layout affiché
+L'utilisation de ````<Suspense>```` pour gérer les états de loading, permet d'afficher un loading dans une portion du layout affiché
 
-- error.tsx : idem loading.tex
+- *error.tsx* : idem *loading.tsx*
 
-- not-found.tsx : idem loading.tsx, permet de gérer les 404 au niveau souhaité
+- *not-found.tsx* : idem *loading.tsx*, permet de gérer les 404 au niveau souhaité
 
-L'utilisation de la fonction notFound() de next/navigation, permet de renvoyer la page not-found.tsx ou error.tsx la plus proche dans l'arborescence
+L'utilisation de la fonction ````notFound()```` de ````next/navigation````, permet de renvoyer la page *not-found.tsx* ou *error.tsx* la plus proche dans l'arborescence
 
 ````typescript
  const meal = getMeal(slug) as Meal;
@@ -94,9 +95,8 @@ L'utilisation de la fonction notFound() de next/navigation, permet de renvoyer l
   }
 ````
 
-- cache validation : notion très importante, lors de la compilation pour déploiement, next va générer un certain nombre de chose en static 
-et va faire de la mise en cache aggressive. Ceci est une très bonne chose pour tous les contenus statiques, mais pose un réel problème
-pour les contenus dont les data peuvent changer. En effet les pages sont pré-rendues et les fetch ne seront plus rééeexécutés !
+- cache validation : **notion très importante**, lors de la compilation pour déploiement, next va générer un certain nombre de chose en statique et va faire de la mise en cache aggressive.
+Ceci est une très bonne chose pour tous les contenus statiques, mais pose un réel problème pour les contenus dont les data peuvent changer. En effet les pages sont pré-rendues et les fetch ne seront plus rééeexécutés !
 
 pour revalider le cache, on peut donc utiliser ````revalidatePath(<url>, <'page' | 'layout'>)````
 
@@ -149,8 +149,7 @@ export generateMetadata = async({params}) => {
 }
 ````
 
-FORMS
-------------
+## FORMS
 
 - forms action : envoyer le contenu d'un formulaire via une action serveur
 
@@ -255,22 +254,22 @@ const SharePage = () => {
 
 
 
-BDD SQLITE
---------------------
+## BDD SQLITE
 
+````typescript
 npm i better-sqlite3
+````
 
-créer un fichier initdb.js
+Va créer un fichier *initdb.js*
 
-lancer la bdd : node initdb.js
+Exécuter le script de création de la bdd : ````node initdb.js````
 
-va créer un fichier meals.db dans le projet
+va créer un fichier *meals.db* dans le projet
 
-SLUGIFY
--------------
-
+## Plugin SLUGIFY
+````typescript
 npm i slugify
-
+````
 
 L'instruction suivante utilise la fonction slugify pour générer un slug à partir de la propriété meal.title. Un slug est une version simplifiée et optimisée pour les URL d'une chaîne de caractères, souvent utilisée dans les chemins d'accès des pages web.
 
@@ -310,18 +309,13 @@ const slug = slugify(meal.title, { lower: true });
 console.log(slug); // "creme-brulee-tartes"
 ````
 
+## Plugin XSS
 
-
-
-
-
-XSS
------------
-
+````typescript
 npm i xss
 
 meal.instructions = xss(meal.instructions);
-
+````
 permet de protéger le contenu des attaques XSS en le préparant:
 
 La fonction xss analyse la chaîne et filtre les balises HTML ou attributs dangereux.
