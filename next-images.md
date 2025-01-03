@@ -2,7 +2,8 @@
 
 # Images
 
-* [Import images internes](#import-images-internes)    
+* [Import images internes](#import-images-internes)
+* [Optimisation des images](#optimisation-des-images)    
 * [Utilisation du composant Image](#utilisation-du-composant-image)
 * [Image background](#image-background)
 * [Image 404](#image-404)    
@@ -16,6 +17,39 @@ La manière la plus simple d'utiliser une image interne (provenant de public ou 
 import myLogo from '@/assets/logo.png';
 
 <Image src={myLogo} />
+````
+
+## Optimisation des images
+
+Utilisez la propriété ````sizes```` plutôt que ````width```` et ````height````
+
+La valeur de ````sizes```` aura un impact significatif sur les performances des images utilisant l'attribut fill ou qui sont stylisées pour avoir une taille réactive.
+
+La propriété sizes remplit deux fonctions importantes liées aux performances des images :
+
+Détermination de la taille de l'image à télécharger
+La valeur de sizes est utilisée par le navigateur pour déterminer quelle taille d'image télécharger, à partir du srcset généré automatiquement par next/image. Lorsque le navigateur fait ce choix, il ne connaît pas encore la taille de l'image sur la page ; il sélectionne donc une image dont la taille est égale ou supérieure à celle du viewport. La propriété sizes vous permet d'indiquer au navigateur que l'image sera en réalité plus petite que la largeur de l'écran. Si vous ne spécifiez pas une valeur pour sizes dans une image avec l'attribut fill, une valeur par défaut de 100vw (largeur complète de l'écran) est utilisée.
+
+Modification du comportement de srcset généré automatiquement
+Si aucune valeur sizes n'est spécifiée, un petit srcset est généré, adapté à une image de taille fixe (1x/2x/etc.). Si sizes est défini, un srcset plus grand est généré, adapté à une image réactive (640w/750w/etc.). Si la propriété sizes inclut des tailles telles que 50vw, qui représentent un pourcentage de la largeur du viewport, alors le srcset est réduit pour ne pas inclure de valeurs trop petites pour être nécessaires.
+
+Par exemple, si vous savez que votre style fera en sorte qu'une image soit pleine largeur sur les appareils mobiles, en disposition à 2 colonnes sur les tablettes, et en disposition à 3 colonnes sur les écrans d'ordinateur, vous devriez inclure une propriété sizes comme suit :
+
+````typescript
+import Image from 'next/image'
+
+export default function Page() {
+  return (
+    <div className="grid-element">
+      <Image
+        fill
+        src="/example.png"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+    </div>
+  )
+}
+
 ````
 
 ## Utilisation du composant Image
