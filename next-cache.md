@@ -22,7 +22,13 @@ Ceci est **vrai pour la version 14** de NextJS.
 
 ### revalidatePath
 
-### Configuration fetch
+Pour cela on utilise ````revalidatePath()````. On utilise ````revalidatePath()```` **avant** de faire une redirection
+
+````typescript
+revalidatePath('/', 'layout');
+````
+
+### Configuration fetch (unitairement)
 
 **Paramètre cache**
 
@@ -44,3 +50,37 @@ const response = await fetch('http://localhost:8080/messages', {
 ````
 
 ````5```` est le nombre de secondes durant lequel Nextjs continue d'utiliser le cache avant de revalider le cache
+
+### Configuration fetch (globale au fichier)
+
+Il est possible de configurer le cache des requêtes de manière globale à un fichier, via la déclaration globale de constantes. Ceci permet d'éviter de paramétrer à la main toutes les requêtes d'un même composant / fichier
+
+Ainsi la déclaration de la constante ````export const revalidate = 5```` aura le même effet que l'ajout du paramètre ````next: { revalidate: 5 }```` dans la requête fetch.
+
+La déclaration de la constante ````export const dynamic = 'force-dynamic'```` aura le même effet que l'ajout du paramètre ````cache: no-store```` dans la requête fetch.
+
+**Attention** : Il est important d'exporter ces constantes, ainsi que de respecter les nommages ````revalidate```` et ````dynamic```` qui sont des noms réservés
+
+*app/message/page.tsx*
+
+````typescript
+
+/** Différentes constantes de paramétrage global **/
+
+// export const revalidate = 5
+export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-static'
+
+import Messages from "@/components/messages";
+
+export default async function MessagesPage() {
+  const response = await fetch("http://localhost:8080/messages");
+  const messages = await response.json();
+
+  if (!messages || messages.length === 0) {
+    return <p>No messages found</p>;
+  }
+
+  return <Messages messages={messages} />;
+}
+````
