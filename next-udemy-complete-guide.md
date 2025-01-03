@@ -3,9 +3,20 @@
 
 # Udemy : NextJS The Complete Guide
 
+* [Bonnes pratiques](#bonnes-pratiques)
+* [Forms](#forms)
+* [Bdd sqlite](#bdd-sqlite)
+* [Plugin SLUGIFY](#plugin-slugify)
+* [Plugin Xss](#plugin-xss)
+* [Routes parallèles](#routes-parallèles)
+* [Routes catch all](#routes-catch-all)
+* [Interception route](#interception-route)
+* [Routes groupées](#routes-groupées)
+* [Data fetching](#data-fetching)
+* [Server actions](#server-actions)
+* [Mises à jour optimistes](#mises-à-jour-optimistes)     
 
-
-## Bonnes pratiques :
+## Bonnes pratiques
 
 - répertoire *components* en dehors de *app* => Plus claire de garder app uniquement pour les pages
 
@@ -478,6 +489,7 @@ Exécuter le script de création de la bdd : ````node initdb.js````
 va créer un fichier *meals.db* dans le projet
 
 ## Plugin SLUGIFY
+
 ````typescript
 npm i slugify
 ````
@@ -532,3 +544,73 @@ permet de protéger le contenu des attaques XSS en le préparant:
 La fonction xss analyse la chaîne et filtre les balises HTML ou attributs dangereux.
 Elle conserve uniquement les éléments autorisés (comme <b> ou <p> pour du contenu formaté).
 Toute tentative d'injection de scripts ou de styles dangereux est supprimée ou échappée.
+
+## Routes parallèles
+
+En Next.js, les routes parallèles permettent de rendre plusieurs segments ou vues d'une même application de manière indépendante et simultanée. 
+Ces segments sont nommés et se trouvent sous un même chemin principal, mais ils servent des contenus distincts.
+
+*Les routes parallèles sont utiles lorsque :*
+
+* On souhaite afficher plusieurs "contextes" ou "panneaux" sur la même page
+Par exemple, un panneau montrant des archives anciennes (route @archive) et un autre panneau montrant le contenu le plus récent (route @latest).
+
+* On souhaite gérer différentes sections de ta page de manière indépendante.
+Par exemple, si une section affiche une liste d'articles et une autre section affiche un aperçu détaillé d'un article.
+
+pour créer des routes parallèles, il faut créer des répertoires commençants par un ````@```` => ````app/archive/@archive/page.tsx```` et ````app/archive/@latest/page.tsx````.
+	
+Afin de rendre les routes parallèles dans le même layout, il faut créer un layout prenant en paramètre un paramètre par route parallèle (nommé comme la route parallèle associée) à la place de l'habituel ````children```` (voir code ci-dessous)
+
+<details>
+	<summary>Implémentation</summary>
+
+*layout.tsx*
+````
+const ArchiveLayout = ({
+  archive,
+  latest,
+}: Readonly<{
+  archive: React.ReactNode;
+  latest: React.ReactNode;
+}>) => {
+  return (
+    <div>
+      <h1 className="text-5xl font-extrabold mt-4 mb-4">News Archive</h1>
+      <section>{archive}</section>
+      <section>{latest}</section>
+    </div>
+  );
+};
+````
+</details>
+
+Avantages par rapport à l'utilisation d'une page unique avec plusieurs composants :
+- vitesse de rendu : le chargement des segments parallèles est asynchrones contrairement à une page comportant plusieurs composants qui sont rendus en simultanés
+- isolation des erreurs : si une erreur survient sur l'un des segments, celà n'affectera pas les autres segments
+
+**Attention**
+
+Il est recommandé d'utiliser un fichier *default.tsx* (nom réservé) pour définir un contenu ou un rendu par défaut pour une route parallèle si aucun segment spécifique n'est actif. 
+Cela garantit qu'une expérience utilisateur cohérente est fournie même lorsque certaines conditions ne sont pas remplies ou qu'aucune donnée spécifique n'est disponible.
+
+Si vous avez une structure de route parallèle comme celle-ci :
+````
+/app/archive/@archive/default.tsx
+/app/archive/@archive/[year]/page.tsx
+````
+Le fichier *default.tsx* sera rendu si aucun segment dynamique (comme [year]) n'est actif pour la route @archive.
+
+*default.tsx*
+````
+export default function DefaultArchive() {
+  return <p>Select a year to view the archive.</p>;
+}
+```` 
+
+* [Routes catch all](#routes-catch-all)
+* [Interception route](#interception-route)
+* [Routes groupées](#routes-groupées)
+* [Data fetching](#data-fetching)
+* [Server actions](#server-actions)
+* [Mises à jour optimistes](#mises-à-jour-optimistes)     
