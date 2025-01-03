@@ -27,6 +27,7 @@ npm run dev
   * getServerSideProps
   * getStaticPaths
   * CRUD Firebase
+* [SEO](https://github.com/gsoulie/react-resources/blob/master/next-seo.md)     
 * [api](https://github.com/gsoulie/react-resources/blob/master/next-api.md)     
 * [SVG](https://github.com/gsoulie/react-resources/blob/master/next-svg.md)
 * [SWR](https://github.com/gsoulie/react-resources/blob/master/next-swr.md)
