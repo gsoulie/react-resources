@@ -608,9 +608,431 @@ export default function DefaultArchive() {
 }
 ```` 
 
-* [Routes catch all](#routes-catch-all)
-* [Interception route](#interception-route)
-* [Routes groupées](#routes-groupées)
-* [Data fetching](#data-fetching)
-* [Server actions](#server-actions)
-* [Mises à jour optimistes](#mises-à-jour-optimistes)     
+## Routes catch all
+
+Imaginons la structure suivante : 
+
+````
+app/archive/@archive/page.tsx
+app/archive/@archive/[year]/page.tsx
+````
+
+La route ````app/archive/@archive/[year]/page.tsx```` nous permet d'afficher les news pour une année donnée. Imaginons que nous souhaiterions préciser notre recherche en rajoutant un niveau nous permettant de filtrer ensuite sur le mois.
+
+Une solution pourrait être de rajouter une route ````app/news/[year]/[month]/page.tsx````. On pourrait pousser le concept encore plus loin et finir par rajouter X routes. Ceci étant plutôt peu pratique, on peut alors utiliser le concept de **catchAll route**
+
+Pour se faire, il suffit de transformer notre route initiale (app/archive/@archive/[year]/page.tsx) de la manière suivante : ````app/archive/@archive/[[...filter]]/page.tsx````
+
+Celà signifie que cette page sera activée pour n'importe quel segment ajouté après la route "/archive", et peut importe le **nombre** de segments ajoutés !
+
+La première modification à apporter est la manière de récupérer les paramètres de route :
+
+*Remplacer l'ancien code...*
+````typescript
+const ArchiveDetailPage = async ({ params }: { params: any }) => {
+  const { year } = await params;	// paramètre unique params.year
+
+  // ...
+};
+````
+
+*Par le nouveau code...*
+````typescript
+const ArchiveDetailPage = async ({ params }: { params: any }) => {
+  const { filter } = await params;	// params.filter est maintenant un TABLEAU de paramètres
+
+  const selectedYear = filter?.[0]; // équivalent à filter ? filter[0] : undefined
+  const selectedMonth = filter?.[1]; // équivalent à filter ? filter[0] : undefined
+  
+  // ...
+};
+````
+
+**Attention**
+
+L'ajout de la route catch all nécessite la suppression du fichier ````app/archive/@archive.page.tsx```` puisque cette dernière est aussi 
+attrappée par la ````[[...filter]]````. On peut donc transférer son contenu dans la catch all route
+
+<details>
+	<summary>Exemple d'implémentation avec affichage conditionnel en fonction des paramètres récupérés</summary>
+
+````typescript
+const ArchiveDetailPage = async ({ params }: { params: any }) => {
+  const { filter } = await params;
+
+  const selectedYear = filter?.[0]; // équivalent à filter ? filter[0] : undefined
+  const selectedMonth = filter?.[1]; // équivalent à filter ? filter[0] : undefined
+
+  let news;
+  let links = getAvailableNewsYears();
+
+  if (selectedYear && !selectedMonth) {
+    news = getNewsForYear(+selectedYear);
+    links = getAvailableNewsMonths(+selectedYear);
+  }
+
+  if (selectedYear && selectedMonth) {
+    news = getNewsForYearAndMonth(+selectedYear, +selectedMonth);
+    links = [];
+  }
+
+  let newsContent = <p>No news found for the selected period.</p>;
+
+  if (news && news.length > 0) {
+    newsContent = <NewsList news={news} />;
+  }
+
+  // Afficher une fallback si les données ne contiennent pas l'année sélectionnée
+  if (
+    (selectedYear && !getAvailableNewsYears().includes(+selectedYear)) ||
+    (selectedMonth &&
+      !getAvailableNewsMonths(+selectedYear).includes(+selectedMonth))
+  ) {
+    throw new Error("Invalid filters");
+  }
+
+  return (
+    <>
+      <header className="mb-8">
+        <nav>
+          <ul className="flex gap-4 mb-8">
+            {links.map((link) => {
+              const href = selectedYear
+                ? `/archive/${selectedYear}/${link}`
+                : `/archive/${link}`;
+
+              return (
+                <li key={link}>
+                  <Link
+                    href={href}
+                    className="text-[#b0b0a6] rounded font-bold text-lg hover:text-[#e5e5e1] active:text-[#e5e5e1]"
+                  >
+                    {link}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </header>
+
+      {newsContent}
+    </>
+  );
+};
+````
+
+</details>
+
+
+## Interception route
+
+Une route d'interception doit être de la forme ````(<chemin-de-la-route-à-intercepter>)<nom-de-la-route-à-intercepter````
+
+par exemple :
+
+````
+app/news/[slug]/image/page.tsx
+app/news/[slug]/(.)image/page.tsx // interceptera la route image. le (.) indique que la route à intercepter se trouve dans le même répertoire
+````
+
+> Se référer à la documentation pour plus de détails
+
+Les intercepteurs de route dans Next.js permettent de gérer des cas où certaines routes doivent être modifiées ou interagir avec une autre route spécifique sans interrompre complètement la navigation principale. 
+Cela est particulièrement utile pour des fonctionnalités comme les modales, les redirections contextuelles ou des expériences utilisateur conditionnelles.
+
+Voici un aperçu détaillé de l'intérêt d'utiliser un intercepteur de route, comme (.)image, pour intercepter la route image/page.tsx :
+
+**1. Qu'est-ce qu'un intercepteur de route ?**
+
+Un intercepteur de route est un mécanisme où une route spécifique est interceptée et affichée à côté ou au-dessus d'une autre route sans changer complètement l'URL principale. Cela permet de manipuler le rendu de manière conditionnelle tout en conservant le contexte global de navigation.
+
+Dans Next.js, (.) indique une interception relative, et l'intercepteur peut s'intégrer dans une structure de page existante.
+
+**2. Exemple concret**
+
+*Structure des fichiers*
+````
+/app
+  /gallery
+    /page.tsx
+  /gallery
+    /(.)image
+      /[id]
+        /page.tsx
+````
+
+**Scénario utilisateur**
+
+Un utilisateur visite ````/gallery````, qui affiche une galerie d'images.
+
+Lorsqu'il clique sur une image, ````/gallery/image/[id]```` est chargé, mais au lieu de rediriger vers une nouvelle page complète, une modale ou un panneau latéral apparaît au-dessus de la galerie.
+
+L'intercepteur ````(.)image/[id]/page.tsx```` gère cette vue contextuelle.
+
+## Routes groupées
+
+La syntaxe ````(<nom-groupe>)```` permet de regrouper plusieurs routes sous une même racine, et ainsi pouvoir définir un layout différent en fonction
+de l'endroit où l'on se trouve dans le site.
+
+Remarque : ````(<nom-groupe>)```` ne fait pas parti de l'url, c'est uniquement un mot clé permettant d'oganiser les routes
+
+
+````
+app/
+	(landing)
+		layout.tsx
+		page.tsx
+		error.tsx
+		...
+	(content)
+		layout.tsx
+		page.tsx
+		error.tsx
+		...
+````
+
+## Data fetching
+
+### Fetch depuis composant client
+
+<details>
+	<summary>Manière classique de charger des données depuis un client</summary>
+
+````typescript
+"use client";
+import React, { useEffect, useState } from "react";
+import NewsList from "@/components/news/news-list";
+
+const NewsPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [news, setNews] = useState();
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      setIsLoading(true);
+
+      const response = await fetch("http://localhost:8080/news");
+
+      if (!response.ok) {
+        setIsLoading(false);
+        setError("Failed to fetch news.");
+      }
+
+      const news = await response.json();
+      setNews(news);
+
+      setIsLoading(false);
+    };
+
+    fetchNews();
+  }, []);
+
+  if (isLoading) {
+    return <p>Loading news...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  let newsContent;
+
+  if (news) {
+    newsContent = <NewsList news={news} />;
+  }
+
+  return (
+    <div>
+      <h1 className="text-5xl font-extrabold my-4">News Page</h1>
+      {newsContent}
+    </div>
+  );
+};
+
+export default NewsPage;
+````
+ 
+</details>
+
+### Fetch depuis composant serveur
+
+<details>
+	<summary>Manière recommandée pour requêter des données</summary>
+
+````typescript
+import NewsList from "@/components/news/news-list";
+
+const NewsPage = async () => {
+  const response = await fetch("http://localhost:8080/news");
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch news.");
+  }
+
+  const news = await response.json();
+
+  return (
+    <div>
+      <h1 className="text-5xl font-extrabold my-4">News Page</h1>
+      <NewsList news={news} />
+    </div>
+  );
+};
+
+export default NewsPage;
+````
+ 
+</details>
+
+Pour parfaire l'experience utilisateur, il est possible d'ajouter une page *loading.tsx* (mot clé réservé) au même niveau que la page.
+
+de cette manière, la page *loading.tsx* sera affichée automatiquement lors du chargement des données, sans avoir besoin de gérer cet état côté composant
+
+
+## Server actions
+
+plutôt que de surcharger les composants serveurs avec les appels http, il est possible de loger ces appels http dans des server actions (fichiers séparés) et de passer ces actions aux composants clients (voir exercice section-6)
+
+
+## Mises à jour optimistes 
+
+
+Le hook React ````useOptimistic()```` permet de réaliser des mises à jour optimistes. C'est à dire qu'il va réaliser la mise à jour
+visuelle instantannée, avant que la mise à jour réelle des données (qui passe par une api, enregistrement en bdd etc...) ne soit terminée.
+Si la mise à jour réelle des données ne se passe pas bien, alors le hook fera automatiquement un rollback vers l'état initial de la valeur.
+
+````useOptimistic(<data>, <callback>)````
+
+1er updated optimistic post array
+2eme : fonction to trigger the optimistic array
+
+*Modifier le code :*
+````
+export default function Posts({ posts }) {
+
+  if (!posts || posts.length === 0) {
+    return <p>There are no posts yet. Maybe start sharing some?</p>;
+  }
+
+  return (
+    <ul className="posts">
+      {posts.map((post) => (
+        <li key={post.id}>
+          <Post post={post} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+````
+
+<details>
+	<summary>Code mis à jour de manière optimiste</summary>
+	
+	
+````
+"use client";
+import { formatDate } from "@/lib/format";
+import LikeButton from "./like-icon";
+import Image from "next/image";
+import { togglePostLikeStatus } from "@/actions/post";
+import { useOptimistic } from "react";
+
+function Post({ post, action }) {
+  return (
+    <article className="post">
+      <div className="post-image">
+        {/* <Image
+          src={post.image}
+          alt={post.title}
+          width={120}
+          height={120}
+          onError={<span>No picture</span>}
+        /> */}
+      </div>
+      <div className="post-content">
+        <header>
+          <div>
+            <h2>{post.title}</h2>
+            <p>
+              Shared by {post.userFirstName} on{" "}
+              <time dateTime={post.createdAt}>
+                {formatDate(post.createdAt)}
+              </time>
+            </p>
+          </div>
+          <div>
+            <form
+              action={action.bind(null, post.id)}
+              className={post.isLiked ? "liked" : ""}
+            >
+              <LikeButton isLiked={post.isLiked} />
+            </form>
+          </div>
+        </header>
+        <p>{post.content}</p>
+      </div>
+    </article>
+  );
+}
+
+export default function Posts({ posts }) {
+  const [optimisticPosts, updatedOptimisticPosts] = useOptimistic(
+    posts,
+    (prevPosts, updatedPostId) => {
+      // indice du post mis à jour
+      const updatedPostIndex = prevPosts.findIndex(
+        (post) => post.id === updatedPostId
+      );
+
+      if (updatedPostIndex === -1) {
+        return prevPosts;
+      }
+
+      // création du post à mettre à jour, basé sur le prevPost
+      const updatedPost = { ...prevPosts[updatedPostIndex] };
+
+      // mise à jour du compteur de like
+      updatedPost.likes = updatedPost.likes + (updatedPost.isLiked ? -1 : 1);
+
+      // mise à jour de l'état isLike ou non
+      updatedPost.isLiked = !updatedPost.isLiked;
+
+      // création du nouveau tableaux de posts, basés sur le prevPosts (car prevPost est immutable)
+      const newPosts = [...prevPosts];
+      newPosts[updatedPostIndex] = updatedPost;
+
+      return newPosts;
+    }
+  ); // premier param = l'objet data, second param = callback à jouer pour mettre à jour
+
+  if (!optimisticPosts || optimisticPosts.length === 0) {
+    return <p>There are no posts yet. Maybe start sharing some?</p>;
+  }
+
+  const updatePost = async (postId) => {
+    updatedOptimisticPosts(postId);
+    await togglePostLikeStatus(postId);
+  };
+
+  return (
+    <ul className="posts">
+      {optimisticPosts.map((post) => (
+        <li key={post.id}>
+          <Post post={post} action={updatePost} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+````
+
+
+optimisticPosts prend la valeur du retour de la callback (second argument de useOptimistic)
+
+</details>
+
+
