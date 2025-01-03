@@ -13,6 +13,34 @@ Si le cas se présente, il faut alors dire à NextJS que certaines pages / compo
 
 ## Request Memoization
 
-Nextjs mémorise les requêtes **identiques** (2 requêtes pointant la même ressource mais avec des paramètres de header différents ne sont pas considérées comme identiques) et réutilisera la réponse partout dans l'application pour un même appel.
+Nextjs mémorise les requêtes **identiques** (2 requêtes pointant la même ressource mais avec des paramètres de header différents ne sont pas considérées comme identiques) et réutilisera la réponse partout dans l'application pour un même appel. 
+C'est à dire que changer de page et revenir sur la page réalisant la requête, ne mettra pas les données à jour.
 
+Ceci est **vrai pour la version 14** de NextJS.
 
+## Options de rafraichissement du cache
+
+#### revalidatePath
+
+#### Configuration fetch
+
+**Paramètre cache**
+
+NextJS surcharge la fonction fetch de javascript. Il est alors possible d'agir sur le cache via le paramètre ````cache````
+
+* ````force-cache```` : comportement aggréssif équivalent à la gestion du cache de Next 14
+* ````no-store```` : **NextJS 15 ou plus**, force Nextjs à toujours envoyer une nouvelle requête
+
+**Important** : l'option ````no-store```` est active **uniquement** pour la requête sur laquelle elle est ajoutée. C'est à dire que si une requête **identique** est utilisée ailleurs dans l'application, **sans** l'option ````no-store````, alors la seconde requête sera mise en cache
+
+**Paramètre next**
+
+Next met aussi à disposition un paramètre ````next```` dans la fonction fetch, permettant de configurer le temps (en secondes) durant lequel next va continuer d'utiliser les données en cache **avant** de revalider le cache :
+
+````typescript
+const response = await fetch('http://localhost:8080/messages', {
+	next: { revalidate: 5 }}
+	);
+````
+
+````5```` est le nombre de secondes durant lequel Nextjs continue d'utiliser le cache avant de revalider le cache
