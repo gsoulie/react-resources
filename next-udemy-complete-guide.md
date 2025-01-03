@@ -161,7 +161,7 @@ export generateMetadata = async({params}) => {
 }
 ````
 
-## FORMS
+## Forms
 
 - forms action : envoyer le contenu d'un formulaire via une action serveur
 
@@ -186,6 +186,8 @@ export const shareMeal = async (formData: FormData) => {
 
   // Enregistrement en BDD
   await saveMeal(newMeal);
+
+  revalidatePath('/meals');	// invalider le cache
 
   redirect('/meals');
 }
