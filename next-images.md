@@ -2,12 +2,13 @@
 
 # Images
 
+* [Import images internes](#import-images-internes)    
 * [Utilisation du composant Image](#utilisation-du-composant-image)
 * [Image background](#image-background)
 * [Image 404](#image-404)    
 * [Problème de cache image](#problème-de-cache-image)
 
-## Import image internes
+## Import images internes
 
 La manière la plus simple d'utiliser une image interne (provenant de public ou assets) est la suivante :
 
