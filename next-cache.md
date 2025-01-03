@@ -20,9 +20,9 @@ Ceci est **vrai pour la version 14** de NextJS.
 
 ## Options de rafraichissement du cache
 
-#### revalidatePath
+### revalidatePath
 
-#### Configuration fetch
+### Configuration fetch
 
 **Paramètre cache**
 
