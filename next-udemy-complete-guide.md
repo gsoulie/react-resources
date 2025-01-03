@@ -108,7 +108,7 @@ L'utilisation de la fonction ````notFound()```` de ````next/navigation````, perm
 ````
 
 - cache validation : **notion très importante**, lors de la compilation pour déploiement, next va générer un certain nombre de chose en statique et va faire de la mise en cache aggressive.
-Ceci est une très bonne chose pour tous les contenus statiques, mais pose un réel problème pour les contenus dont les data peuvent changer. En effet les pages sont pré-rendues et les fetch ne seront plus rééeexécutés !
+Ceci est une très bonne chose pour tous les contenus statiques, mais pose un réel problème pour les contenus dont les data peuvent changer. En effet les pages sont pré-rendues et les fetch ne seront plus rééxécutés !
 
 pour revalider le cache, on peut donc utiliser ````revalidatePath(<url>, <'page' | 'layout'>)````
 
