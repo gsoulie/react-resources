@@ -20,13 +20,50 @@ Ceci est **vrai pour la version 14** de NextJS.
 
 ## Options de rafraichissement du cache
 
-### revalidatePath
+### Revalidation du cache à la demande : revalidatePath
 
-Pour cela on utilise ````revalidatePath()````. On utilise ````revalidatePath()```` **avant** de faire une redirection
+Pour cela on utilise ````revalidatePath()````. A utiliser **avant** de faire une redirection
+
+* 1er paramètre la route ````path````: toutes les données relatives à cette route seront supprimées ainsi que le route cache. **important** : les données des routes enfants ne seront **pas invalidées** à moins de spécifier le second argument avec la valeur ````layout````
+* 2ème paramètre le type (optionnel) ````page```` ou ````layout```` : Si le chemin contient un segment dynamique (ex: */[slug]/page*) alors ce patamètre est **obligatoire**
+
+Ainsi : 
 
 ````typescript
-revalidatePath('/', 'layout');
+revalidatePath('/messages');	// revalide le cache de la route /message spécifiquement
+revalidatePath('/messages', 'page'); // idem
+
+revalidatePath('/messages', 'layout'); //revalide le cache de la route /messages ainsi que le cache des routes enfants
+
+revalidatePath('/', 'layout'); // revalide le cache de TOUTES les pages
 ````
+
+*Exemple*
+
+````typescript
+async function createMessage(formData) {
+    'use server';
+
+    const message = formData.get('message');
+    addMessage(message);
+
+    // revalider le cache des pages /messages et /users
+    revalidatePath('/messages')
+    revalidatePath('/users')
+
+    redirect('/messages');
+  }
+````
+
+### Revalidation du cache de plusieurs éléments : revalidateTag
+
+Next permet d'ajouter des *tags* aux requêtes fetch :
+
+````typescript
+const response = await fetch('url', { next: { tags: ['msg'] } } )
+````
+
+Utiliser ````revalidateTag('msg')```` aura alors pour effet revalider le cache des éléments ayant le tag mentionné
 
 ### Configuration fetch (unitairement)
 
