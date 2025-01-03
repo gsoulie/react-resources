@@ -11,4 +11,8 @@ Si le cas se présente, il faut alors dire à NextJS que certaines pages / compo
 
 > Il est important de noter que la version 14 fait de la mise en cache plus aggressive que dans la version 15
 
+## Request Memoization
+
+Nextjs mémorise les requêtes **identiques** (2 requêtes pointant la même ressource mais avec des paramètres de header différents ne sont pas considérées comme identiques) et réutilisera la réponse partout dans l'application pour un même appel.
+
 
