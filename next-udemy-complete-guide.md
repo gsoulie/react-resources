@@ -261,7 +261,7 @@ const SharePage = () => {
 npm i better-sqlite3
 ````
 
-Va créer un fichier *initdb.js*
+Créer un fichier *initdb.js* contenant le script de création et insertion des données dans la base
 
 Exécuter le script de création de la bdd : ````node initdb.js````
 
