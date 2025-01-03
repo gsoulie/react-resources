@@ -39,6 +39,8 @@ NextJS surcharge la fonction fetch de javascript. Il est alors possible d'agir s
 
 **Important** : l'option ````no-store```` est active **uniquement** pour la requête sur laquelle elle est ajoutée. C'est à dire que si une requête **identique** est utilisée ailleurs dans l'application, **sans** l'option ````no-store````, alors la seconde requête sera mise en cache
 
+**Important** : l'option ````no-store```` aura aussi pour effet de supprimer la mise en cache de la route, et donc rafraichir la page à chaque fois que de nouvelles données seront requêttées.
+
 **Paramètre next**
 
 Next met aussi à disposition un paramètre ````next```` dans la fonction fetch, permettant de configurer le temps (en secondes) durant lequel next va continuer d'utiliser les données en cache **avant** de revalider le cache :
@@ -84,3 +86,8 @@ export default async function MessagesPage() {
   return <Messages messages={messages} />;
 }
 ````
+
+**Important** l'ajout de la constante ````export const dynamic = 'force-dynamic'```` va rendre la page dynamique lors de la compilation :
+
+![next-cache-page](https://github.com/user-attachments/assets/53d2aac4-95b2-474a-bfa0-ac0b56358d33)
+
