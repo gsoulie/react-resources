@@ -201,7 +201,7 @@ export const shareMeal = async (formData: FormData) => {
   </form>
   ````
 
-- hook useFormStatus() 
+- hook useFormStatus() : permet de récupérer l'état *pending* du formulaire et donc agir sur l'état des boutons de validations, libellé etc...
 
 - ajout server-side field validation : la validation "required" des champs d'un formulaire côté client n'est pas assez sécurisée.
 En effet, il est possible désactiver l'attribut required d'un champs depuis la console developer.
@@ -210,7 +210,7 @@ Pour sécuriser celà, il est bon d'ajouter une validation côté serveur
 voici le nouveau code de la server action précédente :
 
 *actions/meal-action*
-````
+````typescript
 const isInvalidText = (text: string): boolean => {
   return !text || text.trim() === '';
 }
@@ -246,6 +246,8 @@ export const shareMeal = async (prevState, formData: FormData): Promise<{ messag
   // Enregistrement en BDD
   await saveMeal(newMeal);
 
+  revalidatePath('/meals');
+
   redirect('/meals');
 }
 ````
@@ -263,12 +265,12 @@ const SharePage = () => {
 		...
 		</form>
 	)
-	}
+}
 ````
 
 
 
-## BDD SQLITE
+## Bdd SQLite
 
 ````typescript
 npm i better-sqlite3
