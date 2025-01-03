@@ -5,7 +5,17 @@
 * [Utilisation du composant Image](#utilisation-du-composant-image)
 * [Image background](#image-background)
 * [Image 404](#image-404)    
-* [Problème de cache image](#problème-de-cache-image)     
+* [Problème de cache image](#problème-de-cache-image)
+
+## Import image internes
+
+La manière la plus simple d'utiliser une image interne (provenant de public ou assets) est la suivante :
+
+````typescript
+import myLogo from '@/assets/logo.png';
+
+<Image src={myLogo.src} />
+````
 
 ## Utilisation du composant Image
 
