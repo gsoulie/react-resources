@@ -899,14 +899,13 @@ plutôt que de surcharger les composants serveurs avec les appels http, il est p
 ## Mises à jour optimistes 
 
 
-Le hook React ````useOptimistic()```` permet de réaliser des mises à jour optimistes. C'est à dire qu'il va réaliser la mise à jour
-visuelle instantannée, avant que la mise à jour réelle des données (qui passe par une api, enregistrement en bdd etc...) ne soit terminée.
+Le hook React ````useOptimistic()```` permet de réaliser des mises à jour optimistes. C'est à dire qu'il va réaliser la mise à jour visuelle instantannée, avant que la mise à jour réelle des données (qui passe par une api, enregistrement en bdd etc...) ne soit terminée.
 Si la mise à jour réelle des données ne se passe pas bien, alors le hook fera automatiquement un rollback vers l'état initial de la valeur.
 
 ````useOptimistic(<data>, <callback>)````
 
-1er updated optimistic post array
-2eme : fonction to trigger the optimistic array
+* 1er paramètre : données à mettre à jour
+* 2eme paramètre : fonction qui va mettre à jour les données et retourner le nouveau jeu de données
 
 *Modifier le code :*
 ````
