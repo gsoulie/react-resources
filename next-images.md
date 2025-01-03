@@ -15,7 +15,7 @@ La manière la plus simple d'utiliser une image interne (provenant de public ou 
 ````typescript
 import myLogo from '@/assets/logo.png';
 
-<Image src={myLogo.src} />
+<Image src={myLogo} />
 ````
 
 ## Utilisation du composant Image
