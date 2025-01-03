@@ -68,7 +68,7 @@ import logoImg from "@/assets/logo.png";
 
 - destructurer les paramètres
 
-*remplacer  *
+*remplacer *
 ````typescript
 <MealItem
             title={m.title}
