@@ -2,14 +2,15 @@
 
 # Images
 
-* [Import images internes](#import-images-internes)
-* [Optimisation des images](#optimisation-des-images)    
+* [Chargement d'images internes](#chargement-d--images-internes)
+* [Optimisation des images](#optimisation-des-images)
+* [Image loader](#image-loader)         
 * [Utilisation du composant Image](#utilisation-du-composant-image)
 * [Image background](#image-background)
 * [Image 404](#image-404)    
 * [Problème de cache image](#problème-de-cache-image)
 
-## Import images internes
+## Chargement d'images internes
 
 La manière la plus simple d'utiliser une image interne (provenant de public ou assets) est la suivante :
 
@@ -52,6 +53,50 @@ export default function Page() {
 
 ````
 
+## Image loader
+
+````typescript
+Afin d'éviter les erreurs 404 lors du chargement d'images dont l'url est fournie par une api, il est conseillé d'utiliser un **loader resolver**
+
+````typescript
+export const ProductPhoto = (props: {
+  image: string;
+  alt: string;
+  height?: number | undefined;
+  width?: number | undefined
+}) => {
+  const [imageError, setImageError] = useState(false);
+  
+  const imageLoader = () => {
+    return `${encodeURI(props.image)}?w=${props.width}&q=${75}`;
+  };
+  
+  return (
+    <>
+      {props.image && !imageError && (
+        <Image
+          loader={imageLoader}
+          src={encodeURI(props.image) ?? ""}
+          alt={""}
+          fill={!props.height && !props.width ? true : undefined}
+          sizes={!props.height && !props.width ? "100%" : undefined}
+          height={props.height ?? undefined}
+          width={props.width ?? undefined}
+          className="product-tile__image"
+          onError={() => setImageError(true)}
+        />
+      )}
+      {(!props.image || imageError) && (
+        <NotFoundImage small={props?.smallVersion} />
+      )}
+    </>
+  );
+};
+````
+````
+
+
+
 ## Utilisation du composant Image
 
 <details>
@@ -93,46 +138,6 @@ Il faut aussi configurer la div parent comme ayant une position relative.
 ````
 
 </details>
-
-### Bonnes pratiques, pour aller plus loin
-
-Afin d'éviter les erreurs 404 lors du chargement d'images dont l'url est fournie par une api, il est conseillé d'utiliser un **loader resolver**
-
-````typescript
-export const ProductPhoto = (props: {
-  image: string;
-  alt: string;
-  height?: number | undefined;
-  width?: number | undefined
-}) => {
-  const [imageError, setImageError] = useState(false);
-  
-  const imageLoader = () => {
-    return `${encodeURI(props.image)}?w=${props.width}&q=${75}`;
-  };
-  
-  return (
-    <>
-      {props.image && !imageError && (
-        <Image
-          loader={imageLoader}
-          src={encodeURI(props.image) ?? ""}
-          alt={""}
-          fill={!props.height && !props.width ? true : undefined}
-          sizes={!props.height && !props.width ? "100%" : undefined}
-          height={props.height ?? undefined}
-          width={props.width ?? undefined}
-          className="product-tile__image"
-          onError={() => setImageError(true)}
-        />
-      )}
-      {(!props.image || imageError) && (
-        <NotFoundImage small={props?.smallVersion} />
-      )}
-    </>
-  );
-};
-````
 
 ## Image background
 
@@ -196,7 +201,7 @@ const ProductPhoto = (props: { image: string, alt: string }) => {
 ## Problème de cache image
 
 <details>
-	<summary>Problème de cache image, parfois les images affichées ne sont pas les bonnes. ceci à ccause du cache</summary>
+	<summary>Problème de cache image, parfois les images affichées ne sont pas les bonnes. ceci à cause du cache</summary>
 
 ````typescript
 <Link
