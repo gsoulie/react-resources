@@ -21,7 +21,7 @@ import myLogo from '@/assets/logo.png';
 
 ## Optimisation des images
 
-Utilisez la propriété ````sizes```` plutôt que ````width```` et ````height````
+Utilisez la propriété ````sizes```` plutôt que ````width```` et ````height```` lorsque l'image doit être responsive.
 
 La valeur de ````sizes```` aura un impact significatif sur les performances des images utilisant l'attribut fill ou qui sont stylisées pour avoir une taille réactive.
 
