@@ -195,7 +195,7 @@ export const shareMeal = async (formData: FormData) => {
 ````
 
 *Component.tsx*
-````
+````typescript
 <form action={shareMeal}>
   ...
   </form>
@@ -253,7 +253,7 @@ export const shareMeal = async (prevState, formData: FormData): Promise<{ messag
 ````
 
 *implémentation dans le composant formulaire*
-````
+````typescript
 import React, { useActionState } from "react";
 
 const SharePage = () => {
