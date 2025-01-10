@@ -41,7 +41,7 @@ Ensuite, cela permet via l'utilisation du hook ````useActionState```` de gérer 
 
 Pour utiliser un formulaire avec les server actions, il faut remplacer le ````onSubmit```` par ````action````
 
-
+> Important : En utilisant le hook ````useActionState```` il ne faut pas oublier de rajouter le paramètre ````prevState```` en premier paramètre de la server action
 
 *Exemple basique*
 
