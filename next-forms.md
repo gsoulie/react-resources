@@ -2,6 +2,9 @@
 
 # Formulaires
 
+* [Formulaire et server action](#formulaire-et-server-action)
+* [Formulaire avec Yup et React form](#formulaire-avec-yup-et-react-form)      
+
 
 ## Formulaire et server action
 
