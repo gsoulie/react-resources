@@ -147,6 +147,8 @@ router.push('/details' + props.id);
 
 > Important : **searchParams** est un mot clé réservé
 
+Récupération des paramètres définits dans la chaîne d'une route ````<Link href="/?mode=signin">Login with existing account.</Link>````
+
 <details>
 	<summary>Lire les paramètres d'url "?<param>&<param>"</summary>
 
