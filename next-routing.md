@@ -7,7 +7,8 @@
 * [Navigation](#navigation)
 * [Récupéartion paramètre url](#récupération-paramètre-url)
 * [Routage multiple avec page unique](#routage-multiple-avec-page-unique)
-* [Gérer la classe css lien actif](#gérer-la-classe-css-lien-actif)      
+* [Gérer la classe css lien actif](#gérer-la-classe-css-lien-actif)
+* [Paramètres dynamique de route api](#paramètres-dynamique-de-route-api)     
 
 ## Structure
 
@@ -144,12 +145,19 @@ router.push('/details' + props.id);
 
 ## Récupération des searchParams
 
+> Important : **searchParams** est un mot clé réservé
+
 <details>
 	<summary>Lire les paramètres d'url "?<param>&<param>"</summary>
 
 *page.tsx*
 ````typescript
-export default async function Page({searchParams}) {
+export default async function Page({ searchParams }: { searchParams: any }) {
+
+	const { mode } = await searchParams;	// récupération par destructuration
+	// écriture alternative
+  	const mode = await searchParams.mode || <valeur_par_defaut>;
+
 	retrun <h1>{searchParams.hello}</h1>
 }
 ````
@@ -160,7 +168,7 @@ Avec l'url suivante : **localhost:3000/?hello=world** retournera "world"
 
 ## Récupération paramètre url
 
-Route type : /filters/profession/[professionId]/domain/[domainId]/subDomain/[subDomainId]
+Route type : ````/filters/profession/[professionId]/domain/[domainId]/subDomain/[subDomainId]````
 
 ````
 filters
@@ -178,11 +186,13 @@ filters
 
 composant page : 
 
-````typescript
-const ProfessionPage = async ({ params }: { params: { slug: string } }) => {
+> Important : **params** est un mot clé réservé
 
-  return <FilterClient params={params} />;
-};
+Récupération des paramètres d'une route ````app/product/[id]/page.tsx````
+
+````typescript
+const ProductPage = async ({ params }: { params: any }) => {
+  const { id } = await params;	// doit avoir le même nom que le répertoire de l'arborescence
 ````
 
 composant client
@@ -190,7 +200,7 @@ composant client
 ````typescript
 export const FilterClient = (props: any) => {
 
-  const { professionId, domainId, subDomainId } = props?.params || null;  
+  const { professionId, domainId, subDomainId } = props?.params || null;  // récupération par destructuration
 }
 ````
 
@@ -276,3 +286,16 @@ export const NarvbarLink = ({ text, href }: { text: string; href: string }) => {
 ````
  
 </details>
+
+
+## Paramètres dynamique de route api
+
+Il est aussi possible de faire du paramétrage dynamique de route api, le fonctionnement reste le même 
+
+````app/api/product/[id]/route.ts````
+
+````typescript
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+	const { id } = await params
+}
+````
