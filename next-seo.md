@@ -53,3 +53,52 @@ export const generateMetadata = async () => {
   };
 };
 ````
+
+## Rich snippets
+
+*jsonLD.ts*
+````typescript
+
+// rich snippet for SEO on pages which call this component
+const JsonLD = ({ seo }) => {
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': seo.type,
+    name: seo.name,
+    image: seo.image,
+    description: seo.description,
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+export default JsonLD;
+````
+
+*Utilisation Page.tsx*
+
+````typescript
+import JsonLD from '@/components/seo/jsonLD';
+
+export default function Home() {
+const seo = {
+  type: 'Organization',
+  name: 'Lorem Ipsum Dolor',
+  description: 'Lorem Ipsum Dolor',
+  image: ''
+}
+
+  return (
+    <>
+      <JsonLD seo={seo} />
+      { ... }
+    </>
+  );
+}
+````
