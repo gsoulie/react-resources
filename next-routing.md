@@ -8,7 +8,8 @@
 * [Récupéartion paramètre url](#récupération-paramètre-url)
 * [Routage multiple avec page unique](#routage-multiple-avec-page-unique)
 * [Gérer la classe css lien actif](#gérer-la-classe-css-lien-actif)
-* [Paramètres dynamique de route api](#paramètres-dynamique-de-route-api)     
+* [Paramètres dynamique de route api](#paramètres-dynamique-de-route-api)
+* [Redirection URL 300](#redirection-url-300)      
 
 ## Structure
 
@@ -300,4 +301,23 @@ Il est aussi possible de faire du paramétrage dynamique de route api, le foncti
 export async function GET(req: Request, { params }: { params: { id: string } }) {
 	const { id } = await params
 }
+````
+
+## Redirection URL 300
+
+*next.config.js*
+````typescript
+const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/my-url-to-redirect',
+        destination: '/my-new-url',
+        statusCode: 301
+      }
+    ]
+  }
+};
+
+module.exports = nextConfig;
 ````
