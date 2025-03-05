@@ -2,6 +2,7 @@
 
 # Généralités
 
+* [Librairies UI](#librairies-ui)    
 * [Bonnes pratiques](#bonnes-pratiques)     
 * [Installation](#installation)
 * [Architecture recommandée](#architecture-recommandée)
@@ -42,10 +43,16 @@ présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart
 ## Stack recommandée
 
 * SWR (= redux / context)
-* react-bootstrap | voir aussi Shadcn https://ui.shadcn.com/ (très sympa) | NextUI https://nextui.org/docs/components/table
 * NextTopLoader : https://www.npmjs.com/package/nextjs-toploader
 * Pino : gestion des logs
 
+## Librairies UI
+
+* Shadcn : https://ui.shadcn.com/
+* HeroUI (anciennement NextUI) : https://www.heroui.com/docs/guide/installation
+* react-bootstrap
+
+  
 ## Bonnes pratiques
 
 * Il est fortement conseillé de déclarer toutes les pages serveur en asynchrone et de créer au même niveau un composant client pour gérer les traitements clients s'il y en a.
