@@ -18,6 +18,8 @@ npm run dev
 
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)
   * [react-bootstrap classes display](https://getbootstrap.com/docs/5.1/utilities/flex/)
+  * Stack recommandées
+  * Librairies UI     
   * authentification      
 * [Gestion du cache et revalidation](https://github.com/gsoulie/react-resources/blob/master/next-cache.md)
 * [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)
