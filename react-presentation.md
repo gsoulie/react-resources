@@ -46,6 +46,7 @@ npm run dev
 * [Server actions](https://github.com/gsoulie/react-resources/blob/master/next-server-action.md)
 * Composants
   * [Bouton panier avec popover au survol](https://github.com/gsoulie/react-resources/tree/main/react-cart-popover)
+  * [Segment bouton](https://github.com/gsoulie/react-resources/blob/master/react-segment-button.md)           
 * CMS headless : (https://strapi.io/)
 
 <details>
