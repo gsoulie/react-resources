@@ -45,12 +45,14 @@ présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart
 * SWR (= redux / context)
 * NextTopLoader : https://www.npmjs.com/package/nextjs-toploader
 * Pino : gestion des logs
+* [TanStack query](https://tanstack.com/query/latest)    
 
 ## Librairies UI
 
 * Shadcn : https://ui.shadcn.com/
 * HeroUI (anciennement NextUI) : https://www.heroui.com/docs/guide/installation
 * react-bootstrap
+* [Recharts](https://recharts.org/en-US)    
 
   
 ## Bonnes pratiques
