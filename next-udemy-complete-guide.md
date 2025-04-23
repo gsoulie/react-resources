@@ -28,7 +28,7 @@
 
 - Utiliser la fonction ````forbiden()```` (depuis Next 15.1) pour les redirections 403, le fichier ````forbidden.tsx```` per met de personaliser la page
 
-- Utiliser la fonction ````authorized()```` (depuis Next 15.1) pour les redirections 401, le fichier ````authorized.tsx```` per met de personaliser la page
+- Utiliser la fonction ````unauthorized()```` (depuis Next 15.1) pour les redirections 401, le fichier ````unauthorized.tsx```` per met de personaliser la page
 
 - récupération des paramètres de route 
 
