@@ -20,7 +20,8 @@ npm run dev
   * [react-bootstrap classes display](https://getbootstrap.com/docs/5.1/utilities/flex/)
   * Stack recommandées
   * Librairies UI     
-  * authentification      
+  * authentification
+  * Bonnes pratiques     
 * [Gestion du cache et revalidation](https://github.com/gsoulie/react-resources/blob/master/next-cache.md)
 * [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)
 * [middleware et interceptor](https://github.com/gsoulie/react-resources/blob/master/next-middleware.md)    
