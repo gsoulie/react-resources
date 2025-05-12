@@ -171,6 +171,70 @@ const ProductFilters: React.FC<{ totalResults: number, filters: any }> = ({ tota
 ````
 </details>
 
+### Gestion des erreurs
+
+<details>
+	<summary>Gestion des erreurs dans les routes api</summary>
+
+Il est conseillé d'utiliser ````NextResponse```` pour gérer les retours succès ou erreur des routes api
+
+````typescript
+
+export async function GET(
+  req: NextRequest,
+  res: NextResponse
+): Promise<Response> {
+
+  
+const url = getApiUrl();
+
+try {
+    const httpResponse: Response = await fetch(url, {
+      method: "GET",
+      headers: getHeaderWithToken(),
+    });
+
+    if (!httpResponse.ok) {
+      const { status, statusText } = httpResponse;
+	  
+      return NextResponse.json(
+        {
+          success: false,
+          error: {
+            status,
+            statusText,
+          },
+          data: null,
+        },
+        { status }
+      );
+    }
+
+    const responseContent = await httpResponse.json();
+
+    return NextResponse.json({
+      success: true,
+      data: responseContent,
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          status: 500,
+          statusText: "[getInformation] - Server error",
+          message: error?.message || null,
+        },
+        data: null,
+      },
+      { status: 500 }
+    );
+  }
+}
+````
+ 
+</details>
+
 ## Installation
 
 ````
