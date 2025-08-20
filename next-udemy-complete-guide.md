@@ -120,7 +120,7 @@ Dans notre exemple, lors de l'ajout d'un nouvel item, on souhaite revalider le c
 la liste des items avant redirection
 
 *actions/meal-action*
-````
+````typescript
 export const shareMeal = async (prevState, formData: FormData): Promise<{ message: string | null }> => {
 // ...
 	
@@ -140,7 +140,7 @@ vous ne devez pas fournir de type."
 - metadata dynamiques : 
 
 *static metadata*
-````
+````typescript
 export const metadata: Metadata = {
   title: "All meals",
   description: "Browse all meals",
@@ -148,7 +148,7 @@ export const metadata: Metadata = {
 ````
 
 *dynamic metadata*
-````
+````typescript
 export generateMetadata = async({params}) => {
   const { slug } = await params;
 
@@ -527,14 +527,14 @@ La fonction slugify :
 Exemple :
 
 Cas 1 : cas simple
-````
+````typescript
 const meal = { title: "Delicious Pancakes" };
 const slug = slugify(meal.title, { lower: true });
 console.log(slug); // "delicious-pancakes"
 ````
 
 Cas 2 : Titre avec caractères spéciaux
-````
+````typescript
 const meal = { title: "Crème Brûlée & Tartes!" };
 const slug = slugify(meal.title, { lower: true });
 console.log(slug); // "creme-brulee-tartes"
@@ -574,7 +574,7 @@ Afin de rendre les routes parallèles dans le même layout, il faut créer un la
 	<summary>Implémentation</summary>
 
 *layout.tsx*
-````
+````typescript
 const ArchiveLayout = ({
   archive,
   latest,
@@ -603,14 +603,14 @@ Il est recommandé d'utiliser un fichier *default.tsx* (nom réservé) pour déf
 Cela garantit qu'une expérience utilisateur cohérente est fournie même lorsque certaines conditions ne sont pas remplies ou qu'aucune donnée spécifique n'est disponible.
 
 Si vous avez une structure de route parallèle comme celle-ci :
-````
+````typescript
 /app/archive/@archive/default.tsx
 /app/archive/@archive/[year]/page.tsx
 ````
 Le fichier *default.tsx* sera rendu si aucun segment dynamique (comme [year]) n'est actif pour la route @archive.
 
 *default.tsx*
-````
+````typescript
 export default function DefaultArchive() {
   return <p>Select a year to view the archive.</p>;
 }
@@ -620,7 +620,7 @@ export default function DefaultArchive() {
 
 Imaginons la structure suivante : 
 
-````
+````typescript
 app/archive/@archive/page.tsx
 app/archive/@archive/[year]/page.tsx
 ````
@@ -739,7 +739,7 @@ Une route d'interception doit être de la forme ````(<chemin-de-la-route-à-inte
 
 par exemple :
 
-````
+````typescript
 app/news/[slug]/image/page.tsx
 app/news/[slug]/(.)image/page.tsx // interceptera la route image. le (.) indique que la route à intercepter se trouve dans le même répertoire
 ````
@@ -916,7 +916,7 @@ Si la mise à jour réelle des données ne se passe pas bien, alors le hook fera
 * 2eme paramètre : fonction qui va mettre à jour les données et retourner le nouveau jeu de données
 
 *Modifier le code :*
-````
+````typescript
 export default function Posts({ posts }) {
 
   if (!posts || posts.length === 0) {
@@ -939,7 +939,7 @@ export default function Posts({ posts }) {
 	<summary>Code mis à jour de manière optimiste</summary>
 	
 	
-````
+````typescript
 "use client";
 import { formatDate } from "@/lib/format";
 import LikeButton from "./like-icon";
