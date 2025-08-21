@@ -15,7 +15,8 @@
 * [Référencement](#référencement)
 * [Type générique T](#type-générique-t)
 * [Configuration eslint](#configuration-eslint)
-* [Authentification](#authentification)     
+* [Authentification](#authentification)
+* [Suspense](#suspense)    
 
 ## Présentation
 
@@ -777,3 +778,7 @@ export const sessionIsActive = (): boolean => {
 ````
  
 </details>
+
+## Suspense
+
+> IMPORTANT : L'utilisation de ````<Suspense>```` dans une page serveur n'est déclenché que si le composant client enfant déclenche un traitement asynchrone via *await* par exemple.
