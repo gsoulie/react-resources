@@ -14,6 +14,8 @@ npx create-next-app@latest --typescript myApp
 npm run dev
 ````
 
+
+* [Nouveautés NextJS](https://github.com/gsoulie/react-resources/blob/master/next-news.md)    
 * [Udemy : NextJS The Complete Guide](https://github.com/gsoulie/react-resources/blob/main/next-udemy-complete-guide.md)     
 
 * [Généralités](https://github.com/gsoulie/react-resources/blob/master/next-generalites.md)
