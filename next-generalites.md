@@ -51,6 +51,7 @@ présentation : https://www.youtube.com/watch?v=wTFThzLcrOk&ab_channel=Grafikart
 ## Librairies UI
 
 * Shadcn : https://ui.shadcn.com/
+* DaisyUI : https://daisyui.com/docs/install/    
 * HeroUI (anciennement NextUI) : https://www.heroui.com/docs/guide/installation
 * react-bootstrap
 * [Recharts](https://recharts.org/en-US)    
