@@ -40,7 +40,8 @@ npm run dev
 * [Http](https://github.com/gsoulie/react-resources/blob/master/next-http.md)
   * Interceptor     
   * Middleware
-  * Tanstack react-query     
+  * Tanstack react-query
+* [Gestion des erreurs](https://github.com/gsoulie/react-resources/blob/master/next-error.md)      
 * [Page not-found](https://github.com/gsoulie/react-resources/blob/master/next-not-found.md)
 * [Checkbox](https://github.com/gsoulie/react-resources/blob/master/next-checkbox.md)
 * [Images](https://github.com/gsoulie/react-resources/blob/master/next-images.md)
