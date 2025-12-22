@@ -6,6 +6,7 @@
 npx create-next-app@latest --typescript myApp
 
 √ Would you like to use ESLint? ... Yes
+√ Would you like to use React Compiler? ... Yes // Améliore la performance en optimisant automatiquement le rendu des composants
 √ Would you like to use Tailwind CSS? ... No
 √ Would you like to use `src/` directory? ... No
 √ Would you like to use App Router? (recommended) ... Yes // Sinon ne génère pas le rép app mais un rép pages à la place
