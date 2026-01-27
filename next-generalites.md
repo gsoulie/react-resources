@@ -16,6 +16,7 @@
 * [Type générique T](#type-générique-t)
 * [Configuration eslint](#configuration-eslint)
 * [Authentification](#authentification)
+* [Utiliser les bons modes de rendus](#utiliser-les-bons-modes-de-rendus)     
 * [Suspense](#suspense)    
 
 ## Présentation
@@ -778,6 +779,62 @@ export const sessionIsActive = (): boolean => {
 };
 ````
  
+</details>
+
+## Utiliser les bons modes de rendus
+
+<details>
+	<summary>Bonnes pratiques de rendu des composants</summary>
+
+Utilisation des composants statiques, cache component, et dynamic component.
+
+* static component : composant sans chargement de données, avec un contenu static
+* cache component : composant avec chargement de données, qui sont des données communens à tous les utilisateurs (page produit, page marketing etc...). Ajouter ````'use cache'```` pour le déclarer
+* dynamic component : composant avec chargement de données spécifiques à un utilisateur, ne peuvent pas être partagées à tous les utilisateurs. Utilisation de ````<Suspense>````
+
+````typescript
+import { Suspense } from 'react'
+import { List, Promotion, PromotionSkeleton } from '@/app/products/ui'
+import { getProducts, getPromotion } from '@/app/products/data'
+
+// Static component
+function Header() {
+  return <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Shop</h1>
+}
+
+// Cache component
+async function ProductList() {
+  'use cache'	// <-- sans 'use cache', l'affichage de la page serait bloqué tant que les data ne seraient pas chargées
+  const products = await getProducts()
+  return <List items={products} />
+}
+
+// Dynamic component
+async function PromotionContent() {
+  const promotion = await getPromotion()
+  if (!promotion) return null
+  return <Promotion data={promotion} />
+}
+
+export default async function Page() {
+  return (
+    <>
+      <Suspense fallback={<PromotionSkeleton />}>
+        <PromotionContent />
+      </Suspense>
+      <Header />
+      <ProductList />
+    </>
+  )
+}
+````
+
+Si les données affichées dans un composant peuvent être partagées entre tous les utilisateurs (contenu identique) alors on peut  convertir le composant en cache component.
+
+Si les données diffèrent entre les utilisateurs, alors il faut utiliser un composant dynamique, dans ce cas, on ne peut pas utiliser un component cache. On passe donc en mode streaming,
+et en utilisant ````<Suspense>````
+
+	
 </details>
 
 ## Suspense
