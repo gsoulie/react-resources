@@ -25,6 +25,7 @@ npm run dev
   * Librairies UI     
   * authentification
   * Bonnes pratiques
+  * Utiliser les bons modes de rendus    
   * Suspense    
 * [Gestion du cache et revalidation](https://github.com/gsoulie/react-resources/blob/master/next-cache.md)
 * [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)
