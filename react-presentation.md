@@ -28,7 +28,7 @@ npm run dev
   * Utiliser les bons modes de rendus    
   * Suspense    
 * [Gestion du cache et revalidation](https://github.com/gsoulie/react-resources/blob/master/next-cache.md)
-* [Cache component](https://github.com/gsoulie/react-resources/blob/master/next-cache-component.md)     
+* [Gestion du cache : Cache component](https://github.com/gsoulie/react-resources/blob/master/next-cache-component.md)     
 * [Navigation](https://github.com/gsoulie/react-resources/blob/master/next-routing.md)
 * [middleware et interceptor](https://github.com/gsoulie/react-resources/blob/master/next-middleware.md)    
 * [Pré-render et Apis](https://github.com/gsoulie/react-resources/blob/master/next-render.md)
