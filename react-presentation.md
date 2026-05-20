@@ -77,7 +77,7 @@ const Layout = ({ children }) => {
 
 # Tanstack Start
 
-* [Présentation](https://github.com/gsoulie/react-resources/blob/master/next-tanstack.md)
+* [Présentation](https://github.com/gsoulie/react-resources/blob/main/next-tanstack.md)    
 
 # React
 
